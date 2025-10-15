@@ -1,0 +1,15 @@
+# Jupyter Book Configuration
+title: "Glacier Modelling cours"
+author: "Guillaume Jouvet"
+logo: "course_illu.png"
+# execute:
+#  execute_notebooks: "off"  # Turn off execution
+#  remove_cell_tags: ["solution"]  # Remove cells tagged with "solution"
+html:
+  theme: "sphinx_book_theme"
+  favicon: ""  # Add the path to a favicon if needed
+  launch_buttons:
+    notebook_interface: "jupyterlab"
+    colab_url: "https://colab.research.google.com/"
+    binderhub_url: "https://mybinder.org"
+

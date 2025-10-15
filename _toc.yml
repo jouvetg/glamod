@@ -1,0 +1,7 @@
+# Jupyter Book Table of Contents
+format: jb-book
+root: syllabus
+
+chapters:
+  - file: 00_cours/00_cours
+  - file: 01_notebook/glacier-modelling-1
