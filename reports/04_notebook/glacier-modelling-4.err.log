@@ -32,7 +32,7 @@ File [0;32m~/anaconda3/envs/igm/lib/python3.10/site-packages/xarray/backends/lr
 [0;32m---> 56[0m     value [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_cache[49m[43m[[49m[43mkey[49m[43m][49m
 [1;32m     57[0m     [38;5;28mself[39m[38;5;241m.[39m_cache[38;5;241m.[39mmove_to_end(key)
 
-[0;31mKeyError[0m: [<class 'netCDF4._netCDF4.Dataset'>, ('/media/gjouvet/storage/Dropbox/home/teaching/25-glacier-modelling/glamod/04_notebook/output.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '4f59afb7-1f8e-4a23-894b-bc9972162059']
+[0;31mKeyError[0m: [<class 'netCDF4._netCDF4.Dataset'>, ('/media/gjouvet/storage/Dropbox/home/teaching/25-glacier-modelling/glamod/04_notebook/output.nc',), 'r', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), '57061ac7-3bd1-4e6a-9312-36907b4278dd']
 
 During handling of the above exception, another exception occurred:
 

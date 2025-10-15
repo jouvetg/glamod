@@ -11,7 +11,7 @@ color: white
 Guillaume Jouvet
   
 <figure style="text-align: center;"> 
-    <img src="fig/rhone-mod.png" height="220" />  
+    <img src="fig/rhone-mod-lq.png" height="220" />  
 </figure>
 
 ---
@@ -368,8 +368,8 @@ Can we reproduce this with a glacier model ?
 ## Paleo glacier modelling in the Alps with IGM
 
 <figure style="text-align: center;">
-     <img src="fig/AIF.png" width="50%" />   
-    <img src="fig/leger2024.png" width="47%" />   
+     <img src="fig/AIF-lq.png" width="50%" />   
+    <img src="fig/leger2024-lq.png" width="47%" />   
 </figure>
  
 <sub>(Leger, Jouvet and al., Nature Com., 2025)   </sub>
@@ -383,8 +383,8 @@ Modelling last ice age glacier evolution in the Alps: https://youtu.be/IbLOFh3U9
 ... to model the alternance of ice flow-driven glacial (U) and fluvial (V) erosion.
 
 <figure style="text-align: center;">
-    <img src="fig/cordonnier_1.png" width="80%" /> 
-    <img src="fig/cordonnier_2.png" width="80%" /> 
+    <img src="fig/cordonnier_1-lq.png" width="80%" /> 
+    <img src="fig/cordonnier_2-lq.png" width="80%" /> 
 </figure>
  
 <sub>(Cordonnier, Jouvet et al., SIGGRAPH, 2023)</sub>

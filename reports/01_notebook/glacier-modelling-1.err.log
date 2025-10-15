@@ -30,8 +30,15 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import numpy as np', '', 'b_max=0.3', 'grad_b=0.001', 'A=2.5e-14']
-...
-['', 'def smb_fct(Z,time):', '    return np.minimum(grad_b * (Z - ela_fct(time)), b_max), ela_fct(time)', '', 'model_glacier_1d(smb_fct,A,ttot)']
+import numpy as np
+
+b_max=0.3
+grad_b=0.002
+z_ELA=3100
+
+def smb_fct(Z):
+    return np.minimum(grad_b * (Z - z_ELA), b_max) 
+
+model_glacier_2d(smb_fct)
 -------------------
 
