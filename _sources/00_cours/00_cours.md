@@ -9,10 +9,8 @@ color: white
 # Course
 
 Guillaume Jouvet
-  
-<figure style="text-align: center;"> 
-    <img src="fig/rhone-mod-lq.png" height="220" />  
-</figure>
+   
+![height:200px](fig/rhone-mod-lq.png)
 
 ---
 
@@ -367,10 +365,7 @@ Can we reproduce this with a glacier model ?
  
 ## Paleo glacier modelling in the Alps with IGM
 
-<figure style="text-align: center;">
-     <img src="fig/AIF-lq.png" width="50%" />   
-    <img src="fig/leger2024-lq.png" width="47%" />   
-</figure>
+![height:370px](fig/AIF-leger-lq.png)
  
 <sub>(Leger, Jouvet and al., Nature Com., 2025)   </sub>
 
@@ -382,10 +377,8 @@ Modelling last ice age glacier evolution in the Alps: https://youtu.be/IbLOFh3U9
 
 ... to model the alternance of ice flow-driven glacial (U) and fluvial (V) erosion.
 
-<figure style="text-align: center;">
-    <img src="fig/cordonnier_1-lq.png" width="80%" /> 
-    <img src="fig/cordonnier_2-lq.png" width="80%" /> 
-</figure>
+![height:370px](fig/cordonnier_lq.png)
+
  
 <sub>(Cordonnier, Jouvet et al., SIGGRAPH, 2023)</sub>
 
