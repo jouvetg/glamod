@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Notebook 2 &#8212; Glacier Modelling cours</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_notebook/glacier-modelling-2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../syllabus.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Glacier Modelling cours</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_cours/00_cours.html">Course</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01_notebook/glacier-modelling-1.html">Notebook 1</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02_notebook/glacier-modelling-2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Notebook 2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-this-notebook">Goals of this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-igm">What is IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-run-with-igm">First run with IGM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-exploration">Folder exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-file-exploration">Parameter file exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runing-igm-params-0">Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_0</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-output">Explore the output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runing-igm-params-1">Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_1</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="notebook-2">
+<h1>Notebook 2<a class="headerlink" href="#notebook-2" title="Link to this heading">#</a></h1>
+<p><a class="reference internal" href="#notebook2.zip"><span class="xref myst">Download the notebook</span></a></p>
+<p><a class="reference external" href="https://colab.research.google.com/github/gjouvet/glacier-tutorials/blob/main/notebooks/demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section id="goals-of-this-notebook">
+<h2>Goals of this notebook<a class="headerlink" href="#goals-of-this-notebook" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Get familiar with model IGM</p></li>
+<li><p>Understand the parameters, set-up your model</p></li>
+<li><p>Run IGM examples</p></li>
+<li><p>Custumization, run IGM for your own glacier</p></li>
+</ul>
+</section>
+<section id="what-is-igm">
+<h2>What is IGM?<a class="headerlink" href="#what-is-igm" title="Link to this heading">#</a></h2>
+<p>Here we will use the glacier evolution model developed at UNIL – the Instructed Glacier Model.</p>
+<p>The IGM is an open-source Python package, which permits to simulate 3D glacier evolution accounting for the coupling between ice thermo-dynamics, surface mass balance, and mass conservation. IGM is especially computationally efficient thanks to the TensorFlow library, mathematical operations are fully-vectorized. This permits tremendous speed-ups on <a class="reference external" href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPU</a> (Graphics Processing Units), which are devices made of many processors, and can therefore perform highly-parallelized computations.</p>
+<p>All the documentation can be found at <a class="reference external" href="https://igm-model.org/">https://igm-model.org/</a>.</p>
+</section>
+<section id="how-to-install-igm">
+<h2>How to install IGM?<a class="headerlink" href="#how-to-install-igm" title="Link to this heading">#</a></h2>
+<p>Running IGM consists of running a python script <code class="docutils literal notranslate"><span class="pre">igm_run</span></code>, which is made of functions of the <code class="docutils literal notranslate"><span class="pre">igm</span></code> python package.  First of all, one needs to install igm as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installation of the igm package directly from the github repository, this may take a while</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/instructed-glacier-model/igm.git@main
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/instructed-glacier-model/igm.git@main
+  Cloning https://github.com/instructed-glacier-model/igm.git (to revision main) to /tmp/pip-req-build-388zps5z
+  Running command git clone --filter=blob:none --quiet https://github.com/instructed-glacier-model/igm.git /tmp/pip-req-build-388zps5z
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Resolved https://github.com/instructed-glacier-model/igm.git to commit d20122d4561cd500ddeb3896cf627c1a35294cc1
+  Running command git submodule update --init --recursive -q
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+<span class=" -Color -Color-Red">ERROR: Operation cancelled by user</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="first-run-with-igm">
+<h2>First run with IGM<a class="headerlink" href="#first-run-with-igm" title="Link to this heading">#</a></h2>
+<section id="folder-exploration">
+<h3>Folder exploration<a class="headerlink" href="#folder-exploration" title="Link to this heading">#</a></h3>
+<p>Let us explore the directory with the following comand:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree
+</pre></div>
+</div>
+</div>
+</div>
+<p>You will see the following files :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+├──<span class="w"> </span>data<span class="w"> </span>
+├──<span class="w"> </span>experiment
+│<span class="w">   </span>├──<span class="w"> </span>params_0.yaml
+│<span class="w">   </span>├──<span class="w"> </span>params_1.yaml
+│<span class="w">   </span>└──<span class="w"> </span>params_2.yaml<span class="w">  </span>
+└──<span class="w"> </span>user
+<span class="w">    </span>├──<span class="w"> </span>code<span class="w"> </span>
+<span class="w">    </span>└──<span class="w"> </span>conf<span class="w"> </span>
+</pre></div>
+</div>
+<p>The important here are the folder <code class="docutils literal notranslate"><span class="pre">data</span></code>, which will contain all the <strong>input</strong> data to run the model, the parameters file in folder <strong>experiment</strong>. The folder <strong>user</strong> can serve to custumize some function (such as SMB function).</p>
+</section>
+<section id="parameter-file-exploration">
+<h3>Parameter file exploration<a class="headerlink" href="#parameter-file-exploration" title="Link to this heading">#</a></h3>
+<p>If you look at the parameter file, you will see the following files, whcih shows all the input, process, and output modules along with all their parameters.</p>
+<p>Below, you may notice that IGM :</p>
+<ul class="simple">
+<li><p>first loads a certain number of inputs, processes, and output modules.</p></li>
+<li><p>Second define parameters associated with each module that deviates from default ones.</p></li>
+</ul>
+<p>IGM is organized module-wise : as detailled here : <a class="reference external" href="https://igm-model.org/latest/modules/introduction/">https://igm-model.org/latest/modules/introduction/</a></p>
+<p>In the example below (taken from IGM’s exampled <code class="docutils literal notranslate"><span class="pre">aletsch-basic</span></code>), IGM loads data with the <code class="docutils literal notranslate"><span class="pre">local</span></code> module, proceed to a simulation from 1900 to 2000 updating surface mass balance (<code class="docutils literal notranslate"><span class="pre">smb</span></code>), iceflow, time, and ice thickness. Then, it writes the results in both a local file (netcdf file), and in form of plots.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># @package _global_</span>
+
+<span class="nt">defaults</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /inputs</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /processes</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smb_simple</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iceflow</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thk</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /outputs</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plot2d</span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">local</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input.nc</span>
+
+<span class="nt">processes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">smb_simple</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">array</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;time&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradabl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradacc&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ela&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;accmax&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1900</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2800</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2000</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2900</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2100</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3300</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1900.0</span>
+<span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000.0</span>
+<span class="w">    </span><span class="nt">save</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">    </span>
+<span class="nt">outputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">plot2d</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">live</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+</section>
+<section id="runing-igm-params-0">
+<h3>Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_0</span></code>)<a class="headerlink" href="#runing-igm-params-0" title="Link to this heading">#</a></h3>
+<p>Now, we can run IGM by simply run the command <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code> (or replace <code class="docutils literal notranslate"><span class="pre">params</span></code> with the actual name of your parameter file) in the corresponding folder to execute the example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="explore-the-output">
+<h3>Explore the output<a class="headerlink" href="#explore-the-output" title="Link to this heading">#</a></h3>
+<p>Each IGM run will then generate a folder with the day as the parent folder and the time as a subfolder. For instance, after a few runs we could end up with the following structure</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>outputs
+<span class="w">  </span>└───2025-04-07
+<span class="w">      </span>├───<span class="w"> </span><span class="m">12</span>-06-29<span class="w"> </span>
+<span class="w">      </span>└───<span class="w"> </span><span class="m">12</span>-07-38<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="runing-igm-params-1">
+<h3>Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_1</span></code>)<a class="headerlink" href="#runing-igm-params-1" title="Link to this heading">#</a></h3>
+<p>The above example is somewhat limited</p>
+<p>Copy and paste the following YAML parameter file (name it <code class="docutils literal notranslate"><span class="pre">params.yaml</span></code>), place it in a folder named <code class="docutils literal notranslate"><span class="pre">experiment</span></code>, and then run the command <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code>. This will model the Glacier with RGI ID <code class="docutils literal notranslate"><span class="pre">RGI60-11.01450</span></code> (the Great Aletsch Glacier, Switzerland) from 2020 to 2100, assuming a temperature increase of 4 degrees by 2100 relative to 1960–1990.</p>
+<p>The run will:</p>
+<ol class="arabic simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to download all necessary data via OGGM.</p></li>
+<li><p>Execute a forward model combining the OGGM-based SMB model and the IGM-based ice flow model.</p></li>
+<li><p>Write and plot the results in real time.</p></li>
+</ol>
+<p>!!! warning</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This setup is provided as an example and has not been validated against historical data. It should not be interpreted as a scientifically accurate simulation. After running this example, you can explore different glaciers by selecting a different ID (refer to the [GLIMS Viewer](https://www.glims.org/maps/glims)), modify parameters, or experiment with additional modules.
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02_notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-this-notebook">Goals of this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-igm">What is IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-run-with-igm">First run with IGM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-exploration">Folder exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-file-exploration">Parameter file exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runing-igm-params-0">Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_0</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-output">Explore the output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runing-igm-params-1">Runing IGM (<code class="docutils literal notranslate"><span class="pre">params_1</span></code>)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guillaume Jouvet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

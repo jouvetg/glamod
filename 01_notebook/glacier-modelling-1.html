@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Notebook 1 &#8212; Glacier Modelling cours</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01_notebook/glacier-modelling-1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Course" href="../00_cours/00_cours.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../syllabus.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Glacier Modelling cours</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_cours/00_cours.html">Course</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebook 1</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/01_notebook/glacier-modelling-1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Notebook 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notebook 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-2d">Glacier in 2D</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-deformation">Ice Deformation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-conservation">Mass Conservation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-sheet-evolution-equation">Ice sheet evolution equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solving">Numerical solving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate">Climate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-implementation">Numerical Implementation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-3d">Glacier in 3D</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="notebook-1">
+<h1>Notebook 1<a class="headerlink" href="#notebook-1" title="Link to this heading">#</a></h1>
+<p><a class="reference internal" href="#notebook1.zip"><span class="xref myst">Download the notebook</span></a></p>
+<p>Goals of this notebook:</p>
+<ul class="simple">
+<li><p>Get familiar with simplified SIA-based glacier model in 2D and 3D</p></li>
+<li><p>Understand the implementation of underlying equations governing glacier evolution based on the SIA</p></li>
+<li><p>Performing simple numerical experiments</p></li>
+</ul>
+<p>Here we will play a simple glacier evolution model in 2D and 3D based on the simplified equations from the ice physics. Later on, we will use a more elaborated model (IGM) to mode the evolution of a real glacier with a “state-of-the-art” approach. We start with a “2D” and “idealized” glacier for simplicity.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="glacier-in-2d">
+<h1>Glacier in 2D<a class="headerlink" href="#glacier-in-2d" title="Link to this heading">#</a></h1>
+<img src="https://svs.gsfc.nasa.gov/vis/a000000/a003800/a003849/antarctica_flows_1_00120_1024x576.jpg" alt="Map of Antarctica" width="40%">
+<p><em>Ice flow field in Antarctica, the pink areas (ice shelves where the ice is floating) display the zone for the ice is the fastest. Check a the <a class="reference external" href="https://svs.gsfc.nasa.gov/3849/">NASA website</a> for animations.</em></p>
+<section id="ice-deformation">
+<h2>Ice Deformation<a class="headerlink" href="#ice-deformation" title="Link to this heading">#</a></h2>
+<section id="glen-s-flow-law">
+<h3>Glen’s flow law<a class="headerlink" href="#glen-s-flow-law" title="Link to this heading">#</a></h3>
+<p>Ice is often considered a non-Newtonian fluid, meaning that its flow behavior is not linear with respect to stress. This unique characteristic is primarily due to ice’s crystalline structure and the way it deforms under stress. Glen’s flow law provides a mathematical description of this behavior, quantifying how ice flow is related to stress. According to Glen’s law, the ice strain rate <span class="math notranslate nohighlight">\( \dot{\epsilon} \)</span> is proportional to the applied stress <span class="math notranslate nohighlight">\( \tau \)</span> raised to a power n=3, expressed as:</p>
+<p>\begin{equation}
+\dot{\epsilon} = A \tau^n
+\end{equation}</p>
+<p>Here, <span class="math notranslate nohighlight">\( A \)</span> is a temperature-dependent flow parameter, its unit is <span class="math notranslate nohighlight">\(Pa^{-3} \, y^{-1} \)</span>. Glen’s exponent is very commonly taken as n=3. This non-linear relation illustrates that as stress increases, the rate of ice deformation also increases but at an accelerating rate, which is a fundamental concept in understanding ice dynamics.</p>
+<p>Glen’s flow law, together with the momentum conservation equations, yields a set of Stokes equations, which can be solved to derive the ice flow velocity of an ice body subject to gravitational deformation.</p>
+</section>
+<section id="shallow-ice-approximation-sia">
+<h3>Shallow Ice Approximation (SIA)<a class="headerlink" href="#shallow-ice-approximation-sia" title="Link to this heading">#</a></h3>
+<p>The Shallow Ice Approximation (SIA) is a simplification of the Stokes equation that applies to ice flow in regions where the ice thickness is much smaller than its horizontal extent. This approximation is particularly useful for modeling ice sheets and glaciers, as it assumes that the vertical shear stress is negligible compared to the gravitational forces acting on the ice. Consequently, the SIA focuses on the balance between the driving stress from the surface slope and the resisting stress due to the ice’s weight and friction at the base. The velocity of ice flow under the SIA can be expressed as:</p>
+<p>\begin{equation}
+u (z) = -\frac{A}{2} \left( \rho g \frac{\partial z}{\partial x} \right)^3 \left( h^4 - (h -z)^4 \right), \qquad (1)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\( u \)</span> is the ice velocity, <span class="math notranslate nohighlight">\( h \)</span> is the ice thickness, <span class="math notranslate nohighlight">\( \rho \)</span> is the ice density, <span class="math notranslate nohighlight">\( g \)</span> is the acceleration due to gravity, and <span class="math notranslate nohighlight">\( \frac{\partial z}{\partial x} \)</span> is the slope of the ice surface.</p>
+<p>The following sketch of code implements the SIA formula (1) and allows us to visualize the ice velocity along the ice thickness as a function of depth <span class="math notranslate nohighlight">\(z\)</span>, ice thickness <span class="math notranslate nohighlight">\(h\)</span>, surface slope <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial x}\)</span>, <span class="math notranslate nohighlight">\(A\)</span> ice softness parameter. Run the code for different parameters of <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(h\)</span>, and slope <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial x}\)</span>, and check at how the ice velocity profile change.</p>
+<p>✅ <strong>Yout turn !</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># parameters</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">2.5e-15</span>  <span class="c1"># Constant A, Arrhenius that determine the ice softness (Unit: $Pa^{-3} \, y^{-1} $)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">910</span>  <span class="c1"># Density of ice in kg/m³</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># Acceleration due to gravity in m/s²</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># Total ice thickness in meters</span>
+<span class="n">dz_dx</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="c1"># Slope</span>
+
+<span class="n">z_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100 points from 0 to h</span>
+
+<span class="c1"># Calculate u(z) using the provided formula (1)</span>
+<span class="n">u_values</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dz_dx</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">z_values</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Plotting the profile (u(z) vs z)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u_values</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ice Velocity Profile $u(z)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Velocity Profile from Top to Bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ice Velocity $u(z)$ [m/y]&#39;</span><span class="p">)</span>  <span class="c1"># Adjust units based on context</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance to the ground (z) [m]&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6902524960b0ebfb507041289113cdd83ca3e74b6d3b4081dbf29cc904956b56.png" src="../_images/6902524960b0ebfb507041289113cdd83ca3e74b6d3b4081dbf29cc904956b56.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="mass-conservation">
+<h2>Mass Conservation<a class="headerlink" href="#mass-conservation" title="Link to this heading">#</a></h2>
+<p>The principle of mass conservation is fundamental in fluid dynamics and applies to the evolution of ice sheets as well. In the context of ice flow, mass conservation asserts that the rate of change of ice thickness over time is equal to the difference between the ice accumulation and ablation. Mathematically, this can be expressed as:</p>
+<p>\begin{equation}
+\frac{\partial h}{\partial t} + \frac{\partial q}{\partial x} = SMB(z) \qquad (2)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\( h \)</span> is the ice thickness, <span class="math notranslate nohighlight">\(q= \int_b^s u dz\)</span> is the ice flux, and <span class="math notranslate nohighlight">\( SMB(z) \)</span> is the Surface Mass Balance term representing accumulation minus ablation, <span class="math notranslate nohighlight">\(t\)</span> is time, and <span class="math notranslate nohighlight">\(x\)</span> is the distance along the model.</p>
+</section>
+<section id="ice-sheet-evolution-equation">
+<h2>Ice sheet evolution equation<a class="headerlink" href="#ice-sheet-evolution-equation" title="Link to this heading">#</a></h2>
+<p>When combining the Shallow Ice Approximation (1), which relates the flux <span class="math notranslate nohighlight">\( q \)</span> to the ice thickness and the slope of the ice surface, with the mass conservation equation (2), we obtain a nonlinear diffusive equation (given here in one dimension) that predicts the evolution of the geometry of an ice sheet, as follows:</p>
+<p>\begin{equation}
+\frac{\partial h}{\partial t} =  \frac{\partial}{\partial x} \left( D(h) \frac{\partial z}{\partial x} \right) + SMB(z), \qquad (3)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\(h\)</span> is the ice thickness, <span class="math notranslate nohighlight">\(D(h)\)</span> is the dynamic diffusivity of the ice defined as</p>
+<p>\begin{equation}
+D(h) = \frac{2 A}{5} (\rho g)^3 h^5 \left( \frac{\partial z}{\partial x} \right)^2.
+\end{equation}</p>
+</section>
+<section id="numerical-solving">
+<h2>Numerical solving<a class="headerlink" href="#numerical-solving" title="Link to this heading">#</a></h2>
+<p>Equation (3) must be solved numerically for doing the experiments proposed below.</p>
+<p>For that purpose, the code below “discretizes” (3) using finite differences to approximate the time derivative, this yields to the following update rule:</p>
+<p>\begin{equation}
+h^{n+1} = h^{n} + dt \left(  \frac{\partial}{\partial x} \left( D(h^n) \frac{\partial z^n}{\partial x} \right) + SMB^n(z) \right),
+\end{equation}</p>
+<p>where we compute the ice thickness variable <span class="math notranslate nohighlight">\(h\)</span> at time <span class="math notranslate nohighlight">\(t^0\)</span>, <span class="math notranslate nohighlight">\(t^1\)</span>, <span class="math notranslate nohighlight">\(t^2\)</span>, …, <span class="math notranslate nohighlight">\(t^n\)</span>, …</p>
+<p>The same way, the domain of the glacier is discretized into small intervall, <span class="math notranslate nohighlight">\(x^0\)</span>, <span class="math notranslate nohighlight">\(x^1\)</span>, …, <span class="math notranslate nohighlight">\(x^m\)</span>, … and the ice thickness evolution is computed only at these points of the discretization.</p>
+</section>
+<section id="climate">
+<h2>Climate<a class="headerlink" href="#climate" title="Link to this heading">#</a></h2>
+<p>The snow accumulation budget (which turns into ice) at altitude and ice melt depends on precipitation and temperature. This mass balance <span class="math notranslate nohighlight">\(SMB(z)\)</span> is commonly defined as a function of altitude (next figure to the right) and depends on three factors:</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>a slope that controls the mass balance gradient <span class="math notranslate nohighlight">\(b_\mathrm{grad}\)</span>,</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>a maximum value for accumulation <span class="math notranslate nohighlight">\(b_\mathrm{max}\)</span>,</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>the altitude of the equilibrium line <span class="math notranslate nohighlight">\(z_\mathrm{ELA}\)</span> beyond which ice accumulates and below which ice melts.</p></li>
+</ol>
+</li>
+</ul>
+<p>Mathematically, <span class="math notranslate nohighlight">\(SMB(z)\)</span> can thus be expressed as:</p>
+<p>\begin{equation}
+SMB(z) = \min ( b_\mathrm{grad} (z-z_\mathrm{ELA}), b_\mathrm{max} ). \qquad (4)
+\end{equation}</p>
+<p>The code in the next block gives an example of SMB function as function of <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">b_max</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
+<span class="n">z_ELA</span><span class="o">=</span><span class="mi">3000</span> 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">smb_fct</span><span class="p">(</span><span class="n">elev</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">elev</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span>
+
+<span class="n">elev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">z_ELA</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y = z_ELA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">(</span><span class="n">elev</span><span class="p">),</span> <span class="n">elev</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Altitute [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;SMB [m/y]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example of SMB  as a function of elevation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Example of SMB  as a function of elevation&#39;)
+</pre></div>
+</div>
+<img alt="../_images/6d3231a4445c4466d3bc57ec9d9645f8a60cd369aedf3f80ab5710810bb8ee61.png" src="../_images/6d3231a4445c4466d3bc57ec9d9645f8a60cd369aedf3f80ab5710810bb8ee61.png" />
+</div>
+</div>
+</section>
+<section id="numerical-implementation">
+<h2>Numerical Implementation<a class="headerlink" href="#numerical-implementation" title="Link to this heading">#</a></h2>
+<p>Here, we will solve numerically equation (3) with surface mass balance parametrization (4) in order to conduct simple numerical experiments of glacier evolution for different climate configurations. The model setup is as follows:</p>
+<ul class="simple">
+<li><p>We assume a glacier that forms along the axis <span class="math notranslate nohighlight">\( x \)</span> in one dimension.</p></li>
+<li><p>Use an initial ice thickness of 0 m.</p></li>
+<li><p>As boundary conditions, fix the ice thickness at both ends of the model to zero.</p></li>
+<li><p>Use the following logarithmic function to define the bedrock:
+\begin{equation}
+z_{bed}(x)  = 13522.8 - 1000 \times \log(x + 1000)
+\end{equation}</p></li>
+<li><p>The additional parameters are given in the table below.</p></li>
+</ul>
+<p>The code below permits to solve and visualize the temporal evolution of the results of the model.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Parameters</strong></p></th>
+<th class="head"><p><strong>Values</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>physical constant <span class="math notranslate nohighlight">\( A \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( 2.5 \times 10^{-15} [Pa^{-3} yr^{-1}]\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>model length <span class="math notranslate nohighlight">\( L \)</span></p></td>
+<td><p>100 km</p></td>
+</tr>
+<tr class="row-even"><td><p>initial ice thickness</p></td>
+<td><p>0 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>maximum time step <span class="math notranslate nohighlight">\( dt_{max} \)</span></p></td>
+<td><p>1 y</p></td>
+</tr>
+<tr class="row-even"><td><p>ice density <span class="math notranslate nohighlight">\( \rho_{\mathrm{ice}} \)</span></p></td>
+<td><p>910 <span class="math notranslate nohighlight">\(kg/m^{3}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>gravitational constant <span class="math notranslate nohighlight">\( g \)</span></p></td>
+<td><p>9.81 m <span class="math notranslate nohighlight">\(s^{-2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>altitude of the equilibrium line <span class="math notranslate nohighlight">\( z_{\mathrm{ELA}} \)</span></p></td>
+<td><p>1200 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>maximum mass balance <span class="math notranslate nohighlight">\( b_{\mathrm{max}} \)</span></p></td>
+<td><p>0.3 m/yr</p></td>
+</tr>
+<tr class="row-even"><td><p>mass balance gradient <span class="math notranslate nohighlight">\( b_{\mathrm{grad}} \)</span></p></td>
+<td><p>0.001</p></td>
+</tr>
+<tr class="row-odd"><td><p>total time</p></td>
+<td><p>3000 y</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Parameters for the exercises.</em></p>
+<p><strong>Note:</strong> It is important to check the units. Since</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( Pa = Kg \, m^{-1} \,  s^{-2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\([A] = Pa^{-3} \, y^{-1} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\([\rho g] = Kg \, m^{-3} \, m  \, s^{-2} = Kg \, m^{-2} \, s^{-2} = Pa \, m^{-1}\)</span>,</p></li>
+</ul>
+<p>we have <span class="math notranslate nohighlight">\([A(\rho g)^3 ] = Pa^{-3} \, y^{-1} \, Pa^3 \, m^{-3} = m^{-3} y^{-1} \)</span>  and therefore <span class="math notranslate nohighlight">\([D] = m^2 y^{-1} \)</span>, which is consistent.</p>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">):</span>
+     
+    <span class="n">Lx</span> <span class="o">=</span> <span class="mf">1.4e5</span>  <span class="c1"># model length, m</span>
+  
+    <span class="n">rhog</span> <span class="o">=</span> <span class="mi">910</span> <span class="o">*</span> <span class="mf">9.81</span>  <span class="c1"># ice density kg/m^3 * gravity m/s^{-2}</span>
+    <span class="n">kD</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span>  <span class="o">*</span> <span class="n">rhog</span><span class="o">**</span><span class="mi">3</span>  <span class="c1"># lump all constants for diffusivity together</span>
+
+    <span class="c1"># Numerics</span>
+    <span class="n">nx</span> <span class="o">=</span> <span class="mi">201</span>  <span class="c1"># number of cells</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span> <span class="o">/</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># number of cells </span>
+    <span class="n">dtmax</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># initial dt, will be changed within loop, yr</span>
+    <span class="n">dt</span>    <span class="o">=</span> <span class="n">dtmax</span>  <span class="c1"># initial dt, will be changed within loop, yr</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>  <span class="c1"># x-coordinates</span>
+    <span class="n">nout</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># frequency of plotting</span>
+
+    <span class="c1"># Initialization</span>
+    <span class="n">Z_bed</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">13522.8</span> <span class="c1"># topography</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>  <span class="c1"># ice thickness</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># initialize time</span>
+    <span class="n">nplot</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># counter for plotting</span>
+
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z_bed</span> <span class="o">+</span> <span class="n">H</span>  <span class="c1"># ice surface</span>
+
+    <span class="n">time</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">it</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="p">((</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">))</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">eps</span><span class="o">=</span><span class="p">[]</span>
+    
+    <span class="c1"># Time loop</span>
+    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">ttot</span><span class="p">:</span>
+
+        <span class="c1"># compute dHdt due to diffusion</span>
+        <span class="n">H_av</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">H</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>            <span class="c1"># average height between cells (nx-1)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">kD</span> <span class="o">*</span> <span class="n">H_av</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># diffusivity (nx-1)</span>
+        <span class="n">qx</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                <span class="c1"># ice flux</span>
+        <span class="n">dHdt</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qx</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                 <span class="c1"># change in ice thickness from flow</span>
+
+        <span class="c1"># update time step as function of D</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dtmax</span><span class="p">,</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)))</span>  <span class="c1"># update time step </span>
+
+        <span class="c1"># update thickness of ice (iceflow)</span>
+        <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dHdt</span>                 
+
+        <span class="c1"># update ice thickness (mass balance)</span>
+        <span class="n">smb</span><span class="p">,</span> <span class="n">z_ELA</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+
+        <span class="n">H</span><span class="p">[</span><span class="n">H</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># set any negative thickness to 0</span>
+
+        <span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># boundary conditions</span>
+        <span class="n">H</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># boundary conditions</span>
+ 
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">Z_bed</span> <span class="o">+</span> <span class="n">H</span>  <span class="c1"># update ice surface</span>
+        <span class="n">time</span> <span class="o">+=</span> <span class="n">dt</span>  <span class="c1"># update time</span>
+
+        <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span> 
+
+        <span class="c1"># Visualization</span>
+        <span class="k">if</span> <span class="n">it</span> <span class="o">%</span> <span class="n">nout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  
+
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Clear the output in VS Code</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">Z_bed</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="n">z_ELA</span><span class="p">,</span> <span class="n">z_ELA</span><span class="p">],</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Z_bed</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Z_bed</span><span class="p">)])</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Elevation, m&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Glacier apres &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; années&#39;</span><span class="p">)</span>
+    
+            <span class="c1"># ax2.subplot(2, 2, 3,aspect=20.0)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">smb</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bilan de masse effectif&#39;</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bilan de masse, m/a&#39;</span><span class="p">)</span> 
+
+            <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now run the model for different configurations of SMB function and ice flow parameter (<span class="math notranslate nohighlight">\(A\)</span>) and explore their influence on the result.
+Take the following code, and play with it to answer the following questions:</p>
+<ul class="simple">
+<li><p>How long does it take to reach a steady state (roughly) ?</p></li>
+<li><p>change the equilibrium line altitude (ELA) from 3000 to 4000, what do you observe?</p></li>
+<li><p>change the surface mass balance gradient grad_b (multiply and divide by 3), what do you observe?</p></li>
+<li><p>change the ice flow parameter, taking one order of magnitude less (harder ice), and one more (softer), what do you observe?</p></li>
+</ul>
+<p>✅ <strong>Your turn !</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
+<span class="n">z_ELA</span><span class="o">=</span><span class="mi">3000</span>
+<span class="n">A</span><span class="o">=</span><span class="mf">2.5e-15</span>
+<span class="n">ttot</span><span class="o">=</span><span class="mi">5000</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span> <span class="p">,</span> <span class="n">z_ELA</span>
+
+<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">)</span>
+ 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/50818bd907cb11d5da7ae6cd406c6128255367f2e88b897081f9b235c3f14df4.png" src="../_images/50818bd907cb11d5da7ae6cd406c6128255367f2e88b897081f9b235c3f14df4.png" />
+<img alt="../_images/50818bd907cb11d5da7ae6cd406c6128255367f2e88b897081f9b235c3f14df4.png" src="../_images/50818bd907cb11d5da7ae6cd406c6128255367f2e88b897081f9b235c3f14df4.png" />
+</div>
+</div>
+<p>In the next exercise, we will make the ELA vary with time, following a cosine curve to mimic a series of cooling and warming events as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10001</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="mi">3300</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2000</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [years]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ELA [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example of ELA as a function of time with a frequency of 2000 years&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Example of ELA as a function of time with a frequency of 2000 years&#39;)
+</pre></div>
+</div>
+<img alt="../_images/576f83b694de7d5f55a18875aef524dcce3a2c6ebd99a360dee7e14e6b5325f0.png" src="../_images/576f83b694de7d5f55a18875aef524dcce3a2c6ebd99a360dee7e14e6b5325f0.png" />
+</div>
+</div>
+<p>Observe the time lapse between the minimum (resp. maximum) in ELA, and the time the glacier reach its maximum (resp. minimum). This is due to the fact that glacier have a certain inertia as system. Try increasing or decreasing the frequency of these climate warming and cooling cycles.
+✅ <strong>Your turn !</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
+<span class="n">A</span><span class="o">=</span><span class="mf">2.5e-14</span>
+<span class="n">freq</span><span class="o">=</span><span class="mi">2000</span>
+<span class="n">ttot</span> <span class="o">=</span> <span class="mi">200000</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">3300</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">freq</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">b_max</span><span class="p">),</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+
+<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span><span class="w"> </span><span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">b_max</span><span class="p">),</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">)</span>
+
+<span class="nn">Cell In[3], line 86,</span> in <span class="ni">model_glacier_1d</span><span class="nt">(smb_fct, A, ttot)</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+<span class="g g-Whitespace">     </span><span class="mi">84</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bilan de masse, m/a&#39;</span><span class="p">)</span> 
+<span class="ne">---&gt; </span><span class="mi">86</span> <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/IPython/core/display_functions.py:298,</span> in <span class="ni">display</span><span class="nt">(include, exclude, metadata, transient, display_id, raw, clear, *objs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="n">publish_display_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">298</span>     <span class="n">format_dict</span><span class="p">,</span> <span class="n">md_dict</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">format_dict</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="c1"># nothing to display (e.g. _ipython_display_ took over)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>         <span class="k">continue</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/IPython/core/formatters.py:238,</span> in <span class="ni">DisplayFormatter.format</span><span class="nt">(self, obj, include, exclude)</span>
+<span class="g g-Whitespace">    </span><span class="mi">236</span> <span class="n">md</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">238</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">formatter</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span> <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span>     <span class="c1"># FIXME: log the exception</span>
+<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="k">raise</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/decorator.py:235,</span> in <span class="ni">decorate.&lt;locals&gt;.fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">235</span> <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/IPython/core/formatters.py:282,</span> in <span class="ni">catch_format_error</span><span class="nt">(method, self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;show traceback on failed format call&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">282</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span> <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span>     <span class="c1"># don&#39;t warn on NotImplementedErrors</span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_return</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/IPython/core/formatters.py:402,</span> in <span class="ni">BaseFormatter.__call__</span><span class="nt">(self, obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">402</span>     <span class="k">return</span> <span class="n">printer</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span> <span class="c1"># Finally look for special method names</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="n">method</span> <span class="o">=</span> <span class="n">get_real_method</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_method</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/IPython/core/pylabtools.py:170,</span> in <span class="ni">print_figure</span><span class="nt">(fig, fmt, bbox_inches, base64, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.backend_bases</span><span class="w"> </span><span class="kn">import</span> <span class="n">FigureCanvasBase</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>     <span class="n">FigureCanvasBase</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">170</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">print_figure</span><span class="p">(</span><span class="n">bytes_io</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span> <span class="n">data</span> <span class="o">=</span> <span class="n">bytes_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span> <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;svg&#39;</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/backend_bases.py:2155,</span> in <span class="ni">FigureCanvasBase.print_figure</span><span class="nt">(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2152</span>     <span class="c1"># we do this instead of `self.figure.draw_without_rendering`</span>
+<span class="g g-Whitespace">   </span><span class="mi">2153</span>     <span class="c1"># so that we can inject the orientation</span>
+<span class="g g-Whitespace">   </span><span class="mi">2154</span>     <span class="k">with</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="s2">&quot;_draw_disabled&quot;</span><span class="p">,</span> <span class="n">nullcontext</span><span class="p">)():</span>
+<span class="ne">-&gt; </span><span class="mi">2155</span>         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2156</span> <span class="k">if</span> <span class="n">bbox_inches</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2157</span>     <span class="k">if</span> <span class="n">bbox_inches</span> <span class="o">==</span> <span class="s2">&quot;tight&quot;</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/artist.py:94,</span> in <span class="ni">_finalize_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="k">def</span><span class="w"> </span><span class="nf">draw_wrapper</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">_rasterizing</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/artist.py:71,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/figure.py:3257,</span> in <span class="ni">Figure.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3254</span>             <span class="c1"># ValueError can occur when resizing a window.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3256</span>     <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3257</span>     <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3258</span>         <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3260</span>     <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3261</span> <span class="k">finally</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/image.py:134,</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span> <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="c1"># Composite any adjacent images together</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">image_group</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/artist.py:71,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axes/_base.py:3210,</span> in <span class="ni">_AxesBase.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3207</span> <span class="k">if</span> <span class="n">artists_rasterized</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3208</span>     <span class="n">_draw_rasterized</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_figure</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">artists_rasterized</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3210</span> <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3211</span>     <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_figure</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3213</span> <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3214</span> <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/image.py:134,</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span> <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>         <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="c1"># Composite any adjacent images together</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">image_group</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/artist.py:71,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:1404,</span> in <span class="ni">Axis.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1401</span>     <span class="k">return</span>
+<span class="g g-Whitespace">   </span><span class="mi">1402</span> <span class="n">renderer</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">gid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gid</span><span class="p">())</span>
+<span class="ne">-&gt; </span><span class="mi">1404</span> <span class="n">ticks_to_draw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_ticks</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1405</span> <span class="n">tlb1</span><span class="p">,</span> <span class="n">tlb2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ticklabel_bboxes</span><span class="p">(</span><span class="n">ticks_to_draw</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1407</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ticks_to_draw</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:1283,</span> in <span class="ni">Axis._update_ticks</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1281</span> <span class="n">major_locs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_majorticklocs</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="n">major_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="o">.</span><span class="n">formatter</span><span class="o">.</span><span class="n">format_ticks</span><span class="p">(</span><span class="n">major_locs</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1283</span> <span class="n">major_ticks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_major_ticks</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">major_locs</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1284</span> <span class="k">for</span> <span class="n">tick</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">major_ticks</span><span class="p">,</span> <span class="n">major_locs</span><span class="p">,</span> <span class="n">major_labels</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span>     <span class="n">tick</span><span class="o">.</span><span class="n">update_position</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:1664,</span> in <span class="ni">Axis.get_major_ticks</span><span class="nt">(self, numticks)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1660</span>     <span class="n">numticks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_majorticklocs</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span> <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">majorTicks</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">numticks</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1663</span>     <span class="c1"># Update the new tick label properties from the old.</span>
+<span class="ne">-&gt; </span><span class="mi">1664</span>     <span class="n">tick</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tick</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1665</span>     <span class="bp">self</span><span class="o">.</span><span class="n">majorTicks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1666</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_copy_tick_props</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">majorTicks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tick</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:1592,</span> in <span class="ni">Axis._get_tick</span><span class="nt">(self, major)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1588</span>     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1589</span>         <span class="sa">f</span><span class="s2">&quot;The Axis subclass </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must define &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1590</span>         <span class="s2">&quot;_tick_class or reimplement _get_tick()&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1591</span> <span class="n">tick_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_major_tick_kw</span> <span class="k">if</span> <span class="n">major</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minor_tick_kw</span>
+<span class="ne">-&gt; </span><span class="mi">1592</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tick_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">major</span><span class="o">=</span><span class="n">major</span><span class="p">,</span> <span class="o">**</span><span class="n">tick_kw</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:368,</span> in <span class="ni">XTick.__init__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">367</span> <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">368</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>     <span class="c1"># x in data coords, y in axes coords</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:181,</span> in <span class="ni">Tick.__init__</span><span class="nt">(self, axes, loc, size, width, color, tickdir, pad, labelsize, labelcolor, labelfontfamily, zorder, gridOn, tick1On, tick2On, label1On, label2On, major, labelrotation, grid_color, grid_linestyle, grid_linewidth, grid_alpha, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span> <span class="bp">self</span><span class="o">.</span><span class="n">label1</span> <span class="o">=</span> <span class="n">mtext</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span>     <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>     <span class="n">fontsize</span><span class="o">=</span><span class="n">labelsize</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">labelcolor</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">label1On</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>     <span class="n">fontfamily</span><span class="o">=</span><span class="n">labelfontfamily</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_labelrotation</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span> <span class="bp">self</span><span class="o">.</span><span class="n">label2</span> <span class="o">=</span> <span class="n">mtext</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span>     <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span>     <span class="n">fontsize</span><span class="o">=</span><span class="n">labelsize</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">labelcolor</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">label2On</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span>     <span class="n">fontfamily</span><span class="o">=</span><span class="n">labelfontfamily</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_labelrotation</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="ne">--&gt; </span><span class="mi">181</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_tickdir</span><span class="p">(</span><span class="n">tickdir</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span> <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tick1line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tick2line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gridline</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>                <span class="bp">self</span><span class="o">.</span><span class="n">label1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label2</span><span class="p">]:</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_set_artist_props</span><span class="p">(</span><span class="n">artist</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:397,</span> in <span class="ni">XTick._apply_tickdir</span><span class="nt">(self, tickdir)</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span> <span class="k">def</span><span class="w"> </span><span class="nf">_apply_tickdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tickdir</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span>     <span class="c1"># docstring inherited</span>
+<span class="ne">--&gt; </span><span class="mi">397</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_apply_tickdir</span><span class="p">(</span><span class="n">tickdir</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span>     <span class="n">mark1</span><span class="p">,</span> <span class="n">mark2</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span>         <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">mlines</span><span class="o">.</span><span class="n">TICKDOWN</span><span class="p">,</span> <span class="n">mlines</span><span class="o">.</span><span class="n">TICKUP</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>         <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">mlines</span><span class="o">.</span><span class="n">TICKUP</span><span class="p">,</span> <span class="n">mlines</span><span class="o">.</span><span class="n">TICKDOWN</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span>         <span class="s1">&#39;inout&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span>     <span class="p">}[</span><span class="bp">self</span><span class="o">.</span><span class="n">_tickdir</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span>     <span class="bp">self</span><span class="o">.</span><span class="n">tick1line</span><span class="o">.</span><span class="n">set_marker</span><span class="p">(</span><span class="n">mark1</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/axis.py:212,</span> in <span class="ni">Tick._apply_tickdir</span><span class="nt">(self, tickdir)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="c1"># This method is responsible for verifying input and, in subclasses, for setting</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span> <span class="c1"># the tick{1,2}line markers.  From the user perspective this should always be</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="c1"># called through _apply_params, which further updates ticklabel positions using</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="c1"># the new pads.</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="k">if</span> <span class="n">tickdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">212</span>     <span class="n">tickdir</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.direction&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="n">_api</span><span class="o">.</span><span class="n">check_in_list</span><span class="p">([</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="s1">&#39;inout&#39;</span><span class="p">],</span> <span class="n">tickdir</span><span class="o">=</span><span class="n">tickdir</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/envs/igm/lib/python3.10/site-packages/matplotlib/__init__.py:793,</span> in <span class="ni">RcParams.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">alt_key</span><span class="p">)</span> <span class="k">if</span> <span class="n">alt_key</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span> <span class="c1"># In theory, this should only ever be used after the global rcParams</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span> <span class="c1"># has been set up, but better be safe e.g. in presence of breakpoints.</span>
+<span class="ne">--&gt; </span><span class="mi">793</span> <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;backend&quot;</span> <span class="ow">and</span> <span class="bp">self</span> <span class="ow">is</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rcParams&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>     <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>     <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="n">rcsetup</span><span class="o">.</span><span class="n">_auto_backend_sentinel</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+<img alt="../_images/64c76266dab4548498582cd2f7fc36870fa936d687a5bb66dbcee18c3f29a488.png" src="../_images/64c76266dab4548498582cd2f7fc36870fa936d687a5bb66dbcee18c3f29a488.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="glacier-in-3d">
+<h1>Glacier in 3D<a class="headerlink" href="#glacier-in-3d" title="Link to this heading">#</a></h1>
+<p>We will now consider a more complex situation involving a three-dimensional glacier, namely Gorner Glacier located near Zermatt.</p>
+<img src="https://images.contenthub.dev/xshiytapvw9a/e404ac0c4deb0f9ef3d3bd6859603bb2/Gornergletscher%20Wanderung%20Rotenboden.jpg?fm=avif&fit=fill&q=45&h=640&w=1140"  width="50%">
+<p><em>Gorner Glacier</em></p>
+<p>The objective of this exercise is to implement the ice equation to simulate a glacial landscape. In 3D, the evolution of ice thickness is represented by</p>
+<p>\begin{equation}
+\frac{\partial h}{\partial t} - \frac{\partial}{\partial x} \left( D(h,z) \frac{\partial z}{\partial x} \right) - \frac{\partial}{\partial y} \left( D(h,z) \frac{\partial z}{\partial y} \right) =  SMB(z), \quad (1)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\( h \)</span> is the ice thickness, <span class="math notranslate nohighlight">\( t \)</span> is time, <span class="math notranslate nohighlight">\( b \)</span> is the mass balance (accumulation minus surface ablation), <span class="math notranslate nohighlight">\( D \)</span> is the dynamic diffusivity of the ice, and <span class="math notranslate nohighlight">\( z \)</span> is the altitude of the ice surface. The non-linearity arises from the diffusivity constant <span class="math notranslate nohighlight">\( D \)</span>, which itself depends on the local ice thickness <span class="math notranslate nohighlight">\( h \)</span> and the slope of the ice surface:</p>
+<p>\begin{equation}
+D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\( ||\nabla S|| \)</span> is the norm of the local slope of the ice surface. At first glance, the problem is very similar to the 1D case, but the exact positioning of all values on the model grid is more complex in 2D.</p>
+<p>The following code implements the model with the following setup:</p>
+<ul class="simple">
+<li><p>Use an initial ice thickness of 0 m, and maintain a thickness of 0 at the edges of the model (boundary conditions).</p></li>
+<li><p>The bedrock topography is given in the file <code class="docutils literal notranslate"><span class="pre">topg.txt</span></code></p></li>
+<li><p>The rest of the parameters are given in the table below.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Parameters:</strong></p></th>
+<th class="head"><p><strong>Values:</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>initial ice thickness</p></td>
+<td><p>0 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>ice density <span class="math notranslate nohighlight">\( \rho_\mathrm{ice} \)</span></p></td>
+<td><p>910 kg/m<span class="math notranslate nohighlight">\(^3\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>physical constant <span class="math notranslate nohighlight">\( A \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( 2.5 \times 10^{-18} Pa^{-3} yr^{-1} \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>maximum mass balance <span class="math notranslate nohighlight">\( b_\mathrm{max} \)</span></p></td>
+<td><p>0.3 m/yr</p></td>
+</tr>
+<tr class="row-even"><td><p>mass balance gradient <span class="math notranslate nohighlight">\( b_\mathrm{grad} \)</span></p></td>
+<td><p>0.001</p></td>
+</tr>
+<tr class="row-odd"><td><p>total time</p></td>
+<td><p>5000 y</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>✅ <strong>Your turn !</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>  
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">model_glacier_2d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">):</span>
+
+    <span class="c1"># Physical parameters</span>
+    <span class="n">ttot</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># Time limit (yr) </span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="mf">910.0</span>   <span class="c1"># Ice density (g/m^3)</span>
+    <span class="n">g</span>   <span class="o">=</span> <span class="mf">9.81</span>    <span class="c1"># Earth&#39;s gravity (m/s^2)</span>
+    <span class="n">A</span>   <span class="o">=</span> <span class="mf">2.5e-18</span>   <span class="c1"># Deformation constant (Pa^-3 y^-1) </span>
+    <span class="n">xz</span> <span class="o">=</span> <span class="mi">6327</span>   <span class="c1"># x-coordinate of Zermatt</span>
+    <span class="n">yz</span> <span class="o">=</span> <span class="mi">14672</span>  <span class="c1"># y-coordinate of Zermatt</span>
+
+    <span class="c1"># load the topography of Gorner Glacier</span>
+    <span class="n">Z_topo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;topg.txt&#39;</span><span class="p">)[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span> 
+    <span class="n">ny</span><span class="p">,</span><span class="n">nx</span> <span class="o">=</span> <span class="n">Z_topo</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">dx</span><span class="o">=</span><span class="mi">200</span>
+    <span class="n">dy</span><span class="o">=</span><span class="mi">200</span>
+    
+    <span class="n">Lx</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">nx</span>
+    <span class="n">Ly</span> <span class="o">=</span> <span class="n">dy</span><span class="o">*</span><span class="n">ny</span>
+
+    <span class="n">nout</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Frequency of plotting</span>
+    <span class="n">dtmax</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># maximum time step</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dtmax</span>  <span class="c1"># Initial time step</span>
+ 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>  <span class="c1"># x-coordinates</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>  <span class="c1"># y-coordinates</span>
+
+    <span class="n">H_ice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">))</span>  <span class="c1"># Initial ice thickness</span>
+    <span class="n">Z_surf</span> <span class="o">=</span> <span class="n">Z_topo</span> <span class="o">+</span> <span class="n">H_ice</span>  <span class="c1"># Initial ice surface</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initial time</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4800</span><span class="p">)</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation (m)&#39;</span><span class="p">)</span>
+
+    <span class="n">ss</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H_ice</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="n">H_ice</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ccbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ice Thickness (m)&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Loop</span>
+    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">ttot</span><span class="p">:</span>
+        
+        <span class="c1"># Update time</span>
+        <span class="n">time</span> <span class="o">+=</span> <span class="n">dt</span>
+        <span class="n">it</span>   <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Calculate H_avg, size (ny-1,nx-1)</span>
+        <span class="n">H_avg</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">H_ice</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Compute Snorm, size (ny-1,nx-1)</span>
+        <span class="n">Sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>
+        <span class="n">Sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
+        <span class="n">Sx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">Sx</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">Sx</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
+        <span class="n">Sy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">Sy</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Sy</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
+        <span class="n">Snorm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Sy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Compute D, size (ny-1,nx-1)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span><span class="p">)</span><span class="o">**</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">H_avg</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="n">Snorm</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="c1"># Compute dt</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)),</span> <span class="n">dtmax</span><span class="p">)</span>
+
+        <span class="c1"># Compute qx, size (ny-2,nx-1)</span>
+        <span class="n">qx</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>
+
+        <span class="c1"># Compute qy, size (ny-1,nx-2)</span>
+        <span class="n">qy</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
+
+        <span class="c1"># Update rule (diffusion)</span>
+        <span class="n">dHdt</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span><span class="p">)</span>
+        <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dHdt</span> <span class="c1"># size (ny-2,nx-2)</span>
+
+        <span class="n">smb</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">)</span>
+
+        <span class="c1"># Update rule (mass balance)</span>
+        <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Update rule (positive thickness)</span>
+        <span class="n">H_ice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">H_ice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># updatesurface topography</span>
+        <span class="n">Z_surf</span> <span class="o">=</span> <span class="n">Z_topo</span> <span class="o">+</span> <span class="n">H_ice</span>
+    
+        <span class="c1"># Display</span>
+        <span class="k">if</span> <span class="n">it</span> <span class="o">%</span> <span class="n">nout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Clear the output in VS Code</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    
+            <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">yz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Surface at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+ 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H_ice</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="n">H_ice</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">yz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Thickness at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Currently, the ELA of alpine glaciers is around 3000 m. Run the model until the glacier is approximately in equilibrium (5000 years), and compare your results to the Gorner Glacier with the images on <a class="reference external" href="https://map.geo.admin.ch">map.geo.admin.ch</a>. Try to find the ELA that produces a glacier (in equilibrium) that best fits the current state of the Gorner Glacier. To help you, the city of Zermatt is indicated with a black dot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.002</span>
+<span class="n">z_ELA</span><span class="o">=</span><span class="mi">3100</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span> 
+
+<span class="n">model_glacier_2d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># parameters</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">2.5e-15</span>  <span class="c1"># Constant A, Arrhenius that determine the ice softness (Unit: $Pa^{-3} \, y^{-1} $)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">910</span>  <span class="c1"># Density of ice in kg/m³</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># Acceleration due to gravity in m/s²</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># Total ice thickness in meters</span>
+<span class="n">dz_dx</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="c1"># Slope</span>
+
+<span class="n">z_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100 points from 0 to h</span>
+
+<span class="c1"># Calculate u(z) using the provided formula (1)</span>
+<span class="n">u_values</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dz_dx</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">h</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">z_values</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Plotting the profile (u(z) vs z)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u_values</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ice Velocity Profile $u(z)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Velocity Profile from Top to Bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ice Velocity $u(z)$ [m/y]&#39;</span><span class="p">)</span>  <span class="c1"># Adjust units based on context</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distance to the ground (z) [m]&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./01_notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../00_cours/00_cours.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Course</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notebook 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-2d">Glacier in 2D</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-deformation">Ice Deformation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-conservation">Mass Conservation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-sheet-evolution-equation">Ice sheet evolution equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solving">Numerical solving</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate">Climate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-implementation">Numerical Implementation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-3d">Glacier in 3D</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guillaume Jouvet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

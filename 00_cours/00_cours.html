@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Course &#8212; Glacier Modelling cours</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '00_cours/00_cours';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Notebook 1" href="../01_notebook/glacier-modelling-1.html" />
+    <link rel="prev" title="Syllabus" href="../syllabus.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../syllabus.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Glacier Modelling cours</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Course</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01_notebook/glacier-modelling-1.html">Notebook 1</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/00_cours/00_cours.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Course</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Course</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ressources">Ressources</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#content-of-this-course">Content of this course</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#i-glacier-processes">I &gt; Glacier processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-glacial-processes-governing-glacier-evol">Main glacial processes governing glacier evol.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacial-processes-governing-glacier-evolution">Glacial processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-processes">Mass balance processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-glacial-motion">Observing glacial motion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-a-glacier-flow-brief-historical-outlines">How can a glacier flow?  Brief historical outlines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-1st-measurements">19th century: 1st measurements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-from-lab-exp-to-glens-flow-law">20th century: From lab exp. to Glen’s flow law</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-components-of-glacier-ice-flow">The two components of glacier ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-of-ice-under-argentiere-glacier">Sliding of ice under Argentière Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#subglacial-hydrology">Subglacial hydrology</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thermic-and-basal-glacial-state">Thermic and basal glacial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-these-processes-are-coupled">Number of these processes are coupled</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-mathematical-modelling">II&gt; Mathematical Modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-dynamics-equations-boundary-conditions">Ice dynamics equations &amp; boundary conditions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-models-since-glaciers-are-shallow">Shallow Ice models (since glaciers are shallow)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Shallow Ice Approximation (SIA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-shallow-ice-models">2 (simplified) shallow ice models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-marine-ice-sheets">Dynamics of marine ice sheets</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-the-antartica-ice-sheet">Dynamics of the Antartica Ice Sheet</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-ice-flow-and-mass-conservation">Connecting ice flow and mass conservation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-sheet-evolution-equation">Ice sheet evolution equation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-numerical-modelling">III &gt; Numerical modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#need-for-a-numerical-glacier-evolution-model">Need for a numerical glacier evolution model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-must-be-meshed-discretized">Glacier must be meshed/discretized …</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-glacier-evolution-computation">Transient glacier evolution computation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-ice-flow-and-mass-balance-models">Combining ice flow and mass balance models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-models">Numerical models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-present-day-and-paleo-glacier-applications">IV &gt; Present-day and paleo glacier applications</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-of-the-evolution-of-aletsch-glacier">Modelling of the evolution of Aletsch Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-cold-case-with-glacier-modelling">Solving a cold case with glacier modelling!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#last-glacial-maximum-in-the-switzerland">Last Glacial Maximum in the Switzerland</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleo-glacier-modelling-in-the-alps-with-igm">Paleo glacier modelling in the Alps with IGM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-modelling-for-landscape-evolution">Ice flow modelling for landscape evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#v-analogue-modelling">V &gt; Analogue modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-glacier-goo-experiment">The “glacier goo” experiment</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="course">
+<h1>Course<a class="headerlink" href="#course" title="Link to this heading">#</a></h1>
+<p>Guillaume Jouvet</p>
+<figure style="text-align: center;"> 
+    <img src="fig/rhone-mod.png" height="220" />  
+</figure>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="course-objectives">
+<h1>Course objectives<a class="headerlink" href="#course-objectives" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Provide basics of glacier processes</p></li>
+<li><p>Introduce numerical methods to model glacier evolution</p></li>
+<li><p>Perform pratical numerical experiments with IGM</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ressources">
+<h1>Ressources<a class="headerlink" href="#ressources" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>If there is one ressource to remember is the awesome website : <a class="reference external" href="https://www.antarcticglaciers.org">https://www.antarcticglaciers.org</a> that can allow you to deepen the processes.</p></li>
+<li><p>To dive more into the mechanics and the maths, I recommend the “Karthaus Summer School Lecture Notes”:
+<a class="reference external" href="https://link.springer.com/book/10.1007/978-3-030-42584-5">https://link.springer.com/book/10.1007/978-3-030-42584-5</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="content-of-this-course">
+<h1>Content of this course<a class="headerlink" href="#content-of-this-course" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>I&gt; Glacier processes</p></li>
+<li><p>II&gt; Mathematical Modelling</p></li>
+<li><p>III&gt; Numerical Modelling</p></li>
+<li><p>IV&gt; Application to paleo and present-day glaciers</p></li>
+<li><p>V&gt; Analogue Modelling</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="i-glacier-processes">
+<h1>I &gt; Glacier processes<a class="headerlink" href="#i-glacier-processes" title="Link to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="main-glacial-processes-governing-glacier-evol">
+<h1>Main glacial processes governing glacier evol.<a class="headerlink" href="#main-glacial-processes-governing-glacier-evol" title="Link to this heading">#</a></h1>
+<p><img alt="width:60%" src="../_images/scheme_glacier.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="glacial-processes-governing-glacier-evolution">
+<h1>Glacial processes governing glacier evolution<a class="headerlink" href="#glacial-processes-governing-glacier-evolution" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Climatic surface mass balance (= accumulation – ablation)</p></li>
+<li><p>Ice thermo-dynamics</p></li>
+<li><p>Mass conservation</p></li>
+<li><p>Subglacial hydrology</p></li>
+<li><p>Debris / sediment transport</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="mass-balance-processes">
+<h1>Mass balance processes<a class="headerlink" href="#mass-balance-processes" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/glaciers-as-a-system.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="observing-glacial-motion">
+<h1>Observing glacial motion<a class="headerlink" href="#observing-glacial-motion" title="Link to this heading">#</a></h1>
+<p>There are a number of timelapse cameras that have captured glacial motion :</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=TWGR6FxFlt8">https://www.youtube.com/watch?v=TWGR6FxFlt8</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=he5QzhE7_g4&amp;amp;t=55s">https://www.youtube.com/watch?v=he5QzhE7_g4&amp;t=55s</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=iaULB6O-JNY">https://www.youtube.com/watch?v=iaULB6O-JNY</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="how-can-a-glacier-flow-brief-historical-outlines">
+<h1>How can a glacier flow?  Brief historical outlines<a class="headerlink" href="#how-can-a-glacier-flow-brief-historical-outlines" title="Link to this heading">#</a></h1>
+<p><strong>How could ice remain in a warm green valley without melting?</strong></p>
+<p><img alt="height:200px" src="../_images/gletsch-1856.jpg" /><br />
+<small>Rhone Glacier in 1856</small></p>
+<p>18th century: 1st theories (Rémy et al., 2006)</p>
+<ul class="simple">
+<li><p>1705: <strong>Dilation of water refreezing</strong> (Scheuchzer)</p></li>
+<li><p>1760: <strong>Basal sliding</strong> (Gruner)</p></li>
+<li><p>1773: <strong>Ice behaves as a “fluid”</strong> (Bordier)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="th-century-1st-measurements">
+<h1>19th century: 1st measurements<a class="headerlink" href="#th-century-1st-measurements" title="Link to this heading">#</a></h1>
+<p><img alt="height:400px" src="../_images/mercanton.jpg" /></p>
+<p><small>Ice movement of Rhone Glacier 1874–1900 (Mercanton, 1916)</small></p>
+<p>➡️ Ice deformation is <strong>faster in the center</strong> and <strong>slower at the sides</strong></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="th-century-from-lab-exp-to-glens-flow-law">
+<h1>20th century: From lab exp. to Glen’s flow law<a class="headerlink" href="#th-century-from-lab-exp-to-glens-flow-law" title="Link to this heading">#</a></h1>
+<p><img alt="height:350px" src="../_images/stress-strain-BuddJacka1989.png" /></p>
+<p><small>Figure from (Budd &amp; Jacka, 1989)</small></p>
+<ul class="simple">
+<li><p>1D:  <span class="math notranslate nohighlight">\(\dot\epsilon = A(T)\,\sigma^n\)</span>, where <span class="math notranslate nohighlight">\(\dot\epsilon\)</span> is the strain rate, and <span class="math notranslate nohighlight">\(\sigma\)</span>  is the stress.</p></li>
+<li><p>3D: <span class="math notranslate nohighlight">\(\dot\varepsilon_{ij} = A(T)\,[\sigma^{(d)}_{II}]^{n-1}\,\sigma^{(d)}_{ij}\)</span>  ➡️ Ice is a <strong>non-Newtonian fluid</strong>  <small>(J. Glen, 1958)</small></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-two-components-of-glacier-ice-flow">
+<h1>The two components of glacier ice flow<a class="headerlink" href="#the-two-components-of-glacier-ice-flow" title="Link to this heading">#</a></h1>
+<p>ICE is both: a <strong>fluid</strong> that flow/shear, and a <strong>solid</strong> that slides</p>
+<p><img alt="height:350px" src="../_images/shearing-sliding.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="sliding-of-ice-under-argentiere-glacier">
+<h1>Sliding of ice under Argentière Glacier<a class="headerlink" href="#sliding-of-ice-under-argentiere-glacier" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://youtu.be/WkgsFiQvI_M">https://youtu.be/WkgsFiQvI_M</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=mHdnB_yCvLY">https://www.youtube.com/watch?v=mHdnB_yCvLY</a></p></li>
+</ul>
+<p><img alt="height:300px" src="../_images/argen1.JPG" /></p>
+<p><small>Source: Luc Moreau</small></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="subglacial-hydrology">
+<h1>Subglacial hydrology<a class="headerlink" href="#subglacial-hydrology" title="Link to this heading">#</a></h1>
+<p><img alt="height:400px" src="../_images/surface_meltwater_glacier_bed.png" /></p>
+<ul class="simple">
+<li><p>Inefficient drainage → high pressure → high basal sliding</p></li>
+<li><p>Efficient drainage → low pressure → low basal sliding</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="thermic-and-basal-glacial-state">
+<h1>Thermic and basal glacial state<a class="headerlink" href="#thermic-and-basal-glacial-state" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/till.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="number-of-these-processes-are-coupled">
+<h1>Number of these processes are coupled<a class="headerlink" href="#number-of-these-processes-are-coupled" title="Link to this heading">#</a></h1>
+<p><img alt="height:400px" src="../_images/scheme.png" /></p>
+<p>… and deformation of lithosphere for ice fields and ice sheets</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ii-mathematical-modelling">
+<h1>II&gt; Mathematical Modelling<a class="headerlink" href="#ii-mathematical-modelling" title="Link to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="glen-s-flow-law">
+<h1>Glen’s flow law<a class="headerlink" href="#glen-s-flow-law" title="Link to this heading">#</a></h1>
+<div style="display:flex;align-items:center;">
+<p><img alt="height:350px" src="../_images/stress-strain-BuddJacka1989.png" /></p>
+<ul class="simple">
+<li><p>1D:  <span class="math notranslate nohighlight">\(\dot\epsilon = A(T)\,\sigma^n\)</span>, where <span class="math notranslate nohighlight">\(\dot\epsilon\)</span> is the strain rate, and <span class="math notranslate nohighlight">\(\sigma\)</span>  is the stress.</p></li>
+<li><p>3D: <span class="math notranslate nohighlight">\(\dot\varepsilon_{ij} = A(T)\,[\sigma^{(d)}_{II}]^{n-1}\,\sigma^{(d)}_{ij}\)</span>  ➡️ Ice = non-Newtonian fluid  <small>(J. Glen, 1958), n=3</small></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ice-dynamics-equations-boundary-conditions">
+<h1>Ice dynamics equations &amp; boundary conditions<a class="headerlink" href="#ice-dynamics-equations-boundary-conditions" title="Link to this heading">#</a></h1>
+<p><img alt="height:450px" src="../_images/gl-equations.png" /></p>
+<p>Note that the ice flow speed is independent of time!</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="shallow-ice-models-since-glaciers-are-shallow">
+<h1>Shallow Ice models (since glaciers are shallow)<a class="headerlink" href="#shallow-ice-models-since-glaciers-are-shallow" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="height:300px" src="../_images/pic2.jpg" /></p></td>
+<td><p><img alt="height:300px" src="../_images/pic1.jpg" /></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mountain glacier</p></td>
+<td><p>Ice sheet</p></td>
+</tr>
+<tr class="row-even"><td><p>aspect ratio <span class="math notranslate nohighlight">\(\sim 1/10\)</span></p></td>
+<td><p>aspect ratio <span class="math notranslate nohighlight">\(\sim 1/1000\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="shallow-ice-approximation-sia">
+<h1>Shallow Ice Approximation (SIA)<a class="headerlink" href="#shallow-ice-approximation-sia" title="Link to this heading">#</a></h1>
+<p>Most simple ice flow model, velocity given by formula (<span class="math notranslate nohighlight">\(n=3\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+u(z) = \underbrace{\frac{-2A}{n+1}\left(\rho g \frac{\partial s}{\partial x}\right)^n
+\left(H^{n+1}-(H-z)^{n+1}\right)}_{\text{deformation velocity}}
++ \underbrace{u_b}_{\text{sliding velocity}} \qquad (1)
+\]</div>
+<p>SIA is obtained by neglecting <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon^k)\)</span>,<br />
+where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspect ratio.</p>
+<p><strong>Valid for</strong>: thin ice, inland ice sheets, wide glaciers.<br />
+<strong>Not valid for</strong>: thick ice, ice domes, narrow glaciers, fast sliding.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Shallow Ice Approximation (SIA)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/SIA-profile.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="simplified-shallow-ice-models">
+<h1>2 (simplified) shallow ice models<a class="headerlink" href="#simplified-shallow-ice-models" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>SIA</strong> (Shallow Ice Approximation) -&gt; suitable for pure <strong>Shearing</strong></p></li>
+<li><p><strong>SSA</strong> (Shallow Shelf Approximation) -&gt; suitable for pure <strong>Sliding</strong></p></li>
+</ul>
+<p><img alt="height:450px" src="../_images/sia-vs-ssa.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="dynamics-of-marine-ice-sheets">
+<h1>Dynamics of marine ice sheets<a class="headerlink" href="#dynamics-of-marine-ice-sheets" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/scheme-ice-shelf.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="dynamics-of-the-antartica-ice-sheet">
+<h1>Dynamics of the Antartica Ice Sheet<a class="headerlink" href="#dynamics-of-the-antartica-ice-sheet" title="Link to this heading">#</a></h1>
+<img src="https://svs.gsfc.nasa.gov/vis/a000000/a003800/a003849/antarctica_flows_1_00120_1024x576.jpg" alt="Map of Antarctica" width="70%">
+<p><em>Ice flow field in Antarctica, the pink areas (ice shelves where the ice is floating) display the zone for the ice is the fastest. Check a the <a class="reference external" href="https://svs.gsfc.nasa.gov/3849/">NASA website</a> for animations.</em></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="connecting-ice-flow-and-mass-conservation">
+<h1>Connecting ice flow and mass conservation<a class="headerlink" href="#connecting-ice-flow-and-mass-conservation" title="Link to this heading">#</a></h1>
+<p>Mass conservation: rate of change of thickness = surface mass balance (SMB)</p>
+<p><img alt="height:350px" src="../_images/simple_glacierA.png" /></p>
+<div class="math notranslate nohighlight">
+\[\frac{dh}{dt}(x,t) = \frac{\partial h}{\partial t} + \frac{\partial}{\partial x} \left( \int_b^s u \, dz \right) = b \qquad (2) \]</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ice-sheet-evolution-equation">
+<h1>Ice sheet evolution equation<a class="headerlink" href="#ice-sheet-evolution-equation" title="Link to this heading">#</a></h1>
+<p>Combine SIA (1) with <span class="math notranslate nohighlight">\(n=3\)</span>, and no sliding with mass conservation equation (2) leads to a nonlinear diffusive equation (given here in 1D) that predicts the evolution of the geometry of an ice sheet:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial h}{\partial t} = \frac{\partial}{\partial x}\left(D(h)\frac{\partial z}{\partial x}\right) + b(z), \qquad (3) \]</div>
+<p>where D(h) is the dynamic diffusivity of the ice defined by</p>
+<div class="math notranslate nohighlight">
+\[ D(h) = \frac{2A}{5} (\rho g)^3 h^5 \left(\frac{\partial z}{\partial x}\right)^2 \qquad (4) \]</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="iii-numerical-modelling">
+<h1>III &gt; Numerical modelling<a class="headerlink" href="#iii-numerical-modelling" title="Link to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="need-for-a-numerical-glacier-evolution-model">
+<h1>Need for a numerical glacier evolution model<a class="headerlink" href="#need-for-a-numerical-glacier-evolution-model" title="Link to this heading">#</a></h1>
+<p>Since the above equations are to complex to be solved analytically, we need a <strong>numerical model</strong> to approximate them.</p>
+<ul class="simple">
+<li><p>Link to the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a>.</p></li>
+<li><p>5 min video on glacier modelling : <a class="reference external" href="https://youtu.be/eJNIr_0zOyk">https://youtu.be/eJNIr_0zOyk</a></p></li>
+</ul>
+<figure style="text-align: center;"> 
+    <img src="fig/rhone-mod.png" height="200" />  
+</figure>
+<sub> Numerically modelled retreat of Rhone Glacier from 1874 to 2100 (Jouvet and al., JCP, 2019)</sub>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="glacier-must-be-meshed-discretized">
+<h1>Glacier must be meshed/discretized …<a class="headerlink" href="#glacier-must-be-meshed-discretized" title="Link to this heading">#</a></h1>
+<p>to resolve the equations numerically.</p>
+<p><img alt="height:400px" src="../_images/MESH.png" /></p>
+<p>In practise, it is common to work with simplified (shallow) models.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="transient-glacier-evolution-computation">
+<h1>Transient glacier evolution computation<a class="headerlink" href="#transient-glacier-evolution-computation" title="Link to this heading">#</a></h1>
+<p><img alt="height:600px" src="../_images/algo.gif" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="combining-ice-flow-and-mass-balance-models">
+<h1>Combining ice flow and mass balance models<a class="headerlink" href="#combining-ice-flow-and-mass-balance-models" title="Link to this heading">#</a></h1>
+<p>The above algorithm updates the glacier surface at each time step accounting for both: ice flow and surface mass balance</p>
+<p><img alt="height:400px" src="../_images/velocity-smb-rhone.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="numerical-models">
+<h1>Numerical models<a class="headerlink" href="#numerical-models" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>The SIA-based equations can solved in few lines of codes, see the last courses / exercices sheets of the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a>, you may deepen this aspect with the <a class="reference external" href="https://link.springer.com/book/10.1007/978-3-030-42584-5">Karthaus Summer School Lecture Notes</a></p></li>
+<li><p>There are a number of open models developped by glaciology modeller community that solves ice flow equations with different level complexity such as <a class="reference external" href="https://elmerice.elmerfem.org/">Elmer/Ice</a>, <a class="reference external" href="https://www.pism.io/">PISM</a>, ISSM, CISM, OGGM, IcePack, …</p></li>
+<li><p>Here we will use the “Instructed Glacier Model” (<a class="reference external" href="https://igm-model.org/">IGM</a> developed at UNIL), which is a python-based glacier evolution model that uses Machine Learning (ML) and Graphics Processing Units (GPU) to acceleratehe code computations.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="iv-present-day-and-paleo-glacier-applications">
+<h1>IV &gt; Present-day and paleo glacier applications<a class="headerlink" href="#iv-present-day-and-paleo-glacier-applications" title="Link to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modelling-of-the-evolution-of-aletsch-glacier">
+<h1>Modelling of the evolution of Aletsch Glacier<a class="headerlink" href="#modelling-of-the-evolution-of-aletsch-glacier" title="Link to this heading">#</a></h1>
+<p><img alt="height:300px" src="../_images/aletsch.jpg" /></p>
+<p><small>Key numbers: ~ 20 km long – 85 km² – 13 km³ </small></p>
+<p>➡️ 1880–2010 : Model validation <small>(Jouvet and al., JOG 2010)</small><br />
+➡️ 2010–2100 : Multiple climate scenarios <small>(Jouvet &amp; Huss, JOG 2019)</small></p>
+<p>Check at the <a class="reference external" href="https://jouvetg.github.io/the-aletsch-glacier-module">simulation page</a></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="solving-a-cold-case-with-glacier-modelling">
+<h1>Solving a cold case with glacier modelling!<a class="headerlink" href="#solving-a-cold-case-with-glacier-modelling" title="Link to this heading">#</a></h1>
+<p><img alt="height:250px" src="../_images/climbers2.jpg" /></p>
+<p>➡️ 1226: 4 mens vanish on the Great Aletsch Glacier
+➡️ 2012: The remains of 3 of them ar found ~ 10 km downstream.</p>
+<p>What caused the fate of the mountainers?
+Can glacier modelling help to estimate the vanishing place?</p>
+<p>Want to know more ? Check at the <a class="reference external" href="https://youtu.be/cyKb-P3mwDk">short film</a>.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="last-glacial-maximum-in-the-switzerland">
+<h1>Last Glacial Maximum in the Switzerland<a class="headerlink" href="#last-glacial-maximum-in-the-switzerland" title="Link to this heading">#</a></h1>
+<p><img alt="height:450px" src="../_images/AIF-CH.png" /></p>
+<p>Can we reproduce this with a glacier model ?</p>
+<hr class="docutils" />
+<section id="paleo-glacier-modelling-in-the-alps-with-igm">
+<h2>Paleo glacier modelling in the Alps with IGM<a class="headerlink" href="#paleo-glacier-modelling-in-the-alps-with-igm" title="Link to this heading">#</a></h2>
+<figure style="text-align: center;">
+     <img src="fig/AIF.png" width="50%" />   
+    <img src="fig/leger2024.png" width="47%" />   
+</figure>
+<p><sub>(Leger, Jouvet and al., Nature Com., 2025)   </sub></p>
+<p>Modelling last ice age glacier evolution in the Alps: <a class="reference external" href="https://youtu.be/IbLOFh3U9gI">https://youtu.be/IbLOFh3U9gI</a></p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ice-flow-modelling-for-landscape-evolution">
+<h1>Ice flow modelling for landscape evolution<a class="headerlink" href="#ice-flow-modelling-for-landscape-evolution" title="Link to this heading">#</a></h1>
+<p>… to model the alternance of ice flow-driven glacial (U) and fluvial (V) erosion.</p>
+<figure style="text-align: center;">
+    <img src="fig/cordonnier_1.png" width="80%" /> 
+    <img src="fig/cordonnier_2.png" width="80%" /> 
+</figure>
+<p><sub>(Cordonnier, Jouvet et al., SIGGRAPH, 2023)</sub></p>
+<p>Simulation: <a class="reference external" href="https://youtu.be/xfk_J4VhdWA">https://youtu.be/xfk_J4VhdWA</a></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="v-analogue-modelling">
+<h1>V &gt; Analogue modelling<a class="headerlink" href="#v-analogue-modelling" title="Link to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-glacier-goo-experiment">
+<h1>The “glacier goo” experiment<a class="headerlink" href="#the-glacier-goo-experiment" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://uzh.mediaspace.cast.switch.ch/channel/Glacier-Goo-Experimente">https://uzh.mediaspace.cast.switch.ch/channel/Glacier-Goo-Experimente</a></p>
+<p><img alt="height:400px" src="../_images/glacier-goo.png" /></p>
+<p>Credit: G. Vieli, A. Vieli, A. Linsbauer (UZH, 3G)</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./00_cours"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../syllabus.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Syllabus</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../01_notebook/glacier-modelling-1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebook 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Course</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ressources">Ressources</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#content-of-this-course">Content of this course</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#i-glacier-processes">I &gt; Glacier processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-glacial-processes-governing-glacier-evol">Main glacial processes governing glacier evol.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacial-processes-governing-glacier-evolution">Glacial processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-processes">Mass balance processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-glacial-motion">Observing glacial motion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-a-glacier-flow-brief-historical-outlines">How can a glacier flow?  Brief historical outlines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-1st-measurements">19th century: 1st measurements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-from-lab-exp-to-glens-flow-law">20th century: From lab exp. to Glen’s flow law</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-components-of-glacier-ice-flow">The two components of glacier ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-of-ice-under-argentiere-glacier">Sliding of ice under Argentière Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#subglacial-hydrology">Subglacial hydrology</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thermic-and-basal-glacial-state">Thermic and basal glacial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-these-processes-are-coupled">Number of these processes are coupled</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-mathematical-modelling">II&gt; Mathematical Modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-dynamics-equations-boundary-conditions">Ice dynamics equations &amp; boundary conditions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-models-since-glaciers-are-shallow">Shallow Ice models (since glaciers are shallow)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Shallow Ice Approximation (SIA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-shallow-ice-models">2 (simplified) shallow ice models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-marine-ice-sheets">Dynamics of marine ice sheets</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics-of-the-antartica-ice-sheet">Dynamics of the Antartica Ice Sheet</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-ice-flow-and-mass-conservation">Connecting ice flow and mass conservation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-sheet-evolution-equation">Ice sheet evolution equation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-numerical-modelling">III &gt; Numerical modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#need-for-a-numerical-glacier-evolution-model">Need for a numerical glacier evolution model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-must-be-meshed-discretized">Glacier must be meshed/discretized …</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-glacier-evolution-computation">Transient glacier evolution computation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-ice-flow-and-mass-balance-models">Combining ice flow and mass balance models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-models">Numerical models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-present-day-and-paleo-glacier-applications">IV &gt; Present-day and paleo glacier applications</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-of-the-evolution-of-aletsch-glacier">Modelling of the evolution of Aletsch Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-cold-case-with-glacier-modelling">Solving a cold case with glacier modelling!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#last-glacial-maximum-in-the-switzerland">Last Glacial Maximum in the Switzerland</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleo-glacier-modelling-in-the-alps-with-igm">Paleo glacier modelling in the Alps with IGM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-modelling-for-landscape-evolution">Ice flow modelling for landscape evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#v-analogue-modelling">V &gt; Analogue modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-glacier-goo-experiment">The “glacier goo” experiment</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guillaume Jouvet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
