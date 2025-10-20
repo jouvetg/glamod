@@ -1,9 +1,9 @@
 # Jupyter Book Configuration
 title: "Glacier Modelling cours"
 author: "Guillaume Jouvet"
-logo: "course_illu.png"
-# execute:
-#  execute_notebooks: "off"  # Turn off execution
+# logo: "course_illu.png"
+execute:
+  execute_notebooks: "off"  # Turn off execution
 #  remove_cell_tags: ["solution"]  # Remove cells tagged with "solution"
 html:
   theme: "sphinx_book_theme"

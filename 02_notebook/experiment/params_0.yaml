@@ -1,0 +1,35 @@
+# @package _global_
+
+defaults:
+  - override /inputs: 
+    - local
+  - override /processes: 
+    - smb_simple
+    - iceflow
+    - time
+    - thk
+  - override /outputs: 
+    - local
+    - plot2d
+
+inputs:
+  local:
+     filename: input.nc
+
+processes:
+  smb_simple:
+    array:
+      - ["time", "gradabl", "gradacc", "ela", "accmax"]
+      - [1900, 0.009, 0.005, 2800, 2.0]
+      - [2000, 0.009, 0.005, 2900, 2.0]
+      - [2100, 0.009, 0.005, 3300, 2.0]
+  time:
+    start: 1900.0
+    end: 2000.0
+    save: 10.0
+    
+outputs:
+  plot2d:
+    live: False
+    
+    
