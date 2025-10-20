@@ -62,7 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '01_notebook/glacier-modelling-1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Course" href="../00_cours/00_cours.html" />
+    <link rel="next" title="Notebook 2" href="../02_notebook/glacier-modelling-2.html" />
+    <link rel="prev" title="Mini-project" href="../00_project/project.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -143,7 +144,7 @@
     
   
 
-<a class="navbar-brand logo" href="../syllabus.html">
+<a class="navbar-brand logo" href="../infos.html">
   
   
   
@@ -169,13 +170,13 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../syllabus.html">
-                    Syllabus
+                <a class="reference internal" href="../infos.html">
+                    Informations
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../00_cours/00_cours.html">Course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_introduction/00_introduction.html">Introduction</a></li>
 
 
 
@@ -216,9 +217,11 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../00_project/project.html">Mini-project</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebook 1</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../02_notebook/glacier-modelling-2.html">Notebook 2</a></li>
 </ul>
 
     </div>
@@ -396,8 +399,21 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-1">
 <h1>Notebook 1<a class="headerlink" href="#notebook-1" title="Link to this heading">#</a></h1>
-<p><a class="reference download internal" download="" href="../_downloads/f513fb9f47aab84ccb4d88acf3720f60/01_notebook.zip"><span class="xref download myst">Download the notebook</span></a></p>
-<p><a class="reference external" href="https://colab.research.google.com/github/gjouvet/glacier-tutorials/blob/main/notebooks/demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>Run online (recommended): <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/01_notebook/glacier-modelling-1.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>Download for offline use: <a class="reference internal" href="#01_notebook.zip"><span class="xref myst">Download ZIP</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">pathlib</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span>
+
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/jouvetg/glamod/archive/refs/heads/main.zip&quot;</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;repo.zip&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s2">&quot;repo.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;glamod-main/01_notebook&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>The goals of this notebook:</p>
 <ul class="simple">
 <li><p>Get familiar with simplified SIA-based glacier model in 2D and 3D</p></li>
@@ -734,7 +750,7 @@ Take the following code, and play with it to answer the following questions:</p>
 <span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
 <span class="n">A</span><span class="o">=</span><span class="mf">2.5e-14</span>
 <span class="n">freq</span><span class="o">=</span><span class="mi">2000</span>
-<span class="n">ttot</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">ttot</span> <span class="o">=</span> <span class="mi">20000</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">3300</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">freq</span><span class="p">)</span>
@@ -964,13 +980,22 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../00_cours/00_cours.html"
+       href="../00_project/project.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Course</p>
+        <p class="prev-next-title">Mini-project</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../02_notebook/glacier-modelling-2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebook 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

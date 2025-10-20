@@ -6,7 +6,7 @@ backgroundColor: black
 color: white
 ---
 
-# Course
+# Introduction
 
 Guillaume Jouvet
    
@@ -61,7 +61,9 @@ https://link.springer.com/book/10.1007/978-3-030-42584-5
 
 # Mass balance processes
 
-![height:500px](fig/glaciers-as-a-system.png)
+![height:450px](https://www.antarcticglaciers.org/wp-content/uploads/2018/11/glaciers-as-a-system.png)
+
+Picture from www.antarcticglaciers.org
 
 ---
 
@@ -138,10 +140,12 @@ ICE is both: a **fluid** that flow/shear, and a **solid** that slides
 
 # Subglacial hydrology
 
-![height:400px](fig/surface_meltwater_glacier_bed.png)
+![height:350px](https://www.antarcticglaciers.org/wp-content/uploads/2015/06/surface_meltwater_glacier_bed.png)
 
 - Inefficient drainage → high pressure → high basal sliding  
 - Efficient drainage → low pressure → low basal sliding  
+
+<small>Source: https://www.antarcticglaciers.org</small>
 
 ---
 
@@ -189,6 +193,7 @@ Note that the ice flow speed is independent of time!
 | | |
 |---|---|
 | ![height:300px](fig/pic2.jpg) | ![height:300px](fig/pic1.jpg) |
+| *source: G. Kappenberger* | *source: NASA* |
 | Mountain glacier | Ice sheet |
 | aspect ratio $\sim 1/10$ | aspect ratio $\sim 1/1000$ |
 
@@ -238,9 +243,9 @@ where $\epsilon$ is the aspect ratio.
 
 # Dynamics of the Antartica Ice Sheet
 
-<img src="https://svs.gsfc.nasa.gov/vis/a000000/a003800/a003849/antarctica_flows_1_00120_1024x576.jpg" alt="Map of Antarctica" width="70%">
+![height:350px](https://svs.gsfc.nasa.gov/vis/a000000/a003800/a003849/antarctica_flows_1_00120_1024x576.jpg)
 
-*Ice flow field in Antarctica, the pink areas (ice shelves where the ice is floating) display the zone for the ice is the fastest. Check a the [NASA website](https://svs.gsfc.nasa.gov/3849/) for animations.*
+*Ice flow field in Antarctica, the pink areas display the zone for the ice is the fastest over ice shelves (floating ice). Check a the [NASA website](https://svs.gsfc.nasa.gov/3849/) for animations.* Source: NASA.
 
 ---
 
