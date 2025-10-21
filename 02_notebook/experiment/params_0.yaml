@@ -14,7 +14,7 @@ defaults:
 
 inputs:
   local:
-     filename: input-alesch.nc
+     filename: input-aletsch.nc
 
 processes:
   smb_simple:
