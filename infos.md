@@ -13,7 +13,7 @@ The goal of this course is to provide an overview of basic physical processes th
 
 # Content:
 
-- **Course content :** Basics of glacier processes and numerical model
+- **Introduction :** Basics of glacier processes and numerical model
 - **Mini-project :** Model your own Glacier
 - **Notebook 1 :** Getting familiar with a simple numerical glacier model
 - **Notebook 2 :** Getting familiar with IGM
@@ -30,3 +30,7 @@ The goal of this course is to provide an overview of basic physical processes th
 - **Use your own computer** to perform computations. This requires: 1) a Python editor (like VS Code), and 2) Python and Anaconda to create a Python environment. You may follow the installation steps here: https://jouvetg.github.io/modnum/00_install/00_install.html. Installing IGM is a bit more complicated, but once done, it is easier to perform your computations locally. To that aim, follow instructions on the IGM webpage : https://igm-model.org/.
 
 - **Use Colab** to do all your computations online. This is much easier at first, as there is nothing to install, but it is less flexible since you need to upload and download data and results.
+
+# IGM support
+
+You may subscribe to the dedicated discord Chanel in order to get IGM support related to this class by clicking on this invit : https://discord.gg/Nrpjpsqd

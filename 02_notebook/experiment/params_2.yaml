@@ -33,4 +33,5 @@ processes:
 
 outputs:
   plot2d:
-    live: true
+    live: False
+    

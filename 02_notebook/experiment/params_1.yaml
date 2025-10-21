@@ -1,9 +1,5 @@
 # @package _global_
-
-# hydra:
-#   job:
-#     chdir: True
-
+ 
 defaults:
   - override /inputs: 
     - oggm_shop
@@ -36,6 +32,8 @@ processes:
       - [ 1900,           0.0,         1.0]
       - [ 2020,           0.0,         1.0]
       - [ 2100,           4.0,         1.0]
+    
 outputs:
   plot2d:
-    live: true
+    live: False
+    
