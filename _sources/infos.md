@@ -5,7 +5,7 @@
 
 - Teacher: Guillaume Jouvet (guillaume.jouvet (at) unil.ch) 
 
-Salle Géoplis 2224, wednesday from 8.30 to 10.00
+Salle Géopolis 2224, wednesday from 8.30 to 10.00
 
 # Course objective
 

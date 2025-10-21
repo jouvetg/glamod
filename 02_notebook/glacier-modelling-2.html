@@ -418,9 +418,17 @@ document.write(`
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running in Colab: cloning repo...&quot;</span><span class="p">)</span>
     <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
-    <span class="o">%</span><span class="k">cd</span> glamod/02_notebook
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running locally: using local files.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now go the working folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">cd</span> /content/glamod/02_notebook
 </pre></div>
 </div>
 </div>
@@ -445,7 +453,7 @@ document.write(`
 <p>Running IGM consists of running a python script <code class="docutils literal notranslate"><span class="pre">igm_run</span></code>, which is made of functions of the <code class="docutils literal notranslate"><span class="pre">igm</span></code> python package.  First of all, one needs to install igm as follows: (this may take a while, and it may crashes the first time, but should work the second time).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--no-cache-dir<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.3
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.5
 </pre></div>
 </div>
 </div>
