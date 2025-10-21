@@ -424,11 +424,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running locally: using local files.
-</pre></div>
-</div>
-</div>
 </div>
 <section id="goals-of-this-notebook">
 <h2>Goals of this notebook<a class="headerlink" href="#goals-of-this-notebook" title="Link to this heading">#</a></h2>
@@ -451,8 +446,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installation of the igm package directly from the github repository, this may take a while</span>
-<span class="c1"># !pip install git+https://github.com/instructed-glacier-model/igm.git@main</span>
-<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>igm-model-testing-package
+<span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--no-cache-dir<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.3
 </pre></div>
 </div>
 </div>
