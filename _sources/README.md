@@ -1,5 +1,11 @@
 # git add, commit, push ...
 
+# clean
+rm -r 02_notebook/outputs
+rm -r 02_notebook/data/RGI2000-v7.0-G-11-02596
+rm -r 02_notebook/data/input.nc
+rm -r 02_notebook/__pycache__
+
 # ziip ex
 sh zip-exercices.sh
 
