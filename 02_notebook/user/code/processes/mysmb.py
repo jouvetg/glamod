@@ -4,13 +4,8 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import math
 
- ## add custumized smb function
-def params(parser):  
-    parser.add_argument("--meanela", type=float, default=3000 )
-
 def initialize(cfg,state):
-    state.meanela = np.quantile(state.usurf[state.thk>10],0.2)
-    # cfg.processes.mysmb.meanela = np.quantile(state.usurf[state.thk>10],0.2) # cfg does not seem to work here.. which is okay as maybe we want to keep the config separate...
+    state.meanela = 3000 # np.quantile(state.usurf[state.thk>10],0.2)
 
 def update(cfg,state):
     # perturabe the ELA with sinusional signal 
