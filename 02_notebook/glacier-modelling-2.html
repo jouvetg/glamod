@@ -372,6 +372,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-this-notebook">Goals of this notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-igm">What is IGM?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-run-with-igm">First run with IGM</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-exploration">Folder exploration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-file-exploration">Parameter file exploration</a></li>
@@ -386,10 +387,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Analyzing the time series results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-run-with-igm">Third run with IGM</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-moraine-formation">Visualizing the moraine formation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-run-with-igm">Third run with IGM</a></li>
 </ul>
             </nav>
         </div>
@@ -404,35 +402,13 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-2">
 <h1>Notebook 2<a class="headerlink" href="#notebook-2" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>If you work on Google Colab, <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/02_notebook/glacier-modelling-2.ipynb"><img alt="open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> and you will donwload the repo in the first step below. Make sure to activate the GPU on Colab “Runtime” -&gt; “Change Runtime Type” -&gt; Slect GPU.</p></li>
+<li><p>If you work on Google Colab, <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/02_notebook/glacier-modelling-2.ipynb"><img alt="open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> and you will donwload the repo  below. Make sure to activate the GPU on Colab “Runtime” -&gt; “Change Runtime Type” -&gt; Slect GPU.</p></li>
 <li><p>If you work locally on your own PC, you can download the repo</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
 </pre></div>
 </div>
 <p>and then go the notebook folder, and work from there.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
- 
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running in Colab: cloning repo...&quot;</span><span class="p">)</span>
-    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running locally: using local files.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s now go the working folder</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">cd</span> /content/glamod/02_notebook
-</pre></div>
-</div>
-</div>
-</div>
 <section id="goals-of-this-notebook">
 <h2>Goals of this notebook<a class="headerlink" href="#goals-of-this-notebook" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -465,6 +441,33 @@ document.write(`
 <li><p>A third with a user-defined SMB and particle tracking</p></li>
 </ul>
 </section>
+<section id="download-the-data">
+<h2>Download the data<a class="headerlink" href="#download-the-data" title="Link to this heading">#</a></h2>
+<p>Let’s now download the repo with the data if you are using Colab</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+ 
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running in Colab: cloning repo...&quot;</span><span class="p">)</span>
+    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
+    <span class="o">!</span>apt-get<span class="w"> </span>install<span class="w"> </span>tree<span class="w"> </span>-q
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running locally: using local files.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now go the working folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">cd</span> /content/glamod/02_notebook
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="first-run-with-igm">
 <h2>First run with IGM<a class="headerlink" href="#first-run-with-igm" title="Link to this heading">#</a></h2>
 <section id="folder-exploration">
@@ -472,8 +475,7 @@ document.write(`
 <p>Let us explore the directory with the following command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>apt-get<span class="w"> </span>install<span class="w"> </span>tree<span class="w"> </span>-q
-<span class="o">!</span>tree
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree
 </pre></div>
 </div>
 </div>
@@ -795,18 +797,7 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 <p>In a third run, we will bring 2 additional new features (explore the parameter file <code class="docutils literal notranslate"><span class="pre">params_2.yaml</span></code>):</p>
 <p><strong>First new feature:</strong> Using a <strong>custom SMB function</strong> that is defined in the <code class="docutils literal notranslate"><span class="pre">user</span></code> folder. Explore the <code class="docutils literal notranslate"><span class="pre">user</span></code> folder and the parameter file <code class="docutils literal notranslate"><span class="pre">params_2.yaml</span></code> to see how custom code can be integrated.</p>
 <p><strong>Second new feature:</strong> We activate a particle tracking module to simulate the displacement of virtual particles within the ice flow. These particles may represent debris or sediments that are transported by the glacier and are responsible for the formation of moraines. Our goal is to model the formation of the main moraine that developed during the Little Ice Age when the glacier reached its maximum extent.</p>
-<p>To achieve this, we have made 2 changes to the parameter file <code class="docutils literal notranslate"><span class="pre">params_2.yaml</span></code>:</p>
-<ol class="arabic simple">
-<li><p>We added two modules: <code class="docutils literal notranslate"><span class="pre">vert_flow</span></code> and <code class="docutils literal notranslate"><span class="pre">particles</span></code>. The <code class="docutils literal notranslate"><span class="pre">vert_flow</span></code> module computes vertical velocities (which is not done by default as it is not usually required), while the <code class="docutils literal notranslate"><span class="pre">particles</span></code> module tracks the trajectory of individual particles.</p></li>
-<li><p>We added the following parameters:</p></li>
-</ol>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vflo_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kinematic</span>
-<span class="w">  </span><span class="nt">tracking_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3d</span>
-<span class="w">  </span><span class="nt">density_seeding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25</span>
-<span class="w">  </span><span class="nt">frequency_seeding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-</pre></div>
-</div>
-<p>It is possible to visualize the moraine formed by looking at the file <code class="docutils literal notranslate"><span class="pre">velbar_mag-XXXX.0.png</span></code>.</p>
+<p>To achieve this, we have added in <code class="docutils literal notranslate"><span class="pre">params_2.yaml</span></code> two modules: <code class="docutils literal notranslate"><span class="pre">vert_flow</span></code> and <code class="docutils literal notranslate"><span class="pre">particles</span></code>. The <code class="docutils literal notranslate"><span class="pre">vert_flow</span></code> module computes vertical velocities (which is not done by default as it is not usually required), while the <code class="docutils literal notranslate"><span class="pre">particles</span></code> module tracks the trajectory of individual particles. It is possible to visualize the moraine formed by looking at the file <code class="docutils literal notranslate"><span class="pre">velbar_mag-XXXX.0.png</span></code>.</p>
 <p>Run the following command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -815,28 +806,6 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 </div>
 </div>
 </div>
-<section id="visualizing-the-moraine-formation">
-<h3>Visualizing the moraine formation<a class="headerlink" href="#visualizing-the-moraine-formation" title="Link to this heading">#</a></h3>
-<p>After the simulation completes, let’s visualize the results including the particle tracking:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
-
-<span class="c1"># Find all output files</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s):&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">A</span><span class="p">:</span>
-    <span class="c1"># Animate the last run showing particles/moraines</span>
-    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -898,6 +867,7 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-of-this-notebook">Goals of this notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-igm">What is IGM?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-run-with-igm">First run with IGM</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#folder-exploration">Folder exploration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-file-exploration">Parameter file exploration</a></li>
@@ -912,10 +882,7 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Analyzing the time series results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-run-with-igm">Third run with IGM</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-moraine-formation">Visualizing the moraine formation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-run-with-igm">Third run with IGM</a></li>
 </ul>
   </nav></div>
 
