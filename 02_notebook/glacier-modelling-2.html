@@ -404,7 +404,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-2">
 <h1>Notebook 2<a class="headerlink" href="#notebook-2" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>If you work on Google Colab, <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/02_notebook/glacier-modelling-2.ipynb"><img alt="open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> and you will donwload the repo in the first step below.</p></li>
+<li><p>If you work on Google Colab, <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/02_notebook/glacier-modelling-2.ipynb"><img alt="open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> and you will donwload the repo in the first step below. Make sure to activate the GPU on Colab “Runtime” -&gt; “Change Runtime Type” -&gt; Slect GPU.</p></li>
 <li><p>If you work locally on your own PC, you can download the repo</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
@@ -442,11 +442,10 @@ document.write(`
 </section>
 <section id="how-to-install-igm">
 <h2>How to install IGM?<a class="headerlink" href="#how-to-install-igm" title="Link to this heading">#</a></h2>
-<p>Running IGM consists of running a python script <code class="docutils literal notranslate"><span class="pre">igm_run</span></code>, which is made of functions of the <code class="docutils literal notranslate"><span class="pre">igm</span></code> python package.  First of all, one needs to install igm as follows:</p>
+<p>Running IGM consists of running a python script <code class="docutils literal notranslate"><span class="pre">igm_run</span></code>, which is made of functions of the <code class="docutils literal notranslate"><span class="pre">igm</span></code> python package.  First of all, one needs to install igm as follows: (this may take a while, and it may crashes the first time, but should work the second time).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installation of the igm package directly from the github repository, this may take a while</span>
-<span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--no-cache-dir<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.3
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>--no-cache-dir<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.3
 </pre></div>
 </div>
 </div>
@@ -465,7 +464,8 @@ document.write(`
 <p>Let us explore the directory with the following command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>apt-get<span class="w"> </span>install<span class="w"> </span>tree<span class="w"> </span>-q
+<span class="o">!</span>tree
 </pre></div>
 </div>
 </div>
