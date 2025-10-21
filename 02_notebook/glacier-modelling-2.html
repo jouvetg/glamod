@@ -403,8 +403,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-2">
 <h1>Notebook 2<a class="headerlink" href="#notebook-2" title="Link to this heading">#</a></h1>
-<p><a class="reference internal" href="#notebook2.zip"><span class="xref myst">Download the notebook</span></a></p>
-<p><a class="reference external" href="https://colab.research.google.com/github/gjouvet/glacier-tutorials/blob/main/notebooks/demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/b060de9c6805bbbd34365b7656788073/02_notebook.zip"><span class="xref download myst">Download the notebook</span></a></p>
+<p>You may unzip this notebook and open the folder with Colab : <a class="reference external" href="https://colab.research.google.com">https://colab.research.google.com</a>, or work on locally on your PC.</p>
 <section id="goals-of-this-notebook">
 <h2>Goals of this notebook<a class="headerlink" href="#goals-of-this-notebook" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -465,8 +465,8 @@ document.write(`
 </section>
 <section id="parameter-file-exploration">
 <h3>Parameter file exploration<a class="headerlink" href="#parameter-file-exploration" title="Link to this heading">#</a></h3>
-<p>If you look at the parameter file, you will see the following files, which shows all the input, process, and output modules along with all their parameters. Below, you may notice that IGM : i) first loads a certain number of inputs, processes, and output modules ii) second define parameters associated with each module that deviates from default ones.</p>
-<p>Here is content of <code class="docutils literal notranslate"><span class="pre">params_0.yaml</span></code>, taken from IGM’s exampled <code class="docutils literal notranslate"><span class="pre">aletsch-basic</span></code>. Here, IGM loads data with the <code class="docutils literal notranslate"><span class="pre">local</span></code> module, proceed to a simulation from 1900 to 2000 updating surface mass balance (<code class="docutils literal notranslate"><span class="pre">smb</span></code>), iceflow, time, and ice thickness. Then, it writes the results in both a local file (netcdf file), and in form of plots.</p>
+<p>If you look at the parameter file, you will see the following content, which shows all the input, process, and output modules along with all their parameters. Below, you may notice that IGM: i) first loads a certain number of inputs, processes, and output modules, ii) second defines parameters associated with each module that deviate from default ones.</p>
+<p>Here is the content of <code class="docutils literal notranslate"><span class="pre">params_0.yaml</span></code>, taken from IGM’s example <code class="docutils literal notranslate"><span class="pre">aletsch-basic</span></code>. Here, IGM loads data with the <code class="docutils literal notranslate"><span class="pre">local</span></code> module, proceeds to a simulation from 1900 to 2000 updating surface mass balance (<code class="docutils literal notranslate"><span class="pre">smb</span></code>), iceflow, time, and ice thickness. Then, it writes the results in both a local file (NetCDF file) and in the form of plots.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># @package _global_</span>
 
 <span class="nt">defaults</span><span class="p">:</span>
@@ -502,9 +502,9 @@ document.write(`
 <span class="w">    </span><span class="nt">live</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </pre></div>
 </div>
-<p>IGM is organized <strong>module-wise</strong> as shown on the following flowchart</p>
+<p>IGM is organized <strong>module-wise</strong> as shown in the following flowchart:</p>
 <p><img alt="" src="https://igm-model.org/latest/modules/flowchat-module.png" /></p>
-<p>As a user, you need to pick an ensemble of modules from existing one (or you may create some user ones), and then defines the parameters that deviates from default ones.</p>
+<p>As a user, you need to pick an ensemble of modules from existing ones (or you may create some user ones), and then define the parameters that deviate from default ones.</p>
 </section>
 <section id="exploring-the-data-input-nc">
 <h3>Exploring the data (<code class="docutils literal notranslate"><span class="pre">input.nc</span></code>)<a class="headerlink" href="#exploring-the-data-input-nc" title="Link to this heading">#</a></h3>
@@ -560,7 +560,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>What you see above show raster grids of top surface elevation, ice thickness, and “ice mask”, for the Aletsch Glacier at a spatial resolution of 100 m.</p>
+<p>What you see above shows raster grids of top surface elevation, ice thickness, and ice mask for the Aletsch Glacier at a spatial resolution of 100 m.</p>
 </section>
 <section id="simple-surface-mass-balance">
 <h3>‘Simple’ Surface Mass Balance<a class="headerlink" href="#simple-surface-mass-balance" title="Link to this heading">#</a></h3>
@@ -621,7 +621,7 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 </section>
 <section id="explore-the-output">
 <h3>Explore the output<a class="headerlink" href="#explore-the-output" title="Link to this heading">#</a></h3>
-<p>Each IGM run will then generate a folder with the day as the parent folder and the time as a subfolder. For instance, after a few runs we could end up with the following structure</p>
+<p>Each IGM run will generate a folder with the date as the parent folder and the time as a subfolder. For instance, after a few runs we could end up with the following structure:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>outputs
 <span class="w">  </span>└───2025-04-07
 <span class="w">      </span>├───<span class="w"> </span><span class="m">12</span>-06-29<span class="w"> </span>

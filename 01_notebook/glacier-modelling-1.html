@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -399,21 +399,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-1">
 <h1>Notebook 1<a class="headerlink" href="#notebook-1" title="Link to this heading">#</a></h1>
-<p>Run online (recommended): <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/01_notebook/glacier-modelling-1.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>Download for offline use: <a class="reference download internal" download="" href="../_downloads/f513fb9f47aab84ccb4d88acf3720f60/01_notebook.zip"><span class="xref download myst">Download ZIP</span></a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">pathlib</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span>
-
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/jouvetg/glamod/archive/refs/heads/main.zip&quot;</span>
-    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s2">&quot;repo.zip&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s2">&quot;repo.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;glamod-main/01_notebook&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>You may unzip this notebook and open the folder with Colab : <a class="reference external" href="https://colab.research.google.com">https://colab.research.google.com</a>, or work on locally on your PC.</p>
 <p>The goals of this notebook:</p>
 <ul class="simple">
 <li><p>Get familiar with simplified SIA-based glacier model in 2D and 3D</p></li>
