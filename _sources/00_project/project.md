@@ -28,11 +28,12 @@ color: white
 You may explore https://www.glims.org/maps/glims to find a glacier you would like to model. You need to collect the RGI ID (v7) and save it, as we will use it to download the data. Here are the criteria to choose your glacier:
 
 - Prefer a well-defined mountain glacier, not an ice cap.
-- The area should be between 5 km² and 500 km² (otherwise, it may be tricky computationally). Between 20 km² and 100 km² is a good target.
+- The area should be between 10 km² and 200 km² (otherwise, it may be tricky computationally).  
 - It is better if the glacier is somewhat dynamic (with enough slope). You may look at Google Earth for a 3D view.
 - Ideally, it shows well-visible moraines from the Little Ice Age (LIA).
+- Do not chose either Aletsch, or Rhone Glaciers, CH
   
-Once you have chosen your glacier, please communicate the RGI ID to the professor. Make sure that the same glacier is not studied twice in the class.
+Pick 3 candidate glaciers you would like to model, and comunicate to the professor (email or discord) the RGI7 ID, the name (if has one), the area, the country, by Monday 27. I will confirm the glaciers in the class on Wed 29. 
 
 ---
 
