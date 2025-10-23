@@ -24,6 +24,7 @@ defaults:
 inputs:
   oggm_shop:
     RGI_ID: "RGI60-11.01450"
+    thk_source: millan_ice_thickness
 
 processes:
   time:

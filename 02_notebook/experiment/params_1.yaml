@@ -17,6 +17,8 @@ defaults:
 inputs:
   oggm_shop:
     RGI_ID: "RGI2000-v7.0-G-11-02596"
+    thk_source: millan_ice_thickness
+    
 
 processes:
   time:
