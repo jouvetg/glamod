@@ -4,55 +4,38 @@ from matplotlib.animation import FuncAnimation
 from IPython.display import HTML
 import numpy as np
 import matplotlib 
+from IPython.display import HTML
 
 def animate_glacier_evolution(nc_file='output.nc'):
-    # Load the dataset
     ds = xr.open_dataset(nc_file)
- 
-    # Extract data
+
     var_t = ds['thk']
     var_u = ds['velsurf_mag']
     times = var_t.time
-    x = var_t.coords['x']
-    y = var_t.coords['y']
-
+    x, y = var_t.coords['x'], var_t.coords['y']
     extent = [x.min(), x.max(), y.min(), y.max()]
-    
-    # Set up the plot
-    fig, ax = plt.subplots(figsize=(6, 8),dpi=100) 
-    ## im = ax.contourf(x, y, var.isel(time=0), levels=50, cmap='Blues')
-    im0 = ax.imshow(var_t.isel(time=0), origin="lower", cmap='binary', extent=extent) 
-    im  = ax.imshow( np.where(var_t.isel(time=0)>0,var_u.isel(time=0), np.nan),  origin="lower", cmap="turbo", extent=extent, 
-                     norm=matplotlib.colors.LogNorm(vmin=1, vmax=200) ) 
 
+    fig, ax = plt.subplots(figsize=(6, 8), dpi=100)
+    im0 = ax.imshow(var_t.isel(time=0), origin="lower", cmap='binary', extent=extent)
+    im  = ax.imshow(np.where(var_t.isel(time=0)>0, var_u.isel(time=0), np.nan),
+                    origin="lower", cmap="turbo", extent=extent,
+                    norm=matplotlib.colors.LogNorm(vmin=1, vmax=200))
     cbar = plt.colorbar(im, ax=ax, label='Speed (m)')
     ax.set_title(f'Glacier Evolution\nTime: {times[0].values}')
-    ax.set_xlabel('X Coordinate')
-    ax.set_ylabel('Y Coordinate')
-    ax.set_aspect('equal')
     ax.axis("off")
- 
-    # Update function for animation
-    def update(frame):
-        for c in ax.collections:
-            c.remove()  # Remove previous contours to update with new data
-#        ax.contourf(x, y, var.isel(time=frame), levels=50, cmap='Blues')
-        ax.imshow(var_t.isel(time=frame), origin="lower", cmap='binary', extent=extent) 
-        ax.imshow( np.where(var_t.isel(time=frame)>0, var_u.isel(time=frame), np.nan),  origin="lower", cmap="turbo", extent=extent, 
-                   norm=matplotlib.colors.LogNorm(vmin=1, vmax=200) )  
 
+    def update(frame):
+        im0.set_data(var_t.isel(time=frame))
+        im.set_data(np.where(var_t.isel(time=frame)>0, var_u.isel(time=frame), np.nan))
         ax.set_title(f'Glacier Evolution\nTime: {times[frame].values}')
-        return ax
-    
-    # Create the animation
+        return [im0, im]
+
     ani = FuncAnimation(fig, update, frames=len(times), interval=200, blit=False)
-    
-    # Display the animation in the notebook
-    display_animation = HTML(ani.to_jshtml())
-    plt.close()  # Prevents static display of the plot
     ds.close()
-    
-    return display_animation
+
+    # Important for Colab: do NOT close before displaying
+    from IPython.display import HTML
+    return HTML(ani.to_jshtml())
 
 
 def analyze_time_series(ts_file):
