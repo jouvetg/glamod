@@ -16,24 +16,29 @@ defaults:
 
 inputs:
   oggm_shop:
-    RGI_ID: "RGI2000-v7.0-G-11-02596"
+    RGI_ID: "RGI2000-v7.0-G-11-01706"
     thk_source: millan_ice_thickness
     
 
 processes:
   time:
-    start: 1800.0
+    start: 1700.0
     end: 2100.0
     save: 10.0
   iceflow:
     physics:
       init_slidingco: 0.25
   smb_oggm:
-    melt_enhancer: 1
+    melt_enhancer: 1.4
   clim_oggm:
     clim_trend_array: 
       - ["time", "delta_temp", "prec_scal"]
+      - [ 1700,           -1.5,        1.0]
+      - [ 1750,           -1.5,         1.0]
+      - [ 1800,           -1.0,         1.0]
+      - [ 1850,           -0.5,         1.0]
       - [ 1900,           0.0,         1.0]
+      - [ 1950,           0.0,         1.0]
       - [ 2020,           0.0,         1.0]
       - [ 2100,           4.0,         1.0]
     
