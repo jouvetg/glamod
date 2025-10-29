@@ -28,6 +28,8 @@ processes:
   iceflow:
     physics:
       init_slidingco: 0.25
+  smb_oggm:
+    melt_enhancer: 1
   clim_oggm:
     clim_trend_array: 
       - ["time", "delta_temp", "prec_scal"]
