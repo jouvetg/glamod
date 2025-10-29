@@ -389,8 +389,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further">To go further</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-climate-driven-surface-mass-balance">Extension 1: Climate driven Surface Mass Balance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-2-moraine-building">Extension 2: Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-moraine-building">Extension 1: Moraine building</a></li>
 </ul>
 </li>
 </ul>
@@ -449,9 +448,14 @@ document.write(`
 <h3>Step 3: Define and perform modelling experiments<a class="headerlink" href="#step-3-define-and-perform-modelling-experiments" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Make sure to include the module <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> with the RGI ID of your glacier.</p></li>
-<li><p>Start gently by doing a simple model run based on existing IGM examples (using simple SMB paramaters such as ELA, not a climate-based SMB yet).</p></li>
-<li><p>First focus on reproducing past periods, typically from the Little Ice Age (LIA, ~ 1850) to present before investigating future periods.</p></li>
+<li><p>To force the surface mass balance, you have 2 options:</p>
+<ul>
+<li><p>The simplest is to force the SMB with ELA parameters using the <code class="docutils literal notranslate"><span class="pre">smb_simple</span></code> IGM module, you don’t need any climate, you only force a time transient evolution of the SMB parameters. <a class="reference external" href="https://igm-model.org/latest/modules/processes/smb_simple/">https://igm-model.org/latest/modules/processes/smb_simple/</a>. This SMB is used in the first example given in notebook 2.</p></li>
+<li><p>Used a climate-driven SMB or custom SMB. To that aim, you may explore the IGM module <code class="docutils literal notranslate"><span class="pre">oggm_clim</span></code> and <code class="docutils literal notranslate"><span class="pre">oggm_smb</span></code>, which generate climate, and force a SMB, respectively. <a class="reference external" href="https://igm-model.org/latest/modules/processes/smb_oggm/">https://igm-model.org/latest/modules/processes/smb_oggm/</a> , <a class="reference external" href="https://igm-model.org/latest/modules/processes/clim_oggm/">https://igm-model.org/latest/modules/processes/clim_oggm/</a> . This SMB is used in the second example given in notebook 2.</p></li>
 </ul>
+</li>
+</ul>
+<p>First focus on reproducing past periods, typically from the Little Ice Age (LIA, ~ 1850) to present before investigating future periods.</p>
 <p><strong>Tips:</strong> As we don’t have surface topography for the LIA period, the trick is to start much earlier (like 1700), assuming the glacier in 1700 had the present-day topography, and then apply a transient lowering of the ELA (or the temperature), followed by an increase of the ELA (or the temperature).</p>
 <p>Mind that there may be a gap between the climate signal and the glacier response; this is due to glacier inertia, which varies according to the glacier volume (large glaciers usually have more inertia, and therefore longer lags).</p>
 </section>
@@ -567,16 +571,9 @@ document.write(`
 <section id="to-go-further">
 <h2>To go further<a class="headerlink" href="#to-go-further" title="Link to this heading">#</a></h2>
 <hr class="docutils" />
-<section id="extension-1-climate-driven-surface-mass-balance">
-<h3>Extension 1: Climate driven Surface Mass Balance<a class="headerlink" href="#extension-1-climate-driven-surface-mass-balance" title="Link to this heading">#</a></h3>
-<p>Instead of using a simple SMB driven by ELA parameters, you may consider increasing the model complexity by switching to a climate-driven SMB or custom SMB.</p>
-<p>To that aim, you may explore the IGM module <code class="docutils literal notranslate"><span class="pre">oggm_clim</span></code> and <code class="docutils literal notranslate"><span class="pre">oggm_smb</span></code>, which generate climate, and force a SMB, respectively.</p>
-</section>
-<hr class="docutils" />
-<section id="extension-2-moraine-building">
-<h3>Extension 2: Moraine building<a class="headerlink" href="#extension-2-moraine-building" title="Link to this heading">#</a></h3>
-<p>In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period.</p>
-<p>To that aim, you may explore the <code class="docutils literal notranslate"><span class="pre">particle</span></code> IGM module that permits to seed virtual particles, and transport them through the ice flow.</p>
+<section id="extension-1-moraine-building">
+<h3>Extension 1: Moraine building<a class="headerlink" href="#extension-1-moraine-building" title="Link to this heading">#</a></h3>
+<p>In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period. To that aim, you may explore the <code class="docutils literal notranslate"><span class="pre">particle</span></code> IGM module that permits to seed virtual particles, and transport them through the ice flow. To that aim, the third example in the notebook 2 may help you.</p>
 </section>
 </section>
 </section>
@@ -666,8 +663,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further">To go further</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-climate-driven-surface-mass-balance">Extension 1: Climate driven Surface Mass Balance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-2-moraine-building">Extension 2: Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-moraine-building">Extension 1: Moraine building</a></li>
 </ul>
 </li>
 </ul>

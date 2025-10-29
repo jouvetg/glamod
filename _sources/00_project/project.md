@@ -54,8 +54,13 @@ If you wish, you may adress other questions such as (for instance) related to mo
 ### Step 3: Define and perform modelling experiments
 
 - Make sure to include the module `oggm_shop` with the RGI ID of your glacier.
-- Start gently by doing a simple model run based on existing IGM examples (using simple SMB paramaters such as ELA, not a climate-based SMB yet).
-- First focus on reproducing past periods, typically from the Little Ice Age (LIA, ~ 1850) to present before investigating future periods.
+- To force the surface mass balance, you have 2 options:
+
+   - The simplest is to force the SMB with ELA parameters using the `smb_simple` IGM module, you don't need any climate, you only force a time transient evolution of the SMB parameters. https://igm-model.org/latest/modules/processes/smb_simple/. This SMB is used in the first example given in notebook 2.
+
+   - Used a climate-driven SMB or custom SMB. To that aim, you may explore the IGM module `oggm_clim` and `oggm_smb`, which generate climate, and force a SMB, respectively. https://igm-model.org/latest/modules/processes/smb_oggm/ , https://igm-model.org/latest/modules/processes/clim_oggm/ . This SMB is used in the second example given in notebook 2.
+
+First focus on reproducing past periods, typically from the Little Ice Age (LIA, ~ 1850) to present before investigating future periods.
  
 **Tips:** As we don't have surface topography for the LIA period, the trick is to start much earlier (like 1700), assuming the glacier in 1700 had the present-day topography, and then apply a transient lowering of the ELA (or the temperature), followed by an increase of the ELA (or the temperature). 
 
@@ -159,18 +164,7 @@ In your report, you must make sure to present the following information:
 ## To go further
 
 ---
-   
 
-### Extension 1: Climate driven Surface Mass Balance
+### Extension 1: Moraine building
 
-Instead of using a simple SMB driven by ELA parameters, you may consider increasing the model complexity by switching to a climate-driven SMB or custom SMB.
-
-To that aim, you may explore the IGM module `oggm_clim` and `oggm_smb`, which generate climate, and force a SMB, respectively.
-
----
-
-### Extension 2: Moraine building
-
-In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period.
-
-To that aim, you may explore the `particle` IGM module that permits to seed virtual particles, and transport them through the ice flow.
+In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period. To that aim, you may explore the `particle` IGM module that permits to seed virtual particles, and transport them through the ice flow. To that aim, the third example in the notebook 2 may help you.
