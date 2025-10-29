@@ -742,6 +742,32 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 <p>Find more information about the generated climate <a class="reference external" href="https://igm-model.org/latest/modules/processes/clim_oggm/">here</a>.</p>
 <p><strong>Third improvement:</strong> Instead of using the Simple Surface Mass Balance <code class="docutils literal notranslate"><span class="pre">smb_simple</span></code>, and now that we have climate available, we will use the <code class="docutils literal notranslate"><span class="pre">smb_oggm</span></code> SMB, which is a monthly temperature index model as described <a class="reference external" href="https://igm-model.org/latest/modules/processes/smb_oggm/">here</a>.</p>
 <p>First explore <code class="docutils literal notranslate"><span class="pre">params_1.yaml</span></code>, then run the following command, which will model the Glacier with RGI ID <code class="docutils literal notranslate"><span class="pre">RGI60-11.01450</span></code> (the Great Aletsch Glacier, Switzerland) from 2020 to 2100, assuming a temperature increase of 4 degrees by 2100 relative to 1960–1990:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running the code has created the following output files:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="c1"># Find all output files</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s):&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">A</span><span class="p">:</span>
+    <span class="c1"># Animate the last run</span>
+    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="visualizing-climate-data">
 <h2>Visualizing Climate Data<a class="headerlink" href="#visualizing-climate-data" title="Link to this heading">#</a></h2>
@@ -801,32 +827,6 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean temperature: </span><span class="si">{</span><span class="n">temp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precipitation range: </span><span class="si">{</span><span class="n">prcp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">prcp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mm&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean precipitation: </span><span class="si">{</span><span class="n">prcp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> mm&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_1
-</pre></div>
-</div>
-</div>
-</div>
-<p>Running the code has created the following output files:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
-
-<span class="c1"># Find all output files</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s):&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">A</span><span class="p">:</span>
-    <span class="c1"># Animate the last run</span>
-    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
