@@ -10,32 +10,44 @@ def animate_glacier_evolution(nc_file='output.nc'):
     ds = xr.open_dataset(nc_file)
 
     var_t = ds['thk']
-    var_u = ds['velsurf_mag']
     times = var_t.time
     x, y = var_t.coords['x'], var_t.coords['y']
     extent = [x.min(), x.max(), y.min(), y.max()]
-
-    fig, ax = plt.subplots(figsize=(6, 8), dpi=100)
-    im0 = ax.imshow(var_t.isel(time=0), origin="lower", cmap='binary', extent=extent)
-    im  = ax.imshow(np.where(var_t.isel(time=0)>0, var_u.isel(time=0), np.nan),
-                    origin="lower", cmap="turbo", extent=extent,
-                    norm=matplotlib.colors.LogNorm(vmin=1, vmax=200))
-    cbar = plt.colorbar(im, ax=ax, label='Speed (m)')
-    ax.set_title(f'Glacier Evolution\nTime: {times[0].values}')
-    ax.axis("off")
-
-    def update(frame):
-        im0.set_data(var_t.isel(time=frame))
-        im.set_data(np.where(var_t.isel(time=frame)>0, var_u.isel(time=frame), np.nan))
-        ax.set_title(f'Glacier Evolution\nTime: {times[frame].values}')
-        return [im0, im]
-
-    ani = FuncAnimation(fig, update, frames=len(times), interval=200, blit=False)
+    
+    # Select 16 evenly spaced time indices
+    n_times = len(times)
+    time_indices = np.linspace(0, n_times - 1, 16, dtype=int)
+    
+    # Create 4x4 subplot grid
+    fig, axes = plt.subplots(4, 4, figsize=(16, 16), dpi=100)
+    axes = axes.flatten()
+    
+    # Find global min and max for consistent colorbar
+    thk_max = float(var_t.max())
+    
+    for idx, time_idx in enumerate(time_indices):
+        ax = axes[idx]
+        thk_data = var_t.isel(time=time_idx)
+        
+        # Plot ice thickness
+        im = ax.imshow(thk_data, origin="lower", cmap='Blues', 
+                      extent=extent, vmin=0, vmax=thk_max)
+        
+        # Format the time value
+        time_val = times[time_idx].values
+        ax.set_title(f'Time: {time_val}', fontsize=10)
+        ax.axis("off")
+    
+    # Add a single colorbar for all subplots
+    fig.subplots_adjust(right=0.92)
+    cbar_ax = fig.add_axes([0.94, 0.15, 0.02, 0.7])
+    cbar = fig.colorbar(im, cax=cbar_ax, label='Ice Thickness (m)')
+    
+    plt.suptitle('Glacier Ice Thickness Evolution', fontsize=16, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0, 0.92, 0.96])
+    
     ds.close()
-
-    # Important for Colab: do NOT close before displaying
-    from IPython.display import HTML
-    return HTML(ani.to_jshtml())
+    plt.show()
 
 
 def analyze_time_series(ts_file):
