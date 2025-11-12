@@ -18,7 +18,9 @@ inputs:
   oggm_shop:
     RGI_ID: RGI2000-v7.0-G-11-01706
     thk_source: millan_ice_thickness
-    
+  local:
+    coarsening:
+      ratio: 2
 
 processes:
   time:

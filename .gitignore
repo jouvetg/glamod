@@ -1,6 +1,8 @@
 _build/
-03_notebook
+04_notebook
 00_introduction.html
 00_project.html
 outputs
 00_project/project.html
+03_notebook/data
+__pycache__

@@ -86,30 +86,38 @@ In your report, you must make sure to present the following information:
 
 ---
  
-### Model calibration tips
-
-1. **Start simple**: Begin with basic parameters and gradually increase complexity. Don't try to add all features at once.
-
-2. **Equilibrium Line Altitude (ELA) estimation**:  For present-day conditions:
+### Model calibration tips (Simple SMB)
+ 
+1. **Simple ELA parameters**:  For present-day conditions:
    - You can estimate it from satellite imagery (snowline at end of summer)
    - Typical values range from 2500-3500m in the Alps, but vary by location
    - Historical ELA was typically 100-200m lower during the Little Ice Age 
 
-3. **Mass balance gradients**: Typical values:
+2. **Mass balance gradients**: Typical values:
    - Ablation gradient: 0.005-0.012 m ice eq./m
-   - Accumulation gradient: 0.002-0.006 m ice eq./m
+   - Accumulation gradient: 0.002-0.0006 m ice eq./m
+
+---
  
+### Model calibration tips (Climate-based SMB)
+ 
+1. Adjust `melt_enhancer` to increase / reduce melt.
+
+2. Adjust `delta_temp` to correct increase / decrease temperature relative the historical measurements.
+
+3. Adjust `prec_scal` to correct increase / decrease precipitation relative the historical measurements.
+
 ---
 
 ### Common pitfalls to avoid
 
 1. **Unrealistic glacier growth**: If your glacier grows indefinitely:
-   - Your ELA might be too low
+   - Your ELA/Temperature might be too low
    - Check your accumulation parameters
  
 
 2. **Too rapid glacier retreat**: If the glacier disappears too quickly:
-   - Your ELA might be too high 
+   - Your ELA/Temperature might be too high 
    - Check your ablation parameters
 
 3. **Poor match with observations**:

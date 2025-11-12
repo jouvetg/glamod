@@ -7,3 +7,4 @@ chapters:
   - file: 00_project/project
   - file: 01_notebook/glacier-modelling-1
   - file: 02_notebook/glacier-modelling-2
+  - file: 03_notebook/my_glacier
