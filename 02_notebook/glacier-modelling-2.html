@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '02_notebook/glacier-modelling-2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mini-projet notebook template" href="../03_notebook/my_glacier.html" />
     <link rel="prev" title="Notebook 1" href="../01_notebook/glacier-modelling-1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -221,6 +222,9 @@
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebook 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_notebook/my_glacier.html">Mini-projet notebook template</a></li>
+
+
 </ul>
 
     </div>
@@ -648,6 +652,71 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-05 08:29:43.661007: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-11-05 08:29:43.689920: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2025-11-05 08:29:43.689956: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2025-11-05 08:29:43.691016: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-11-05 08:29:43.696212: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-11-05 08:29:44.258313: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File &quot;/home/gjouvet/anaconda3/envs/igm/bin/igm_run&quot;, line 33, in &lt;module&gt;
+    sys.exit(load_entry_point(&#39;igm-model&#39;, &#39;console_scripts&#39;, &#39;igm_run&#39;)())
+  File &quot;/home/gjouvet/anaconda3/envs/igm/bin/igm_run&quot;, line 25, in importlib_load_entry_point
+    return next(matches).load()
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/importlib/metadata/__init__.py&quot;, line 171, in load
+    module = import_module(match.group(&#39;module&#39;))
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/importlib/__init__.py&quot;, line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1050, in _gcd_import
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1027, in _find_and_load
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 992, in _find_and_load_unlocked
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 241, in _call_with_frames_removed
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1050, in _gcd_import
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1027, in _find_and_load
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1006, in _find_and_load_unlocked
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 688, in _load_unlocked
+  File &quot;&lt;frozen importlib._bootstrap_external&gt;&quot;, line 883, in exec_module
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 241, in _call_with_frames_removed
+  File &quot;/home/gjouvet/IGM/igm/igm/__init__.py&quot;, line 6, in &lt;module&gt;
+    from . import processes
+  File &quot;/home/gjouvet/IGM/igm/igm/processes/__init__.py&quot;, line 1, in &lt;module&gt;
+    from . import time, thk, iceflow, vert_flow, enthalpy, stress
+  File &quot;/home/gjouvet/IGM/igm/igm/processes/time/__init__.py&quot;, line 1, in &lt;module&gt;
+    from .time import (
+  File &quot;/home/gjouvet/IGM/igm/igm/processes/time/time.py&quot;, line 9, in &lt;module&gt;
+    import tensorflow as tf
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/tensorflow/__init__.py&quot;, line 485, in &lt;module&gt;
+    importlib.import_module(&quot;keras.src.optimizers&quot;)
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/importlib/__init__.py&quot;, line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/__init__.py&quot;, line 3, in &lt;module&gt;
+    from keras import __internal__
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/__internal__/__init__.py&quot;, line 3, in &lt;module&gt;
+    from keras.__internal__ import backend
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/__internal__/backend/__init__.py&quot;, line 3, in &lt;module&gt;
+    from keras.src.backend import _initialize_variables as initialize_variables
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/__init__.py&quot;, line 21, in &lt;module&gt;
+    from keras.src import applications
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/applications/__init__.py&quot;, line 18, in &lt;module&gt;
+    from keras.src.applications.convnext import ConvNeXtBase
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/applications/convnext.py&quot;, line 30, in &lt;module&gt;
+    from keras.src import layers
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/layers/__init__.py&quot;, line 21, in &lt;module&gt;
+    from keras.src.engine.base_preprocessing_layer import PreprocessingLayer
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/engine/base_preprocessing_layer.py&quot;, line 21, in &lt;module&gt;
+    from keras.src.engine import data_adapter
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/keras/src/engine/data_adapter.py&quot;, line 51, in &lt;module&gt;
+    import pandas as pd
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/pandas/__init__.py&quot;, line 49, in &lt;module&gt;
+    from pandas.core.api import (
+  File &quot;/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/pandas/core/api.py&quot;, line 47, in &lt;module&gt;
+    from pandas.core.groupby import (
+  File &quot;/home/gjouvet/anaco^C
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="explore-the-output">
@@ -911,6 +980,15 @@ b_\mathrm{abl} \cdot (z - z_\mathrm{ELA}) &amp; \text{if } z &lt; z_\mathrm{ELA}
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Notebook 1</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../03_notebook/my_glacier.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mini-projet notebook template</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

@@ -220,6 +220,9 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../02_notebook/glacier-modelling-2.html">Notebook 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_notebook/my_glacier.html">Mini-projet notebook template</a></li>
+
+
 </ul>
 
     </div>
@@ -377,7 +380,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tips-and-common-pitfalls">Additional Tips and Common Pitfalls</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips">Model calibration tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips-simple-smb">Model calibration tips (Simple SMB)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips-climate-based-smb">Model calibration tips (Climate-based SMB)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-to-avoid">Common pitfalls to avoid</a></li>
 </ul>
 </li>
@@ -478,11 +482,10 @@ document.write(`
 <section id="additional-tips-and-common-pitfalls">
 <h2>Additional Tips and Common Pitfalls<a class="headerlink" href="#additional-tips-and-common-pitfalls" title="Link to this heading">#</a></h2>
 <hr class="docutils" />
-<section id="model-calibration-tips">
-<h3>Model calibration tips<a class="headerlink" href="#model-calibration-tips" title="Link to this heading">#</a></h3>
+<section id="model-calibration-tips-simple-smb">
+<h3>Model calibration tips (Simple SMB)<a class="headerlink" href="#model-calibration-tips-simple-smb" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Start simple</strong>: Begin with basic parameters and gradually increase complexity. Don’t try to add all features at once.</p></li>
-<li><p><strong>Equilibrium Line Altitude (ELA) estimation</strong>:  For present-day conditions:</p>
+<li><p><strong>Simple ELA parameters</strong>:  For present-day conditions:</p>
 <ul class="simple">
 <li><p>You can estimate it from satellite imagery (snowline at end of summer)</p></li>
 <li><p>Typical values range from 2500-3500m in the Alps, but vary by location</p></li>
@@ -492,9 +495,18 @@ document.write(`
 <li><p><strong>Mass balance gradients</strong>: Typical values:</p>
 <ul class="simple">
 <li><p>Ablation gradient: 0.005-0.012 m ice eq./m</p></li>
-<li><p>Accumulation gradient: 0.002-0.006 m ice eq./m</p></li>
+<li><p>Accumulation gradient: 0.002-0.0006 m ice eq./m</p></li>
 </ul>
 </li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="model-calibration-tips-climate-based-smb">
+<h3>Model calibration tips (Climate-based SMB)<a class="headerlink" href="#model-calibration-tips-climate-based-smb" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> to increase / reduce melt.</p></li>
+<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> to correct increase / decrease temperature relative the historical measurements.</p></li>
+<li><p>Adjust <code class="docutils literal notranslate"><span class="pre">prec_scal</span></code> to correct increase / decrease precipitation relative the historical measurements.</p></li>
 </ol>
 </section>
 <hr class="docutils" />
@@ -503,13 +515,13 @@ document.write(`
 <ol class="arabic simple">
 <li><p><strong>Unrealistic glacier growth</strong>: If your glacier grows indefinitely:</p>
 <ul class="simple">
-<li><p>Your ELA might be too low</p></li>
+<li><p>Your ELA/Temperature might be too low</p></li>
 <li><p>Check your accumulation parameters</p></li>
 </ul>
 </li>
 <li><p><strong>Too rapid glacier retreat</strong>: If the glacier disappears too quickly:</p>
 <ul class="simple">
-<li><p>Your ELA might be too high</p></li>
+<li><p>Your ELA/Temperature might be too high</p></li>
 <li><p>Check your ablation parameters</p></li>
 </ul>
 </li>
@@ -651,7 +663,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tips-and-common-pitfalls">Additional Tips and Common Pitfalls</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips">Model calibration tips</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips-simple-smb">Model calibration tips (Simple SMB)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-calibration-tips-climate-based-smb">Model calibration tips (Climate-based SMB)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-to-avoid">Common pitfalls to avoid</a></li>
 </ul>
 </li>
