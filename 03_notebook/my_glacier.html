@@ -222,6 +222,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-projet notebook template</a></li>
 
 
+
 </ul>
 
     </div>
@@ -372,6 +373,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mini-projet notebook template</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#install-igm">Install IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-climate-data">Visualizing Climate Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-time-series-results">Analyzing the time series results</a></li>
@@ -412,6 +414,33 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.5
 <span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ml-dtypes<span class="o">==</span><span class="m">0</span>.5.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="download-the-data">
+<h1>Download the data<a class="headerlink" href="#download-the-data" title="Link to this heading">#</a></h1>
+<p>Let’s now download the repo with the data if you are using Colab</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+ 
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running in Colab: cloning repo...&quot;</span><span class="p">)</span>
+    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
+    <span class="o">!</span>apt-get<span class="w"> </span>install<span class="w"> </span>tree<span class="w"> </span>-q
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running locally: using local files.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now go the working folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">cd</span> /content/glamod/03_notebook
 </pre></div>
 </div>
 </div>
@@ -681,6 +710,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mini-projet notebook template</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#install-igm">Install IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-climate-data">Visualizing Climate Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-time-series-results">Analyzing the time series results</a></li>
