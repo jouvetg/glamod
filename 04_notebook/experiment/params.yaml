@@ -1,0 +1,45 @@
+# @package _global_
+ 
+defaults:
+  - override /inputs: 
+    - oggm_shop
+    - local
+  - override /processes:  
+    - smb_simple
+    - iceflow
+    - time
+    - thk
+  - override /outputs: 
+    - local
+    - plot2d
+
+inputs:
+  oggm_shop:
+    RGI_ID: RGI2000-v7.0-G-11-00907
+    thk_source: millan_ice_thickness
+  local:
+    coarsening:
+      ratio: 2
+
+processes:
+  time:
+    start: 1700.0
+    end: 2024.0
+    save: 10.0
+  iceflow:
+    physics:
+      init_slidingco: 0.25 
+  smb_simple:
+    array: 
+      - ["time", "gradabl", "gradacc", "ela", "accmax"]
+      - [ 1700,      0.009,     0.005,  2850,      2.0]
+      - [ 1800,      0.009,     0.005,  2900,      2.0]
+      - [ 1850,      0.009,     0.005,  2900,      2.0]
+      - [ 1900,      0.009,     0.005,  3000,      2.0]
+      - [ 2000,      0.009,     0.005,  3100,      2.0]
+      - [ 2024,      0.009,     0.005,  3100,      2.0]
+          
+outputs:
+  plot2d:
+    live: False
+    
