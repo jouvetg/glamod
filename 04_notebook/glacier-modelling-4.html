@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '04_notebook/glacier-modelling-4';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Mini-projet notebook template" href="../03_notebook/my_glacier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -175,7 +174,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_introduction/00_introduction.html">Introduction</a></li>
 
 
@@ -225,6 +224,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../03_notebook/my_glacier.html">Mini-projet notebook template</a></li>
 
 
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebook 4</a></li>
 
 </ul>
 
@@ -374,10 +375,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibrate-the-glacier-model-to-match-the-osl-data">Calibrate the glacier model to match the OSL data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-moraine-building">To go further : moraine building</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notebook 4</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-glacier-du-mont-mine">Modelling Glacier du Mont Miné</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-using-a-true-surface-mass-balance-model">To go further : using a <strong>true</strong> Surface Mass Balance Model</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -390,69 +398,67 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="notebook-4">
 <h1>Notebook 4<a class="headerlink" href="#notebook-4" title="Link to this heading">#</a></h1>
-<p><a class="reference internal" href="#notebook4.zip"><span class="xref myst">Download the notebook</span></a></p>
-<p>In this notebook we aim to model the evolution of “<a class="reference external" href="https://www.google.com/maps/place/Mont+Min%C3%A9+Glacier/&#64;46.0145075,7.4877889,24811m/data=!3m1!1e3!4m6!3m5!1s0x478f2db4b5d1a731:0x2c7d28e4d7f7bb26!8m2!3d46.014!4d7.54439!16s%2Fm%2F04n61lb?entry=ttu&amp;amp;g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D,">Glacier du Mont Miné</a>” located in te South of Sion (Valais, Switzerland), from the end of the little ice age (about 1850) to now.</p>
-<p>You may find on slides 28 to 30 some graphical <a class="reference external" href="https://www.unige.ch/forel/application/files/3116/5476/6042/F-Evolene-Paysagesglaciaires_compressed.pdf">illustrations</a> of the retreat of the Mont Miné Glacier since the end of the Little Ice Age (LIA).</p>
-<!-- 
-<img src="fig/mont_mine_2.png" alt="La mer de Glace" width="80%">
-
-In more details, the goal is to reproduce the documented retreat as shown on this slide:
-
-<img src="fig/mont_mine_1.png" alt="La mer de Glace" width="80%">
---><p>First, we will donwload the data of Mont Miné Glacier stored in folder <code class="docutils literal notranslate"><span class="pre">RGI60-11.02709</span></code> (this can done directly in IGM withing the OGGM module, however, it is but quicker to do it separatly. IGM will notice the data are already there, and won’t download through OGGM.)</p>
+<ul class="simple">
+<li><p>If you work on Google Colab, <a class="reference external" href="https://colab.research.google.com/github/jouvetg/glamod/blob/main/04_notebook/glacier-modelling-4.ipynb"><img alt="open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> and you will donwload the repo  below. Make sure to activate the GPU on Colab “Runtime” -&gt; “Change Runtime Type” -&gt; Slect GPU.</p></li>
+<li><p>If you work locally on your own PC, you can download the repo</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
+</pre></div>
+</div>
+<p>and then go the notebook folder, and work from there.</p>
+<section id="how-to-install-igm">
+<h2>How to install IGM?<a class="headerlink" href="#how-to-install-igm" title="Link to this heading">#</a></h2>
+<p>Running IGM consists of running a python script <code class="docutils literal notranslate"><span class="pre">igm_run</span></code>, which is made of functions of the <code class="docutils literal notranslate"><span class="pre">igm</span></code> python package.  First of all, one needs to install igm as follows: (this may take a while, and it may crashes the first time, but should work the second time).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.dropbox.com/scl/fi/29b27a98fchvjgm4fzo99/RGI60-11.02709.zip?rlkey=de8ndc3taa3iw1nraqfidq477&amp;st=3c85sk36&amp;dl=0&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple<span class="w"> </span>igm-model-testing-package<span class="o">==</span><span class="m">3</span>.0.5
+<span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ml-dtypes<span class="o">==</span><span class="m">0</span>.5.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="download-the-data">
+<h2>Download the data<a class="headerlink" href="#download-the-data" title="Link to this heading">#</a></h2>
+<p>Let’s now download the repo with the data if you are using Colab</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
  
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;RGI60-11.02709&quot;</span><span class="p">):</span>
-
-    <span class="c1"># Download the file with wget</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;wget&#39;</span><span class="p">,</span> <span class="s1">&#39;-O&#39;</span><span class="p">,</span> <span class="s1">&#39;downloaded_file.zip&#39;</span><span class="p">,</span> <span class="n">url</span><span class="p">])</span> 
-
-    <span class="c1"># Unzipping the file </span>
-    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;downloaded_file.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
-        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Clean up (delete) the zip file after extraction</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;downloaded_file.zip&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running in Colab: cloning repo...&quot;</span><span class="p">)</span>
+    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/jouvetg/glamod.git
+    <span class="o">!</span>apt-get<span class="w"> </span>install<span class="w"> </span>tree<span class="w"> </span>-q
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running locally: using local files.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="calibrate-the-glacier-model-to-match-the-osl-data">
-<h2>Calibrate the glacier model to match the OSL data<a class="headerlink" href="#calibrate-the-glacier-model-to-match-the-osl-data" title="Link to this heading">#</a></h2>
-<p>Running <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">--param_file</span> <span class="pre">params.json</span></code> will do a certain number of things :</p>
-<ul class="simple">
-<li><p>Use ‘oggm’ to read to collect the data related to the Mont Miné glacier (Switzerland), which as the ID : RGI60-11.02709 (explore <a class="reference external" href="https://www.glims.org/maps/glims">https://www.glims.org/maps/glims</a> to find the ID of other glaciers). As said before, having downloaded the data already, this step is in fact ignored, but would be active if we were picking another glacier ID.</p></li>
-<li><p>Run the model forward in time from 1700 to 2024 with a rather simple surface mass balance parametrized by the equilibrium line altitude (ELA).</p></li>
-<li><p>Save the output in a netCDF file <code class="docutils literal notranslate"><span class="pre">output.nc</span></code>.</p></li>
-</ul>
+<p>Let’s now go the working folder</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>igm_run<span class="w"> </span>--param_file<span class="w"> </span>params.json
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">cd</span> /content/glamod/04_notebook
 </pre></div>
 </div>
 </div>
 </div>
-<p>IGM’s previous run did the following:</p>
-<ul class="simple">
-<li><p>Collected data in the folder <code class="docutils literal notranslate"><span class="pre">RGI60-11.02709</span></code> and summarized it in <code class="docutils literal notranslate"><span class="pre">input_saved.nc</span></code>.</p></li>
-<li><p>Reported the time evolution of the ice volume as output from the code.</p></li>
-<li><p>Saved all results in the file <code class="docutils literal notranslate"><span class="pre">output.nc</span></code>.</p></li>
-</ul>
-<p>Let’s first take a look at this data. It corresponds to the reconstruction of the ice thickness, surface topography, and surface ice flow field obtained after a “data assimilation” step that is not detailed further here. We can visualize the data by reading <code class="docutils literal notranslate"><span class="pre">input_saved.nc</span></code> using a helper function <code class="docutils literal notranslate"><span class="pre">plot_input_data</span></code> that displays the surface topography , the ice thickness (Millan et al. 2022), and the location of sampling points.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modelling-glacier-du-mont-mine">
+<h1>Modelling Glacier du Mont Miné<a class="headerlink" href="#modelling-glacier-du-mont-mine" title="Link to this heading">#</a></h1>
+<p>In this notebook we aim to model the evolution of “<a class="reference external" href="https://www.google.com/maps/place/Mont+Min%C3%A9+Glacier/&#64;46.0145075,7.4877889,24811m/data=!3m1!1e3!4m6!3m5!1s0x478f2db4b5d1a731:0x2c7d28e4d7f7bb26!8m2!3d46.014!4d7.54439!16s%2Fm%2F04n61lb?entry=ttu&amp;amp;g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D,">Glacier du Mont Miné</a>” located in te South of Sion (Valais, Switzerland), from the end of the little ice age (about 1850) to now, the goal being to calibrate the glacier model to match the OSL data. To this aim, we take over the material from the previous notebook, and apply it Mont Miné.</p>
+<p>You may find on slides 28 to 30 some graphical <a class="reference external" href="https://www.unige.ch/forel/application/files/3116/5476/6042/F-Evolene-Paysagesglaciaires_compressed.pdf">illustrations</a> of the retreat of the Mont Miné Glacier since the end of the Little Ice Age (LIA).</p>
+<p>Running <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code> will  collect the data, run the model forward in time from 1700 to 2024 with a rather simple surface mass balance parametrized by the equilibrium line altitude, and save the output in a netCDF file <code class="docutils literal notranslate"><span class="pre">output.nc</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">plot_input_data</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;input_saved.nc&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params
 </pre></div>
 </div>
 </div>
 </div>
-<p>Explore <code class="docutils literal notranslate"><span class="pre">params.json</span></code> to see the details of the configuration. A closer look at the parameter file shows that we declare some physical modules, such as <code class="docutils literal notranslate"><span class="pre">smb_simple</span></code>, <code class="docutils literal notranslate"><span class="pre">iceflow</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, and <code class="docutils literal notranslate"><span class="pre">thk</span></code>.</p>
+<p>Explore <code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> to see the details of the configuration. A closer look at the parameter file shows that we declare some physical modules, such as <code class="docutils literal notranslate"><span class="pre">smb_simple</span></code>, <code class="docutils literal notranslate"><span class="pre">iceflow</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, and <code class="docutils literal notranslate"><span class="pre">thk</span></code>.</p>
 <p>The first module <code class="docutils literal notranslate"><span class="pre">smb_simple</span></code> computes the surface mass balance as <span class="math notranslate nohighlight">\(SMB(z) = \alpha (z - z_{ELA})\)</span>, with one SMB gradient <span class="math notranslate nohighlight">\(\beta_{abl}\)</span> in the ablation area when <span class="math notranslate nohighlight">\(z &lt; z_{ELA}\)</span>, and one SMB gradient <span class="math notranslate nohighlight">\(\beta_{acc}\)</span> in the accumulation area when <span class="math notranslate nohighlight">\(z &gt; z_{ELA}\)</span>, along with a maximum SMB capping value of <span class="math notranslate nohighlight">\(a_{max}\)</span>, as illustrated in the following figure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -483,14 +489,14 @@ In more details, the goal is to reproduce the documented retreat as shown on thi
 </div>
 </div>
 </div>
-<p>In <code class="docutils literal notranslate"><span class="pre">params.json</span></code>, the SMB parameters are evolving with time as follows:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gradabl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gradacc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ela&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;accmax&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">1700</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">2850</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">],</span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">1800</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">2900</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">],</span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">1850</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">2900</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">],</span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">1900</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">3000</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">],</span><span class="w">  </span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">3100</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">],</span><span class="w">  </span>
-<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w">      </span><span class="mf">0.009</span><span class="p">,</span><span class="w">     </span><span class="mf">0.005</span><span class="p">,</span><span class="w">  </span><span class="mi">3100</span><span class="p">,</span><span class="w">      </span><span class="mf">2.0</span><span class="p">]</span>
+<p>In <code class="docutils literal notranslate"><span class="pre">params.yaml</span></code>, the SMB parameters are evolving with time as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;time&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradabl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradacc&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ela&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;accmax&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1700</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2850</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1800</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2900</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1850</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2900</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1900</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">3000</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">2000</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">3100</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">2024</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">3100</span><span class="p p-Indicator">,</span><span class="w">      </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <p>this allows us to describe a changing ELA to mimic with an advance (to the little ice age), followed by a retreat as the one observed since the end of the little ice age (LIA).</p>
@@ -512,65 +518,15 @@ In more details, the goal is to reproduce the documented retreat as shown on thi
 </div>
 </div>
 </div>
-<p>✅ <strong>Your turn !</strong></p>
-<p>Modify the parameters in <code class="docutils literal notranslate"><span class="pre">params.json</span></code> as follows (tips: you may use a copy – e.g. <code class="docutils literal notranslate"><span class="pre">params_0.json</span></code> – to keep experimenting without losing the original setup):</p>
+<p>Modify the parameters in <code class="docutils literal notranslate"><span class="pre">yaml.json</span></code> as follows (tips: you may use a copy – e.g. <code class="docutils literal notranslate"><span class="pre">params_0.yaml</span></code> – to keep experimenting without losing the original setup):</p>
 <ul class="simple">
 <li><p>Change the SMB parameters: initially adjust the ELA values over time, and later consider modifying the mass balance gradients and maximum accumulation values.</p></li>
 <li><p>Set the parameter “iflo_init_slidingco” to a higher value (e.g., 0.4 for less basal sliding) and a lower value (e.g., 0.1 for more basal sliding).</p></li>
 </ul>
 <p>After making these changes, observe how they affect the glacier, and attempt to align the model (by changing iteratively parameters) with the ages of the collected samples.</p>
-</section>
-<section id="to-go-further-moraine-building">
-<h2>To go further : moraine building<a class="headerlink" href="#to-go-further-moraine-building" title="Link to this heading">#</a></h2>
-<p>In the next step, we will activate particle tracking in the Ice Glacier Model (IGM) to simulate the displacement of virtual particles within the ice flow. These particles may represent debris or sediments that are transported by the glacier and are responsible for the formation of moraines. Our goal is to model the formation of the main moraine that developed during the Little Ice Age when the glacier reached its maximum extent.</p>
-<p>To achieve this, we need to make two changes to the parameter file <code class="docutils literal notranslate"><span class="pre">params.json</span></code>. First, we need to add two modules, “vert_flow” and “particles”, to the IGM. The “vert_flow” module computes vertical velocities (which is not done by default as it is not usually required), while the “particles” module tracks the trajectory of individual particles. We will accomplish this by adding these modules to the “modules_process” section of the parameter file:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&quot;modules_process&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;smb_simple&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;iceflow&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;thk&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;vert_flow&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;particles&quot;</span>
-<span class="w">                      </span><span class="p">],</span>
-</pre></div>
-</div>
-<p>Second, one needs to add the following parameters :</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&quot;vflo_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kinematic&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;part_tracking_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3d&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;part_density_seeding&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;part_frequency_seeding&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
-</pre></div>
-</div>
-<p>It is possible to visualize the moraine formed by looking at the file <code class="docutils literal notranslate"><span class="pre">velbar_mag-XXXX.0.png</span></code>. Compare it with a satellite image of the “<a class="reference external" href="https://www.google.com/maps/place/Mont+Min%C3%A9+Glacier/&#64;46.0145075,7.4877889,24811m/data=!3m1!1e3!4m6!3m5!1s0x478f2db4b5d1a731:0x2c7d28e4d7f7bb26!8m2!3d46.014!4d7.54439!16s%2Fm%2F04n61lb?entry=ttu&amp;amp;g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D,">Glacier du Mont Miné</a>”</p>
-<p>✅ <strong>Yout turn !</strong></p>
-<p>Try to adjust the model to reproduce as closely as possible the little ice age moraine.</p>
-</section>
 <section id="to-go-further-using-a-true-surface-mass-balance-model">
 <h2>To go further : using a <strong>true</strong> Surface Mass Balance Model<a class="headerlink" href="#to-go-further-using-a-true-surface-mass-balance-model" title="Link to this heading">#</a></h2>
-<p>In the next step, we will replace the simple Surface Mass Balance (SMB) model with an improved model known as the <a class="reference external" href="https://www.antarcticglaciers.org/glaciers-and-climate/numerical-ice-sheet-models/modelling-glacier-melt/">Positive Degree Day Model (PDD)</a>. This model computes the SMB based on climate forcing (temperature and precipitation) by seasonally summing the amount of snow precipitation and melt, which is determined as proportional to the number of days with positive temperatures.</p>
-<p>To implement this, we need to make two changes to the parameter file <code class="docutils literal notranslate"><span class="pre">params.json</span></code>. First, we will replace the module “smb_simple” with two modules: “clim_oggm” and “smb_oggm,” which will update the climate and the surface mass balance, respectively. “clim_oggm” will also take care of retrieving historical climate data located in folder <code class="docutils literal notranslate"><span class="pre">RGI60-11.02709</span></code>, and generate climate forcing frm this.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&quot;modules_process&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;clim_oggm&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;smb_oggm&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;iceflow&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
-<span class="w">                      </span><span class="s2">&quot;thk&quot;</span>
-<span class="w">                      </span><span class="p">],</span>
-</pre></div>
-</div>
-<p>Second, one needs to replace “smb_simple_array” by another array:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&quot;clim_oggm_clim_trend_array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;delta_temp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;prec_scal&quot;</span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span><span class="w"> </span><span class="mi">1700</span><span class="p">,</span><span class="w">           </span><span class="mf">0.0</span><span class="p">,</span><span class="w">         </span><span class="mf">1.0</span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span><span class="w"> </span><span class="mi">1800</span><span class="p">,</span><span class="w">           </span><span class="mf">0.0</span><span class="p">,</span><span class="w">         </span><span class="mf">1.0</span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span><span class="w"> </span><span class="mi">1900</span><span class="p">,</span><span class="w">           </span><span class="mf">0.0</span><span class="p">,</span><span class="w">         </span><span class="mf">1.0</span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w">           </span><span class="mf">1.0</span><span class="p">,</span><span class="w">         </span><span class="mf">1.0</span><span class="p">]</span>
-<span class="w">                                 </span><span class="p">],</span>
-</pre></div>
-</div>
-<p>Similar to the previous method, this array assigns weights to modify precipitation and temperature series based on a <em>neutral</em> climate period, typically defined as 1960-1990. By adjusting the temperature offset in the “delta_temp” column, for example, a value of -2.0 would create a climate scenario for the 1960-1990 period that is 2 degrees cooler. Likewise, by modifying the precipitation scaling in the “prec_scal” column, a value of 1.5 would result in a climate scenario that has 150% of the precipitation compared to the 1960-1990 average.</p>
-<p>Finally, you can incorporate this parameter to provide global control for melt (note that the melt parameters in the PDD model are notoriously uncertain):</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="nt">&quot;melt_enhancer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
-</pre></div>
-</div>
+<p>As we did in notebook 2, you may replace the simple Surface Mass Balance (SMB) model with an improved model known as the <a class="reference external" href="https://www.antarcticglaciers.org/glaciers-and-climate/numerical-ice-sheet-models/modelling-glacier-melt/">Positive Degree Day Model (PDD)</a>.</p>
 </section>
 </section>
 
@@ -604,6 +560,15 @@ In more details, the goal is to reproduce the documented retreat as shown on thi
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../03_notebook/my_glacier.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mini-projet notebook template</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -620,10 +585,17 @@ In more details, the goal is to reproduce the documented retreat as shown on thi
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibrate-the-glacier-model-to-match-the-osl-data">Calibrate the glacier model to match the OSL data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-moraine-building">To go further : moraine building</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Notebook 4</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-igm">How to install IGM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-glacier-du-mont-mine">Modelling Glacier du Mont Miné</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-using-a-true-surface-mass-balance-model">To go further : using a <strong>true</strong> Surface Mass Balance Model</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

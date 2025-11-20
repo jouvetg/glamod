@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '03_notebook/my_glacier';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Notebook 4" href="../04_notebook/glacier-modelling-4.html" />
     <link rel="prev" title="Notebook 2" href="../02_notebook/glacier-modelling-2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -222,6 +223,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-projet notebook template</a></li>
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="../04_notebook/glacier-modelling-4.html">Notebook 4</a></li>
 
 </ul>
 
@@ -417,6 +420,78 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://test.pypi.org/simple/, https://pypi.org/simple
+Collecting igm-model-testing-package==3.0.5
+  Using cached https://test-files.pythonhosted.org/packages/c5/c2/f82e8d7a85ea222215053ecd0bf1e3206fb637572f66a6225fc48c71cbbd/igm_model_testing_package-3.0.5-py3-none-any.whl.metadata (3.4 kB)
+Collecting tensorflow==2.17.1 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached tensorflow-2.17.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Requirement already satisfied: matplotlib in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (3.10.1)
+Requirement already satisfied: scipy in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.15.2)
+Requirement already satisfied: netCDF4==1.6.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.6.0)
+Requirement already satisfied: xarray in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (2025.1.2)
+Requirement already satisfied: rasterio in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.4.3)
+Requirement already satisfied: pyproj in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (3.7.1)
+Requirement already satisfied: geopandas in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.0.1)
+Requirement already satisfied: oggm in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.6.2)
+Requirement already satisfied: salem in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (0.3.11)
+Requirement already satisfied: pyyaml in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (6.0.2)
+Requirement already satisfied: importlib_resources in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (6.5.2)
+Requirement already satisfied: tqdm in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (4.67.1)
+Requirement already satisfied: hydra-core in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (1.3.2)
+Requirement already satisfied: omegaconf in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from igm-model-testing-package==3.0.5) (2.3.0)
+Requirement already satisfied: numpy&gt;=1.9 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from netCDF4==1.6.0-&gt;igm-model-testing-package==3.0.5) (1.26.4)
+Requirement already satisfied: cftime in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from netCDF4==1.6.0-&gt;igm-model-testing-package==3.0.5) (1.6.4.post1)
+Requirement already satisfied: absl-py&gt;=1.0.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (2.1.0)
+Requirement already satisfied: astunparse&gt;=1.6.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (1.6.3)
+Requirement already satisfied: flatbuffers&gt;=24.3.25 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (25.2.10)
+Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,&gt;=0.2.1 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (0.6.0)
+Requirement already satisfied: google-pasta&gt;=0.1.1 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (0.2.0)
+Requirement already satisfied: h5py&gt;=3.10.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (3.13.0)
+Requirement already satisfied: libclang&gt;=13.0.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (18.1.1)
+Requirement already satisfied: ml-dtypes&lt;0.5.0,&gt;=0.3.1 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (0.3.2)
+Requirement already satisfied: opt-einsum&gt;=2.3.2 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (3.4.0)
+Requirement already satisfied: packaging in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (24.2)
+Requirement already satisfied: protobuf!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,&lt;5.0.0dev,&gt;=3.20.3 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (4.25.6)
+Requirement already satisfied: requests&lt;3,&gt;=2.21.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (2.32.3)
+Requirement already satisfied: setuptools in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (75.8.0)
+Requirement already satisfied: six&gt;=1.12.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (1.17.0)
+Requirement already satisfied: termcolor&gt;=1.1.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (2.5.0)
+Requirement already satisfied: typing-extensions&gt;=3.6.6 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (4.13.2)
+Requirement already satisfied: wrapt&gt;=1.11.0 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (1.14.1)
+Requirement already satisfied: grpcio&lt;2.0,&gt;=1.24.3 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (1.71.0)
+Collecting tensorboard&lt;2.18,&gt;=2.17 (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached tensorboard-2.17.1-py3-none-any.whl.metadata (1.6 kB)
+Collecting keras&gt;=3.2.0 (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Downloading keras-3.12.0-py3-none-any.whl.metadata (5.9 kB)
+Requirement already satisfied: tensorflow-io-gcs-filesystem&gt;=0.23.1 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from tensorflow==2.17.1-&gt;tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5) (0.37.1)
+Collecting nvidia-cublas-cu12==12.3.4.1 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached nvidia_cublas_cu12-12.3.4.1-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cuda-cupti-cu12==12.3.101 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached nvidia_cuda_cupti_cu12-12.3.101-py3-none-manylinux1_x86_64.whl.metadata (1.6 kB)
+Collecting nvidia-cuda-nvcc-cu12==12.3.107 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached nvidia_cuda_nvcc_cu12-12.3.107-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cuda-nvrtc-cu12==12.3.107 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached nvidia_cuda_nvrtc_cu12-12.3.107-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cuda-runtime-cu12==12.3.101 (from tensorflow[and-cuda]==2.17.1-&gt;igm-model-testing-package==3.0.5)
+  Using cached nvidia_cuda_runtime_cu12-12.3.101-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+<span class=" -Color -Color-Red">ERROR: Operation cancelled by user</span>
+^C
+Collecting ml-dtypes==0.5.3
+  Using cached ml_dtypes-0.5.3-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+Requirement already satisfied: numpy&gt;=1.21 in /home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages (from ml-dtypes==0.5.3) (1.26.4)
+Using cached ml_dtypes-0.5.3-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (4.9 MB)
+Installing collected packages: ml-dtypes
+  Attempting uninstall: ml-dtypes
+    Found existing installation: ml-dtypes 0.3.2
+    Uninstalling ml-dtypes-0.3.2:
+      Successfully uninstalled ml-dtypes-0.3.2
+<span class=" -Color -Color-Red">ERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
+<span class=" -Color -Color-Red">tensorflow 2.15.1 requires ml-dtypes~=0.3.1, but you have ml-dtypes 0.5.3 which is incompatible.</span>
+Successfully installed ml-dtypes-0.5.3
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="download-the-data">
@@ -469,6 +544,184 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-12 09:14:54.758308: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-11-12 09:14:54.784828: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2025-11-12 09:14:54.784862: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2025-11-12 09:14:54.785718: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-11-12 09:14:54.790357: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-11-12 09:14:55.338860: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2025-11-12 09:14:58.469359: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.497307: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.498537: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+-------------------------------------------------------------------CUDA Enviroment--------------------------------------------------------------------
+{
+  &quot;cpu_compiler&quot;: &quot;/usr/lib/llvm-17/bin/clang&quot;,
+  &quot;cuda_version&quot;: &quot;12.2&quot;,
+  &quot;cudnn_version&quot;: &quot;8&quot;,
+  &quot;is_cuda_build&quot;: true,
+  &quot;is_rocm_build&quot;: false,
+  &quot;is_tensorrt_build&quot;: true
+}
+----------------------------------------------------------------Available GPU Devices-----------------------------------------------------------------
+2025-11-12 09:14:58.499716: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+{
+  &quot;gpu_id&quot;: &quot;/physical_device:GPU:0&quot;,
+  &quot;device_type&quot;: &quot;GPU&quot;,
+  &quot;compute_capability&quot;: [
+    8,
+    9
+  ],
+  &quot;device_name&quot;: &quot;NVIDIA RTX 2000 Ada Generation Laptop GPU&quot;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+2025-11-12 09:14:58.501975: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.503074: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.504001: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.584650: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.585730: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.586687: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:901] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2025-11-12 09:14:58.587651: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1929] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 6172 MB memory:  -&gt; device: 0, name: NVIDIA RTX 2000 Ada Generation Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
+1 Physical GPUs, 1 Logical GPU
+----------------------------------------------------------------------------------------------------
+-------------------------------------------INPUTS Modules-------------------------------------------
+ 0: &lt;module &#39;igm.inputs.oggm_shop&#39; from &#39;/home/gjouvet/IGM/igm/igm/inputs/oggm_shop/__init__.py&#39;&gt;
+ 1: &lt;module &#39;igm.inputs.local&#39; from &#39;/home/gjouvet/IGM/igm/igm/inputs/local.py&#39;&gt;
+-----------------------------------------PROCESSES Modules------------------------------------------
+ 0: &lt;module &#39;igm.processes.clim_oggm&#39; from &#39;/home/gjouvet/IGM/igm/igm/processes/clim_oggm/__init__.py&#39;&gt;
+ 1: &lt;module &#39;igm.processes.smb_oggm&#39; from &#39;/home/gjouvet/IGM/igm/igm/processes/smb_oggm/__init__.py&#39;&gt;
+ 2: &lt;module &#39;igm.processes.iceflow&#39; from &#39;/home/gjouvet/IGM/igm/igm/processes/iceflow/__init__.py&#39;&gt;
+ 3: &lt;module &#39;igm.processes.time&#39; from &#39;/home/gjouvet/IGM/igm/igm/processes/time/__init__.py&#39;&gt;
+ 4: &lt;module &#39;igm.processes.thk&#39; from &#39;/home/gjouvet/IGM/igm/igm/processes/thk/__init__.py&#39;&gt;
+------------------------------------------OUTPUTS Modules-------------------------------------------
+ 0: &lt;module &#39;igm.outputs.local&#39; from &#39;/home/gjouvet/IGM/igm/igm/outputs/local.py&#39;&gt;
+ 1: &lt;module &#39;igm.outputs.plot2d&#39; from &#39;/home/gjouvet/IGM/igm/igm/outputs/plot2d.py&#39;&gt;
+----------------------------------------------------------------------------------------------------
+2025-11-12 09:14:58: oggm.cfg: Reading default parameters from the OGGM `params.cfg` configuration file.
+2025-11-12 09:14:58: oggm.cfg: Multiprocessing switched OFF according to the parameter file.
+2025-11-12 09:14:58: oggm.cfg: Multiprocessing: using all available processors (N=22)
+2025-11-12 09:14:58: oggm.cfg: PARAMS[&#39;continue_on_error&#39;] changed from `False` to `True`.
+2025-11-12 09:14:59: oggm.workflow: init_glacier_directories from prepro level 3 on 1 glaciers.
+2025-11-12 09:14:59: oggm.workflow: Execute entity tasks [gdir_from_prepro] on 1 glaciers
+2025-11-12 09:14:59: oggm.utils: Downloading https://cluster.klima.uni-bremen.de/~oggm/gdirs/oggm_v1.6/exps/igm_v4/RGI70G/b_040/L3/RGI2000-v7.0-G-17/RGI2000-v7.0-G-17-24.tar to /home/gjouvet/OGGM/download_cache/cluster.klima.uni-bremen.de/~oggm/gdirs/oggm_v1.6/exps/igm_v4/RGI70G/b_040/L3/RGI2000-v7.0-G-17/RGI2000-v7.0-G-17-24.tar...
+2025-11-12 09:16:53.453846: I external/local_tsl/tsl/platform/default/subprocess.cc:304] Start cannot spawn child process: No such file or directory
+Found pretrained emulator in the igm package: pinnbp_10_4_cnn_16_32_2_1_a
+Model: &quot;model&quot;
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, None, None, 5)]      0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, None, None, 32)       1472      [&#39;input_1[0][0]&#39;]             
+                                                                                                  
+ leaky_re_lu (LeakyReLU)     (None, None, None, 32)       0         [&#39;conv2d[0][0]&#39;,              
+                                                                     &#39;conv2d_1[0][0]&#39;,            
+                                                                     &#39;conv2d_2[0][0]&#39;,            
+                                                                     &#39;conv2d_3[0][0]&#39;,            
+                                                                     &#39;conv2d_4[0][0]&#39;,            
+                                                                     &#39;conv2d_5[0][0]&#39;,            
+                                                                     &#39;conv2d_6[0][0]&#39;,            
+                                                                     &#39;conv2d_7[0][0]&#39;,            
+                                                                     &#39;conv2d_8[0][0]&#39;,            
+                                                                     &#39;conv2d_9[0][0]&#39;,            
+                                                                     &#39;conv2d_10[0][0]&#39;,           
+                                                                     &#39;conv2d_11[0][0]&#39;,           
+                                                                     &#39;conv2d_12[0][0]&#39;,           
+                                                                     &#39;conv2d_13[0][0]&#39;,           
+                                                                     &#39;conv2d_14[0][0]&#39;,           
+                                                                     &#39;conv2d_15[0][0]&#39;]           
+                                                                                                  
+ dropout (Dropout)           (None, None, None, 32)       0         [&#39;leaky_re_lu[0][0]&#39;]         
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout[0][0]&#39;]             
+                                                                                                  
+ dropout_1 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[1][0]&#39;]         
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_1[0][0]&#39;]           
+                                                                                                  
+ dropout_2 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[2][0]&#39;]         
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_2[0][0]&#39;]           
+                                                                                                  
+ dropout_3 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[3][0]&#39;]         
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_3[0][0]&#39;]           
+                                                                                                  
+ dropout_4 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[4][0]&#39;]         
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_4[0][0]&#39;]           
+                                                                                                  
+ dropout_5 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[5][0]&#39;]         
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_5[0][0]&#39;]           
+                                                                                                  
+ dropout_6 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[6][0]&#39;]         
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_6[0][0]&#39;]           
+                                                                                                  
+ dropout_7 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[7][0]&#39;]         
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_7[0][0]&#39;]           
+                                                                                                  
+ dropout_8 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[8][0]&#39;]         
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, None, None, 32)       9248      [&#39;dropout_8[0][0]&#39;]           
+                                                                                                  
+ dropout_9 (Dropout)         (None, None, None, 32)       0         [&#39;leaky_re_lu[9][0]&#39;]         
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_9[0][0]&#39;]           
+                                                                                                  
+ dropout_10 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[10][0]&#39;]        
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_10[0][0]&#39;]          
+                                                                                                  
+ dropout_11 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[11][0]&#39;]        
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_11[0][0]&#39;]          
+                                                                                                  
+ dropout_12 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[12][0]&#39;]        
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_12[0][0]&#39;]          
+                                                                                                  
+ dropout_13 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[13][0]&#39;]        
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_13[0][0]&#39;]          
+                                                                                                  
+ dropout_14 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[14][0]&#39;]        
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, None, None, 32)       9248      [&#39;dropout_14[0][0]&#39;]          
+                                                                                                  
+ dropout_15 (Dropout)        (None, None, None, 32)       0         [&#39;leaky_re_lu[15][0]&#39;]        
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, None, None, 20)       660       [&#39;dropout_15[0][0]&#39;]          
+                                                                                                  
+==================================================================================================
+Total params: 140852 (550.20 KB)
+Trainable params: 140852 (550.20 KB)
+Non-trainable params: 0 (0.00 Byte)
+__________________________________________________________________________________________________
+None
+2025-11-12 09:16:53.892406: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:454] Loaded cuDNN version 8904
+2025-11-12 09:16:53.940496: I external/local_tsl/tsl/platform/default/subprocess.cc:304] Start cannot spawn child process: No such file or directory
+/home/gjouvet/anaconda3/envs/igm/lib/python3.10/site-packages/tensorflow/python/framework/tensor_util.py:522: RuntimeWarning: overflow encountered in cast
+  nparray = np.array(values, dtype=np_dt)
+IGM , 🕒=09:17:03, 🔄=000100, ⏱ Time=0001755.3 yr, ⏳ Step=0.25 yr, ❄️  Volume=2.19 km³
+IGM , 🕒=09:17:07, 🔄=000200, ⏱ Time=0001777.4 yr, ⏳ Step=0.18 yr, ❄️  Volume=2.56 km³
+IGM , 🕒=09:17:10, 🔄=000300, ⏱ Time=0001795.5 yr, ⏳ Step=0.19 yr, ❄️  Volume=2.79 km³
+IGM , 🕒=09:17:14, 🔄=000400, ⏱ Time=0001814.7 yr, ⏳ Step=0.19 yr, ❄️  Volume=2.99 km³
+IGM , 🕒=09:17:18, 🔄=000500, ⏱ Time=0001834.6 yr, ⏳ Step=0.22 yr, ❄️  Volume=3.01 km³
+IGM , 🕒=09:17:21, 🔄=000600, ⏱ Time=0001855.0 yr, ⏳ Step=0.20 yr, ❄️  Volume=3.11 km³
+IGM , 🕒=09:17:25, 🔄=000700, ⏱ Time=0001877.7 yr, ⏳ Step=0.26 yr, ❄️  Volume=2.87 km³
+IGM , 🕒=09:17:31, 🔄=000800, ⏱ Time=0001905.0 yr, ⏳ Step=0.28 yr, ❄️  Volume=2.58 km³
+IGM , 🕒=09:17:37, 🔄=000900, ⏱ Time=0001933.1 yr, ⏳ Step=0.31 yr, ❄️  Volume=2.35 km³
+IGM , 🕒=09:17:44, 🔄=001000, ⏱ Time=0001975.2 yr, ⏳ Step=0.54 yr, ❄️  Volume=1.77 km³
+IGM , 🕒=09:17:55, 🔄=001100, ⏱ Time=0002021.5 yr, ⏳ Step=0.77 yr, ❄️  Volume=1.36 km³
+IGM , 🕒=09:18:12, 🔄=001186, ⏱ Time=0002100.0 yr, ⏳ Step=1.00 yr, ❄️  Volume=0.28 km³
 </pre></div>
 </div>
 </div>
@@ -585,6 +838,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 output file(s)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/media/gjouvet/storage/Dropbox/home/teaching/25-glacier-modelling/glamod/03_notebook/helper.py:105: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  initial_area = float(ds_ts[&#39;area&#39;].isel(time=0))
+</pre></div>
+</div>
+<img alt="../_images/5a016b3fa016d44deda3772709ac16c7d94ed7bf286fd31d2151e3bf890cd25b.png" src="../_images/5a016b3fa016d44deda3772709ac16c7d94ed7bf286fd31d2151e3bf890cd25b.png" />
+</div>
 </div>
 </section>
 <section id="glacier-velocity-evolution">
@@ -613,6 +876,16 @@ document.write(`
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 output file(s)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/media/gjouvet/storage/Dropbox/home/teaching/25-glacier-modelling/glamod/03_notebook/helper.py:105: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  initial_area = float(ds_ts[&#39;area&#39;].isel(time=0))
+</pre></div>
+</div>
+<img alt="../_images/ef6bcbff203d7d1ed01e6a46a8967755548d689044cd4fa0a749e28de8f2614e.png" src="../_images/ef6bcbff203d7d1ed01e6a46a8967755548d689044cd4fa0a749e28de8f2614e.png" />
 </div>
 </div>
 </section>
@@ -646,6 +919,26 @@ document.write(`
     <span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 output file(s)
+
+Reading glacier evolution data from: outputs/2025-11-12/06-52-17/output.nc
+Reading flowline data from: data/RGI2000-v7.0-G-11-01706/downstream_line.pkl
+
+OGGM grid: origin=(449734.98, 5168854.01), resolution=(50.0, -50.0)
+Flowline loaded: 27 points
+
+Extending flowline to capture upper glacier...
+  Extended flowline by 38 points (3.80 km)
+  Total flowline points: 65
+</pre></div>
+</div>
+<img alt="../_images/061bde8541a85be6ad8aa58e398904e05a673998567f406b06084fda89ea00b3.png" src="../_images/061bde8541a85be6ad8aa58e398904e05a673998567f406b06084fda89ea00b3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flowline length: 6.40 km
+Time period: 1700 - 2100
 </pre></div>
 </div>
 </div>
@@ -691,6 +984,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Notebook 2</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../04_notebook/glacier-modelling-4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebook 4</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
