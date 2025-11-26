@@ -635,3 +635,140 @@ def plot_flowline_velocity(nc_file='output.nc', flowline_file='data/RGI2000-v7.0
     print(f"Time period: {times[0]:.0f} - {times[-1]:.0f}")
 
 
+def compare_modeled_observed_velocity(input_file='data/input.nc', output_file='output.nc', year=2020):
+    """
+    Compare modeled and observed surface velocity
+    
+    Parameters:
+    -----------
+    input_file : str
+        Path to the input NetCDF file containing observed velocities (uvelsurfobs, vvelsurfobs)
+    output_file : str
+        Path to the output NetCDF file containing modeled velocities (uvelsurf, vvelsurf)
+    year : int
+        Year to extract from the modeled output
+    
+    Returns:
+    --------
+    None (displays plots)
+    """
+    print(f"Comparing modeled (year {year}) vs observed velocity\n")
+    
+    # Load input data with observed velocities
+    ds_input = xr.open_dataset(input_file)
+    
+    # Load output data with modeled velocities
+    ds_output = xr.open_dataset(output_file)
+    
+    # Calculate observed velocity magnitude from components
+    uvelsurfobs = ds_input['uvelsurfobs'].values
+    vvelsurfobs = ds_input['vvelsurfobs'].values
+    vel_obs_mag = np.sqrt(uvelsurfobs**2 + vvelsurfobs**2)
+    
+    # Get modeled velocity at the specified year
+    # Find the time index closest to the specified year
+    times = ds_output['time'].values
+    time_idx = np.argmin(np.abs(times - year))
+    actual_year = times[time_idx]
+    
+    print(f"Using modeled data from year: {actual_year:.1f}")
+    
+    # Extract modeled velocity components
+    uvelsurf = ds_output['uvelsurf'].isel(time=time_idx).values
+    vvelsurf = ds_output['vvelsurf'].isel(time=time_idx).values
+    vel_mod_mag = np.sqrt(uvelsurf**2 + vvelsurf**2)
+    
+    # Also get the ice thickness mask
+    thk = ds_output['thk'].isel(time=time_idx).values
+    ice_mask = thk > 1.0  # At least 1m of ice
+    
+    # Get coordinates
+    x_coords = ds_output['x'].values
+    y_coords = ds_output['y'].values
+    extent = [x_coords.min(), x_coords.max(), y_coords.min(), y_coords.max()]
+    
+    # Mask velocities where there's no ice
+    vel_obs_mag_masked = np.where(ice_mask, vel_obs_mag, np.nan)
+    vel_mod_mag_masked = np.where(ice_mask, vel_mod_mag, np.nan)
+    
+    # Calculate difference
+    vel_diff = vel_mod_mag - vel_obs_mag
+    vel_diff_masked = np.where(ice_mask, vel_diff, np.nan)
+    
+    # Create figure with 3 subplots in a row
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    
+    # Find global min/max for consistent color scales
+    vmax = max(np.nanmax(vel_obs_mag_masked), np.nanmax(vel_mod_mag_masked))
+    vmin = 0
+    
+    # Use log scale for better visualization
+    from matplotlib.colors import LogNorm
+    norm = LogNorm(vmin=max(0.1, np.nanpercentile(vel_obs_mag_masked, 1)), 
+                   vmax=np.nanpercentile(vel_obs_mag_masked, 99))
+    
+    # Plot 1: Observed velocity
+    ax1 = axes[0]
+    im1 = ax1.imshow(vel_obs_mag_masked, origin='lower', cmap='plasma', 
+                     extent=extent, norm=norm)
+    ax1.set_title('Observed Surface Velocity', fontsize=14, fontweight='bold')
+    ax1.set_xlabel('X (m)')
+    ax1.set_ylabel('Y (m)')
+    plt.colorbar(im1, ax=ax1, label='Velocity (m/yr)', fraction=0.046, pad=0.04)
+    
+    # Plot 2: Modeled velocity
+    ax2 = axes[1]
+    im2 = ax2.imshow(vel_mod_mag_masked, origin='lower', cmap='plasma', 
+                     extent=extent, norm=norm)
+    ax2.set_title(f'Modeled Surface Velocity (Year {actual_year:.0f})', fontsize=14, fontweight='bold')
+    ax2.set_xlabel('X (m)')
+    ax2.set_ylabel('Y (m)')
+    plt.colorbar(im2, ax=ax2, label='Velocity (m/yr)', fraction=0.046, pad=0.04)
+    
+    # Plot 3: Difference (modeled - observed)
+    ax3 = axes[2]
+    diff_max = np.nanpercentile(np.abs(vel_diff_masked), 95)
+    im3 = ax3.imshow(vel_diff_masked, origin='lower', cmap='RdBu_r', 
+                     extent=extent, vmin=-diff_max, vmax=diff_max)
+    ax3.set_title('Difference (Modeled - Observed)', fontsize=14, fontweight='bold')
+    ax3.set_xlabel('X (m)')
+    ax3.set_ylabel('Y (m)')
+    plt.colorbar(im3, ax=ax3, label='Velocity Difference (m/yr)', fraction=0.046, pad=0.04)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    # Calculate and print statistics
+    # Flatten and remove NaN values
+    vel_obs_flat = vel_obs_mag_masked[ice_mask].flatten()
+    vel_mod_flat = vel_mod_mag_masked[ice_mask].flatten()
+    
+    # Remove any remaining NaNs
+    valid_mask = ~(np.isnan(vel_obs_flat) | np.isnan(vel_mod_flat))
+    vel_obs_flat = vel_obs_flat[valid_mask]
+    vel_mod_flat = vel_mod_flat[valid_mask]
+    
+    # Calculate statistics
+    from scipy.stats import pearsonr
+    correlation = pearsonr(vel_obs_flat, vel_mod_flat)[0]
+    rmse = np.sqrt(np.mean((vel_mod_flat - vel_obs_flat)**2))
+    bias = np.mean(vel_mod_flat - vel_obs_flat)
+    
+    # Print statistics
+    print("\n" + "="*60)
+    print("VELOCITY COMPARISON STATISTICS")
+    print("="*60)
+    print(f"Correlation coefficient (R): {correlation:.3f}")
+    print(f"RMSE: {rmse:.2f} m/yr")
+    print(f"Bias (modeled - observed): {bias:.2f} m/yr")
+    print(f"Number of points: {len(vel_obs_flat)}")
+    print(f"\nObserved velocity range: {vel_obs_flat.min():.2f} - {vel_obs_flat.max():.2f} m/yr")
+    print(f"Modeled velocity range: {vel_mod_flat.min():.2f} - {vel_mod_flat.max():.2f} m/yr")
+    print("="*60)
+    
+    # Close datasets
+    ds_input.close()
+    ds_output.close()
+
+
+

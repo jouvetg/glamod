@@ -20,7 +20,7 @@ inputs:
     thk_source: millan_ice_thickness
   local:
     coarsening:
-      ratio: 2
+      ratio: 1
 
 processes:
   time:
