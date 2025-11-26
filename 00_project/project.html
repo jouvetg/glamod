@@ -380,6 +380,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-research-questions">Step 2: Define research questions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-and-perform-modelling-experiments">Step 3: Define and perform modelling experiments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-report-your-results">Step 4: Report your results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-figures">About Figures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tips-and-common-pitfalls">Additional Tips and Common Pitfalls</a><ul class="nav section-nav flex-column">
@@ -396,7 +397,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further">To go further</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-moraine-building">Extension 1: Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moraine-building">Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-ice-flow-parameters">Explore ice flow parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -480,6 +482,22 @@ document.write(`
 <li><p>Conclusions and potential future work</p></li>
 </ul>
 </section>
+<hr class="docutils" />
+<section id="about-figures">
+<h3>About Figures<a class="headerlink" href="#about-figures" title="Link to this heading">#</a></h3>
+<p>Figures (and tables) are very important as they convey the main results. Make them readable and effective. For this work, they can include:</p>
+<ul class="simple">
+<li><p>Plan-view plots of ice thickness or ice speed</p></li>
+<li><p>Profile plots along a given flowline of ice thickness or ice speed</p></li>
+<li><p>Time evolution plots of glacier area and volume</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Some examples of papers for inspiration:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://doi.org/10.3189/002214311798843359">https://doi.org/10.3189/002214311798843359</a></p></li>
+<li><p><a class="reference external" href="https://doi.org/10.3189/2013AoG63A434">https://doi.org/10.3189/2013AoG63A434</a></p></li>
+</ul>
+</section>
 </section>
 <hr class="docutils" />
 <section id="additional-tips-and-common-pitfalls">
@@ -519,13 +537,11 @@ document.write(`
 <li><p><strong>Unrealistic glacier growth</strong>: If your glacier grows indefinitely:</p>
 <ul class="simple">
 <li><p>Your ELA/Temperature might be too low</p></li>
-<li><p>Check your accumulation parameters</p></li>
 </ul>
 </li>
 <li><p><strong>Too rapid glacier retreat</strong>: If the glacier disappears too quickly:</p>
 <ul class="simple">
 <li><p>Your ELA/Temperature might be too high</p></li>
-<li><p>Check your ablation parameters</p></li>
 </ul>
 </li>
 <li><p><strong>Poor match with observations</strong>:</p>
@@ -586,9 +602,30 @@ document.write(`
 <section id="to-go-further">
 <h2>To go further<a class="headerlink" href="#to-go-further" title="Link to this heading">#</a></h2>
 <hr class="docutils" />
-<section id="extension-1-moraine-building">
-<h3>Extension 1: Moraine building<a class="headerlink" href="#extension-1-moraine-building" title="Link to this heading">#</a></h3>
+<section id="moraine-building">
+<h3>Moraine building<a class="headerlink" href="#moraine-building" title="Link to this heading">#</a></h3>
 <p>In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period. To that aim, you may explore the <code class="docutils literal notranslate"><span class="pre">particle</span></code> IGM module that permits to seed virtual particles, and transport them through the ice flow. To that aim, the third example in the notebook 2 may help you.</p>
+</section>
+<hr class="docutils" />
+<section id="explore-ice-flow-parameters">
+<h3>Explore ice flow parameters<a class="headerlink" href="#explore-ice-flow-parameters" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Basal sliding</strong> (<code class="docutils literal notranslate"><span class="pre">slidingco</span></code>): Controls basal motion. Try changing from default 0.0464 to 0.02 to make it more slippery.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">iceflow</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">physics</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">init_slidingco</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0464</span><span class="w"> </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Rate factor</strong> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>): Controls ice deformability. Try changing from default 78 to 150 to make ice softer and more deformable.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">iceflow</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">physics</span><span class="p">:</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">init_arrhenius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">78.0</span>
+</pre></div>
+</div>
+<p>Params are usually tuned to reproduce observed surface velocities, you may try to compare your modelled speed with observed ones provided in <code class="docutils literal notranslate"><span class="pre">input.nc</span></code>.</p>
 </section>
 </section>
 </section>
@@ -663,6 +700,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-define-research-questions">Step 2: Define research questions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-define-and-perform-modelling-experiments">Step 3: Define and perform modelling experiments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-report-your-results">Step 4: Report your results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-figures">About Figures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tips-and-common-pitfalls">Additional Tips and Common Pitfalls</a><ul class="nav section-nav flex-column">
@@ -679,7 +717,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further">To go further</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-1-moraine-building">Extension 1: Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moraine-building">Moraine building</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-ice-flow-parameters">Explore ice flow parameters</a></li>
 </ul>
 </li>
 </ul>

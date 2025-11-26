@@ -82,6 +82,24 @@ In your report, you must make sure to present the following information:
 
 ---
 
+### About Figures
+
+Figures (and tables) are very important as they convey the main results. Make them readable and effective. For this work, they can include:
+
+- Plan-view plots of ice thickness or ice speed
+- Profile plots along a given flowline of ice thickness or ice speed
+- Time evolution plots of glacier area and volume
+- ...
+
+Some examples of papers for inspiration:
+
+- https://doi.org/10.3189/002214311798843359 
+
+- https://doi.org/10.3189/2013AoG63A434 
+
+
+---
+
 ## Additional Tips and Common Pitfalls
 
 ---
@@ -112,13 +130,11 @@ In your report, you must make sure to present the following information:
 ### Common pitfalls to avoid
 
 1. **Unrealistic glacier growth**: If your glacier grows indefinitely:
-   - Your ELA/Temperature might be too low
-   - Check your accumulation parameters
+   - Your ELA/Temperature might be too low 
  
 
 2. **Too rapid glacier retreat**: If the glacier disappears too quickly:
-   - Your ELA/Temperature might be too high 
-   - Check your ablation parameters
+   - Your ELA/Temperature might be too high  
 
 3. **Poor match with observations**:
    - Don't expect perfect agreement - models are simplified representations
@@ -173,6 +189,29 @@ In your report, you must make sure to present the following information:
 
 ---
 
-### Extension 1: Moraine building
+### Moraine building
 
 In case you have identified well-preserved moraines, you may switch on the particle module to try to reproduce them during the Little Ice Age to present period. To that aim, you may explore the `particle` IGM module that permits to seed virtual particles, and transport them through the ice flow. To that aim, the third example in the notebook 2 may help you.
+
+---
+
+###  Explore ice flow parameters
+ 
+
+- **Basal sliding** (`slidingco`): Controls basal motion. Try changing from default 0.0464 to 0.02 to make it more slippery.
+
+```yaml
+iceflow: 
+  physics: 
+    init_slidingco: 0.0464 
+```
+
+- **Rate factor** (`arrhenius`): Controls ice deformability. Try changing from default 78 to 150 to make ice softer and more deformable.
+
+```yaml
+iceflow: 
+  physics:  
+    init_arrhenius: 78.0
+```
+
+Params are usually tuned to reproduce observed surface velocities, you may try to compare your modelled speed with observed ones provided in `input.nc`.
