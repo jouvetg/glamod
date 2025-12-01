@@ -381,6 +381,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-glacier-du-mont-mine">Modelling Glacier du Mont Miné</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-time-series-results">Analyzing the Time Series Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-velocity-evolution">Glacier Velocity Evolution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-using-a-true-surface-mass-balance-model">To go further : using a <strong>true</strong> Surface Mass Balance Model</a></li>
 </ul>
 </li>
@@ -503,8 +505,71 @@ document.write(`
 <p>Let’s now look at the results, vizualizing the time evolution of the glacier :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">helper</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">helper</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="c1"># Find all output files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">output_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s). Using: </span><span class="si">{</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Visualize ice thickness evolution with sample locations</span>
+    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;thk&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using output.nc in current directory</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;thk&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="analyzing-the-time-series-results">
+<h2>Analyzing the Time Series Results<a class="headerlink" href="#analyzing-the-time-series-results" title="Link to this heading">#</a></h2>
+<p>Let’s examine how the glacier evolved under the climate scenario:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_time_series</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="c1"># Find time series files</span>
+<span class="n">ts_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output_ts.nc&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">ts_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> time series file(s). Using: </span><span class="si">{</span><span class="n">ts_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">analyze_time_series</span><span class="p">(</span><span class="n">ts_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;output_ts.nc&#39;</span><span class="p">):</span>
+    <span class="n">analyze_time_series</span><span class="p">(</span><span class="s1">&#39;output_ts.nc&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output_ts.nc file found.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="glacier-velocity-evolution">
+<h2>Glacier Velocity Evolution<a class="headerlink" href="#glacier-velocity-evolution" title="Link to this heading">#</a></h2>
+<p>Now let’s visualize the ice velocity magnitude evolution in log scale. This shows the flow dynamics and where the glacier is moving fastest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">animate_glacier_evolution</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="c1"># Find all output files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">output_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s). Using: </span><span class="si">{</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Visualize velocity evolution with sample locations</span>
+    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;velbar_mag&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using output.nc in current directory</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&#39;velbar_mag&#39;</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -513,7 +578,19 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="n">plot_thk_at_sample</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="c1"># Find all output files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;outputs/*/*/output.nc&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">output_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> output file(s). Using: </span><span class="si">{</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plot_thk_at_sample</span><span class="p">(</span><span class="n">output_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using output.nc in current directory</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plot_thk_at_sample</span><span class="p">(</span><span class="s1">&#39;output.nc&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No output.nc files found. Please run the model first.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -524,6 +601,7 @@ document.write(`
 <li><p>Set the parameter “iflo_init_slidingco” to a higher value (e.g., 0.4 for less basal sliding) and a lower value (e.g., 0.1 for more basal sliding).</p></li>
 </ul>
 <p>After making these changes, observe how they affect the glacier, and attempt to align the model (by changing iteratively parameters) with the ages of the collected samples.</p>
+</section>
 <section id="to-go-further-using-a-true-surface-mass-balance-model">
 <h2>To go further : using a <strong>true</strong> Surface Mass Balance Model<a class="headerlink" href="#to-go-further-using-a-true-surface-mass-balance-model" title="Link to this heading">#</a></h2>
 <p>As we did in notebook 2, you may replace the simple Surface Mass Balance (SMB) model with an improved model known as the <a class="reference external" href="https://www.antarcticglaciers.org/glaciers-and-climate/numerical-ice-sheet-models/modelling-glacier-melt/">Positive Degree Day Model (PDD)</a>.</p>
@@ -591,6 +669,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-glacier-du-mont-mine">Modelling Glacier du Mont Miné</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-the-time-series-results">Analyzing the Time Series Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-velocity-evolution">Glacier Velocity Evolution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-using-a-true-surface-mass-balance-model">To go further : using a <strong>true</strong> Surface Mass Balance Model</a></li>
 </ul>
 </li>
