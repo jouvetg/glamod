@@ -39,7 +39,7 @@ def plot_input_data(file = "input_saved.nc"):
     axes[0].set_aspect('equal')  # Set aspect ratio to be equal
     axes[0].scatter(sp[:, 0], sp[:, 1], c='r', marker='o', s=10)
     for ii in range(sp.shape[0]):
-       axes[0].text(sp[ii, 0], sp[ii, 1], id[ii], fontsize=7, c='r') 
+       axes[0].text(sp[ii, 0], sp[:, 1], id[ii], fontsize=7, c='r') 
     axes[0].invert_yaxis() 
     plt.colorbar(c1, ax=axes[0], orientation='vertical', label='usurf units')  # Add colorbar
 
@@ -52,7 +52,7 @@ def plot_input_data(file = "input_saved.nc"):
     axes[1].set_aspect('equal')  # Set aspect ratio to be equal
     axes[1].scatter(sp[:, 0], sp[:, 1], c='r', marker='o', s=10)
     for ii in range(sp.shape[0]):
-       axes[1].text(sp[ii, 0], sp[ii, 1], id[ii], fontsize=7, c='r') 
+       axes[1].text(sp[ii, 0], sp[:, 1], id[ii], fontsize=7, c='r') 
     axes[1].invert_yaxis() 
     plt.colorbar(c2, ax=axes[1], orientation='vertical', label='Ice Thickness (units)')  # Add colorbar
 
@@ -65,62 +65,192 @@ def plot_input_data(file = "input_saved.nc"):
     # Optionally, close the dataset explicitly (not necessary in most cases)
     dataset.close()
 
-def animate_glacier_evolution(nc_file='output.nc'):
-    # Load the dataset
+
+def animate_glacier_evolution(nc_file='output.nc', variable='thk', log_scale=False, show_samples=True):
+    """
+    Animate glacier evolution in a 4x4 grid showing 16 time steps
+    
+    Parameters:
+    -----------
+    nc_file : str
+        Path to the output NetCDF file (output.nc)
+    variable : str
+        Variable to plot ('thk' for ice thickness, 'velbar_mag' for velocity magnitude)
+    log_scale : bool
+        If True, use logarithmic color scale (useful for velocity)
+    show_samples : bool
+        If True, overlay sample locations from Samples_2024.csv
+    
+    Returns:
+    --------
+    None (displays plots)
+    """
     ds = xr.open_dataset(nc_file)
 
-    df = pd.read_csv('Samples_2024.csv')
-    id = list(df.iloc[:, 0])
-    sp = np.array(df.iloc[:, 3:])  # Get the rest of the columns (numeric values)
-    
-    # Extract data
-    var_t = ds['thk']
-    var_u = ds['velsurf_mag']
-    times = var_t.time
-    x = var_t.coords['x']
-    y = var_t.coords['y']
+    # Load sample data if available
+    samples_x, samples_y, sample_ids = None, None, None
+    if show_samples:
+        try:
+            df = pd.read_csv('Samples_2024.csv')
+            sample_ids = list(df.iloc[:, 0])
+            sp = np.array(df.iloc[:, 3:])
+            samples_x, samples_y = sp[:, 0], sp[:, 1]
+        except:
+            show_samples = False
 
+    var_t = ds[variable]
+    times = var_t.time
+    x, y = var_t.coords['x'], var_t.coords['y']
     extent = [x.min(), x.max(), y.min(), y.max()]
     
-    # Set up the plot
-    fig, ax = plt.subplots(figsize=(6, 8),dpi=100) 
-    ## im = ax.contourf(x, y, var.isel(time=0), levels=50, cmap='Blues')
-    im0 = ax.imshow(var_t.isel(time=0), origin="lower", cmap='binary', extent=extent) 
-    im  = ax.imshow( np.where(var_t.isel(time=0)>0,var_u.isel(time=0), np.nan),  origin="lower", cmap="turbo", extent=extent, 
-                     norm=matplotlib.colors.LogNorm(vmin=1, vmax=200) )
-    ax.scatter(sp[:, 0], sp[:, 1], c='k', marker='o', s=10)
-
-    cbar = plt.colorbar(im, ax=ax, label='Speed (m)')
-    ax.set_title(f'Glacier Evolution\nTime: {times[0].values}')
-    ax.set_xlabel('X Coordinate')
-    ax.set_ylabel('Y Coordinate')
-    ax.set_aspect('equal')
-    ax.axis("off")
- 
-    # Update function for animation
-    def update(frame):
-        for c in ax.collections:
-            c.remove()  # Remove previous contours to update with new data
-#        ax.contourf(x, y, var.isel(time=frame), levels=50, cmap='Blues')
-        ax.imshow(var_t.isel(time=frame), origin="lower", cmap='binary', extent=extent) 
-        ax.imshow( np.where(var_t.isel(time=frame)>0, var_u.isel(time=frame), np.nan),  origin="lower", cmap="turbo", extent=extent, 
-                   norm=matplotlib.colors.LogNorm(vmin=1, vmax=200) )
-        ax.scatter(sp[:, 0], sp[:, 1], c='k', marker='o', s=10)
-        for ii in range(sp.shape[0]):
-            ax.text(sp[ii, 0], sp[ii, 1], id[ii], fontsize=7, c='r') 
-
-        ax.set_title(f'Glacier Evolution\nTime: {times[frame].values}')
-        return ax
+    # Select 16 evenly spaced time indices
+    n_times = len(times)
+    time_indices = np.linspace(0, n_times - 1, 16, dtype=int)
     
-    # Create the animation
-    ani = FuncAnimation(fig, update, frames=len(times), interval=200, blit=False)
+    # Create 4x4 subplot grid
+    fig, axes = plt.subplots(4, 4, figsize=(16, 16), dpi=100)
+    axes = axes.flatten()
     
-    # Display the animation in the notebook
-    display_animation = HTML(ani.to_jshtml())
-    plt.close()  # Prevents static display of the plot
+    # Find global min and max for consistent colorbar
+    var_max = float(var_t.max())
+    var_min = float(var_t.min())
+    
+    # For velocity in log scale, set appropriate min value
+    if log_scale and variable == 'velbar_mag':
+        # Find minimum positive value
+        var_data_all = var_t.values
+        var_positive = var_data_all[var_data_all > 0]
+        if len(var_positive) > 0:
+            var_min = max(0.1, float(np.percentile(var_positive, 1)))  # Use 1st percentile to avoid outliers
+        else:
+            var_min = 0.1
+        var_max = float(np.percentile(var_data_all, 99))  # Use 99th percentile
+    
+    # Choose colormap based on variable
+    if variable == 'thk':
+        cmap = 'Blues'
+        cbar_label = 'Ice Thickness (m)'
+        title = 'Glacier Ice Thickness Evolution'
+    elif variable == 'velbar_mag':
+        cmap = 'plasma'
+        cbar_label = 'Velocity Magnitude (m/yr)' + (' (log scale)' if log_scale else '')
+        title = 'Glacier Velocity Evolution' + (' (Log Scale)' if log_scale else '')
+    else:
+        cmap = 'viridis'
+        cbar_label = variable
+        title = f'{variable} Evolution'
+    
+    # Set normalization
+    if log_scale:
+        from matplotlib.colors import LogNorm
+        norm = LogNorm(vmin=var_min, vmax=var_max)
+    else:
+        norm = None
+        
+    for idx, time_idx in enumerate(time_indices):
+        ax = axes[idx]
+        var_data = var_t.isel(time=time_idx)
+        
+        # For log scale velocity, mask zeros
+        if log_scale and variable == 'velbar_mag':
+            var_data = var_data.where(var_data > 0)
+        
+        # Plot variable
+        if log_scale:
+            im = ax.imshow(var_data, origin="lower", cmap=cmap, 
+                          extent=extent, norm=norm)
+        else:
+            im = ax.imshow(var_data, origin="lower", cmap=cmap, 
+                          extent=extent, vmin=var_min if variable != 'thk' else 0, 
+                          vmax=var_max)
+        
+        # Overlay samples if requested
+        if show_samples and samples_x is not None:
+            ax.scatter(samples_x, samples_y, c='red', marker='o', s=20, edgecolors='black', linewidths=0.5)
+        
+        # Format the time value
+        time_val = times[time_idx].values
+        ax.set_title(f'Time: {time_val}', fontsize=10)
+        ax.axis("off")
+    
+    # Add a single colorbar for all subplots
+    fig.subplots_adjust(right=0.92)
+    cbar_ax = fig.add_axes([0.94, 0.15, 0.02, 0.7])
+    cbar = fig.colorbar(im, cax=cbar_ax, label=cbar_label)
+    
+    plt.suptitle(title, fontsize=16, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0, 0.92, 0.96])
+    
     ds.close()
+    plt.show()
+
+
+def analyze_time_series(ts_file):
+    """
+    Analyze and visualize glacier time series data from output_ts.nc
     
-    return display_animation
+    Parameters:
+    -----------
+    ts_file : str
+        Path to the time series file (output_ts.nc)
+    
+    Returns:
+    --------
+    None (displays plots and prints statistics)
+    """
+    print(f"Reading time series data from: {ts_file}\n")
+    
+    # Load the time series dataset
+    ds_ts = xr.open_dataset(ts_file)
+    
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+    
+    # Plot ice volume over time
+    ds_ts['vol'].plot(ax=ax1, linewidth=2, color='blue')
+    ax1.set_ylabel('Ice Volume [km³]', fontsize=12)
+    ax1.set_xlabel('Time [years]', fontsize=12)
+    ax1.set_title('Glacier Ice Volume Evolution', fontsize=14, fontweight='bold')
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot ice area over time
+    ds_ts['area'].plot(ax=ax2, linewidth=2, color='green')
+    ax2.set_ylabel('Ice Area [km²]', fontsize=12)
+    ax2.set_xlabel('Time [years]', fontsize=12)
+    ax2.set_title('Glacier Ice Area Evolution', fontsize=14, fontweight='bold')
+    ax2.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    # Print summary statistics
+    print("\n" + "="*60)
+    print("SUMMARY STATISTICS")
+    print("="*60)
+    
+    initial_volume = float(ds_ts['vol'].isel(time=0))
+    final_volume = float(ds_ts['vol'].isel(time=-1))
+    volume_change = final_volume - initial_volume
+    
+    print(f"\nIce Volume:")
+    print(f"  Initial: {initial_volume:.2f} km³")
+    print(f"  Final:   {final_volume:.2f} km³")
+    print(f"  Change:  {volume_change:.2f} km³")
+    
+    initial_area = float(ds_ts['area'].isel(time=0))
+    final_area = float(ds_ts['area'].isel(time=-1))
+    area_change = final_area - initial_area
+    
+    print(f"\nIce Area:")
+    print(f"  Initial: {initial_area:.2f} km²")
+    print(f"  Final:   {final_area:.2f} km²")
+    print(f"  Change:  {area_change:.2f} km²")
+    
+    print("="*60)
+    
+    # Close the dataset
+    ds_ts.close()
+
 
 def plot_thk_at_sample(file = 'output.nc'):
 
