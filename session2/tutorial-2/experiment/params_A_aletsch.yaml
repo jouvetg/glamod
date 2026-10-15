@@ -1,0 +1,44 @@
+# @package _global_
+
+# Run A: Aletsch Glacier, 1900-2000, simple ELA-based SMB
+# (adapted from igm-examples/aletsch, Part A, Step 1, IGM 3.2)
+
+defaults:
+  - common: iceflow_offline # off-line pretrained ice-flow emulator (fast, frozen)
+  - override /inputs:       # where the data comes from
+    - local
+  - override /processes:    # what is computed at each time step (in this order)
+    - smb
+    - iceflow
+    - time
+    - thk
+  - override /outputs:      # what is written to disk
+    - local
+    - live_dashboard
+
+inputs:
+  local:
+    filename: input.nc      # read from the data/ folder
+
+processes:
+  smb:
+    method: simple          # SMB(z) linear in elevation, see the notebook
+    simple:
+      array:
+        - ["time", "gradabl", "gradacc", "ela", "accmax"]
+        - [1900, 0.009, 0.005, 2800, 2.0]
+        - [2000, 0.009, 0.005, 2900, 2.0]
+        - [2100, 0.009, 0.005, 3300, 2.0]
+  time:
+    start: 1900.0
+    end: 2000.0
+    save: 10.0              # write results every 10 years
+  iceflow:
+    physics:
+      sliding:
+        tau_ref: 0.325      # basal shear stress (MPa) required to ...
+        u_ref: 100.0        # ... achieve u_ref basal sliding speed (m/yr)
+
+outputs:
+  live_dashboard:
+    headless: true          # no screen in the cloud: save the dashboard as PNG files

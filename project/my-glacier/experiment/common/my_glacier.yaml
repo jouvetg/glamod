@@ -1,0 +1,29 @@
+# @package _global_
+#
+# Settings shared by ALL experiments of the project: your glacier, data and ice flow.
+# Change the RGI ID here ONCE (or on the command line: inputs.oggm_shop.RGI_ID=...).
+# Experiments include this file with `- common: my_glacier` (first line of their defaults).
+
+defaults:
+  - iceflow_offline          # off-line pretrained ice-flow emulator (common/iceflow_offline.yaml)
+
+inputs:
+  oggm_shop:
+    RGI_ID: "RGI2000-v7.0-G-11-01189"                  # <-- YOUR GLACIER (here: Findelengletscher)
+    thk_source: millan_ice_thickness                    # initial ice thickness (Millan et al., 2022)
+    filename: input_${inputs.oggm_shop.RGI_ID}.nc       # one data file per glacier, re-used if it exists
+  local:
+    filename: ${inputs.oggm_shop.filename}
+
+processes:
+  iceflow:
+    physics:
+      sliding:
+        tau_ref: 0.215       # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
+        u_ref: 100.0         # (m/yr)
+      viscosity:
+        arrhenius: 78.0      # ice softness A (MPa^-3 a^-1): higher = softer ice
+
+outputs:
+  live_dashboard:
+    headless: true           # no screen in the cloud: save dashboard_XXXX.png frames instead

@@ -1,7 +1,6 @@
-rm -r 02_notebook/outputs
-rm -r 02_notebook/data/RGI2000-v7.0-G-11-02596
-rm 02_notebook/data/input.nc
-rm -r 02_notebook/__pycache__
-rm -r 04_notebook/__pycache__
-rm -r 02_notebook/user/code/processes/__pycache__
-rm -r 02_notebook/data/RGI60-11.01450
+# remove IGM outputs, downloaded data and build artefacts (keeps the tracked tutorial data)
+rm -rf _build
+find . -path ./.git -prune -o -type d \( -name outputs -o -name __pycache__ -o -name .ipynb_checkpoints \) -print -exec rm -rf {} +
+find . -path ./.git -prune -o -type d -path "*/data/RGI*" -print -exec rm -rf {} +
+find . -path ./.git -prune -o -type f -name "input_RGI*.nc" -print -exec rm -f {} +
+rm -f project/my-glacier/experiment/params_future_*.yaml

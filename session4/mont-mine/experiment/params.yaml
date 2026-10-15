@@ -1,0 +1,46 @@
+# @package _global_
+
+# Glacier du Mont Miné (VS), 1700-2024, ELA-based SMB.
+# Start from today's geometry in 1700, advance to the Little Ice Age maximum (~1850),
+# then retreat. Goal: calibrate the ELA history so that the modelled deglaciation dates
+# at the sample sites match the measured (OSL / exposure) ages.
+
+defaults:
+  - common: iceflow_offline   # off-line pretrained ice-flow emulator
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [smb, iceflow, time, thk]
+  - override /outputs: [local, live_dashboard]
+
+inputs:
+  oggm_shop:
+    RGI_ID: "RGI2000-v7.0-G-11-00907"                  # Glacier du Mont Miné
+    thk_source: millan_ice_thickness
+    filename: input_${inputs.oggm_shop.RGI_ID}.nc
+  local:
+    filename: ${inputs.oggm_shop.filename}
+
+processes:
+  time:
+    start: 1700.0
+    end: 2024.0
+    save: 5.0
+  smb:
+    method: simple
+    simple:
+      array:
+        - ["time", "gradabl", "gradacc", "ela", "accmax"]
+        - [ 1700,      0.009,     0.005,  2850,      2.0]
+        - [ 1800,      0.009,     0.005,  2900,      2.0]
+        - [ 1850,      0.009,     0.005,  2900,      2.0]
+        - [ 1900,      0.009,     0.005,  3000,      2.0]
+        - [ 2000,      0.009,     0.005,  3100,      2.0]
+        - [ 2024,      0.009,     0.005,  3100,      2.0]
+  iceflow:
+    physics:
+      sliding:
+        tau_ref: 0.215     # basal shear stress (MPa) needed to slide at u_ref: higher = less sliding
+        u_ref: 100.0
+
+outputs:
+  live_dashboard:
+    headless: true

@@ -1,0 +1,38 @@
+# @package _global_
+
+# Run C (optional): same as Run A, but the SMB is computed by your own Python
+# module user/code/processes/mysmb.py (oscillating ELA), 1900-2300
+# (adapted from igm-examples/aletsch, Part A, Step 2, IGM 3.2)
+
+defaults:
+  - common: iceflow_offline
+  - /user/conf/processes@processes: mysmb   # load the parameters of the user module
+  - override /inputs:
+    - local
+  - override /processes:
+    - mysmb                 # user-defined module instead of smb
+    - iceflow
+    - time
+    - thk
+  - override /outputs:
+    - local
+    - live_dashboard
+
+inputs:
+  local:
+    filename: input.nc
+
+processes:
+  time:
+    start: 1900.0
+    end: 2300.0
+    save: 10.0
+  iceflow:
+    physics:
+      sliding:
+        tau_ref: 0.325
+        u_ref: 100.0
+
+outputs:
+  live_dashboard:
+    headless: true

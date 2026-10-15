@@ -1,0 +1,34 @@
+# @package _global_
+
+# PAST: 1700-2020, climate-driven SMB.
+# Trick: we do not know the glacier geometry in 1700, so we start from TODAY's geometry,
+# let the glacier adjust to a cooler pre-industrial climate (LIA advance, maximum ~1850),
+# then retreat with the observed climate 1901-2019. Calibrate delta_temp (before 1901) and
+# melt_enhancer so that the glacier (i) reaches the LIA moraines around 1850 and
+# (ii) matches the present-day extent/volume in 2020.
+
+defaults:
+  - common: my_glacier
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [climate, smb, iceflow, time, thk]
+  - override /outputs: [local, live_dashboard]
+
+processes:
+  time:
+    start: 1700.0
+    end: 2020.0
+    save: 10.0
+  climate:
+    method: oggm
+    oggm:
+      # Used only BEFORE 1901: random years of 1960-1990 shifted by delta_temp (°C).
+      # From 1901 to 2019, the observed climate is used (this table is ignored).
+      clim_trend_array:
+        - ["time", "delta_temp", "prec_scal"]
+        - [ 1700,          -1.0,         1.0]
+        - [ 1850,          -1.0,         1.0]
+        - [ 1900,          -0.5,         1.0]
+  smb:
+    method: oggm
+    oggm:
+      melt_enhancer: 1.0     # > 1: more melt, < 1: less melt

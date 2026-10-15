@@ -1,0 +1,28 @@
+# @package _global_
+
+# PAST (simple alternative): 1700-2020, ELA-based SMB, no climate.
+# Same trick as params_past.yaml (start from today's geometry), but you prescribe the
+# ELA history yourself: lower ELA until the LIA maximum (~1850), then rising ELA.
+# Estimate today's ELA (end-of-summer snowline, GLAMOS) and adapt the values below.
+
+defaults:
+  - common: my_glacier
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [smb, iceflow, time, thk]
+  - override /outputs: [local, live_dashboard]
+
+processes:
+  time:
+    start: 1700.0
+    end: 2020.0
+    save: 10.0
+  smb:
+    method: simple
+    simple:
+      array:
+        - ["time", "gradabl", "gradacc", "ela", "accmax"]
+        - [ 1700,     0.009,     0.005,  3000,      2.0]
+        - [ 1850,     0.009,     0.005,  3000,      2.0]
+        - [ 1900,     0.009,     0.005,  3050,      2.0]
+        - [ 2000,     0.009,     0.005,  3200,      2.0]
+        - [ 2020,     0.009,     0.005,  3300,      2.0]

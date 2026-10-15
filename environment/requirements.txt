@@ -1,0 +1,6 @@
+igm-model==3.2.1
+xarray
+netCDF4
+scipy
+matplotlib
+ipywidgets
