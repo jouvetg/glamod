@@ -8,22 +8,21 @@ parts:
       - file: setup/renku
   - caption: "Session 1: Glacier processes and modelling"
     chapters:
-      - file: session1/lecture-1a-glacier-processes
-      - file: session1/lecture-1b-glacier-modelling
-      - file: session1/tutorial-1-sia-model
-      - file: session1/choose-your-glacier
+      - file: session1/1a-lecture-glacier-processes
+      - file: session1/1b-lecture-glacier-modelling
+      - file: session1/1c-tutorial-1-sia-model
+      - file: session1/1d-choose-your-glacier
   - caption: "Session 2: Introduction to IGM"
     chapters:
-      - file: session2/lecture-2-igm
+      - file: session2/1-lecture-igm
       - file: session2/tutorial-2/tutorial-2-igm
-      - file: session2/glacier-goo
   - caption: "Session 3: Application and report"
     chapters:
       - file: session3/lecture-3-application-and-report
   - caption: Mini-project
     chapters:
       - file: project/project
-      - file: project/my-glacier/my_glacier
+      - file: project/my-glacier/analysis
   - caption: "Session 4: Mont Miné (course Dates & Rates)"
     chapters:
       - file: session4/mont-mine/tutorial-4-mont-mine

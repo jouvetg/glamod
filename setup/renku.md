@@ -4,7 +4,7 @@ All computations of this course run **online** on [RenkuLab](https://renkulab.io
 
 ## For students
 
-The same guide is presented in Lecture 2 (slides "Introduction to RenkuLab").
+The same guide is presented at the end of Lecture 1b (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.
 
 | Renku | What it is for you |
 |---|---|
@@ -13,7 +13,7 @@ The same guide is presented in Lecture 2 (slides "Introduction to RenkuLab").
 | **Session** | Your running machine (CPU, RAM, disk) — temporary! |
 | **Data connector** | Your SWITCHdrive folder, mounted in the session: where you **save** your work |
 
-### Step 1 — Your own copy of the course (once, Session 1)
+### Step 1 — Your own copy of the course (once, Session 1, hour 3)
 
 1. Go to [renkulab.io](https://renkulab.io) and log in with your **SWITCH edu-ID** (UNIL account).
 2. Open the course project (**link on Moodle**).
@@ -28,7 +28,7 @@ The same guide is presented in Lecture 2 (slides "Introduction to RenkuLab").
 
 ```
 glamod/
-├── session1/     lectures, tutorial-1-sia-model.ipynb, choose-your-glacier.md
+├── session1/     lectures, 1c-tutorial-1-sia-model.ipynb, 1d-choose-your-glacier.md
 ├── session2/     lecture on IGM, tutorial-2/ (IGM hands-on)
 ├── session3/     project goals & report guidelines
 ├── session4/     Mont Miné (course "Dates and Rates")
@@ -38,22 +38,22 @@ glamod/
 
 3. At the end of the afternoon: **Pause** the session (do not delete it).
 
-### Step 3 — Run IGM
+### Step 3 — Work with IGM: YAML + terminal + notebook (Sessions 2–3)
 
-From a notebook cell (with `!`), inside the folder that contains `experiment/`:
+| What | Where |
+|---|---|
+| **Set** the parameters | YAML files in `experiment/`, opened in the JupyterLab text editor |
+| **Run** IGM | a JupyterLab **Terminal** (*File → New → Terminal*) |
+| **Look** at the results | a **notebook** that only reads the run folders (`analysis.ipynb` in the project) |
 
-```bash
-!igm_run +experiment=params_A_aletsch
-```
-
-or from a JupyterLab **Terminal** (*File → New → Terminal*):
+Drag the tabs to put them side by side. In the terminal, from the folder that contains `experiment/`:
 
 ```bash
 cd ~/work/glamod/session2/tutorial-2
-igm_run +experiment=params_A_aletsch
+igm_run +experiment=params_A_aletsch hydra.run.dir=outputs/A_reference
 ```
 
-Results are written to `outputs/<date>/<time>/` (`output.nc`, `output_ts.nc`, `dashboard_XXXX.png`).
+Results are written to the named folder `outputs/A_reference/` (`output.nc`, `output_ts.nc`, `dashboard_XXXX.png`, `.hydra/` with all parameters). A run in the terminal keeps going if you close the browser tab. Stop it with Ctrl+C.
 
 ### Step 4 — Save your work ⚠️
 
@@ -69,6 +69,7 @@ Results are written to `outputs/<date>/<time>/` (`output.nc`, `output_ts.nc`, `d
 |---|---|
 | The session does not start | Wait, retry. Check that you launched from **your** project. |
 | `igm_run: command not found` | Wrong launcher: use the `glamod` launcher. |
+| `Parameter 'experiment' does not exist` | You are not in the folder that contains `experiment/`: `cd` there. |
 | The kernel dies / very slow | Out of memory: restart the kernel, shorten the run, close other notebooks. |
 | Data download (`oggm_shop`) fails | Retry. The data comes from a server in Bremen, which may be slow when 20 students download at once. |
 | Lost files | Were they saved in the SWITCHdrive folder? |
@@ -110,7 +111,7 @@ Results are written to `outputs/<date>/<time>/` (`output.nc`, `output_ts.nc`, `d
    - **Resource class**: the GPU class of the course resource pool (students can pick the CPU class at launch if no GPU is free).
    - Name: `glamod` → *Add session launcher*.
 6. **Mark the project as a template**: *Settings* → toggle *Template project*. Make it visible to the students (public, or within the course group), and post the link on Moodle.
-7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/tutorial-1-sia-model.ipynb`, `session2/tutorial-2/tutorial-2-igm.ipynb` and `project/my-glacier/my_glacier.ipynb`, save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
+7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/1c-tutorial-1-sia-model.ipynb`, `session2/tutorial-2/tutorial-2-igm.ipynb` and the project (`project/my-glacier/`: check run, `params_past`, `bash run_future.sh`, then `analysis.ipynb`), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
 
 **Updating the material during the course**: students' copies keep a link to the GitHub repository; a new session clones the latest version. In an existing (paused) session, run `git pull` in `~/work/glamod` (students' own changes may conflict: they should work in copies of the files, e.g. in their SWITCHdrive folder or with new file names).
 

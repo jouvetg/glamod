@@ -20,14 +20,9 @@ Guillaume Jouvet
 
 | | |
 |---|---|
-| Hour 1 | Lecture 2: the Instructed Glacier Model (IGM) — introduction to RenkuLab — first IGM runs (Tutorial 2) |
+| Hour 1 | Lecture 2: the Instructed Glacier Model (IGM) — how to work with IGM in RenkuLab — first IGM runs (Tutorial 2) |
 | Hours 2–4 | Mini-project: set up and run **your** glacier (with the assistant) |
 | Break | Glacier goo: ice flow in the lab |
-
----|---|
-| Hour 1 | Lecture: the Instructed Glacier Model (IGM) |
-| Hour 2 | Tutorial 2: first IGM runs (`session2/tutorial-2/tutorial-2-igm.ipynb`) |
-| Hours 3–4 | Mini-project: set up and run **your** glacier |
 
 ---
 
@@ -116,7 +111,7 @@ igm_run +experiment=params processes.time.end=2050
 igm_run +experiment=params inputs.oggm_shop.RGI_ID="RGI2000-v7.0-G-11-01189"
 ```
 
-- Results go to `outputs/<date>/<time>/`, with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
+- Results go to `outputs/<date>/<time>/` (or the folder given by `hydra.run.dir=...`), with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
 - All parameters and their defaults: https://igm-model.org (Modules)
 
 ---
@@ -174,7 +169,7 @@ Usually tuned so that modelled surface speeds match **observed** ones (provided 
 - `output_ts.nc`: ice volume and area through time ➡️ time series
 - `dashboard_XXXX.png`: quick-look images during the run
 
-Helpers in `utils/helper.py`: `animate_glacier_evolution`, `analyze_time_series`, `plot_flowline_evolution`, `compare_modeled_observed_velocity`
+Helpers in `utils/helper.py` (used in the notebooks): `show_dashboard`, `compare_runs`, `animate_glacier_evolution`, `analyze_time_series`, `plot_flowline_evolution`, `compare_modeled_observed_velocity`
 
 ---
 
@@ -188,78 +183,67 @@ Glaciers respond with a delay: mind the **response time**.
 
 ---
 
-# Introduction to RenkuLab
+# Back in RenkuLab
 
-**Where do we run IGM?** On [renkulab.io](https://renkulab.io), a platform of the Swiss Data Science Center (EPFL/ETH)
+Same as in Session 1:
 
-- JupyterLab **in your browser** — nothing to install on your laptop
-- IGM 3.2 and all Python packages are **pre-installed** in the course environment
-- Runs on Swiss servers, with a resource pool (with **GPUs**) reserved for this course
-- Login with your **SWITCH edu-ID** (UNIL account)
+1. Open **your** project on renkulab.io → **Resume** your paused session (or **Launch** a new one)
+2. Course material in `~/work/glamod/`, your SWITCHdrive folder next to it
 
----
-
-# RenkuLab: the vocabulary
-
-| Renku | What it is for you |
-|---|---|
-| **Project** | Your copy of the course: material (code repository) + launcher + storage |
-| **Session launcher** | The "Launch" button: starts a machine with IGM + JupyterLab |
-| **Session** | Your running machine (CPU, RAM, disk) — temporary! |
-| **Data connector** | Your SWITCHdrive folder, mounted in the session: **where you save your work** |
+New today: we run **IGM**, a command-line program. We work with **three tools**, side by side in JupyterLab.
 
 ---
 
-# Step 1 — Your own copy of the course (once)
+# How to work with IGM: three tools
 
-1. Go to **renkulab.io** → *Log in* with SWITCH edu-ID
-2. Open the course project (link on Moodle)
-3. Click the banner button to **copy the project** → this is now *your* project
-4. *(Recommended)* In your project: add a **data connector** → *SWITCHdrive* → choose a folder (e.g. `glamod-work`)
-5. *Settings* → *Members*: add the teacher and the assistant as **viewers**
+| What | Where | |
+|---|---|---|
+| **Set** the parameters | **YAML file** (`experiment/*.yaml`), opened in the JupyterLab text editor | one file = one experiment |
+| **Run** IGM | **Terminal** (*File → New → Terminal*) | keeps running even if you close the browser tab |
+| **Look** at the results | **Notebook**, reading `outputs/<run>/` | postprocessing only: never re-runs IGM |
+
+```
+┌──────────────────────┬──────────────────────────────┐
+│ params_past.yaml     │ analysis.ipynb               │
+│ (edit, Ctrl+S)       │  run = "outputs/past_v1"     │
+├──────────────────────┤  show_dashboard(run)         │
+│ Terminal             │  compare_runs([...])         │
+│ $ igm_run ...        │  plt.savefig("figures/...")  │
+└──────────────────────┴──────────────────────────────┘
+```
+Drag the tabs to split the screen.
 
 ---
 
-# Step 2 — Launch a session (each time)
-
-1. Open **your** project → *Sessions* → **Launch** (`glamod` launcher)
-2. Wait 1–3 min → JupyterLab opens in your browser
-3. File browser (left): `glamod/` = course material, plus your SWITCHdrive folder
-4. Open a notebook, e.g. `glamod/session2/tutorial-2/tutorial-2-igm.ipynb`
-
-At the end of the afternoon: **Pause** the session (do not delete it).
-
----
-
-# Step 3 — Run IGM
-
-In a notebook cell (with `!`), from the folder that contains `experiment/`:
+# Run IGM in the terminal
 
 ```bash
-!igm_run +experiment=params_A_aletsch
+cd ~/work/glamod/session2/tutorial-2          # the folder that contains experiment/
+igm_run +experiment=params_A_aletsch hydra.run.dir=outputs/A_reference
 ```
 
-or in a JupyterLab **Terminal** (*File → New → Terminal*):
+- `+experiment=params_A_aletsch` → reads `experiment/params_A_aletsch.yaml`
+- `hydra.run.dir=outputs/A_reference` → **always name your run folder**: this name is how you find it in the notebook
+- Change a parameter without editing the file: `processes.time.end=1950`
+- Stop a run: **Ctrl+C**. Recall the last command: **↑**
 
-```bash
-cd ~/work/glamod/session2/tutorial-2
-igm_run +experiment=params_A_aletsch
-```
-
-Results: `outputs/<date>/<time>/` — plot them with the helpers in the notebooks.
+Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `dashboard_*.png` (quick looks) and `.hydra/` (**all** parameters used).
 
 ---
 
-# Step 4 — Save your work ⚠️
+# Look at the results in a notebook
 
-A session is a **temporary machine**: it may be deleted after a period of inactivity.
+```python
+from helper import *                      # course plotting helpers (utils/helper.py)
+show_dashboard("outputs/A_reference")     # last dashboard images
+compare_runs(["outputs/A_reference", "outputs/A_ela_plus200"],
+             ["reference", "ELA +200 m"])  # volume and area through time
+```
 
-- Copy what matters to your **SWITCHdrive folder** (drag & drop in the file browser, or `cp -r`):
-  - your notebook(s), your `experiment/*.yaml` files, your figures
-- `output.nc` files can be large: keep only the useful ones — they can be re-created by re-running IGM
-- Or right-click → *Download* to your laptop
+- Re-run the notebook as often as you like: it only **reads** the run folders
+- Figures for the report: `plt.savefig("figures/fig_volume.png", dpi=200, bbox_inches="tight")`
 
-**Rule**: never finish an afternoon without saving your YAML files and notebook.
+**Save your work**: YAML files, notebook and figures → SWITCHdrive folder. Run folders can always be re-created.
 
 ---
 
@@ -267,11 +251,11 @@ A session is a **temporary machine**: it may be deleted after a period of inacti
 
 | Symptom | Fix |
 |---|---|
-| Session does not start | Wait (all GPUs may be busy), retry, or launch with the CPU resource class; check you launched from **your** project |
 | `igm_run: command not found` | Wrong launcher/environment → use the `glamod` launcher |
-| Kernel dies / very slow | Out of memory: restart kernel; shorter run; close other notebooks |
-| Data download (`oggm_shop`) fails | Retry — the server may be busy when 20 students download at once |
-| Lost files | Were they in the SWITCHdrive folder? |
+| `Parameter 'experiment' does not exist` | You are not in the folder that contains `experiment/` → `cd` there |
+| `FileNotFoundError: outputs/...` in the notebook | The run is not finished, or the folder name differs from `hydra.run.dir` |
+| Kernel dies / very slow | Out of memory: restart the kernel, shorten the run, close other notebooks |
+| Data download (`oggm_shop`) fails | Retry: the server may be busy when 20 students download at once |
 
 Ask the assistant!
 
@@ -281,7 +265,7 @@ Ask the assistant!
 
 `session2/tutorial-2/tutorial-2-igm.ipynb`
 
-- **Run A**: Aletsch, 1900–2000, simple ELA-based SMB (local data)
+- **Run A**: Aletsch, 1900–2000, simple ELA-based SMB (local data) — first run from the notebook, then in the terminal
 - **Run B**: any glacier from its RGI ID, climate-driven SMB, 2020–2100, +4°C → **try it with your glacier!**
 - **Run C** (optional): write your own SMB module in Python
 
@@ -291,6 +275,6 @@ Ask the assistant!
 
 Ice flow in the lab with a viscous "goo": 9 short films (UZH, 3G).
 
-➡️ Slides `session2/glacier-goo.md`
+<!-- Teacher: slides in session2/2-glacier-goo.md (local only, not in the repo) -->
 
 ![height:350px](fig/glacier-goo.png)

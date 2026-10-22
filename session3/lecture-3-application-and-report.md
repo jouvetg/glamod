@@ -113,4 +113,4 @@ Checklist for today:
 - [ ] Figures drafted
 - [ ] Report outline written
 
-`project/project.md` — `project/my-glacier/my_glacier.ipynb`
+`project/project.md` — `project/my-glacier/` (YAML + terminal + `analysis.ipynb`)

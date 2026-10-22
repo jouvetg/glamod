@@ -22,8 +22,8 @@ Guillaume Jouvet
 |---|---|
 | Hour 1 | Lecture 1a: Glacier processes |
 | Hour 2 | Lecture 1b: Glacier modelling — and a cold case solved with a glacier model |
-| Hour 3 | Tutorial 1: a simple glacier model (`session1/tutorial-1-sia-model.ipynb`) |
-| Hour 4 | Choose your glacier for the mini-project (`session1/choose-your-glacier.md`) |
+| Hour 3 | Set up RenkuLab (≈ 15 min), then Tutorial 1: a simple glacier model (`session1/1c-tutorial-1-sia-model.ipynb`) |
+| Hour 4 | Choose your glacier for the mini-project (`session1/1d-choose-your-glacier.md`) |
 
 ---
 
@@ -37,13 +37,13 @@ Guillaume Jouvet
 
 # Course format: 3 afternoons × 4 hours
 
-| | Hour 1 | Hour 2 | Hours 3–4 |
-|---|---|---|---|
-| **Session 1** | Glacier processes | Glacier modelling + an application (the Ebener case) | Tutorial 1 (simple model) + choose your glacier |
-| **Session 2** | Introduction to IGM + first IGM runs (Tutorial 2) | Mini-project | Mini-project |
-| **Session 3** | Project goals, how to write the report | Mini-project | Mini-project |
+| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
+|---|---|---|---|---|
+| **Session 1** | Glacier processes | Glacier modelling + an application (the Ebener case) | RenkuLab setup + Tutorial 1 (simple model) | Choose your glacier |
+| **Session 2** | Introduction to IGM + first IGM runs (Tutorial 2) | Mini-project | Mini-project | Mini-project |
+| **Session 3** | Project goals, how to write the report | Mini-project | Mini-project | Mini-project |
 
-All computations run **online** (Renku), nothing to install on your laptop.
+All computations run **online** (RenkuLab, set up today in hour 3), nothing to install on your laptop.
 
 ---
 
@@ -93,6 +93,14 @@ Picture from www.antarcticglaciers.org
 - In the Alps today, ELA ≈ 3000–3300 m; during the Little Ice Age (~1850), ≈ 100–200 m lower
 
 More: https://www.antarcticglaciers.org/glacier-processes/mass-balance/introduction-glacier-mass-balance/
+
+
+---
+
+# SMB primarily depends on altitude
+
+![height:500px](https://npshistory.com/publications/geology/pp/715-A/images/fig1.jpg)
+
 
 ---
 

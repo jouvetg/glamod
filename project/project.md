@@ -2,11 +2,11 @@
 
 ## Goal
 
-Each student models **one Swiss glacier** (chosen in Session 1, see [choose-your-glacier](../session1/choose-your-glacier.md)) with IGM, to answer:
+Each student models **one Swiss glacier** (chosen in Session 1, see [choose your glacier](../session1/1d-choose-your-glacier.md)) with IGM, to answer:
 
 > **How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?**
 
-You work in the folder `project/my-glacier/` (template notebook `my_glacier.ipynb` + experiment files), during Sessions 2 and 3 (≈ 6 hours in class, with the help of the assistant), and write a short report.
+You work in the folder `project/my-glacier/` (experiment files, `run_future.sh` and the analysis notebook `analysis.ipynb`), during Sessions 2 and 3 (≈ 6 hours in class, with the help of the assistant), and write a short report.
 
 ## Timeline
 
@@ -21,7 +21,10 @@ You work in the folder `project/my-glacier/` (template notebook `my_glacier.ipyn
 
 ```
 my-glacier/
-├── my_glacier.ipynb              # notebook: run, plot, compare — your lab book
+├── analysis.ipynb                # notebook: plot, compare, make figures — your lab book
+├── run_future.sh                 # runs the future scenarios one after the other
+├── figures/                      # (created by the notebook) figures for the report
+├── outputs/                      # (created by IGM) one folder per run: outputs/past_v1/, outputs/future_rcp45/, ...
 └── experiment/
     ├── common/
     │   ├── my_glacier.yaml       # YOUR RGI ID + ice-flow parameters (shared by all experiments)
@@ -33,17 +36,21 @@ my-glacier/
 
 **First thing to do**: put the RGI ID of your glacier in `experiment/common/my_glacier.yaml`.
 
-**Good practice**: one YAML file = one experiment. Copy a file before changing it (e.g. `params_future_ssp585.yaml`), and run each experiment into a named folder:
+## How to work: YAML + terminal + notebook
 
-```bash
-igm_run +experiment=params_future_ssp585 hydra.run.dir=outputs/future_ssp585
-```
+Open the three side by side in JupyterLab (drag the tabs to split the screen):
 
-Keep a short log (in the notebook) of each run: what you changed, why, and what came out.
+| What | Where | Good practice |
+|---|---|---|
+| **Set** the parameters | YAML files in `experiment/`, in the text editor | One file = one experiment: copy a file before changing it (right-click → *Duplicate*, e.g. `params_past_v2.yaml`) |
+| **Run** IGM | **Terminal**, from `~/work/glamod/project/my-glacier` | Always name the run folder: `igm_run +experiment=params_past_v2 hydra.run.dir=outputs/past_v2` |
+| **Look** at the results | `analysis.ipynb` | Postprocessing only: it reads `outputs/<run>/` and saves figures to `figures/` |
+
+A run in the terminal keeps going if you close the browser tab, and the notebook stays free for plotting while IGM runs. Each run folder keeps all the parameters used (`.hydra/config.yaml`), so every result can be traced back. Keep a short log (in the notebook) of each run: what you changed, why, and what came out.
 
 ## Step 1 — Present: check the initial state
 
-- Run any experiment once: the data is downloaded to `data/` (`input_<RGI_ID>.nc` and `data/<RGI_ID>/`).
+- Run any experiment once (the notebook gives a 1-year run): the data is downloaded to `data/` (`input_<RGI_ID>.nc` and `data/<RGI_ID>/`).
 - Plot the input data (`plot_input_data`) and the climate (`plot_climate`): area, volume, thickness, observed speeds.
 - Compare the modelled surface speed at the start of a run with the observed one (`compare_modeled_observed_velocity`). If the model is systematically too fast or too slow, adjust the sliding (`tau_ref`) or the ice softness (`arrhenius`) in `common/my_glacier.yaml`.
 - Compare with what you know: GLAMOS length and volume changes, the swisstopo thickness map.
@@ -77,7 +84,7 @@ Scenario warming for Switzerland around 2085 vs. 1981–2010 (annual mean, [CH20
 | RCP4.5 / SSP2-4.5 (moderate) | ≈ +2.0 to +3.3 °C |
 | RCP8.5 / SSP5-8.5 (high emissions) | ≈ +3.3 to +5.4 °C |
 
-Run **at least two scenarios**, using the `melt_enhancer` calibrated in Step 2. Analyse volume and area loss, front retreat, and when the glacier (nearly) disappears. Add a **committed-loss** experiment: keep today's climate until 2100 (2100 row = 2020 row). How much would still be lost?
+`run_future.sh` runs four scenarios (committed, RCP2.6, RCP4.5, RCP8.5) with these rules: set your calibrated `melt_enhancer` and the two offsets at the top of the file, then `bash run_future.sh` in the terminal. You can change the warming values or add scenarios (e.g. the low and high ends of the CH2018 ranges). Run **at least two scenarios**, using the `melt_enhancer` calibrated in Step 2. Analyse volume and area loss, front retreat, and when the glacier (nearly) disappears. Add a **committed-loss** experiment: keep today's climate until 2100 (2100 row = 2020 row). How much would still be lost?
 
 ## Step 4 — Report
 
@@ -111,5 +118,5 @@ See the guidelines in [Lecture 3](../session3/lecture-3-application-and-report.m
 
 ## Practicalities
 
-- Work in your RenkuLab session ([setup/renku.md](../setup/renku.md)). **Download** your notebook, YAML files and figures regularly: sessions are not permanent storage.
+- Work in your RenkuLab session ([setup/renku.md](../setup/renku.md)). Copy your notebook, YAML files, `run_future.sh` and figures to your **SWITCHdrive folder** regularly: sessions are not permanent storage.
 - Data for your glacier is downloaded once, then re-used. If something looks wrong with the data, delete `data/input_<RGI_ID>.nc` and run again.

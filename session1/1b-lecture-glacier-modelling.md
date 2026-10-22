@@ -20,6 +20,7 @@ Guillaume Jouvet
 - II> Numerical modelling
 - III> Applications to present-day and paleo glaciers
 - IV> A cold case solved with a glacier model (the Ebener brothers)
+- V> Hands-on: set up RenkuLab, Tutorial 1
 
 ---
 
@@ -238,7 +239,9 @@ Simulation: https://youtu.be/xfk_J4VhdWA
 ➡️ March 1926: the Ebener brothers vanish on the Great Aletsch Glacier
 ➡️ 2012: their remains are found near the tongue, ~10 km downstream
 
-*Slides: [case-ebener.pdf](case-ebener.pdf) — short film: https://youtu.be/cyKb-P3mwDk*
+*Short film: https://youtu.be/cyKb-P3mwDk*
+
+<!-- Teacher: full slides in session1/case-ebener.pdf (local only, not in the repo) -->
 
 ---
 
@@ -253,13 +256,73 @@ Simulation: https://youtu.be/xfk_J4VhdWA
 
 ---
 
-# Next: Tutorial 1 (1 hour)
+# Hour 3: set up RenkuLab, then Tutorial 1
 
-Open the Renku session, then `session1/tutorial-1-sia-model.ipynb`:
+**Where do we compute?** On [renkulab.io](https://renkulab.io), a platform of the Swiss Data Science Center (EPFL/ETH)
+
+- JupyterLab **in your browser**: nothing to install on your laptop
+- Python, IGM and all packages are **pre-installed** in the course environment
+- Runs on Swiss servers, with resources (incl. **GPUs**) reserved for this course
+- Login with your **SWITCH edu-ID** (UNIL account)
+
+Today: Tutorial 1 (no IGM yet). The same setup is used for IGM and your project in Sessions 2–3.
+
+---
+
+# RenkuLab: the vocabulary
+
+| Renku | What it is for you |
+|---|---|
+| **Project** | Your copy of the course: material (code repository) + launcher + storage |
+| **Session launcher** | The "Launch" button: starts a machine with Python, IGM and JupyterLab |
+| **Session** | Your running machine (CPU/GPU, RAM, disk): temporary! |
+| **Data connector** | Your SWITCHdrive folder, mounted in the session: **where you save your work** |
+
+---
+
+# Step 1: your own copy of the course (once, now)
+
+1. Go to **renkulab.io** → *Log in* with SWITCH edu-ID
+2. Open the course project (link on Moodle)
+3. Click the banner button to **copy the project** → this is now *your* project
+4. In your project: add a **data connector** → *SWITCHdrive* → choose a folder (e.g. `glamod-work`)
+5. *Settings* → *Members*: add the teacher and the assistant as **viewers**
+
+---
+
+# Step 2: launch a session (every afternoon)
+
+1. Open **your** project → *Sessions* → **Launch** (`glamod` launcher)
+2. Wait 1–3 min (longer the first time) → JupyterLab opens in your browser
+3. File browser (left): `glamod/` = course material, plus your SWITCHdrive folder
+4. Open `glamod/session1/1c-tutorial-1-sia-model.ipynb` → run the cells top to bottom (Shift+Enter)
+
+At the end of the afternoon: **Pause** the session (do not delete it).
+
+---
+
+# Step 3: save your work ⚠️
+
+A session is a **temporary machine**: it may be deleted after a period of inactivity.
+
+- Copy what matters to your **SWITCHdrive folder** (drag & drop in the file browser), or right-click → *Download*
+- **Rule**: never finish an afternoon without saving your notebooks (and later your YAML files and figures)
+
+| Symptom | Fix |
+|---|---|
+| Session does not start | Wait, retry (or choose the CPU resource class); check you launched from **your** project |
+| Kernel dies / very slow | Restart the kernel (*Kernel → Restart*); close other notebooks |
+| Lost files | Were they in the SWITCHdrive folder? |
+
+---
+
+# Tutorial 1 (now)
+
+`session1/1c-tutorial-1-sia-model.ipynb`:
 
 1. Velocity profile of the SIA
 2. A 1D glacier: steady state, sensitivity to ELA, SMB gradient, ice softness
 3. Response time: glacier under an oscillating climate
 4. A 3D glacier: Gorner Glacier, find the ELA that fits today's extent
 
-Then (last hour): **choose your glacier** for the mini-project → `session1/choose-your-glacier.md`
+Then (hour 4): **choose your glacier** for the mini-project → `session1/1d-choose-your-glacier.md`
