@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Glacier Modelling &#8212; Glacier Modelling course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'session1/1a-lecture-glacier-processes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Glacier Modelling" href="1b-lecture-glacier-modelling.html" />
+    <link rel="prev" title="Working online with RenkuLab" href="../setup/renku.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../infos.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Glacier Modelling course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../infos.html">
+                    Glacier Modelling — UNIL, Master course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup/renku.html">Working online with RenkuLab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 1: Glacier processes and modelling</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1b-lecture-glacier-modelling.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1c-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="1d-choose-your-glacier.html">Choose your glacier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../session2/tutorial-2/tutorial-2-igm.html">Tutorial 2 — First steps with IGM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session3/lecture-3-application-and-report.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mini-project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../project/project.html">Mini-project: model your own glacier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session4/mont-mine/tutorial-4-mont-mine.html">Session 4 — Glacier du Mont Miné: modelling deglaciation dates</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/session1/1a-lecture-glacier-processes.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Glacier Modelling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1a-glacier-processes">Session 1 — Lecture 1a: Glacier processes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#today-session-1">Today (Session 1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours">Course format: 3 afternoons × 4 hours</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-processes-governing-glacier-evolution">Main processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacial-processes-governing-glacier-evolution">Glacial processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-processes">Mass balance processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-mass-balance-smb-and-the-ela">Surface mass balance (SMB) and the ELA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#smb-primarily-depends-on-altitude">SMB primarily depends on altitude</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-smb-two-families">Modelling SMB: two families</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-glacial-motion">Observing glacial motion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-a-glacier-flow-brief-historical-outline">How can a glacier flow? Brief historical outline</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-first-measurements">19th century: first measurements</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-from-lab-experiments-to-glens-flow-law">20th century: from lab experiments to Glen’s flow law</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-components-of-glacier-ice-flow">The two components of glacier ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-of-ice-under-argentiere-glacier">Sliding of ice under Argentière Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#subglacial-hydrology">Subglacial hydrology</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-and-basal-glacial-state">Thermal and basal glacial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#many-of-these-processes-are-coupled">Many of these processes are coupled</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-response-to-climate">Glacier response to climate</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="glacier-modelling">
+<h1>Glacier Modelling<a class="headerlink" href="#glacier-modelling" title="Link to this heading">#</a></h1>
+<section id="session-1-lecture-1a-glacier-processes">
+<h2>Session 1 — Lecture 1a: Glacier processes<a class="headerlink" href="#session-1-lecture-1a-glacier-processes" title="Link to this heading">#</a></h2>
+<p>Guillaume Jouvet</p>
+<p><img alt="height:200px" src="../_images/rhone-mod-lq.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="today-session-1">
+<h1>Today (Session 1)<a class="headerlink" href="#today-session-1" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hour 1</p></td>
+<td><p>Lecture 1a: Glacier processes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hour 2</p></td>
+<td><p>Lecture 1b: Glacier modelling — and a cold case solved with a glacier model</p></td>
+</tr>
+<tr class="row-even"><td><p>Hour 3</p></td>
+<td><p>Set up RenkuLab (≈ 15 min), then Tutorial 1: a simple glacier model (<code class="docutils literal notranslate"><span class="pre">session1/1c-tutorial-1-sia-model.ipynb</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hour 4</p></td>
+<td><p>Choose your glacier for the mini-project (<code class="docutils literal notranslate"><span class="pre">session1/1d-choose-your-glacier.md</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="course-objectives">
+<h1>Course objectives<a class="headerlink" href="#course-objectives" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Provide the basics of glacier processes</p></li>
+<li><p>Introduce numerical methods to model glacier evolution</p></li>
+<li><p>Perform practical numerical experiments with IGM, on <strong>your own glacier</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="course-format-3-afternoons-4-hours">
+<h1>Course format: 3 afternoons × 4 hours<a class="headerlink" href="#course-format-3-afternoons-4-hours" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Hour 1</p></th>
+<th class="head"><p>Hour 2</p></th>
+<th class="head"><p>Hour 3</p></th>
+<th class="head"><p>Hour 4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Session 1</strong></p></td>
+<td><p>Glacier processes</p></td>
+<td><p>Glacier modelling + an application (the Ebener case)</p></td>
+<td><p>RenkuLab setup + Tutorial 1 (simple model)</p></td>
+<td><p>Choose your glacier</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Session 2</strong></p></td>
+<td><p>Introduction to IGM + first IGM runs (Tutorial 2)</p></td>
+<td><p>Mini-project</p></td>
+<td><p>Mini-project</p></td>
+<td><p>Mini-project</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Session 3</strong></p></td>
+<td><p>Project goals, how to write the report</p></td>
+<td><p>Mini-project</p></td>
+<td><p>Mini-project</p></td>
+<td><p>Mini-project</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All computations run <strong>online</strong> (RenkuLab, set up today in hour 3), nothing to install on your laptop.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>If there is one resource to remember, it is the website <a class="reference external" href="https://www.antarcticglaciers.org">https://www.antarcticglaciers.org</a>, which covers glacier processes in depth.</p></li>
+<li><p>To dive into the mechanics and the maths, I recommend the “Karthaus Summer School Lecture Notes”:
+<a class="reference external" href="https://link.springer.com/book/10.1007/978-3-030-42584-5">https://link.springer.com/book/10.1007/978-3-030-42584-5</a></p></li>
+<li><p>IGM documentation: <a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="main-processes-governing-glacier-evolution">
+<h1>Main processes governing glacier evolution<a class="headerlink" href="#main-processes-governing-glacier-evolution" title="Link to this heading">#</a></h1>
+<p><img alt="width:60%" src="../_images/scheme_glacier.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="glacial-processes-governing-glacier-evolution">
+<h1>Glacial processes governing glacier evolution<a class="headerlink" href="#glacial-processes-governing-glacier-evolution" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Climatic surface mass balance (= accumulation – ablation)</p></li>
+<li><p>Ice thermo-dynamics</p></li>
+<li><p>Mass conservation</p></li>
+<li><p>Subglacial hydrology</p></li>
+<li><p>Debris / sediment transport</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="mass-balance-processes">
+<h1>Mass balance processes<a class="headerlink" href="#mass-balance-processes" title="Link to this heading">#</a></h1>
+<p><img alt="height:450px" src="https://www.antarcticglaciers.org/wp-content/uploads/2018/11/glaciers-as-a-system.png" /></p>
+<p>Picture from <a class="reference external" href="http://www.antarcticglaciers.org">www.antarcticglaciers.org</a></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="surface-mass-balance-smb-and-the-ela">
+<h1>Surface mass balance (SMB) and the ELA<a class="headerlink" href="#surface-mass-balance-smb-and-the-ela" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Accumulation</strong>: snowfall (+ avalanches, wind drift, refreezing)</p></li>
+<li><p><strong>Ablation</strong>: melt (mostly), sublimation, calving</p></li>
+<li><p><strong>SMB</strong> = accumulation − ablation, in m of ice (or water) equivalent per year</p></li>
+<li><p><strong>Equilibrium Line Altitude (ELA)</strong>: elevation where SMB = 0</p>
+<ul>
+<li><p>above: accumulation area (SMB &gt; 0)</p></li>
+<li><p>below: ablation area (SMB &lt; 0)</p></li>
+</ul>
+</li>
+<li><p>In the Alps today, ELA ≈ 3000–3300 m; during the Little Ice Age (~1850), ≈ 100–200 m lower</p></li>
+</ul>
+<p>More: <a class="reference external" href="https://www.antarcticglaciers.org/glacier-processes/mass-balance/introduction-glacier-mass-balance/">https://www.antarcticglaciers.org/glacier-processes/mass-balance/introduction-glacier-mass-balance/</a></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="smb-primarily-depends-on-altitude">
+<h1>SMB primarily depends on altitude<a class="headerlink" href="#smb-primarily-depends-on-altitude" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="https://npshistory.com/publications/geology/pp/715-A/images/fig1.jpg" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modelling-smb-two-families">
+<h1>Modelling SMB: two families<a class="headerlink" href="#modelling-smb-two-families" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong>Elevation-based</strong> (simplest): SMB depends linearly on elevation, with an ELA and two gradients (ablation / accumulation)
+$<span class="math notranslate nohighlight">\( SMB(z) = \beta\,(z - z_{ELA}), \qquad \text{capped at } b_{max}\)</span>$</p></li>
+<li><p><strong>Climate-based</strong> (temperature-index / positive degree-day): melt ∝ positive temperatures, accumulation = solid precipitation
+$<span class="math notranslate nohighlight">\( SMB = \underbrace{P_{solid}}_{\text{accumulation}} - \underbrace{f_{melt}\sum \max(T - T_{melt},0)}_{\text{melt}}\)</span>$</p></li>
+</ol>
+<p>We will use both in IGM.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="observing-glacial-motion">
+<h1>Observing glacial motion<a class="headerlink" href="#observing-glacial-motion" title="Link to this heading">#</a></h1>
+<p>Timelapse cameras have captured glacial motion:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=TWGR6FxFlt8">https://www.youtube.com/watch?v=TWGR6FxFlt8</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=he5QzhE7_g4&amp;amp;t=55s">https://www.youtube.com/watch?v=he5QzhE7_g4&amp;t=55s</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=iaULB6O-JNY">https://www.youtube.com/watch?v=iaULB6O-JNY</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="how-can-a-glacier-flow-brief-historical-outline">
+<h1>How can a glacier flow? Brief historical outline<a class="headerlink" href="#how-can-a-glacier-flow-brief-historical-outline" title="Link to this heading">#</a></h1>
+<p><strong>How could ice remain in a warm green valley without melting?</strong></p>
+<p><img alt="height:200px" src="../_images/gletsch-1856.jpg" />
+<small>Rhone Glacier in 1856</small></p>
+<p>18th century: first theories (Rémy et al., 2006)</p>
+<ul class="simple">
+<li><p>1705: <strong>Dilation of water refreezing</strong> (Scheuchzer)</p></li>
+<li><p>1760: <strong>Basal sliding</strong> (Gruner)</p></li>
+<li><p>1773: <strong>Ice behaves as a “fluid”</strong> (Bordier)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="th-century-first-measurements">
+<h1>19th century: first measurements<a class="headerlink" href="#th-century-first-measurements" title="Link to this heading">#</a></h1>
+<p><img alt="height:400px" src="../_images/mercanton.jpg" /></p>
+<p><small>Ice movement of Rhone Glacier 1874–1900 (Mercanton, 1916)</small></p>
+<p>➡️ Ice deformation is <strong>faster in the center</strong> and <strong>slower at the sides</strong></p>
+<hr class="docutils" />
+<section id="th-century-from-lab-experiments-to-glens-flow-law">
+<h2>20th century: from lab experiments to Glen’s flow law<a class="headerlink" href="#th-century-from-lab-experiments-to-glens-flow-law" title="Link to this heading">#</a></h2>
+<p><img alt="height:350px" src="../_images/stress-strain-BuddJacka1989.png" /></p>
+<p><small>Figure from (Budd &amp; Jacka, 1989)</small></p>
+<ul class="simple">
+<li><p>1D: <span class="math notranslate nohighlight">\(\dot\epsilon = A(T)\,\sigma^n\)</span>, where <span class="math notranslate nohighlight">\(\dot\epsilon\)</span> is the strain rate, and <span class="math notranslate nohighlight">\(\sigma\)</span> is the stress.</p></li>
+<li><p>3D: <span class="math notranslate nohighlight">\(\dot\varepsilon_{ij} = A(T)\,[\sigma^{(d)}_{II}]^{n-1}\,\sigma^{(d)}_{ij}\)</span> ➡️ Ice is a <strong>non-Newtonian fluid</strong> <small>(J. Glen, 1958)</small></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-two-components-of-glacier-ice-flow">
+<h1>The two components of glacier ice flow<a class="headerlink" href="#the-two-components-of-glacier-ice-flow" title="Link to this heading">#</a></h1>
+<p>Ice is both: a <strong>fluid</strong> that flows/shears, and a <strong>solid</strong> that slides</p>
+<p><img alt="height:350px" src="../_images/shearing-sliding.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="sliding-of-ice-under-argentiere-glacier">
+<h1>Sliding of ice under Argentière Glacier<a class="headerlink" href="#sliding-of-ice-under-argentiere-glacier" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://youtu.be/WkgsFiQvI_M">https://youtu.be/WkgsFiQvI_M</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=mHdnB_yCvLY">https://www.youtube.com/watch?v=mHdnB_yCvLY</a></p></li>
+</ul>
+<p><img alt="height:300px" src="../_images/argen1.JPG" /></p>
+<p><small>Source: Luc Moreau</small></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="subglacial-hydrology">
+<h1>Subglacial hydrology<a class="headerlink" href="#subglacial-hydrology" title="Link to this heading">#</a></h1>
+<p><img alt="height:350px" src="https://www.antarcticglaciers.org/wp-content/uploads/2015/06/surface_meltwater_glacier_bed.png" /></p>
+<ul class="simple">
+<li><p>Inefficient drainage → high water pressure → high basal sliding</p></li>
+<li><p>Efficient drainage → low water pressure → low basal sliding</p></li>
+</ul>
+<p><small>Source: <a class="reference external" href="https://www.antarcticglaciers.org">https://www.antarcticglaciers.org</a></small></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="thermal-and-basal-glacial-state">
+<h1>Thermal and basal glacial state<a class="headerlink" href="#thermal-and-basal-glacial-state" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/till.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="many-of-these-processes-are-coupled">
+<h1>Many of these processes are coupled<a class="headerlink" href="#many-of-these-processes-are-coupled" title="Link to this heading">#</a></h1>
+<p><img alt="height:400px" src="../_images/scheme.png" /></p>
+<p>… plus deformation of the lithosphere for ice fields and ice sheets</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="glacier-response-to-climate">
+<h1>Glacier response to climate<a class="headerlink" href="#glacier-response-to-climate" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>A change in climate (ELA) changes the SMB <strong>immediately</strong></p></li>
+<li><p>The glacier geometry adjusts <strong>slowly</strong>, through ice flow</p></li>
+<li><p><strong>Response time</strong>: time needed to reach a new equilibrium after a step change in climate, roughly
+$<span class="math notranslate nohighlight">\(\tau \approx \frac{H}{-b_{terminus}}\)</span><span class="math notranslate nohighlight">\(
+(\)</span>H<span class="math notranslate nohighlight">\(: typical thickness, \)</span>b_{terminus}$: SMB at the terminus) ➡️ decades for small glaciers, a century or more for large ones</p></li>
+<li><p>Consequence: today’s glaciers are <strong>not in equilibrium</strong> with today’s climate — they will keep retreating even without further warming</p></li>
+</ul>
+<p>You will explore this in Tutorial 1.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./session1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../setup/renku.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Working online with RenkuLab</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1b-lecture-glacier-modelling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Glacier Modelling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1a-glacier-processes">Session 1 — Lecture 1a: Glacier processes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#today-session-1">Today (Session 1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours">Course format: 3 afternoons × 4 hours</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-processes-governing-glacier-evolution">Main processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacial-processes-governing-glacier-evolution">Glacial processes governing glacier evolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-processes">Mass balance processes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-mass-balance-smb-and-the-ela">Surface mass balance (SMB) and the ELA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#smb-primarily-depends-on-altitude">SMB primarily depends on altitude</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-smb-two-families">Modelling SMB: two families</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-glacial-motion">Observing glacial motion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-a-glacier-flow-brief-historical-outline">How can a glacier flow? Brief historical outline</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-first-measurements">19th century: first measurements</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#th-century-from-lab-experiments-to-glens-flow-law">20th century: from lab experiments to Glen’s flow law</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-two-components-of-glacier-ice-flow">The two components of glacier ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-of-ice-under-argentiere-glacier">Sliding of ice under Argentière Glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#subglacial-hydrology">Subglacial hydrology</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-and-basal-glacial-state">Thermal and basal glacial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#many-of-these-processes-are-coupled">Many of these processes are coupled</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-response-to-climate">Glacier response to climate</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guillaume Jouvet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

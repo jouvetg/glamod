@@ -1,36 +1,42 @@
+# Glacier Modelling — UNIL, Master course
 
-# Informations
+![width:200px](session1/fig/rhone-mod.png)
 
- ![width:200px](00_introduction/fig/rhone-mod.png)
+- Teacher: Guillaume Jouvet (guillaume.jouvet (at) unil.ch)
+- Assistant: Brandon Finley
+- Format: **3 afternoons × 4 hours**
 
-- Teacher: Guillaume Jouvet (guillaume.jouvet (at) unil.ch) 
+## Course objective
 
-Salle Géopolis 2224, wednesday from 8.30 to 10.00
+This course gives an overview of the basic physical processes that govern the evolution of mountain glaciers, and of how to model them numerically. It is hands-on: you will use the Instructed Glacier Model ([IGM](https://igm-model.org)) to model the past and future evolution of a Swiss glacier of your choice in a mini-project.
 
-# Course objective
+## Programme
 
-The goal of this course is to provide an overview of basic physical processes that governs the evolution of mountain glaciers, and learn how to model them with a numerical model. This course is highly experience driven, using the Instructed Glacier Model, to perfom numerical experiences.
+| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
+|---|---|---|---|---|
+| **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial 1) | **Choose your glacier** for the mini-project |
+| **Session 2** | Lecture 2: Introduction to IGM and first IGM run (Tutorial 2) | Mini-project | Mini-project | Mini-project |
+| **Session 3** | Lecture 3: Project goals, how to write the report | Mini-project | Mini-project | Mini-project |
 
-# Content:
+Then: write the report (deadline: *to be announced*).
 
-- **Introduction :** Basics of glacier processes and numerical model
-- **Mini-project :** Model your own Glacier
-- **Notebook 1 :** Getting familiar with a simple numerical glacier model
-- **Notebook 2 :** Getting familiar with IGM
-- **Notebook 3 :** Model Glacier du Mont Miné, calibration to OSL data (Course on "Dates and Rates of landscape evolution", G. King and C. Schmidt)
+## Material
 
-# Further Ressources
+- **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Tutorial 1](session1/1c-tutorial-1-sia-model.ipynb), [Choose your glacier](session1/1d-choose-your-glacier.md)
+- **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [Tutorial 2](session2/tutorial-2/tutorial-2-igm.ipynb)
+- **Session 3**: [Lecture 3](session3/lecture-3-application-and-report.md)
+- **Session 4** (taught in the course *Dates and Rates of landscape evolution*): [Mont Miné notebook](session4/mont-mine/tutorial-4-mont-mine.ipynb)
+- **Mini-project**: [Project guide](project/project.md), [analysis notebook](project/my-glacier/analysis.ipynb)
 
-- If there is one ressource to remember is the awesome website : https://www.antarcticglaciers.org that can allow you to deepen the processes.
+## Computing environment
 
-- To dive more into the mechanics and the maths, I recommend the "Karthaus Summer School Lecture Notes": https://link.springer.com/book/10.1007/978-3-030-42584-5
+Everything runs **online on [RenkuLab](https://renkulab.io)** with your SWITCH edu-ID: IGM and all Python packages are pre-installed. Nothing to install on your laptop. You set it up in Session 1 (hour 3). See [Working online with RenkuLab](setup/renku.md).
 
-# Computers and tools
+How we work with IGM: **edit parameters in YAML files, run IGM in a terminal, analyse the results in a notebook** (all three side by side in JupyterLab).
 
-- **Use your own computer** to perform computations. This requires: 1) a Python editor (like VS Code), and 2) Python and Anaconda to create a Python environment. You may follow the installation steps here: https://jouvetg.github.io/modnum/00_install/00_install.html. Installing IGM is a bit more complicated, but once done, it is easier to perform your computations locally. To that aim, follow instructions on the IGM webpage : https://igm-model.org/.
+## Further resources
 
-- **Use Colab** to do all your computations online. This is much easier at first, as there is nothing to install, but it is less flexible since you need to upload and download data and results.
-
-# IGM support
-
-You may subscribe to the dedicated discord Chanel in order to get IGM support related to this class by clicking on this invit : https://discord.gg/Nrpjpsqd
+- https://www.antarcticglaciers.org — the best website to learn more about glacier processes.
+- "Karthaus Summer School Lecture Notes", for the mechanics and the maths: https://link.springer.com/book/10.1007/978-3-030-42584-5
+- IGM documentation and examples: https://igm-model.org, https://github.com/instructed-glacier-model/igm-examples
+- Swiss glaciers: [map.geo.admin.ch](https://map.geo.admin.ch), [GLAMOS](https://www.glamos.ch)

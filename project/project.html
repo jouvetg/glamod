@@ -1,0 +1,817 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mini-project: model your own glacier &#8212; Glacier Modelling course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'project/project';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="My glacier — analysis notebook (mini-project)" href="my-glacier/analysis.html" />
+    <link rel="prev" title="Glacier Modelling" href="../session3/lecture-3-application-and-report.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../infos.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Glacier Modelling course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../infos.html">
+                    Glacier Modelling — UNIL, Master course
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup/renku.html">Working online with RenkuLab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 1: Glacier processes and modelling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session1/1a-lecture-glacier-processes.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../session1/1b-lecture-glacier-modelling.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../session1/1c-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../session1/1d-choose-your-glacier.html">Choose your glacier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../session2/tutorial-2/tutorial-2-igm.html">Tutorial 2 — First steps with IGM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session3/lecture-3-application-and-report.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mini-project</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-project: model your own glacier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../session4/mont-mine/tutorial-4-mont-mine.html">Session 4 — Glacier du Mont Miné: modelling deglaciation dates</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/project/project.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mini-project: model your own glacier</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline">Timeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-template-project-my-glacier">The template: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-yaml-terminal-notebook">How to work: YAML + terminal + notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-present-check-the-initial-state">Step 1 — Present: check the initial state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-past-from-the-little-ice-age-to-today">Step 2 — Past: from the Little Ice Age to today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-future-20202100">Step 3 — Future: 2020–2100</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-report">Step 4 — Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-tips">Calibration tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-optional">Going further (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicalities">Practicalities</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mini-project-model-your-own-glacier">
+<h1>Mini-project: model your own glacier<a class="headerlink" href="#mini-project-model-your-own-glacier" title="Link to this heading">#</a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>Each student models <strong>one Swiss glacier</strong> (chosen in Session 1, see <a class="reference internal" href="../session1/1d-choose-your-glacier.html"><span class="std std-doc">choose your glacier</span></a>) with IGM, to answer:</p>
+<blockquote>
+<div><p><strong>How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?</strong></p>
+</div></blockquote>
+<p>You work in the folder <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code> (experiment files, <code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code> and the analysis notebook <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), during Sessions 2 and 3 (≈ 6 hours in class, with the help of the assistant), and write a short report.</p>
+</section>
+<section id="timeline">
+<h2>Timeline<a class="headerlink" href="#timeline" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>When</p></th>
+<th class="head"><p>What</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Session 1 (last hour)</p></td>
+<td><p>Choose your glacier, collect information and observations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Session 2 (hours 3–4)</p></td>
+<td><p><strong>Present</strong>: download data, check the initial state. <strong>Past</strong>: first LIA → today runs</p></td>
+</tr>
+<tr class="row-even"><td><p>Session 3 (hours 2–4)</p></td>
+<td><p>Finish the past calibration. <strong>Future</strong>: scenario runs. Figures, report outline</p></td>
+</tr>
+<tr class="row-odd"><td><p>After Session 3</p></td>
+<td><p>Write the report — deadline: <strong>to be announced</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-template-project-my-glacier">
+<h2>The template: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code><a class="headerlink" href="#the-template-project-my-glacier" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-glacier/
+├── analysis.ipynb                # notebook: plot, compare, make figures — your lab book
+├── run_future.sh                 # runs the future scenarios one after the other
+├── figures/                      # (created by the notebook) figures for the report
+├── outputs/                      # (created by IGM) one folder per run: outputs/past_v1/, outputs/future_rcp45/, ...
+└── experiment/
+    ├── common/
+    │   ├── my_glacier.yaml       # YOUR RGI ID + ice-flow parameters (shared by all experiments)
+    │   └── iceflow_offline.yaml  # ice-flow emulator settings (do not touch)
+    ├── params_past.yaml          # 1700-2020, climate-driven SMB
+    ├── params_past_simple.yaml   # 1700-2020, ELA-based SMB (simpler alternative)
+    └── params_future.yaml        # 2020-2100, climate-driven SMB, one scenario
+</pre></div>
+</div>
+<p><strong>First thing to do</strong>: put the RGI ID of your glacier in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code>.</p>
+</section>
+<section id="how-to-work-yaml-terminal-notebook">
+<h2>How to work: YAML + terminal + notebook<a class="headerlink" href="#how-to-work-yaml-terminal-notebook" title="Link to this heading">#</a></h2>
+<p>Open the three side by side in JupyterLab (drag the tabs to split the screen):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>What</p></th>
+<th class="head"><p>Where</p></th>
+<th class="head"><p>Good practice</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Set</strong> the parameters</p></td>
+<td><p>YAML files in <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>, in the text editor</p></td>
+<td><p>One file = one experiment: copy a file before changing it (right-click → <em>Duplicate</em>, e.g. <code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Run</strong> IGM</p></td>
+<td><p><strong>Terminal</strong>, from <code class="docutils literal notranslate"><span class="pre">~/work/glamod/project/my-glacier</span></code></p></td>
+<td><p>Always name the run folder: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_past_v2</span> <span class="pre">hydra.run.dir=outputs/past_v2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Look</strong> at the results</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code></p></td>
+<td><p>Postprocessing only: it reads <code class="docutils literal notranslate"><span class="pre">outputs/&lt;run&gt;/</span></code> and saves figures to <code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A run in the terminal keeps going if you close the browser tab, and the notebook stays free for plotting while IGM runs. Each run folder keeps all the parameters used (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>), so every result can be traced back. Keep a short log (in the notebook) of each run: what you changed, why, and what came out.</p>
+</section>
+<section id="step-1-present-check-the-initial-state">
+<h2>Step 1 — Present: check the initial state<a class="headerlink" href="#step-1-present-check-the-initial-state" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Run any experiment once (the notebook gives a 1-year run): the data is downloaded to <code class="docutils literal notranslate"><span class="pre">data/</span></code> (<code class="docutils literal notranslate"><span class="pre">input_&lt;RGI_ID&gt;.nc</span></code> and <code class="docutils literal notranslate"><span class="pre">data/&lt;RGI_ID&gt;/</span></code>).</p></li>
+<li><p>Plot the input data (<code class="docutils literal notranslate"><span class="pre">plot_input_data</span></code>) and the climate (<code class="docutils literal notranslate"><span class="pre">plot_climate</span></code>): area, volume, thickness, observed speeds.</p></li>
+<li><p>Compare the modelled surface speed at the start of a run with the observed one (<code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>). If the model is systematically too fast or too slow, adjust the sliding (<code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) or the ice softness (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>) in <code class="docutils literal notranslate"><span class="pre">common/my_glacier.yaml</span></code>.</p></li>
+<li><p>Compare with what you know: GLAMOS length and volume changes, the swisstopo thickness map.</p></li>
+</ul>
+</section>
+<section id="step-2-past-from-the-little-ice-age-to-today">
+<h2>Step 2 — Past: from the Little Ice Age to today<a class="headerlink" href="#step-2-past-from-the-little-ice-age-to-today" title="Link to this heading">#</a></h2>
+<p>We do not know the geometry of the glacier in the past. The usual trick: <strong>start in 1700 from today’s geometry</strong>, cool the climate so that the glacier advances to its LIA maximum (~1850), then let it retreat with the observed climate of 1901–2019. If the model reproduces both the <strong>LIA extent</strong> (moraines, Siegfried map) and the <strong>present-day extent</strong>, we gain confidence in it before making projections.</p>
+<p>Two options:</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code></strong> (recommended) — climate-driven SMB (<code class="docutils literal notranslate"><span class="pre">climate</span></code> + <code class="docutils literal notranslate"><span class="pre">smb</span></code>, method <code class="docutils literal notranslate"><span class="pre">oggm</span></code>):</p>
+<ul class="simple">
+<li><p>1901–2019: the observed monthly climate is used.</p></li>
+<li><p>Before 1901: random years from 1960–1990, shifted by <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (°C, relative to 1960–1990) and scaled by <code class="docutils literal notranslate"><span class="pre">prec_scal</span></code>, as set in <code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>.</p></li>
+<li><p>Calibrate the <strong>pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></strong> (LIA maximum) and <strong><code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (present-day extent).</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">params_past_simple.yaml</span></code></strong> — ELA-based SMB: you prescribe the ELA history yourself. Simpler to understand, but less realistic. Estimate today’s ELA from the end-of-summer snowline or GLAMOS. LIA ELAs were typically 100–200 m lower than in the late 20th century.</p></li>
+</ol>
+<p><strong>Mind the response time</strong>: the glacier lags behind the climate. Large glaciers respond in a century or more, so the 1700–1850 spin-up must be long enough.</p>
+</section>
+<section id="step-3-future-20202100">
+<h2>Step 3 — Future: 2020–2100<a class="headerlink" href="#step-3-future-20202100" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code> starts from today’s glacier and uses the climate after 2019: random years from 1960–1990, plus <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>. Since <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is <strong>relative to 1960–1990</strong>, compute it as follows:</p>
+<ul class="simple">
+<li><p><strong>2020 row</strong>: today’s offset vs. 1960–1990. <code class="docutils literal notranslate"><span class="pre">plot_climate(RGI_ID)</span></code> prints it (≈ +1.3 °C for 2000–2019 at Findelen).</p></li>
+<li><p><strong>2100 row</strong>: offset of 1981–2010 vs. 1960–1990 (also printed by <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code>) <strong>+</strong> the scenario warming relative to 1981–2010.</p></li>
+</ul>
+<p>Scenario warming for Switzerland around 2085 vs. 1981–2010 (annual mean, <a class="reference external" href="https://www.nccs.admin.ch/nccs/en/home/climate-change-and-impacts/swiss-climate-change-scenarios.html">CH2018</a>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Warming vs. 1981–2010</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RCP2.6 / SSP1-2.6 (strong mitigation)</p></td>
+<td><p>≈ +0.6 to +1.9 °C</p></td>
+</tr>
+<tr class="row-odd"><td><p>RCP4.5 / SSP2-4.5 (moderate)</p></td>
+<td><p>≈ +2.0 to +3.3 °C</p></td>
+</tr>
+<tr class="row-even"><td><p>RCP8.5 / SSP5-8.5 (high emissions)</p></td>
+<td><p>≈ +3.3 to +5.4 °C</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code> runs four scenarios (committed, RCP2.6, RCP4.5, RCP8.5) with these rules: set your calibrated <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> and the two offsets at the top of the file, then <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code> in the terminal. You can change the warming values or add scenarios (e.g. the low and high ends of the CH2018 ranges). Run <strong>at least two scenarios</strong>, using the <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> calibrated in Step 2. Analyse volume and area loss, front retreat, and when the glacier (nearly) disappears. Add a <strong>committed-loss</strong> experiment: keep today’s climate until 2100 (2100 row = 2020 row). How much would still be lost?</p>
+</section>
+<section id="step-4-report">
+<h2>Step 4 — Report<a class="headerlink" href="#step-4-report" title="Link to this heading">#</a></h2>
+<p>See the guidelines in <a class="reference internal" href="../session3/lecture-3-application-and-report.html"><span class="std std-doc">Lecture 3</span></a>. In short:</p>
+<ul class="simple">
+<li><p><strong>≤ 1500 words</strong> (excluding captions and references), PDF.</p></li>
+<li><p>Structure: introduction and research question(s), study site, methods (describe <strong>what</strong> the model does, not how you ran it: no code, no YAML), results, discussion (limitations, uncertainties), conclusion.</p></li>
+<li><p>4–6 good figures: maps, time series of volume/area, flowline profiles, model vs. observations, scenarios.</p></li>
+<li><p>Evaluation: (A) research question, context and literature; (B) modelling tools and experiments; (C) results and discussion; (D) form and quality; on-time submission.</p></li>
+</ul>
+</section>
+<section id="calibration-tips">
+<h2>Calibration tips<a class="headerlink" href="#calibration-tips" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Try</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>The glacier grows without limit</p></td>
+<td><p>Climate too cold / ELA too low → increase <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> or <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> (or raise the ELA)</p></td>
+</tr>
+<tr class="row-odd"><td><p>The glacier disappears too fast</p></td>
+<td><p>Climate too warm / ELA too high → the opposite</p></td>
+</tr>
+<tr class="row-even"><td><p>No LIA advance</p></td>
+<td><p>Cooler pre-1901 climate (more negative <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>), or a longer spin-up</p></td>
+</tr>
+<tr class="row-odd"><td><p>Speeds too high vs. observations</p></td>
+<td><p>Increase <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> (less sliding), or decrease <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> (harder ice)</p></td>
+</tr>
+<tr class="row-even"><td><p>Speeds too low</p></td>
+<td><p>The opposite</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Change <strong>one parameter at a time</strong>, and keep track of all your runs.</p></li>
+<li><p>Do not expect a perfect fit: aim at the right trends and orders of magnitude, and discuss the mismatch.</p></li>
+<li><p>To test quickly, shorten runs from the command line (e.g. <code class="docutils literal notranslate"><span class="pre">processes.time.end=1800</span></code>).</p></li>
+</ul>
+</section>
+<section id="going-further-optional">
+<h2>Going further (optional)<a class="headerlink" href="#going-further-optional" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Moraines</strong>: track debris with the <code class="docutils literal notranslate"><span class="pre">particles</span></code> module (see igm-examples <code class="docutils literal notranslate"><span class="pre">aletsch</span></code>, Part A, Step 4).</p></li>
+<li><p><strong>Sensitivity</strong>: how do the 2100 results depend on <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, the initial thickness (<code class="docutils literal notranslate"><span class="pre">thk_source:</span> <span class="pre">consensus_ice_thickness</span></code>), or precipitation (<code class="docutils literal notranslate"><span class="pre">prec_scal</span></code>)?</p></li>
+<li><p><strong>Response time</strong>: apply a step change in climate and measure how long the glacier takes to adjust.</p></li>
+<li><p><strong>Your own question</strong>: proglacial lakes, tributary disconnection, hazards, … Discuss it with us first.</p></li>
+</ul>
+</section>
+<section id="practicalities">
+<h2>Practicalities<a class="headerlink" href="#practicalities" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Work in your RenkuLab session (<a class="reference internal" href="../setup/renku.html"><span class="std std-doc">setup/renku.md</span></a>). Copy your notebook, YAML files, <code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code> and figures to your <strong>SWITCHdrive folder</strong> regularly: sessions are not permanent storage.</p></li>
+<li><p>Data for your glacier is downloaded once, then re-used. If something looks wrong with the data, delete <code class="docutils literal notranslate"><span class="pre">data/input_&lt;RGI_ID&gt;.nc</span></code> and run again.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./project"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../session3/lecture-3-application-and-report.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Glacier Modelling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="my-glacier/analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">My glacier — analysis notebook (mini-project)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline">Timeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-template-project-my-glacier">The template: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-yaml-terminal-notebook">How to work: YAML + terminal + notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-present-check-the-initial-state">Step 1 — Present: check the initial state</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-past-from-the-little-ice-age-to-today">Step 2 — Past: from the Little Ice Age to today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-future-20202100">Step 3 — Future: 2020–2100</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-report">Step 4 — Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-tips">Calibration tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-optional">Going further (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practicalities">Practicalities</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guillaume Jouvet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
