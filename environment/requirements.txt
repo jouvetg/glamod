@@ -1,4 +1,6 @@
-igm-model==3.2.1
+# IGM installed from the HEAD of its main branch, pinned to a commit for reproducibility.
+# To update: replace the hash by the latest one (git ls-remote https://github.com/instructed-glacier-model/igm.git main), then push.
+igm-model @ git+https://github.com/instructed-glacier-model/igm.git@41085b087f875f80fc5b913340bf9ca3653bda67
 xarray
 netCDF4
 scipy

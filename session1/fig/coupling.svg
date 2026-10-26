@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 580" font-family="sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cccccc"/></marker></defs>
+<rect width="760" height="580" fill="black"/>
+<text x="370" y="45" text-anchor="middle" font-size="19" fill="white">Climate (temperature, precipitation)</text>
+<rect x="285.0" y="110.0" width="170" height="60" rx="10" fill="#1e1e1e" stroke="#e8833a" stroke-width="3"/>
+<text x="370" y="146.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">I. Mass balance</text>
+<rect x="285.0" y="260.0" width="170" height="60" rx="10" fill="#1e1e1e" stroke="#4a90d9" stroke-width="3"/>
+<text x="370" y="296.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">II. Ice dynamics</text>
+<rect x="30.0" y="260.0" width="170" height="60" rx="10" fill="#1e1e1e" stroke="#d94a4a" stroke-width="3"/>
+<text x="115" y="285.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">III. Ice</text>
+<text x="115" y="307.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">temperature</text>
+<rect x="515.0" y="260.0" width="170" height="60" rx="10" fill="#1e1e1e" stroke="#4ad9c8" stroke-width="3"/>
+<text x="600" y="285.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">IV. Subglacial</text>
+<text x="600" y="307.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">hydrology</text>
+<rect x="285.0" y="410.0" width="170" height="60" rx="10" fill="#1e1e1e" stroke="#b08b5a" stroke-width="3"/>
+<text x="370" y="435.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">V. Debris &amp;</text>
+<text x="370" y="457.0" text-anchor="middle" font-size="19" fill="white" font-weight="bold">sediment</text>
+<path d="M370,58 L370,108" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<path d="M350,172 L350,258" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="340" y="220" text-anchor="end" font-size="15" fill="#bbbbbb">SMB</text>
+<path d="M390,258 L390,172" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="400" y="220" text-anchor="start" font-size="15" fill="#bbbbbb">elevation</text>
+<path d="M200,278 L283,278" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="242" y="268" text-anchor="middle" font-size="15" fill="#bbbbbb">softness</text>
+<path d="M283,302 L200,302" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="242" y="322" text-anchor="middle" font-size="15" fill="#bbbbbb">heating</text>
+<path d="M513,290 L457,290" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="485" y="280" text-anchor="middle" font-size="15" fill="#bbbbbb">sliding</text>
+<path d="M455,150 Q600,160 600,258" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="560" y="180" text-anchor="start" font-size="15" fill="#bbbbbb">meltwater</text>
+<path d="M115,322 Q115,545 370,545 Q600,545 600,322" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="370" y="568" text-anchor="middle" font-size="15" fill="#bbbbbb">thawed bed</text>
+<path d="M370,322 L370,408" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="380" y="372" text-anchor="start" font-size="15" fill="#bbbbbb">transport, erosion</text>
+<path d="M457,440 L720,440 L720,130 L457,130" fill="none" stroke="#cccccc" stroke-width="2.2" marker-end="url(#a)"/>
+<text x="740" y="285" text-anchor="middle" font-size="15" fill="#bbbbbb" transform="rotate(90 740 285)">debris cover</text>
+</svg>

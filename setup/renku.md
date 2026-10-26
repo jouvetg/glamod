@@ -4,7 +4,7 @@ All computations of this course run **online** on [RenkuLab](https://renkulab.io
 
 ## For students
 
-The same guide is presented at the end of Lecture 1b (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.
+The same guide is presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.
 
 | Renku | What it is for you |
 |---|---|
@@ -28,7 +28,7 @@ The same guide is presented at the end of Lecture 1b (Session 1, hour 3: setup, 
 
 ```
 glamod/
-├── session1/     lectures, 1c-tutorial-1-sia-model.ipynb, 1d-choose-your-glacier.md
+├── session1/     lectures, 1d-tutorial-1-sia-model.ipynb, 1e-choose-your-glacier.md
 ├── session2/     lecture on IGM, tutorial-2/ (IGM hands-on)
 ├── session3/     project goals & report guidelines
 ├── session4/     Mont Miné (course "Dates and Rates")
@@ -81,7 +81,7 @@ Results are written to the named folder `outputs/A_reference/` (`output.nc`, `ou
 ### Strategy ("classic mode" of Renku for teaching)
 
 - **Content**: the GitHub repository `jouvetg/glamod`, added to the Renku project as a *code repository* (cloned into each session).
-- **Environment**: the Docker image `ghcr.io/jouvetg/glamod:2026` (`environment/Dockerfile`: Jupyter + IGM 3.2.1), built by GitHub Actions (`.github/workflows/build-image.yml`).
+- **Environment**: the Docker image `ghcr.io/jouvetg/glamod:2026` (`environment/Dockerfile`: Jupyter + IGM from its main branch, pinned commit in `environment/requirements.txt`), built by GitHub Actions (`.github/workflows/build-image.yml`).
 - **Project**: one Renku 2.0 project, marked as a **template**. Each student copies it (with the code repository and the launcher) and adds their own SWITCHdrive data connector to save their work.
 - Docs: [Renku for teaching](https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/), [set up a course in classic mode](https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/set-up-course-in-classic-mode), [use your own Docker image](https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session).
 
@@ -111,7 +111,7 @@ Results are written to the named folder `outputs/A_reference/` (`output.nc`, `ou
    - **Resource class**: the GPU class of the course resource pool (students can pick the CPU class at launch if no GPU is free).
    - Name: `glamod` → *Add session launcher*.
 6. **Mark the project as a template**: *Settings* → toggle *Template project*. Make it visible to the students (public, or within the course group), and post the link on Moodle.
-7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/1c-tutorial-1-sia-model.ipynb`, `session2/tutorial-2/tutorial-2-igm.ipynb` and the project (`project/my-glacier/`: check run, `params_past`, `bash run_future.sh`, then `analysis.ipynb`), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
+7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/1d-tutorial-1-sia-model.ipynb`, `session2/tutorial-2/tutorial-2-igm.ipynb` and the project (`project/my-glacier/`: check run, `params_past`, `bash run_future.sh`, then `analysis.ipynb`), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
 
 **Updating the material during the course**: students' copies keep a link to the GitHub repository; a new session clones the latest version. In an existing (paused) session, run `git pull` in `~/work/glamod` (students' own changes may conflict: they should work in copies of the files, e.g. in their SWITCHdrive folder or with new file names).
 

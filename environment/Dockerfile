@@ -1,5 +1,5 @@
 # Docker image for the Glacier Modelling course (UNIL), used as a RenkuLab session.
-# JupyterLab + IGM 3.2.1 + the scientific Python stack.
+# JupyterLab + IGM (main branch, pinned commit in requirements.txt) + the scientific Python stack.
 # The same image runs on CPU and on NVIDIA GPU nodes (TensorFlow ships its CUDA 12 libraries).
 #
 # Build & test locally:

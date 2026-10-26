@@ -2,7 +2,7 @@
 
 ## Goal
 
-Each student models **one Swiss glacier** (chosen in Session 1, see [choose your glacier](../session1/1d-choose-your-glacier.md)) with IGM, to answer:
+Each student models **one Swiss glacier** (chosen in Session 1, see [choose your glacier](../session1/1e-choose-your-glacier.md)) with IGM, to answer:
 
 > **How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?**
 

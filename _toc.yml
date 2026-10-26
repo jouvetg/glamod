@@ -10,8 +10,9 @@ parts:
     chapters:
       - file: session1/1a-lecture-glacier-processes
       - file: session1/1b-lecture-glacier-modelling
-      - file: session1/1c-tutorial-1-sia-model
-      - file: session1/1d-choose-your-glacier
+      - file: session1/1c-setup-renku
+      - file: session1/1d-tutorial-1-sia-model
+      - file: session1/1e-choose-your-glacier
   - caption: "Session 2: Introduction to IGM"
     chapters:
       - file: session2/1-lecture-igm

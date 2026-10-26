@@ -22,7 +22,7 @@ Then: write the report (deadline: *to be announced*).
 
 ## Material
 
-- **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Tutorial 1](session1/1c-tutorial-1-sia-model.ipynb), [Choose your glacier](session1/1d-choose-your-glacier.md)
+- **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Setting up RenkuLab](session1/1c-setup-renku.md), [Tutorial 1](session1/1d-tutorial-1-sia-model.ipynb), [Choose your glacier](session1/1e-choose-your-glacier.md)
 - **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [Tutorial 2](session2/tutorial-2/tutorial-2-igm.ipynb)
 - **Session 3**: [Lecture 3](session3/lecture-3-application-and-report.md)
 - **Session 4** (taught in the course *Dates and Rates of landscape evolution*): [Mont Miné notebook](session4/mont-mine/tutorial-4-mont-mine.ipynb)

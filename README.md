@@ -6,8 +6,8 @@ Course material for *Glacier Modelling* (G. Jouvet, UNIL): 3 afternoons × 4 hou
 glamod/
 ├── infos.md                  course front page (programme, links)
 ├── setup/renku.md            RenkuLab guide (students + teaching team setup)
-├── environment/              Dockerfile + requirements of the session image (Jupyter + IGM 3.2.1)
-├── session1/                 1a/1b lectures (Marp, incl. Ebener case), 1c tutorial 1 (SIA toy model), 1d choose-your-glacier + candidate list
+├── environment/              Dockerfile + requirements of the session image (Jupyter + IGM, main branch)
+├── session1/                 1a/1b lectures (Marp, incl. Ebener case), 1c RenkuLab setup slides, 1d tutorial 1 (SIA toy model), 1e choose-your-glacier + candidate list
 ├── session2/                 lecture 2 (IGM, Marp), tutorial-2/ (IGM runs A, B, C)
 ├── session3/                 lecture 3 (project goals, report)
 ├── session4/mont-mine/       Mont Miné notebook (taught in the course 'Dates and Rates'), deglaciation vs sample ages
