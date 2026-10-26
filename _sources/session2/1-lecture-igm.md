@@ -16,13 +16,15 @@ Guillaume Jouvet
 
 ---
 
-# Today (Session 2)
+# Course format: 3 afternoons × 4 hours + 1 extra
 
-| | |
-|---|---|
-| Hour 1 | Lecture 2: the Instructed Glacier Model (IGM) — how to work with IGM in RenkuLab — first IGM runs (Tutorial 2) |
-| Hours 2–4 | Mini-project: set up and run **your** glacier (with the assistant) |
-| Break | Glacier goo: ice flow in the lab |
+| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
+|---|---|---|---|---|
+| **Week 1** | Glacier processes | Glacier modelling | *Tuto 1* | *Glacier selection* |
+| **Week 2** | **Intro to IGM**, **Tuto 2** | **Project** | **Project** | **Project** |
+| **Week 3** | Project goals, reporting | *Project* | *Project* | *Project* |
+| *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
+ 
 
 ---
 
@@ -36,7 +38,9 @@ A "real" glacier model needs:
 - a **better SMB model** (driven by temperature and precipitation)
 - **efficiency**: many runs (calibration, scenarios), on a laptop or in the cloud
 
-➡️ IGM: an open-source Python model developed at UNIL — https://igm-model.org
+➡️ IGM: an open-source Python model developed @ UNIL 
+
+https://igm-model.org
 
 ---
 
@@ -268,13 +272,3 @@ Ask the assistant!
 - **Run A**: Aletsch, 1900–2000, simple ELA-based SMB (local data) — first run from the notebook, then in the terminal
 - **Run B**: any glacier from its RGI ID, climate-driven SMB, 2020–2100, +4°C → **try it with your glacier!**
 - **Run C** (optional): write your own SMB module in Python
-
----
-
-# Break: glacier goo
-
-Ice flow in the lab with a viscous "goo": 9 short films (UZH, 3G).
-
-<!-- Teacher: slides in session2/2-glacier-goo.md (local only, not in the repo) -->
-
-![height:350px](fig/glacier-goo.png)

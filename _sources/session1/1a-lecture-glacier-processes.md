@@ -6,13 +6,35 @@ backgroundColor: black
 color: white
 ---
 
-# Glacier Modelling
+# Glacier and Glaciated Landscape 
 
-## Session 1 — Lecture 1a: Glacier processes
-
-Guillaume Jouvet
+## Glacier Modelling part -- Guillaume Jouvet
 
 ![height:200px](fig/rhone-mod-lq.png)
+
+---
+ 
+# Sub-Course objectives
+
+- Provide the basics of glacier processes
+- Introduce numerical methods to model glacier evolution
+- Perform practical numerical experiments on **your own glacier** (min-project) from the little ice age to the future
+
+---
+
+# Course format: 3 afternoons × 4 hours + 1 extra
+
+| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
+|---|---|---|---|---|
+| **Week 1** | Glacier processes | Glacier modelling | *Tuto 1* | *Glacier selection* |
+| **Week 2** | Intro to IGM, *Tuto 2* | *Project* | *Project* | *Project* |
+| **Week 3** | Project goals, reporting | *Project* | *Project* | *Project* |
+| *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
+ 
+
+---
+
+# Session 1 — Lecture 1a: Glacier processes
 
 ---
 
@@ -20,39 +42,17 @@ Guillaume Jouvet
 
 | | |
 |---|---|
-| Hour 1 | Lecture 1a: Glacier processes |
-| Hour 2 | Lecture 1b: Glacier modelling — and a cold case solved with a glacier model |
-| Hour 3 | Set up RenkuLab (≈ 15 min), then Tutorial 1: a simple glacier model (`session1/1c-tutorial-1-sia-model.ipynb`) |
-| Hour 4 | Choose your glacier for the mini-project (`session1/1d-choose-your-glacier.md`) |
+| Hour 1 | Lecture 1a: Glacier processes, basics |
+| Hour 2 | Lecture 1b: Glacier modelling, basics |
+| Hour 3 | Set up RenkuLab (≈ 15 min), + Tutorial 1: a simple glacier model |
+| Hour 4 | Choose your glacier for the mini-project   |
+ 
 
 ---
 
-# Course objectives
+# Recommended External resources
 
-- Provide the basics of glacier processes
-- Introduce numerical methods to model glacier evolution
-- Perform practical numerical experiments with IGM, on **your own glacier**
-
----
-
-# Course format: 3 afternoons × 4 hours
-
-| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
-|---|---|---|---|---|
-| **Session 1** | Glacier processes | Glacier modelling + an application (the Ebener case) | RenkuLab setup + Tutorial 1 (simple model) | Choose your glacier |
-| **Session 2** | Introduction to IGM + first IGM runs (Tutorial 2) | Mini-project | Mini-project | Mini-project |
-| **Session 3** | Project goals, how to write the report | Mini-project | Mini-project | Mini-project |
-
-All computations run **online** (RenkuLab, set up today in hour 3), nothing to install on your laptop.
-
----
-
-# Resources
-
-- If there is one resource to remember, it is the website https://www.antarcticglaciers.org, which covers glacier processes in depth.
-
-- To dive into the mechanics and the maths, I recommend the "Karthaus Summer School Lecture Notes":
-https://link.springer.com/book/10.1007/978-3-030-42584-5
+- Excelent website covering glacier processes in depth: https://www.antarcticglaciers.org
 
 - IGM documentation: https://igm-model.org
 
@@ -64,21 +64,31 @@ https://link.springer.com/book/10.1007/978-3-030-42584-5
 
 ---
 
-# Glacial processes governing glacier evolution
+# Glacial processes 
 
-- Climatic surface mass balance (= accumulation – ablation)
-- Ice thermo-dynamics
-- Mass conservation
-- Subglacial hydrology
-- Debris / sediment transport
+![bg right:55% contain](fig/coupling.svg)
+
+- I. Mass balance
+- II. Ice dynamics
+- III. Ice temperature
+- IV. Subglacial hydrology
+- V. Debris and sediment transport
+
+➡️ All processes are **coupled**
 
 ---
 
-# Mass balance processes
+<!-- _class: lead invert -->
 
-![height:450px](https://www.antarcticglaciers.org/wp-content/uploads/2018/11/glaciers-as-a-system.png)
+# I. Mass balance
 
-Picture from www.antarcticglaciers.org
+---
+
+## Mass balance processes  
+
+![height:500px](https://www.antarcticglaciers.org/wp-content/uploads/2018/11/glaciers-as-a-system.png)
+ 
+<small>Source: https://www.antarcticglaciers.org</small>
 
 ---
 
@@ -99,8 +109,10 @@ More: https://www.antarcticglaciers.org/glacier-processes/mass-balance/introduct
 
 # SMB primarily depends on altitude
 
-![height:500px](https://npshistory.com/publications/geology/pp/715-A/images/fig1.jpg)
+![height:470px](https://npshistory.com/publications/geology/pp/715-A/images/fig1.jpg)
 
+
+<small>Source: https://www.antarcticglaciers.org</small>
 
 ---
 
@@ -113,6 +125,24 @@ $$ SMB(z) = \beta\,(z - z_{ELA}), \qquad \text{capped at } b_{max}$$
 $$ SMB = \underbrace{P_{solid}}_{\text{accumulation}} - \underbrace{f_{melt}\sum \max(T - T_{melt},0)}_{\text{melt}}$$
 
 We will use both in IGM.
+
+---
+
+# Calving processes
+
+![bg right:45%](fig/perito-moreno.jpg)
+
+- Glaciers ending in **water** lose ice blocks at the front: **calving**
+- Dominant in Greenland, Antarctica, Patagonia (here: Perito Moreno)
+- In the Alps: minor, and **not modelled** in our mini-project
+
+<small>Photo: Luca Galuzzi, 2005, CC BY-SA 2.5, Wikimedia Commons. More: https://www.antarcticglaciers.org/glacier-processes/calving/</small>
+
+---
+
+<!-- _class: lead invert -->
+
+# II. Ice dynamics
 
 ---
 
@@ -154,7 +184,7 @@ Timelapse cameras have captured glacial motion:
 
 ## 20th century: from lab experiments to Glen’s flow law
 
-![height:350px](fig/stress-strain-BuddJacka1989.png)
+![height:350px](fig/stress-strain-BuddJacka1989.png) ![height:350px](fig/ice_cube.png)
 
 <small>Figure from (Budd & Jacka, 1989)</small>
 
@@ -184,6 +214,44 @@ Ice is both: a **fluid** that flows/shears, and a **solid** that slides
 
 ---
 
+<!-- _class: lead invert -->
+
+# III. Ice temperature
+
+---
+
+# Thermal regime: cold, temperate, polythermal
+
+![width:1100px](fig/thermal-regimes.svg)
+
+- **Temperate**: ice at the pressure melting point (≈ 0 °C) ➡️ most Alpine glaciers
+- **Cold**: ice < 0 °C, frozen to the bed ➡️ high summits (> ~4000 m), polar regions
+- **Polythermal**: *Scandinavian* (cold surface) or *Canadian* (temperate basal layer)
+
+---
+
+# Why ice temperature matters
+
+- Warm ice is **softer**: at −10 °C, ice is ≈ 7× stiffer than at 0 °C (Glen's $A(T)$)
+- A glacier **slides only on a thawed bed** (no sliding, little erosion when frozen)
+- Heat sources: air temperature, geothermal flux, deformation and sliding friction
+
+➡️ For temperate Alpine glaciers, a constant $A$ is a good first approximation (our choice in IGM)
+
+---
+
+# Thermal and basal glacial state
+
+![height:500px](fig/till.png)
+
+---
+
+<!-- _class: lead invert -->
+
+# IV. Subglacial hydrology
+
+---
+
 # Subglacial hydrology
 
 ![height:350px](https://www.antarcticglaciers.org/wp-content/uploads/2015/06/surface_meltwater_glacier_bed.png)
@@ -195,17 +263,47 @@ Ice is both: a **fluid** that flows/shears, and a **solid** that slides
 
 ---
 
-# Thermal and basal glacial state
+<!-- _class: lead invert -->
 
-![height:500px](fig/till.png)
+# V. Debris and sediment transport
 
 ---
 
-# Many of these processes are coupled
+# Debris sources and transport
 
-![height:400px](fig/scheme.png)
+![bg right:45%](fig/aletsch.jpg)
 
-... plus deformation of the lithosphere for ice fields and ice sheets
+- **Sources**: rockfall, avalanches, bed erosion
+- **Transport**: on, inside, and under the ice
+- **Medial moraines**: where flow units merge
+- **Moraines** record past extents (e.g. Little Ice Age)
+
+<small>Medial moraines of the Great Aletsch Glacier</small>
+
+---
+
+# Debris-covered glaciers
+
+![bg right:40%](fig/debris-covered-khumbu.jpg)
+
+![height:250px](fig/ostrem-curve.png)
+ 
+- **Thick** debris ➡️ **less** melt 
+- Debris expands as glaciers retreat
+
+<small>Khumbu, Nepal. Figures: antarcticglaciers.org</small>
+
+---
+
+# Glacial erosion
+
+![bg right:45% contain](fig/roche-moutonnee.png)
+
+- **Abrasion** (upstream) and **quarrying** (downstream) ➡️ *roche moutonnée*
+- Needs a **thawed bed** and **sliding**
+- ➡️ U-shaped valleys, overdeepenings, **landscape evolution** (Session 4)
+
+<small>Figure: antarcticglaciers.org</small>
 
 ---
 
@@ -215,7 +313,7 @@ Ice is both: a **fluid** that flows/shears, and a **solid** that slides
 - The glacier geometry adjusts **slowly**, through ice flow
 - **Response time**: time needed to reach a new equilibrium after a step change in climate, roughly
 $$\tau \approx \frac{H}{-b_{terminus}}$$
-($H$: typical thickness, $b_{terminus}$: SMB at the terminus) ➡️ decades for small glaciers, a century or more for large ones
-- Consequence: today's glaciers are **not in equilibrium** with today's climate — they will keep retreating even without further warming
+($H$: typical thickness, $b_{terminus}$: SMB at the terminus) 
 
-You will explore this in Tutorial 1.
+➡️ decades for small glaciers, a century or more for large ones
+- Consequence: today's glaciers are **not in equilibrium** with today's climate — they will keep retreating even without further warming

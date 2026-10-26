@@ -67,7 +67,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tutorial 2 — First steps with IGM" href="tutorial-2/tutorial-2-igm.html" />
-    <link rel="prev" title="Choose your glacier" href="../session1/1d-choose-your-glacier.html" />
+    <link rel="prev" title="Choose your glacier" href="../session1/1e-choose-your-glacier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -221,7 +221,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 1: Glacier processes and modelling</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../session1/1a-lecture-glacier-processes.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session1/1a-lecture-glacier-processes.html">Glacier and Glaciated Landscape</a></li>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -264,23 +274,20 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session1/1c-setup-renku.html">Glacier Modelling</a></li>
 
 
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../session1/1c-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../session1/1d-choose-your-glacier.html">Choose your glacier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session1/1e-choose-your-glacier.html">Choose your glacier</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glacier Modelling</a></li>
-
 
 
 
@@ -471,7 +478,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-2-lecture-2-introduction-to-igm">Session 2 — Lecture 2: Introduction to IGM</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#today-session-2">Today (Session 2)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-tutorial-1-to-igm">From Tutorial 1 to IGM</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-igm-solve">What does IGM solve?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-machine-learning">Where is the machine learning?</a></li>
@@ -489,7 +496,6 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-now">Tutorial 2 (now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#break-glacier-goo">Break: glacier goo</a></li>
 </ul>
 
             </nav>
@@ -511,23 +517,41 @@
 </section>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="today-session-2">
-<h1>Today (Session 2)<a class="headerlink" href="#today-session-2" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="course-format-3-afternoons-4-hours-1-extra">
+<h1>Course format: 3 afternoons × 4 hours + 1 extra<a class="headerlink" href="#course-format-3-afternoons-4-hours-1-extra" title="Link to this heading">#</a></h1>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
+<th class="head"><p>Hour 1</p></th>
+<th class="head"><p>Hour 2</p></th>
+<th class="head"><p>Hour 3</p></th>
+<th class="head"><p>Hour 4</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Hour 1</p></td>
-<td><p>Lecture 2: the Instructed Glacier Model (IGM) — how to work with IGM in RenkuLab — first IGM runs (Tutorial 2)</p></td>
+<tr class="row-even"><td><p><strong>Week 1</strong></p></td>
+<td><p>Glacier processes</p></td>
+<td><p>Glacier modelling</p></td>
+<td><p><em>Tuto 1</em></p></td>
+<td><p><em>Glacier selection</em></p></td>
 </tr>
-<tr class="row-odd"><td><p>Hours 2–4</p></td>
-<td><p>Mini-project: set up and run <strong>your</strong> glacier (with the assistant)</p></td>
+<tr class="row-odd"><td><p><strong>Week 2</strong></p></td>
+<td><p><strong>Intro to IGM</strong>, <strong>Tuto 2</strong></p></td>
+<td><p><strong>Project</strong></p></td>
+<td><p><strong>Project</strong></p></td>
+<td><p><strong>Project</strong></p></td>
 </tr>
-<tr class="row-even"><td><p>Break</p></td>
-<td><p>Glacier goo: ice flow in the lab</p></td>
+<tr class="row-even"><td><p><strong>Week 3</strong></p></td>
+<td><p>Project goals, reporting</p></td>
+<td><p><em>Project</em></p></td>
+<td><p><em>Project</em></p></td>
+<td><p><em>Project</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><em>(Week 4</em></p></td>
+<td><p><em>dates and rate add-on</em></p></td>
+<td><p><em>G. King’s course</em></p></td>
+<td><p><em>Project</em></p></td>
+<td><p><em>Project)</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -544,7 +568,8 @@
 <li><p>a <strong>better SMB model</strong> (driven by temperature and precipitation)</p></li>
 <li><p><strong>efficiency</strong>: many runs (calibration, scenarios), on a laptop or in the cloud</p></li>
 </ul>
-<p>➡️ IGM: an open-source Python model developed at UNIL — <a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p>
+<p>➡️ IGM: an open-source Python model developed &#64; UNIL</p>
+<p><a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="what-does-igm-solve">
@@ -807,13 +832,6 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 <li><p><strong>Run C</strong> (optional): write your own SMB module in Python</p></li>
 </ul>
 </section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="break-glacier-goo">
-<h1>Break: glacier goo<a class="headerlink" href="#break-glacier-goo" title="Link to this heading">#</a></h1>
-<p>Ice flow in the lab with a viscous “goo”: 9 short films (UZH, 3G).</p>
-<!-- Teacher: slides in session2/2-glacier-goo.md (local only, not in the repo) -->
-<p><img alt="height:350px" src="../_images/glacier-goo.png" /></p>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -846,7 +864,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../session1/1d-choose-your-glacier.html"
+       href="../session1/1e-choose-your-glacier.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -885,7 +903,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-2-lecture-2-introduction-to-igm">Session 2 — Lecture 2: Introduction to IGM</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#today-session-2">Today (Session 2)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-tutorial-1-to-igm">From Tutorial 1 to IGM</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-igm-solve">What does IGM solve?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-machine-learning">Where is the machine learning?</a></li>
@@ -903,7 +921,6 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-now">Tutorial 2 (now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#break-glacier-goo">Break: glacier goo</a></li>
 </ul>
 
   </nav></div>

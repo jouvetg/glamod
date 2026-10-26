@@ -8,18 +8,22 @@ color: white
 
 # Glacier Modelling
 
-## Session 3 — Lecture 3: Project goals, and how to report your project
+## Session 3 — Lecture 3: Project goals and reporting
 
 Guillaume Jouvet
 
 ---
 
-# Today (Session 3)
+# Course format: 3 afternoons × 4 hours + 1 extra
 
-| | |
-|---|---|
-| Hour 1 | Lecture 3: (1) project goals and experiment design — (2) how to write the report |
-| Hours 2–4 | Mini-project: finish your experiments, make your figures, start writing (with the assistant) |
+| | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
+|---|---|---|---|---|
+| **Week 1** | Glacier processes | Glacier modelling | *Tuto 1* | *Glacier selection* |
+| **Week 2** | Intro to IGM, *Tuto 2* | *Project* | *Project* | *Project* |
+| **Week 3** | **Project goals, report** | **Project** | **Project** | **Project** |
+| *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
+ 
+
 
 ---
 

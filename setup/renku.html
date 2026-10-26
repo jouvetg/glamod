@@ -64,7 +64,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Glacier Modelling" href="../session1/1a-lecture-glacier-processes.html" />
+    <link rel="next" title="Glacier and Glaciated Landscape" href="../session1/1a-lecture-glacier-processes.html" />
     <link rel="prev" title="Glacier Modelling — UNIL, Master course" href="../infos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -219,7 +219,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 1: Glacier processes and modelling</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../session1/1a-lecture-glacier-processes.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session1/1a-lecture-glacier-processes.html">Glacier and Glaciated Landscape</a></li>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -262,23 +272,20 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session1/1c-setup-renku.html">Glacier Modelling</a></li>
 
 
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../session1/1c-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../session1/1d-choose-your-glacier.html">Choose your glacier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session1/1e-choose-your-glacier.html">Choose your glacier</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Glacier Modelling</a></li>
-
 
 
 
@@ -497,7 +504,7 @@
 <p>All computations of this course run <strong>online</strong> on <a class="reference external" href="https://renkulab.io">RenkuLab</a>, the Swiss Data Science Center platform (ETH/EPFL). You only need a web browser: IGM and all Python packages are pre-installed. Nothing to install on your laptop.</p>
 <section id="for-students">
 <h2>For students<a class="headerlink" href="#for-students" title="Link to this heading">#</a></h2>
-<p>The same guide is presented at the end of Lecture 1b (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.</p>
+<p>The same guide is presented in the slides <code class="docutils literal notranslate"><span class="pre">session1/1c-setup-renku.md</span></code> (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Renku</p></th>
@@ -537,7 +544,7 @@
 <li><p>JupyterLab opens in your browser. The file browser shows the course material (<code class="docutils literal notranslate"><span class="pre">glamod/</span></code>) and your SWITCHdrive folder:</p></li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>glamod/
-├── session1/     lectures, 1c-tutorial-1-sia-model.ipynb, 1d-choose-your-glacier.md
+├── session1/     lectures, 1d-tutorial-1-sia-model.ipynb, 1e-choose-your-glacier.md
 ├── session2/     lecture on IGM, tutorial-2/ (IGM hands-on)
 ├── session3/     project goals &amp; report guidelines
 ├── session4/     Mont Miné (course &quot;Dates and Rates&quot;)
@@ -625,7 +632,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 <h3>Strategy (“classic mode” of Renku for teaching)<a class="headerlink" href="#strategy-classic-mode-of-renku-for-teaching" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Content</strong>: the GitHub repository <code class="docutils literal notranslate"><span class="pre">jouvetg/glamod</span></code>, added to the Renku project as a <em>code repository</em> (cloned into each session).</p></li>
-<li><p><strong>Environment</strong>: the Docker image <code class="docutils literal notranslate"><span class="pre">ghcr.io/jouvetg/glamod:2026</span></code> (<code class="docutils literal notranslate"><span class="pre">environment/Dockerfile</span></code>: Jupyter + IGM 3.2.1), built by GitHub Actions (<code class="docutils literal notranslate"><span class="pre">.github/workflows/build-image.yml</span></code>).</p></li>
+<li><p><strong>Environment</strong>: the Docker image <code class="docutils literal notranslate"><span class="pre">ghcr.io/jouvetg/glamod:2026</span></code> (<code class="docutils literal notranslate"><span class="pre">environment/Dockerfile</span></code>: Jupyter + IGM from its main branch, pinned commit in <code class="docutils literal notranslate"><span class="pre">environment/requirements.txt</span></code>), built by GitHub Actions (<code class="docutils literal notranslate"><span class="pre">.github/workflows/build-image.yml</span></code>).</p></li>
 <li><p><strong>Project</strong>: one Renku 2.0 project, marked as a <strong>template</strong>. Each student copies it (with the code repository and the launcher) and adds their own SWITCHdrive data connector to save their work.</p></li>
 <li><p>Docs: <a class="reference external" href="https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/">Renku for teaching</a>, <a class="reference external" href="https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/set-up-course-in-classic-mode">set up a course in classic mode</a>, <a class="reference external" href="https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session">use your own Docker image</a>.</p></li>
 </ul>
@@ -667,7 +674,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 </ul>
 </li>
 <li><p><strong>Mark the project as a template</strong>: <em>Settings</em> → toggle <em>Template project</em>. Make it visible to the students (public, or within the course group), and post the link on Moodle.</p></li>
-<li><p><strong>Dry run</strong> with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run <code class="docutils literal notranslate"><span class="pre">session1/1c-tutorial-1-sia-model.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">session2/tutorial-2/tutorial-2-igm.ipynb</span></code> and the project (<code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code>: check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code>, then <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (<code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.</p></li>
+<li><p><strong>Dry run</strong> with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run <code class="docutils literal notranslate"><span class="pre">session1/1d-tutorial-1-sia-model.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">session2/tutorial-2/tutorial-2-igm.ipynb</span></code> and the project (<code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code>: check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code>, then <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (<code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.</p></li>
 </ol>
 <p><strong>Updating the material during the course</strong>: students’ copies keep a link to the GitHub repository; a new session clones the latest version. In an existing (paused) session, run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in <code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code> (students’ own changes may conflict: they should work in copies of the files, e.g. in their SWITCHdrive folder or with new file names).</p>
 </section>
@@ -775,7 +782,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Glacier Modelling</p>
+        <p class="prev-next-title">Glacier and Glaciated Landscape</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

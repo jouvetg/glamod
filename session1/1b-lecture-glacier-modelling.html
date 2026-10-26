@@ -66,8 +66,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 1 — A simple glacier model (SIA)" href="1c-tutorial-1-sia-model.html" />
-    <link rel="prev" title="Glacier Modelling" href="1a-lecture-glacier-processes.html" />
+    <link rel="next" title="Glacier Modelling" href="1c-setup-renku.html" />
+    <link rel="prev" title="Glacier and Glaciated Landscape" href="1a-lecture-glacier-processes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -221,7 +221,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 1: Glacier processes and modelling</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="1a-lecture-glacier-processes.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1a-lecture-glacier-processes.html">Glacier and Glaciated Landscape</a></li>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -264,23 +274,20 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="1c-setup-renku.html">Glacier Modelling</a></li>
 
 
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="1d-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="1c-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="1d-choose-your-glacier.html">Choose your glacier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1e-choose-your-glacier.html">Choose your glacier</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Glacier Modelling</a></li>
-
 
 
 
@@ -468,7 +475,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-mathematical-and-numerical-modelling">Session 1 — Lecture 1b: Mathematical and numerical modelling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-numerical-modelling-of-glaciers">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">Outline</a></li>
@@ -490,20 +497,12 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-ice-flow-and-mass-balance-models">Combining ice flow and mass balance models</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-models">Numerical models</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-present-day-and-paleo-glacier-applications">III&gt; Present-day and paleo glacier applications</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-the-evolution-of-aletsch-glacier">Modelling the evolution of Aletsch Glacier</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#last-glacial-maximum-in-switzerland">Last Glacial Maximum in Switzerland</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-the-evolution-of-aletsch-glacier">Modelling the evolution of Aletsch Glacier</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleo-glacier-modelling-in-the-alps-with-igm">Paleo glacier modelling in the Alps with IGM</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-modelling-for-landscape-evolution">Ice flow modelling for landscape evolution</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cold-case-solved-with-a-glacier-model">A cold case solved with a glacier model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-the-model-need">What did the model need?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hour-3-set-up-renkulab-then-tutorial-1">Hour 3: set up RenkuLab, then Tutorial 1</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renkulab-the-vocabulary">RenkuLab: the vocabulary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-your-own-copy-of-the-course-once-now">Step 1: your own copy of the course (once, now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-launch-a-session-every-afternoon">Step 2: launch a session (every afternoon)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-save-your-work">Step 3: save your work ⚠️</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-1-now">Tutorial 1 (now)</a></li>
 </ul>
 
             </nav>
@@ -518,8 +517,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="glacier-modelling">
 <h1>Glacier Modelling<a class="headerlink" href="#glacier-modelling" title="Link to this heading">#</a></h1>
-<section id="session-1-lecture-1b-mathematical-and-numerical-modelling">
-<h2>Session 1 — Lecture 1b: Mathematical and numerical modelling<a class="headerlink" href="#session-1-lecture-1b-mathematical-and-numerical-modelling" title="Link to this heading">#</a></h2>
+<section id="session-1-lecture-1b-numerical-modelling-of-glaciers">
+<h2>Session 1 — Lecture 1b: Numerical modelling of Glaciers<a class="headerlink" href="#session-1-lecture-1b-numerical-modelling-of-glaciers" title="Link to this heading">#</a></h2>
 <p>Guillaume Jouvet</p>
 </section>
 </section>
@@ -531,7 +530,6 @@
 <li><p>II&gt; Numerical modelling</p></li>
 <li><p>III&gt; Applications to present-day and paleo glaciers</p></li>
 <li><p>IV&gt; A cold case solved with a glacier model (the Ebener brothers)</p></li>
-<li><p>V&gt; Hands-on: set up RenkuLab, Tutorial 1</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -624,7 +622,7 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="connecting-ice-flow-and-mass-conservation">
 <h1>Connecting ice flow and mass conservation<a class="headerlink" href="#connecting-ice-flow-and-mass-conservation" title="Link to this heading">#</a></h1>
-<p>Mass conservation: rate of change of thickness = surface mass balance (SMB) − flux divergence</p>
+<p>Rate of change of thickness + flux divergence = surface mass balance</p>
 <p><img alt="height:350px" src="../_images/simple_glacierA.png" /></p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial h}{\partial t} + \frac{\partial}{\partial x} \left( \int_b^s u \, dz \right) = b \qquad (2) \]</div>
@@ -647,13 +645,10 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="need-for-a-numerical-glacier-evolution-model">
 <h1>Need for a numerical glacier evolution model<a class="headerlink" href="#need-for-a-numerical-glacier-evolution-model" title="Link to this heading">#</a></h1>
-<p>The above equations are too complex to be solved analytically: we need a <strong>numerical model</strong> to approximate them.</p>
-<ul class="simple">
-<li><p>Link to the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a>.</p></li>
-<li><p>5 min video on glacier modelling: <a class="reference external" href="https://youtu.be/eJNIr_0zOyk">https://youtu.be/eJNIr_0zOyk</a></p></li>
-</ul>
+<p>The above equations are too complex to be solved analytically</p>
+<p>➡️ we need a <strong>numerical model</strong> (Link to the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a>)</p>
 <figure style="text-align: center;">
-    <img src="fig/rhone-mod.png" height="200" />
+    <img src="fig/rhone-mod.png" height="250" />
 </figure>
 <sub> Numerically modelled retreat of Rhone Glacier from 1874 to 2100 (Jouvet et al., JCP, 2009)</sub>
 </section>
@@ -662,7 +657,6 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <h1>The glacier must be meshed/discretized …<a class="headerlink" href="#the-glacier-must-be-meshed-discretized" title="Link to this heading">#</a></h1>
 <p>to solve the equations numerically.</p>
 <p><img alt="height:400px" src="../_images/MESH.png" /></p>
-<p>In practice, it is common to work with simplified (shallow) models.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="transient-glacier-evolution-computation">
@@ -679,9 +673,12 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <section class="tex2jax_ignore mathjax_ignore" id="numerical-models">
 <h1>Numerical models<a class="headerlink" href="#numerical-models" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>The SIA-based equations can be solved in a few lines of code (Tutorial 1), see also the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a> and the <a class="reference external" href="https://link.springer.com/book/10.1007/978-3-030-42584-5">Karthaus Summer School Lecture Notes</a></p></li>
-<li><p>Many open models developed by the glacier modelling community solve ice flow equations with different levels of complexity: <a class="reference external" href="https://elmerice.elmerfem.org/">Elmer/Ice</a>, <a class="reference external" href="https://www.pism.io/">PISM</a>, ISSM, CISM, <a class="reference external" href="https://oggm.org">OGGM</a>, IcePack, …</p></li>
-<li><p>Here we will use the “Instructed Glacier Model” (<a class="reference external" href="https://igm-model.org/">IGM</a>, developed at UNIL), a Python-based glacier evolution model that uses Machine Learning (ML) and Graphics Processing Units (GPU) to accelerate computations ➡️ <strong>Session 2</strong></p></li>
+<li><p>The SIA-based equations can be solved in a few lines of code (Tutorial 1), see also the course on <a class="reference external" href="https://jouvetg.github.io/modnum/">numerical modelling</a>.</p></li>
+<li><p>There exists many glacier evolution models developed by glacier modellers:
+<a class="reference external" href="https://elmerice.elmerfem.org/">Elmer/Ice</a>, <a class="reference external" href="https://www.pism.io/">PISM</a>, ISSM, CISM, <a class="reference external" href="https://oggm.org">OGGM</a>, IcePack, …</p></li>
+<li><p>Here we will use the “Instructed Glacier Model” (<a class="reference external" href="https://igm-model.org/">IGM</a>, developed at UNIL),
+a Python-based glacier model accelerated by Graphics Processing Units (GPU)
+➡️ <strong>Session 2</strong></p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -691,23 +688,18 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="modelling-the-evolution-of-aletsch-glacier">
 <h1>Modelling the evolution of Aletsch Glacier<a class="headerlink" href="#modelling-the-evolution-of-aletsch-glacier" title="Link to this heading">#</a></h1>
-<p><img alt="height:300px" src="../_images/aletsch.jpg" /></p>
-<p><small>Key numbers: ~ 20 km long – 80 km² – 13 km³ </small></p>
+<p><img alt="height:300px" src="../_images/aletsch.jpg" /> <img alt="height:300px" src="../_images/aletsch-RCP45.gif" /> <img alt="height:300px" src="../_images/aletsch-moraine.gif" /></p>
+<p><small>Key numbers: ~ 20 km long – 80 km² – 13 km³</small></p>
 <p>➡️ 1880–2010: Model validation <small>(Jouvet et al., JOG 2011)</small>
 ➡️ 2010–2100: Multiple climate scenarios <small>(Jouvet &amp; Huss, JOG 2019)</small></p>
 <p>See the <a class="reference external" href="https://jouvetg.github.io/the-aletsch-glacier-module">simulation page</a></p>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="last-glacial-maximum-in-switzerland">
-<h1>Last Glacial Maximum in Switzerland<a class="headerlink" href="#last-glacial-maximum-in-switzerland" title="Link to this heading">#</a></h1>
-<p><img alt="height:450px" src="../_images/AIF-CH.png" /></p>
-<p>Can we reproduce this with a glacier model?</p>
 <hr class="docutils" />
 <section id="paleo-glacier-modelling-in-the-alps-with-igm">
 <h2>Paleo glacier modelling in the Alps with IGM<a class="headerlink" href="#paleo-glacier-modelling-in-the-alps-with-igm" title="Link to this heading">#</a></h2>
 <p><img alt="height:370px" src="../_images/AIF-leger-lq.png" /></p>
-<p><sub>(Leger, Jouvet et al., Nature Com., 2025)</sub></p>
-<p>Modelling last ice age glacier evolution in the Alps: <a class="reference external" href="https://youtu.be/IbLOFh3U9gI">https://youtu.be/IbLOFh3U9gI</a></p>
+<p>Modelling last ice age glacier evolution in the Alps: <a class="reference external" href="https://youtu.be/7yaEPfkWIcQ">https://youtu.be/7yaEPfkWIcQ</a></p>
+<p>and with particule tracking : <a class="reference external" href="https://www.youtube.com/&#64;IGMGlacierModel">https://www.youtube.com/&#64;IGMGlacierModel</a></p>
+<p><sub>(Leger, Jouvet et al., Nature Com., 2025), (Leger and al., 2026)</sub></p>
 </section>
 </section>
 <hr class="docutils" />
@@ -721,122 +713,12 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="a-cold-case-solved-with-a-glacier-model">
 <h1>A cold case solved with a glacier model<a class="headerlink" href="#a-cold-case-solved-with-a-glacier-model" title="Link to this heading">#</a></h1>
-<p><img alt="height:250px" src="../_images/climbers2.jpg" /></p>
+<p><img alt="height:250px" src="../_images/climbers2.jpg" /> <img alt="height:250px" src="../_images/ebener-map.png" /></p>
 <p>➡️ March 1926: the Ebener brothers vanish on the Great Aletsch Glacier
 ➡️ 2012: their remains are found near the tongue, ~10 km downstream</p>
+<p>Can glacier modelling help clyrifying the fate of Ebener’s brothers?</p>
+<p><sub>(Jouvet and Funk, JOG, 2013)</sub></p>
 <p><em>Short film: <a class="reference external" href="https://youtu.be/cyKb-P3mwDk">https://youtu.be/cyKb-P3mwDk</a></em></p>
-<!-- Teacher: full slides in session1/case-ebener.pdf (local only, not in the repo) -->
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="what-did-the-model-need">
-<h1>What did the model need?<a class="headerlink" href="#what-did-the-model-need" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p><strong>Reconstruct the glacier</strong> 1926 → 2012: geometry + ice flow, calibrated on observed surface elevations</p></li>
-<li><p><strong>Track particles</strong> in the 3D ice flow: where must a body be buried in 1926 to emerge where it was found in 2012?</p></li>
-<li><p>Compare the possible scenarios (crevasse fall, avalanche, exhaustion) with the burial depth/location implied by the model</p></li>
-</ul>
-<p>➡️ Same ingredients as your mini-project: <strong>data + SMB + ice flow + calibration</strong>, plus a <strong>question</strong>.
-➡️ In IGM: <code class="docutils literal notranslate"><span class="pre">particles</span></code> module (see igm-examples <code class="docutils literal notranslate"><span class="pre">aletsch</span></code>, Part A, Step 4).</p>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="hour-3-set-up-renkulab-then-tutorial-1">
-<h1>Hour 3: set up RenkuLab, then Tutorial 1<a class="headerlink" href="#hour-3-set-up-renkulab-then-tutorial-1" title="Link to this heading">#</a></h1>
-<p><strong>Where do we compute?</strong> On <a class="reference external" href="https://renkulab.io">renkulab.io</a>, a platform of the Swiss Data Science Center (EPFL/ETH)</p>
-<ul class="simple">
-<li><p>JupyterLab <strong>in your browser</strong>: nothing to install on your laptop</p></li>
-<li><p>Python, IGM and all packages are <strong>pre-installed</strong> in the course environment</p></li>
-<li><p>Runs on Swiss servers, with resources (incl. <strong>GPUs</strong>) reserved for this course</p></li>
-<li><p>Login with your <strong>SWITCH edu-ID</strong> (UNIL account)</p></li>
-</ul>
-<p>Today: Tutorial 1 (no IGM yet). The same setup is used for IGM and your project in Sessions 2–3.</p>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="renkulab-the-vocabulary">
-<h1>RenkuLab: the vocabulary<a class="headerlink" href="#renkulab-the-vocabulary" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Renku</p></th>
-<th class="head"><p>What it is for you</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Project</strong></p></td>
-<td><p>Your copy of the course: material (code repository) + launcher + storage</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Session launcher</strong></p></td>
-<td><p>The “Launch” button: starts a machine with Python, IGM and JupyterLab</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Session</strong></p></td>
-<td><p>Your running machine (CPU/GPU, RAM, disk): temporary!</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Data connector</strong></p></td>
-<td><p>Your SWITCHdrive folder, mounted in the session: <strong>where you save your work</strong></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-1-your-own-copy-of-the-course-once-now">
-<h1>Step 1: your own copy of the course (once, now)<a class="headerlink" href="#step-1-your-own-copy-of-the-course-once-now" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>Go to <strong><a class="reference external" href="http://renkulab.io">renkulab.io</a></strong> → <em>Log in</em> with SWITCH edu-ID</p></li>
-<li><p>Open the course project (link on Moodle)</p></li>
-<li><p>Click the banner button to <strong>copy the project</strong> → this is now <em>your</em> project</p></li>
-<li><p>In your project: add a <strong>data connector</strong> → <em>SWITCHdrive</em> → choose a folder (e.g. <code class="docutils literal notranslate"><span class="pre">glamod-work</span></code>)</p></li>
-<li><p><em>Settings</em> → <em>Members</em>: add the teacher and the assistant as <strong>viewers</strong></p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-2-launch-a-session-every-afternoon">
-<h1>Step 2: launch a session (every afternoon)<a class="headerlink" href="#step-2-launch-a-session-every-afternoon" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>Open <strong>your</strong> project → <em>Sessions</em> → <strong>Launch</strong> (<code class="docutils literal notranslate"><span class="pre">glamod</span></code> launcher)</p></li>
-<li><p>Wait 1–3 min (longer the first time) → JupyterLab opens in your browser</p></li>
-<li><p>File browser (left): <code class="docutils literal notranslate"><span class="pre">glamod/</span></code> = course material, plus your SWITCHdrive folder</p></li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">glamod/session1/1c-tutorial-1-sia-model.ipynb</span></code> → run the cells top to bottom (Shift+Enter)</p></li>
-</ol>
-<p>At the end of the afternoon: <strong>Pause</strong> the session (do not delete it).</p>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-3-save-your-work">
-<h1>Step 3: save your work ⚠️<a class="headerlink" href="#step-3-save-your-work" title="Link to this heading">#</a></h1>
-<p>A session is a <strong>temporary machine</strong>: it may be deleted after a period of inactivity.</p>
-<ul class="simple">
-<li><p>Copy what matters to your <strong>SWITCHdrive folder</strong> (drag &amp; drop in the file browser), or right-click → <em>Download</em></p></li>
-<li><p><strong>Rule</strong>: never finish an afternoon without saving your notebooks (and later your YAML files and figures)</p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Symptom</p></th>
-<th class="head"><p>Fix</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Session does not start</p></td>
-<td><p>Wait, retry (or choose the CPU resource class); check you launched from <strong>your</strong> project</p></td>
-</tr>
-<tr class="row-odd"><td><p>Kernel dies / very slow</p></td>
-<td><p>Restart the kernel (<em>Kernel → Restart</em>); close other notebooks</p></td>
-</tr>
-<tr class="row-even"><td><p>Lost files</p></td>
-<td><p>Were they in the SWITCHdrive folder?</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="tutorial-1-now">
-<h1>Tutorial 1 (now)<a class="headerlink" href="#tutorial-1-now" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">session1/1c-tutorial-1-sia-model.ipynb</span></code>:</p>
-<ol class="arabic simple">
-<li><p>Velocity profile of the SIA</p></li>
-<li><p>A 1D glacier: steady state, sensitivity to ELA, SMB gradient, ice softness</p></li>
-<li><p>Response time: glacier under an oscillating climate</p></li>
-<li><p>A 3D glacier: Gorner Glacier, find the ELA that fits today’s extent</p></li>
-</ol>
-<p>Then (hour 4): <strong>choose your glacier</strong> for the mini-project → <code class="docutils literal notranslate"><span class="pre">session1/1d-choose-your-glacier.md</span></code></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -875,15 +757,15 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Glacier Modelling</p>
+        <p class="prev-next-title">Glacier and Glaciated Landscape</p>
       </div>
     </a>
     <a class="right-next"
-       href="1c-tutorial-1-sia-model.html"
+       href="1c-setup-renku.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial 1 — A simple glacier model (SIA)</p>
+        <p class="prev-next-title">Glacier Modelling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -906,7 +788,7 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-mathematical-and-numerical-modelling">Session 1 — Lecture 1b: Mathematical and numerical modelling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-numerical-modelling-of-glaciers">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">Outline</a></li>
@@ -928,20 +810,12 @@ where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the aspe
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-ice-flow-and-mass-balance-models">Combining ice flow and mass balance models</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-models">Numerical models</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-present-day-and-paleo-glacier-applications">III&gt; Present-day and paleo glacier applications</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-the-evolution-of-aletsch-glacier">Modelling the evolution of Aletsch Glacier</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#last-glacial-maximum-in-switzerland">Last Glacial Maximum in Switzerland</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-the-evolution-of-aletsch-glacier">Modelling the evolution of Aletsch Glacier</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleo-glacier-modelling-in-the-alps-with-igm">Paleo glacier modelling in the Alps with IGM</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-modelling-for-landscape-evolution">Ice flow modelling for landscape evolution</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cold-case-solved-with-a-glacier-model">A cold case solved with a glacier model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-did-the-model-need">What did the model need?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hour-3-set-up-renkulab-then-tutorial-1">Hour 3: set up RenkuLab, then Tutorial 1</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renkulab-the-vocabulary">RenkuLab: the vocabulary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-your-own-copy-of-the-course-once-now">Step 1: your own copy of the course (once, now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-launch-a-session-every-afternoon">Step 2: launch a session (every afternoon)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-save-your-work">Step 3: save your work ⚠️</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-1-now">Tutorial 1 (now)</a></li>
 </ul>
 
   </nav></div>
