@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Session 4 — Glacier du Mont Miné: modelling deglaciation dates &#8212; Glacier Modelling course</title>
+    <title>Glacier du Mont Miné — visualize the results &#8212; Glacier Modelling course</title>
   
   
   
@@ -60,13 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'session4/mont-mine/tutorial-4-mont-mine';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'session4/mont-mine/analysis';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="My glacier — analysis notebook (mini-project)" href="../../project/my-glacier/analysis.html" />
+    <link rel="prev" title="Glacier Modelling" href="../lecture-4-mont-mine.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -352,7 +350,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 4 — Glacier du Mont Miné: modelling deglaciation dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lecture-4-mont-mine.html">Glacier Modelling</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Glacier du Mont Miné — visualize the results</a></li>
 </ul>
 
     </div>
@@ -412,7 +420,7 @@
       
       
       
-      <li><a href="../../_sources/session4/mont-mine/tutorial-4-mont-mine.ipynb" target="_blank"
+      <li><a href="../../_sources/session4/mont-mine/analysis.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -488,7 +496,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Session 4 — Glacier du Mont Miné: modelling deglaciation dates</h1>
+    <h1>Glacier du Mont Miné — visualize the results</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -498,11 +506,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model-set-up">1. The model set-up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">2. Run the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">3. Ice cover at the sample sites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-your-turn">4. Calibration — your turn!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-a-climate-driven-smb">To go further: a climate-driven SMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run">1. The run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">2. Ice cover at the sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">3. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-your-calibration-runs">Compare your calibration runs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites">4. Second set of sample sites</a></li>
 </ul>
             </nav>
         </div>
@@ -514,16 +524,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="session-4-glacier-du-mont-mine-modelling-deglaciation-dates">
-<h1>Session 4 — Glacier du Mont Miné: modelling deglaciation dates<a class="headerlink" href="#session-4-glacier-du-mont-mine-modelling-deglaciation-dates" title="Link to this heading">#</a></h1>
-<p><em>This session is taught within the course “Dates and Rates of landscape evolution” (G. King and C. Schmidt). It builds on Sessions 1–3; if you did not attend them, go through the first IGM runs of Session 2 (<code class="docutils literal notranslate"><span class="pre">session2/1-lecture-igm.md</span></code>, <code class="docutils literal notranslate"><span class="pre">session2/first-runs/</span></code>) first.</em></p>
-<p>Run this notebook in your RenkuLab session, from <code class="docutils literal notranslate"><span class="pre">session4/mont-mine/</span></code>.</p>
-<p>We model the evolution of <a class="reference external" href="https://map.geo.admin.ch/#/map?lang=en&amp;amp;center=2607500,1100500&amp;amp;z=6">Glacier du Mont Miné</a> (Val d’Hérens, Valais) from the Little Ice Age (LIA, ~1850) to today. The goal is to <strong>calibrate the glacier model against the ages of rock samples</strong> collected in the glacier forefield: for each sample, the model gives the year when the site became ice-free, to be compared with the measured age.</p>
-<p>The retreat of the Mont Miné since the LIA is illustrated on slides 28–30 of <a class="reference external" href="https://www.unige.ch/forel/application/files/3116/5476/6042/F-Evolene-Paysagesglaciaires_compressed.pdf">this presentation</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="glacier-du-mont-mine-visualize-the-results">
+<h1>Glacier du Mont Miné — visualize the results<a class="headerlink" href="#glacier-du-mont-mine-visualize-the-results" title="Link to this heading">#</a></h1>
+<p><em>Session 4. The step-by-step guide is in the slides <code class="docutils literal notranslate"><span class="pre">session4/lecture-4-mont-mine.md</span></code>.</em></p>
+<p>This notebook <strong>only reads</strong> the run folders <code class="docutils literal notranslate"><span class="pre">outputs/&lt;run&gt;/</span></code>: run IGM in the <strong>terminal</strong>, from this folder (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/glamod/session4/mont-mine</span></code>), then run the cells below. Re-run them as often as you like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../../utils&quot;</span><span class="p">))</span>   <span class="c1"># course plotting helpers</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../../utils&quot;</span><span class="p">))</span>   <span class="c1"># course plotting helpers (utils/helper.py)</span>
 <span class="kn">from</span> <span class="nn">helper</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">RGI_ID</span> <span class="o">=</span> <span class="s2">&quot;RGI2000-v7.0-G-11-00907&quot;</span>   <span class="c1"># Glacier du Mont Miné</span>
@@ -532,22 +540,10 @@
 </div>
 </div>
 </div>
-<section id="the-model-set-up">
-<h2>1. The model set-up<a class="headerlink" href="#the-model-set-up" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code>:</p>
-<ul class="simple">
-<li><p>downloads the data for the glacier with <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> (topography, ice thickness, outline);</p></li>
-<li><p>runs from 1700 to 2024, starting from <strong>today’s geometry</strong>, with a surface mass balance (SMB) that depends on elevation and on the equilibrium line altitude (ELA): <code class="docutils literal notranslate"><span class="pre">smb:</span> <span class="pre">method:</span> <span class="pre">simple</span></code>;</p></li>
-<li><p>the ELA is lowered first (advance to the LIA maximum, ~1850), then raised (retreat until today).</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">cat</span> <span class="n">experiment</span><span class="o">/</span><span class="n">params</span><span class="o">.</span><span class="n">yaml</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The SMB is a piecewise linear function of elevation: gradient <span class="math notranslate nohighlight">\(\beta_\mathrm{abl}\)</span> (<code class="docutils literal notranslate"><span class="pre">gradabl</span></code>) below the ELA, <span class="math notranslate nohighlight">\(\beta_\mathrm{acc}\)</span> (<code class="docutils literal notranslate"><span class="pre">gradacc</span></code>) above, capped at <span class="math notranslate nohighlight">\(b_\mathrm{max}\)</span> (<code class="docutils literal notranslate"><span class="pre">accmax</span></code>). Each row of the array gives these values at a given time; they are interpolated linearly in between.</p>
+<section id="the-run">
+<h2>1. The run<a class="headerlink" href="#the-run" title="Link to this heading">#</a></h2>
+<p>Terminal: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span> <span class="pre">hydra.run.dir=outputs/run_v1</span></code></p>
+<p>The SMB profile (ELA 2900 m), then the run:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_smb_simple</span><span class="p">(</span><span class="n">ela</span><span class="o">=</span><span class="mi">2900</span><span class="p">,</span> <span class="n">gradabl</span><span class="o">=</span><span class="mf">0.009</span><span class="p">,</span> <span class="n">gradacc</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">accmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mi">1800</span><span class="p">,</span> <span class="n">zmax</span><span class="o">=</span><span class="mi">3800</span><span class="p">)</span>
@@ -555,20 +551,9 @@
 </div>
 </div>
 </div>
-</section>
-<section id="run-the-model">
-<h2>2. Run the model<a class="headerlink" href="#run-the-model" title="Link to this heading">#</a></h2>
-<p>The first run downloads the data (≈ 1 min). The run takes a few minutes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">igm_run</span> <span class="o">+</span><span class="n">experiment</span><span class="o">=</span><span class="n">params</span> <span class="n">hydra</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">dir</span><span class="o">=</span><span class="n">outputs</span><span class="o">/</span><span class="n">run_v1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/run_v1&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/run_v1&quot;</span>          <span class="c1"># &lt;- the run you want to look at</span>
 <span class="n">show_dashboard</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">analyze_time_series</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output_ts.nc&quot;</span><span class="p">))</span>
 </pre></div>
@@ -577,10 +562,10 @@
 </div>
 </section>
 <section id="ice-cover-at-the-sample-sites">
-<h2>3. Ice cover at the sample sites<a class="headerlink" href="#ice-cover-at-the-sample-sites" title="Link to this heading">#</a></h2>
+<h2>2. Ice cover at the sample sites<a class="headerlink" href="#ice-cover-at-the-sample-sites" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_samples_map</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data/input_</span><span class="si">{</span><span class="n">RGI_ID</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">)</span>          <span class="c1"># today&#39;s glacier and the sample sites</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_samples_map</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data/input_</span><span class="si">{</span><span class="n">RGI_ID</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">)</span>                   <span class="c1"># today&#39;s glacier and the sample sites</span>
 <span class="n">plot_samples_map</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output.nc&quot;</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>   <span class="c1"># modelled LIA glacier</span>
 </pre></div>
 </div>
@@ -593,7 +578,10 @@
 </div>
 </div>
 </div>
-<p>The next plot shows the modelled ice thickness through time at each sample site, and the <strong>modelled deglaciation year</strong> (last time the site is covered by ice). Enter the measured ages in <code class="docutils literal notranslate"><span class="pre">ages</span></code> (calendar years, or years before 2024) to compare.</p>
+</section>
+<section id="modelled-deglaciation-years-vs-measured-ages">
+<h2>3. Modelled deglaciation years vs measured ages<a class="headerlink" href="#modelled-deglaciation-years-vs-measured-ages" title="Link to this heading">#</a></h2>
+<p>Ice thickness through time at each site, and the modelled deglaciation year (last time the site is covered by ice). Enter the measured ages in <code class="docutils literal notranslate"><span class="pre">ages</span></code> (calendar years, or years before 2024).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># e.g. {&quot;24FER1&quot;: 1890, &quot;24FER2&quot;: 1925, ...}  &lt;- measured ages</span>
@@ -603,33 +591,28 @@
 </div>
 </div>
 </div>
-</section>
-<section id="calibration-your-turn">
-<h2>4. Calibration — your turn!<a class="headerlink" href="#calibration-your-turn" title="Link to this heading">#</a></h2>
-<p>Copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>), change the parameters, run into a new folder (<code class="docutils literal notranslate"><span class="pre">hydra.run.dir=outputs/run_v2</span></code>), and compare the modelled deglaciation years with the measured ages:</p>
-<ol class="arabic simple">
-<li><p><strong>ELA history</strong>: first adjust the ELA values in time (when and how low is the LIA maximum? how fast is the rise afterwards?).</p></li>
-<li><p><strong>SMB gradients and maximum accumulation</strong> (<code class="docutils literal notranslate"><span class="pre">gradabl</span></code>, <code class="docutils literal notranslate"><span class="pre">gradacc</span></code>, <code class="docutils literal notranslate"><span class="pre">accmax</span></code>).</p></li>
-<li><p><strong>Basal sliding</strong>: <code class="docutils literal notranslate"><span class="pre">processes.iceflow.physics.sliding.tau_ref</span></code> — e.g. 0.4 (less sliding) and 0.1 (more sliding). Note: last year’s set-up (IGM 3.0) used a stickier bed (<code class="docutils literal notranslate"><span class="pre">init_slidingco:</span> <span class="pre">0.25</span></code>, equivalent to <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> ≈ 1.2 MPa).</p></li>
-</ol>
-<p>Questions:</p>
-<ul class="simple">
-<li><p>Which parameters control the <em>timing</em> of deglaciation at the sites, and which control the <em>extent</em> of the LIA glacier?</p></li>
-<li><p>Can you match all samples with a single ELA history? If not, why (model, data, sample interpretation)?</p></li>
-</ul>
+<section id="compare-your-calibration-runs">
+<h3>Compare your calibration runs<a class="headerlink" href="#compare-your-calibration-runs" title="Link to this heading">#</a></h3>
+<p>Terminal: copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>, change it, then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_v2</span> <span class="pre">hydra.run.dir=outputs/run_v2</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># !igm_run +experiment=params_v2 hydra.run.dir=outputs/run_v2</span>
-<span class="c1"># plot_thk_at_samples(&quot;outputs/run_v2/output.nc&quot;, SAMPLES, ages=ages)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/run_v1&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/run_v2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>
+<span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="s2">&quot;outputs/run_v2/output.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="to-go-further-a-climate-driven-smb">
-<h2>To go further: a climate-driven SMB<a class="headerlink" href="#to-go-further-a-climate-driven-smb" title="Link to this heading">#</a></h2>
-<p>Instead of prescribing the ELA, use the climate-driven SMB of the mini-project (<code class="docutils literal notranslate"><span class="pre">climate</span></code> + <code class="docutils literal notranslate"><span class="pre">smb</span></code> with <code class="docutils literal notranslate"><span class="pre">method:</span> <span class="pre">oggm</span></code>, see <code class="docutils literal notranslate"><span class="pre">project/my-glacier/experiment/params_past.yaml</span></code>). The observed climate is used from 1901; before 1901, the pre-industrial cooling is set with <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> in <code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Samples_XXXX.csv</span></code> contains a second set of sample sites (IDs <code class="docutils literal notranslate"><span class="pre">19FER...</span></code>), in the same format (last two columns = UTM coordinates): <code class="docutils literal notranslate"><span class="pre">plot_thk_at_samples(...,</span> <span class="pre">&quot;Samples_XXXX.csv&quot;)</span></code>.</p>
+</section>
+<section id="second-set-of-sample-sites">
+<h2>4. Second set of sample sites<a class="headerlink" href="#second-set-of-sample-sites" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output.nc&quot;</span><span class="p">),</span> <span class="s2">&quot;Samples_XXXX.csv&quot;</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -664,12 +647,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../project/my-glacier/analysis.html"
+       href="../lecture-4-mont-mine.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">My glacier — analysis notebook (mini-project)</p>
+        <p class="prev-next-title">Glacier Modelling</p>
       </div>
     </a>
 </div>
@@ -690,11 +673,13 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model-set-up">1. The model set-up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-model">2. Run the model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">3. Ice cover at the sample sites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-your-turn">4. Calibration — your turn!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#to-go-further-a-climate-driven-smb">To go further: a climate-driven SMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run">1. The run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">2. Ice cover at the sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">3. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-your-calibration-runs">Compare your calibration runs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites">4. Second set of sample sites</a></li>
 </ul>
   </nav></div>
 
