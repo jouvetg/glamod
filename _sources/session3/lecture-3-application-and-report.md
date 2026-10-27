@@ -7,8 +7,6 @@ color: white
 math: katex
 ---
 
-# Glacier Modelling
-
 ## Session 3 — Lecture 3: Additional experiments and reporting
 
 Guillaume Jouvet
@@ -64,7 +62,7 @@ Choose **at least one** exploration:
 | **B3** | Response time: how fast does your glacier react? | **today** |
 | **B4** | Moraines: where does the debris go? | **today** |
 
-Commands and plots: `project/my-glacier/analysis.ipynb`, section 4
+Commands and plots: `~/work/my-glacier/analysis.ipynb`, section 4
 
 ---
 
@@ -215,6 +213,6 @@ Checklist for today:
 - [ ] Figures drafted
 - [ ] Report outline written
 
-`project/my-glacier/` (YAML + terminal + `analysis.ipynb`)
+`~/work/my-glacier/` (your copy: YAML + terminal + `analysis.ipynb`)
 
 **Save** your YAML files, notebook, scripts and figures to your **SWITCHdrive folder** regularly: RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.

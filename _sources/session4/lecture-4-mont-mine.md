@@ -7,8 +7,6 @@ color: white
 math: katex
 ---
 
-# Glacier Modelling
-
 ## Session 4 — Glacier du Mont Miné: modelling deglaciation dates
 
 Guillaume Jouvet
@@ -25,7 +23,7 @@ Guillaume Jouvet
 | Hour 2 | G. King's course |
 | Hours 3–4 | Calibrate the model against the sample ages |
 
-New to IGM? Go through Lecture 2 first (`session2/1-lecture-igm.md`, runs in `session2/first-runs/`).
+New to IGM? Go through Lecture 2 first (`session2/1-lecture-igm.md`).
 
 ---
 
@@ -124,5 +122,5 @@ Then compare the deglaciation years with the measured ages (notebook, section 3)
 
 # To go further
 
-- **Climate-driven SMB** instead of a prescribed ELA: `climate` + `smb` with `method: oggm`, as in the mini-project (`project/my-glacier/experiment/params_past.yaml`). Observed climate from 1901; before 1901, the cooling is set with `delta_temp` in `clim_trend_array`
+- **Climate-driven SMB** instead of a prescribed ELA: `climate` + `smb` with `method: oggm`, as in the mini-project (`session2/my-glacier/experiment/params_past.yaml`). Observed climate from 1901; before 1901, the cooling is set with `delta_temp` in `clim_trend_array`
 - **Second set of sample sites**: `Samples_XXXX.csv` (IDs `19FER...`), same format: `plot_thk_at_samples(..., "Samples_XXXX.csv")`

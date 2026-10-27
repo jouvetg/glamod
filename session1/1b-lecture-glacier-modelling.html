@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Glacier Modelling &#8212; Glacier Modelling course</title>
+    <title>Session 1 — Lecture 1b: Numerical modelling of Glaciers &#8212; Glacier Modelling course</title>
   
   
   
@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Glacier Modelling" href="1c-setup-renku.html" />
+    <link rel="next" title="Session 1 — Hour 3: Setting up RenkuLab, then the tutorial" href="1c-setup-renku.html" />
     <link rel="prev" title="Glacier and Glaciated Landscape" href="1a-lecture-glacier-processes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -251,7 +251,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Glacier Modelling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
 
 
 
@@ -274,13 +274,13 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="1c-setup-renku.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1c-setup-renku.html">Session 1 — Hour 3: Setting up RenkuLab, then the tutorial</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="1d-tutorial-sia-model.html">Tutorial — A simple glacier model (SIA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1d-tutorial-sia-model.html">Tutorial — A simple glacier model</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="1e-choose-your-glacier.html">Choose your glacier</a></li>
@@ -292,7 +292,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session2/1-lecture-igm.html">Session 2 — Lecture 2: Introduction to IGM</a></li>
 
 
 
@@ -321,15 +321,11 @@
 
 
 
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../session2/first-runs/analysis.html">First IGM runs — visualize the results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../session3/lecture-3-application-and-report.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session3/lecture-3-application-and-report.html">Session 3 — Lecture 3: Additional experiments and reporting</a></li>
 
 
 
@@ -346,14 +342,10 @@
 
 
 
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mini-project</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../project/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../session4/lecture-4-mont-mine.html">Glacier Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session4/lecture-4-mont-mine.html">Session 4 — Glacier du Mont Miné: modelling deglaciation dates</a></li>
 
 
 
@@ -499,7 +491,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Glacier Modelling</h1>
+    <h1>Session 1 — Lecture 1b: Numerical modelling of Glaciers</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -509,10 +501,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-numerical-modelling-of-glaciers">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">Outline</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#i-mathematical-modelling">I&gt; Mathematical modelling</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
@@ -550,12 +539,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="glacier-modelling">
-<h1>Glacier Modelling<a class="headerlink" href="#glacier-modelling" title="Link to this heading">#</a></h1>
-<section id="session-1-lecture-1b-numerical-modelling-of-glaciers">
-<h2>Session 1 — Lecture 1b: Numerical modelling of Glaciers<a class="headerlink" href="#session-1-lecture-1b-numerical-modelling-of-glaciers" title="Link to this heading">#</a></h2>
+  <section id="session-1-lecture-1b-numerical-modelling-of-glaciers">
+<h1>Session 1 — Lecture 1b: Numerical modelling of Glaciers<a class="headerlink" href="#session-1-lecture-1b-numerical-modelling-of-glaciers" title="Link to this heading">#</a></h1>
 <p>Guillaume Jouvet</p>
-</section>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="outline">
@@ -800,7 +786,7 @@ a Python-based glacier model accelerated by Graphics Processing Units (GPU)
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Glacier Modelling</p>
+        <p class="prev-next-title">Session 1 — Hour 3: Setting up RenkuLab, then the tutorial</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -822,10 +808,7 @@ a Python-based glacier model accelerated by Graphics Processing Units (GPU)
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Glacier Modelling</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#session-1-lecture-1b-numerical-modelling-of-glaciers">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 1 — Lecture 1b: Numerical modelling of Glaciers</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">Outline</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#i-mathematical-modelling">I&gt; Mathematical modelling</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>

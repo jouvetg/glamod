@@ -6,8 +6,6 @@ backgroundColor: black
 color: white
 ---
 
-# Glacier Modelling
-
 ## Session 1 — Hour 3: Setting up RenkuLab, then the tutorial
 
 ---
@@ -29,7 +27,7 @@ On [renkulab.io](https://renkulab.io), a platform of the Swiss Data Science Cent
 |---|---|
 | **Project** | Your copy of the course: material (code repository) + launcher + storage |
 | **Session launcher** | The "Launch" button: starts a machine with Python, IGM and JupyterLab |
-| **Session** | Your running machine (CPU/GPU, RAM, disk): temporary! |
+| **Session** | Your running machine (CPU, RAM, disk): temporary! |
 | **Data connector** | Your SWITCHdrive folder, mounted in the session: **where you save your work** |
 
 ---
