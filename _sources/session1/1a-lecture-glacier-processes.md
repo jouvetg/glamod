@@ -26,9 +26,9 @@ color: white
 
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
-| **Week 1** | Glacier processes | Glacier modelling | *Tuto 1* | *Glacier selection* |
-| **Week 2** | Intro to IGM, *Tuto 2* | *Project* | *Project* | *Project* |
-| **Week 3** | Project goals, reporting | *Project* | *Project* | *Project* |
+| **Week 1** | Glacier processes | Glacier modelling | *Tutorial* | *Glacier selection* |
+| **Week 2** | Intro to IGM, *past & future runs* | *Project* | *Project* | *Project* |
+| **Week 3** | Extra experiments, report | *Project* | *Project* | *Project* |
 | *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
  
 
@@ -44,7 +44,7 @@ color: white
 |---|---|
 | Hour 1 | Lecture 1a: Glacier processes, basics |
 | Hour 2 | Lecture 1b: Glacier modelling, basics |
-| Hour 3 | Set up RenkuLab (≈ 15 min), + Tutorial 1: a simple glacier model |
+| Hour 3 | Set up RenkuLab (≈ 15 min), + Tutorial: a simple glacier model |
 | Hour 4 | Choose your glacier for the mini-project   |
  
 

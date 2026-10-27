@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 2 — First steps with IGM" href="tutorial-2/tutorial-2-igm.html" />
+    <link rel="next" title="First IGM runs — visualize the results" href="first-runs/analysis.html" />
     <link rel="prev" title="Choose your glacier" href="../session1/1e-choose-your-glacier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -280,10 +280,15 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-sia-model.html">Tutorial — A simple glacier model (SIA)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../session1/1e-choose-your-glacier.html">Choose your glacier</a></li>
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="current nav bd-sidenav">
@@ -306,7 +311,21 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="tutorial-2/tutorial-2-igm.html">Tutorial 2 — First steps with IGM</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="first-runs/analysis.html">First IGM runs — visualize the results</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -320,10 +339,16 @@
 
 
 
+
+
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mini-project</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../project/project.html">Mini-project: model your own glacier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../project/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
@@ -479,23 +504,37 @@
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-tutorial-1-to-igm">From Tutorial 1 to IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-tutorial-to-igm">From the tutorial to IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#igm-in-one-picture-a-3d-glacier-evolution-model">IGM in one picture: a 3D glacier evolution model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-igm-solve">What does IGM solve?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-machine-learning">Where is the machine learning?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#igm-is-modular">IGM is modular</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-an-igm-run-folder">Structure of an IGM run folder</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parameter-file-experiment-params-yaml">A parameter file (<code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code>)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parameters">Changing parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-for-any-glacier-oggm-shop">Data for any glacier: <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oggm-shop-module-to-retrieve-glacier-data"><code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to retrieve glacier data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-force-the-smb">Two ways to force the SMB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-parameters">Ice-flow parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid-and-a-small-emulator">Fast runs: coarse grid and a small emulator</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-get">What you get</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modelling-workflow-for-your-project">The modelling workflow for your project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-with-igm-three-tools">How to work with IGM: three tools</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-igm-in-the-terminal">Run IGM in the terminal</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-now">Tutorial 2 (now)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-a-past-run-and-a-future-run-1-hour">Hands-on: a past run and a future run (≈ 1 hour)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-up-your-screen">Step 1 — Set up your screen</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-a-past-run-aletsch-19002000">Step 2 — A past run: Aletsch 1900–2000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-past-run-explore-smb-and-ice-flow-parameters">Step 3 — Past run: explore SMB and ice-flow parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-a-future-run-your-glacier-20202100">Step 4 — A future run: your glacier 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-future-run-explore-the-climate">Step 5 — Future run: explore the climate</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mini-project-model-your-own-glacier">The mini-project: model your own glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-project-folder-project-my-glacier">The project folder: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-1-present-check-the-initial-state">Part A, Step 1 — Present: check the initial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-2-past-from-the-lia-to-today">Part A, Step 2 — Past: from the LIA to today</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-3-future-20202100">Part A, Step 3 — Future: 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-b1-does-the-smb-model-matter">Exploration B1 — Does the SMB model matter?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-b2-how-well-do-we-know-the-ice-flow">Exploration B2 — How well do we know the ice flow?</a></li>
 </ul>
 
             </nav>
@@ -508,12 +547,16 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="glacier-modelling">
+  <style>
+/* centre single images */
+p > img:only-child:not(.emoji) { display: block; margin: 0 auto; }
+/* slides tagged center-img: centre all paragraphs (e.g. two images side by side) */
+section.center-img p { text-align: center; }
+</style>
+<section class="tex2jax_ignore mathjax_ignore" id="glacier-modelling">
 <h1>Glacier Modelling<a class="headerlink" href="#glacier-modelling" title="Link to this heading">#</a></h1>
 <section id="session-2-lecture-2-introduction-to-igm">
 <h2>Session 2 — Lecture 2: Introduction to IGM<a class="headerlink" href="#session-2-lecture-2-introduction-to-igm" title="Link to this heading">#</a></h2>
-<p>Guillaume Jouvet</p>
-<p><img alt="height:150px" src="../_images/logo_igm.png" /></p>
 </section>
 </section>
 <hr class="docutils" />
@@ -532,17 +575,17 @@
 <tr class="row-even"><td><p><strong>Week 1</strong></p></td>
 <td><p>Glacier processes</p></td>
 <td><p>Glacier modelling</p></td>
-<td><p><em>Tuto 1</em></p></td>
+<td><p><em>Tutorial</em></p></td>
 <td><p><em>Glacier selection</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Week 2</strong></p></td>
-<td><p><strong>Intro to IGM</strong>, <strong>Tuto 2</strong></p></td>
+<td><p><strong>Intro to IGM</strong>, <strong>past &amp; future runs</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Week 3</strong></p></td>
-<td><p>Project goals, reporting</p></td>
+<td><p>Extra experiments, report</p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
@@ -558,9 +601,9 @@
 </div>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="from-tutorial-1-to-igm">
-<h1>From Tutorial 1 to IGM<a class="headerlink" href="#from-tutorial-1-to-igm" title="Link to this heading">#</a></h1>
-<p>Tutorial 1: 1D/2D SIA model, synthetic SMB, no sliding, 50 lines of numpy.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="from-the-tutorial-to-igm">
+<h1>From the tutorial to IGM<a class="headerlink" href="#from-the-tutorial-to-igm" title="Link to this heading">#</a></h1>
+<p>Tutorial (Session 1): 1D/2D SIA minimal model, synthetic SMB, very simple code.</p>
 <p>A “real” glacier model needs:</p>
 <ul class="simple">
 <li><p><strong>real data</strong>: topography, ice thickness, outlines, velocities, climate</p></li>
@@ -570,58 +613,67 @@
 </ul>
 <p>➡️ IGM: an open-source Python model developed &#64; UNIL</p>
 <p><a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p>
+<p><img alt="height:100px" src="../_images/logo_igm.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="igm-in-one-picture-a-3d-glacier-evolution-model">
+<h1>IGM in one picture: a 3D glacier evolution model<a class="headerlink" href="#igm-in-one-picture-a-3d-glacier-evolution-model" title="Link to this heading">#</a></h1>
+<p><img alt="width:1200px" src="../_images/igm-overview.png" /></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="what-does-igm-solve">
 <h1>What does IGM solve?<a class="headerlink" href="#what-does-igm-solve" title="Link to this heading">#</a></h1>
-<p>Same structure as Tutorial 1, at each time step:</p>
+<p>Same structure as the tutorial, at each time step:</p>
 <ol class="arabic simple">
-<li><p><strong>Surface mass balance</strong>: <span class="math notranslate nohighlight">\(b(x,y,t)\)</span> from an ELA or from climate</p></li>
-<li><p><strong>Ice flow</strong>: 3D velocity field from a higher-order (Blatter–Pattyn) Stokes approximation, with Glen’s law and basal sliding</p></li>
-<li><p><strong>Mass conservation</strong>: <span class="math notranslate nohighlight">\(\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = b\)</span></p></li>
-<li><p>Update time, write outputs, repeat</p></li>
+<li><p><strong>Surface mass balance</strong>: <span class="math notranslate nohighlight">\(SMB(x,y,t)\)</span> from an ELA or from climate</p></li>
+<li><p><strong>Ice flow</strong>: 3D velocity field from a higher-order ice flow approximation,
+using a <strong>convolutional neural network</strong> on a <strong>raster grid</strong>:
+<img alt="width:300px" src="../_images/igm-cnn-mapping.png" /></p></li>
+<li><p><strong>Mass conservation</strong>: <span class="math notranslate nohighlight">\(\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = SMB\)</span> using an upwind scheme.</p></li>
+<li><p>Update time, write outputs</p></li>
 </ol>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="where-is-the-machine-learning">
-<h1>Where is the machine learning?<a class="headerlink" href="#where-is-the-machine-learning" title="Link to this heading">#</a></h1>
-<p>Step 2 (ice flow) is the costly part. IGM solves it with a <strong>neural network</strong> (a CNN):</p>
-<ul class="simple">
-<li><p>input: thickness, surface, ice softness, basal friction, …</p></li>
-<li><p>output: the ice velocity field</p></li>
-<li><p>trained to <strong>minimize the energy</strong> of the ice-flow problem (“physics-informed”: no data needed)</p></li>
-</ul>
-<p>Two modes:</p>
-<ul class="simple">
-<li><p><strong>off-line emulator</strong>: network pre-trained on many glaciers, frozen → very fast, for “standard” mountain glaciers ← <em>we use this</em></p></li>
-<li><p><strong>on-line solver</strong>: network (re)trained during the run → general, slower</p></li>
-</ul>
-<p>➡️ Runs fast on CPU, much faster on GPU.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="igm-is-modular">
 <h1>IGM is modular<a class="headerlink" href="#igm-is-modular" title="Link to this heading">#</a></h1>
-<p><img alt="height:400px" src="../_images/flowchat-module.png" /></p>
-<p><strong>inputs</strong> (load data) → <strong>processes</strong> (run at each time step) → <strong>outputs</strong> (write results)</p>
-<p>All modules share one object: the <strong>state</strong> (<code class="docutils literal notranslate"><span class="pre">state.thk</span></code>, <code class="docutils literal notranslate"><span class="pre">state.usurf</span></code>, <code class="docutils literal notranslate"><span class="pre">state.smb</span></code>, <code class="docutils literal notranslate"><span class="pre">state.t</span></code>, …)</p>
+<p><img alt="width:1200px" src="../_images/igm-flowchart.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="structure-of-an-igm-run-folder">
+<h1>Structure of an IGM run folder<a class="headerlink" href="#structure-of-an-igm-run-folder" title="Link to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>first-runs/                      ← run igm_run from HERE
+├── experiment/                  PARAMETERS
+│   ├── params_A_aletsch.yaml        one YAML file = one experiment
+│   └── common/iceflow_offline.yaml  shared settings (ice-flow emulator)
+├── data/                        INPUTS
+│   └── input.nc                     topography, thickness, velocities, climate...
+└── outputs/                     OUTPUTS: one folder per run (hydra.run.dir=...)
+    └── A_reference/
+        ├── output.nc                maps through time
+        ├── output_ts.nc             volume and area through time
+        ├── dashboard_*.png          quick-look images
+        └── .hydra/                  all parameters used (config.yaml)
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="a-parameter-file-experiment-params-yaml">
 <h1>A parameter file (<code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code>)<a class="headerlink" href="#a-parameter-file-experiment-params-yaml" title="Link to this heading">#</a></h1>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">common</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iceflow_offline</span><span class="w">       </span><span class="c1"># pre-trained ice-flow emulator</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /inputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">local</span><span class="p p-Indicator">]</span><span class="w">     </span><span class="c1"># 1) which data</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">common</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iceflow_offline</span><span class="w">                          </span><span class="c1"># pre-trained ice-flow emulator</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /inputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">local</span><span class="p p-Indicator">]</span><span class="w">                        </span><span class="c1"># 1) which data</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /processes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">smb</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">iceflow</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">time</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">thk</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># 2) which physics, in order</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /outputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">local</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">live_dashboard</span><span class="p p-Indicator">]</span><span class="w">       </span><span class="c1"># 3) which outputs</span>
 
-<span class="nt">processes</span><span class="p">:</span><span class="w">                        </span><span class="c1"># parameters that differ from the defaults</span>
+<span class="nt">inputs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">local</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">coarsening</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">ratio</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span><span class="w">           </span><span class="c1"># GRID: 2 = fast tests, 1 = final runs</span>
+<span class="nt">processes</span><span class="p">:</span><span class="w">                           </span><span class="c1"># only what differs from the defaults</span>
 <span class="w">  </span><span class="nt">smb</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple</span>
-<span class="w">    </span><span class="nt">simple</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">array</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;time&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradabl&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;gradacc&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ela&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;accmax&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1900</span><span class="p p-Indicator">,</span><span class="w">    </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">2800</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2000</span><span class="p p-Indicator">,</span><span class="w">    </span><span class="nv">0.009</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w">     </span><span class="nv">2900</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">2.0</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple</span><span class="w">                   </span><span class="c1"># + the ELA history (array)</span>
+<span class="w">  </span><span class="nt">iceflow</span><span class="p">:</span><span class="w">                           </span><span class="c1"># ICE FLOW</span>
+<span class="w">    </span><span class="nt">physics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">0.325</span><span class="p p-Indicator">}</span>
 <span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="nv">1900.0</span><span class="p p-Indicator">,</span><span class="nt"> end</span><span class="p">:</span><span class="w"> </span><span class="nv">2000.0</span><span class="p p-Indicator">,</span><span class="nt"> save</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
@@ -631,7 +683,7 @@
 <section class="tex2jax_ignore mathjax_ignore" id="changing-parameters">
 <h1>Changing parameters<a class="headerlink" href="#changing-parameters" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Edit the YAML file (keep a copy per experiment!), or</p></li>
+<li><p>Edit the YAML file, and <strong>keep 1 file per experiment</strong> (copy it before changing it), or</p></li>
 <li><p>override from the command line, without editing the file:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span class="w"> </span>processes.time.end<span class="o">=</span><span class="m">2050</span>
@@ -639,21 +691,21 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Results go to <code class="docutils literal notranslate"><span class="pre">outputs/&lt;date&gt;/&lt;time&gt;/</span></code> (or the folder given by <code class="docutils literal notranslate"><span class="pre">hydra.run.dir=...</span></code>), with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
+<li><p>Results go to the folder given by <code class="docutils literal notranslate"><span class="pre">hydra.run.dir=...</span></code>, with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
 <li><p>All parameters and their defaults: <a class="reference external" href="https://igm-model.org">https://igm-model.org</a> (Modules)</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="data-for-any-glacier-oggm-shop">
-<h1>Data for any glacier: <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code><a class="headerlink" href="#data-for-any-glacier-oggm-shop" title="Link to this heading">#</a></h1>
-<p>Give an RGI v7 ID; IGM downloads (via <a class="reference external" href="https://oggm.org">OGGM</a>) and maps to a 100 m grid:</p>
+<section class="tex2jax_ignore mathjax_ignore" id="oggm-shop-module-to-retrieve-glacier-data">
+<h1><code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to retrieve glacier data<a class="headerlink" href="#oggm-shop-module-to-retrieve-glacier-data" title="Link to this heading">#</a></h1>
+<p>Give an RGI v7 ID; IGM downloads (via <a class="reference external" href="https://oggm.org">OGGM</a>) and maps to a 50 m / 100 m grid:</p>
 <ul class="simple">
 <li><p>surface topography (Copernicus DEM)</p></li>
 <li><p>ice thickness estimate (Millan et al. 2022, or consensus)</p></li>
 <li><p>glacier outline (RGI v7)</p></li>
 <li><p>observed surface velocities (Millan et al. 2022)</p></li>
 <li><p>monthly climate 1901–present (GSWP3-W5E5)</p></li>
-<li><p>calibrated SMB parameters (to match Hugonnet et al. 2021 geodetic mass balance)</p></li>
+<li><p>calibrated SMB parameters (to match Hugonnet et al. 2021 elevation change)</p></li>
 </ul>
 <p>Everything ends up in <code class="docutils literal notranslate"><span class="pre">data/input.nc</span></code>, cached for the next runs.</p>
 </section>
@@ -668,7 +720,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <p><strong>2. <code class="docutils literal notranslate"><span class="pre">climate:</span> <span class="pre">method:</span> <span class="pre">oggm</span></code> + <code class="docutils literal notranslate"><span class="pre">smb:</span> <span class="pre">method:</span> <span class="pre">oggm</span></code></strong> — temperature-index model</p>
 <ul class="simple">
 <li><p>monthly temperature &amp; precipitation → accumulation and melt</p></li>
-<li><p>1901–2019: observed climate; <strong>outside</strong> this period: random years of 1960–1990 + a <strong>trend</strong> (temperature offset, precipitation factor, relative to 1960–1990):</p></li>
+<li><p>observed climate extrapolated outside 1901–2019:</p></li>
 </ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">clim_trend_array</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;time&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;delta_temp&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;prec_scal&quot;</span><span class="p p-Indicator">]</span>
@@ -684,36 +736,56 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <section class="tex2jax_ignore mathjax_ignore" id="ice-flow-parameters">
 <h1>Ice-flow parameters<a class="headerlink" href="#ice-flow-parameters" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Ice softness</strong> <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, default 78 MPa⁻³ a⁻¹): softer ice → faster deformation</p></li>
+<li><p><strong>Ice softness</strong> <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, default 78 MPa⁻³ a⁻¹):
+softer ice → faster deformation</p></li>
 <li><p><strong>Basal sliding</strong>: Weertman-type law, parametrized by</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>: basal shear stress (MPa) needed to slide at</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">u_ref</span></code> (100 m/yr)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>: basal shear stress (MPa) needed to slide at <code class="docutils literal notranslate"><span class="pre">u_ref</span></code>=100 m/yr</p></li>
 <li><p>lower <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> → more slippery bed → faster sliding</p></li>
 </ul>
 </li>
 </ul>
-<p>Usually tuned so that modelled surface speeds match <strong>observed</strong> ones (provided in <code class="docutils literal notranslate"><span class="pre">input.nc</span></code>).</p>
+<p>Tuned so that modelled speeds match <strong>observed</strong> ones. In every parameter file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">iceflow</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">unified</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">pretrained_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;dahunet_edu.keras&quot;</span><span class="p p-Indicator">}}</span><span class="w">   </span><span class="c1"># off-line emulator</span>
+<span class="w">    </span><span class="nt">physics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">0.215</span><span class="p p-Indicator">,</span><span class="nt"> u_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">100.0</span><span class="p p-Indicator">},</span><span class="nt"> viscosity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">arrhenius</span><span class="p">:</span><span class="w"> </span><span class="nv">78.0</span><span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="fast-runs-coarse-grid-and-a-small-emulator">
+<h1>Fast runs: coarse grid and a small emulator<a class="headerlink" href="#fast-runs-coarse-grid-and-a-small-emulator" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Grid coarsening</strong>: <code class="docutils literal notranslate"><span class="pre">inputs.local.coarsening.ratio:</span> <span class="pre">2</span></code> ➡️ cells 2× larger (e.g. 100 m → 200 m), <strong>4× fewer cells</strong>, much faster runs</p>
+<ul>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">2</span></code> to <strong>test and calibrate</strong> (many runs)</p></li>
+<li><p>switch to <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code> to <strong>finalize</strong> (runs and figures of your report):</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>inputs.local.coarsening.ratio<span class="o">=</span><span class="m">1</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_final
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Emulator</strong> <code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code>: the smallest and fastest pre-trained ice-flow network of IGM (trained on mountain glaciers)</p></li>
+</ul>
+<p>➡️ Your project: both are set <strong>once</strong> in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="what-you-get">
 <h1>What you get<a class="headerlink" href="#what-you-get" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">output.nc</span></code>: maps through time (thickness, surface, speed, SMB, …) ➡️ maps, flowline profiles</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output.nc</span></code>: 2D distributed maps through time (thickness, speed, SMB, …)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">output_ts.nc</span></code>: ice volume and area through time ➡️ time series</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dashboard_XXXX.png</span></code>: quick-look images during the run</p></li>
 </ul>
 <p>Helpers in <code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code> (used in the notebooks): <code class="docutils literal notranslate"><span class="pre">show_dashboard</span></code>, <code class="docutils literal notranslate"><span class="pre">compare_runs</span></code>, <code class="docutils literal notranslate"><span class="pre">animate_glacier_evolution</span></code>, <code class="docutils literal notranslate"><span class="pre">analyze_time_series</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_flowline_evolution</span></code>, <code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code></p>
-</section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="the-modelling-workflow-for-your-project">
-<h1>The modelling workflow for your project<a class="headerlink" href="#the-modelling-workflow-for-your-project" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p><strong>Present</strong>: download data, check the initial state (thickness, velocities vs. observations)</p></li>
-<li><p><strong>Past</strong>: start before the LIA (e.g. 1700) from today’s geometry, cool then warm the climate, to reproduce the <strong>LIA maximum (~1850)</strong> and the <strong>retreat to today</strong> ➡️ calibration / validation</p></li>
-<li><p><strong>Future</strong>: 2020–2100 under several warming scenarios (e.g. SSP1-2.6, SSP2-4.5, SSP5-8.5)</p></li>
-</ol>
-<p>Glaciers respond with a delay: mind the <strong>response time</strong>.</p>
+<!-- _class: invert center-img -->
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="visualizing-results-live-dashboard-module">
+<h1>Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module<a class="headerlink" href="#visualizing-results-live-dashboard-module" title="Link to this heading">#</a></h1>
+<p><img alt="height:500px" src="../_images/visu-dashboard.png" /></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="back-in-renkulab">
@@ -723,7 +795,8 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <li><p>Open <strong>your</strong> project on <a class="reference external" href="http://renkulab.io">renkulab.io</a> → <strong>Resume</strong> your paused session (or <strong>Launch</strong> a new one)</p></li>
 <li><p>Course material in <code class="docutils literal notranslate"><span class="pre">~/work/glamod/</span></code>, your SWITCHdrive folder next to it</p></li>
 </ol>
-<p>New today: we run <strong>IGM</strong>, a command-line program. We work with <strong>three tools</strong>, side by side in JupyterLab.</p>
+<p>New today: we run <strong>IGM</strong>, a command-line program.</p>
+<p>We work with <strong>three tools</strong>, side by side in JupyterLab.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="how-to-work-with-igm-three-tools">
@@ -751,28 +824,18 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 </tbody>
 </table>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────────────┬──────────────────────────────┐
-│ params_past.yaml     │ analysis.ipynb               │
-│ (edit, Ctrl+S)       │  run = &quot;outputs/past_v1&quot;     │
-├──────────────────────┤  show_dashboard(run)         │
-│ Terminal             │  compare_runs([...])         │
-│ $ igm_run ...        │  plt.savefig(&quot;figures/...&quot;)  │
-└──────────────────────┴──────────────────────────────┘
-</pre></div>
-</div>
 <p>Drag the tabs to split the screen.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="run-igm-in-the-terminal">
 <h1>Run IGM in the terminal<a class="headerlink" href="#run-igm-in-the-terminal" title="Link to this heading">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod/session2/tutorial-2<span class="w">          </span><span class="c1"># the folder that contains experiment/</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod/session2/first-runs<span class="w">          </span><span class="c1"># the folder that contains experiment/</span>
 igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_aletsch<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/A_reference
 </pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">+experiment=params_A_aletsch</span></code> → reads <code class="docutils literal notranslate"><span class="pre">experiment/params_A_aletsch.yaml</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hydra.run.dir=outputs/A_reference</span></code> → <strong>always name your run folder</strong>: this name is how you find it in the notebook</p></li>
-<li><p>Change a parameter without editing the file: <code class="docutils literal notranslate"><span class="pre">processes.time.end=1950</span></code></p></li>
 <li><p>Stop a run: <strong>Ctrl+C</strong>. Recall the last command: <strong>↑</strong></p></li>
 </ul>
 <p>Each run folder contains <code class="docutils literal notranslate"><span class="pre">output.nc</span></code> (maps), <code class="docutils literal notranslate"><span class="pre">output_ts.nc</span></code> (volume, area), <code class="docutils literal notranslate"><span class="pre">dashboard_*.png</span></code> (quick looks) and <code class="docutils literal notranslate"><span class="pre">.hydra/</span></code> (<strong>all</strong> parameters used).</p>
@@ -823,14 +886,243 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 <p>Ask the assistant!</p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="tutorial-2-now">
-<h1>Tutorial 2 (now)<a class="headerlink" href="#tutorial-2-now" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">session2/tutorial-2/tutorial-2-igm.ipynb</span></code></p>
+<section class="tex2jax_ignore mathjax_ignore" id="hands-on-a-past-run-and-a-future-run-1-hour">
+<h1>Hands-on: a past run and a future run (≈ 1 hour)<a class="headerlink" href="#hands-on-a-past-run-and-a-future-run-1-hour" title="Link to this heading">#</a></h1>
+<p>In <code class="docutils literal notranslate"><span class="pre">session2/first-runs/</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Set up the screen: YAML + terminal + notebook</p></td>
+</tr>
+<tr class="row-odd"><td><p>2–3</p></td>
+<td><p><strong>Past</strong> run: Aletsch, 1900–2000, ELA-based SMB ➡️ explore <strong>SMB</strong> and <strong>ice-flow</strong> parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>4–5</p></td>
+<td><p><strong>Future</strong> run: <strong>your glacier</strong> (RGI ID), climate-driven SMB, 2020–2100 ➡️ explore the <strong>climate</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Your project: the same for your glacier, LIA → 2100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All runs in the <strong>terminal</strong>; <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code> (one section per run) <strong>only plots</strong>.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-1-set-up-your-screen">
+<h1>Step 1 — Set up your screen<a class="headerlink" href="#step-1-set-up-your-screen" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>File browser → <code class="docutils literal notranslate"><span class="pre">glamod/session2/first-runs/</span></code></p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, run the first cell (loads the plotting helpers)</p></li>
+<li><p><em>File → New → Terminal</em>, drag it next to the notebook, then:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod/session2/first-runs
+ls<span class="w"> </span>experiment/
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Double-click <code class="docutils literal notranslate"><span class="pre">experiment/params_A_aletsch.yaml</span></code> to read it: which <strong>inputs</strong>, <strong>processes</strong>, <strong>outputs</strong>? Which SMB?</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-2-a-past-run-aletsch-19002000">
+<h1>Step 2 — A past run: Aletsch 1900–2000<a class="headerlink" href="#step-2-a-past-run-aletsch-19002000" title="Link to this heading">#</a></h1>
+<p>In the <strong>terminal</strong> (≈ 1–2 min on CPU):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_aletsch<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/A_reference
+</pre></div>
+</div>
 <ul class="simple">
-<li><p><strong>Run A</strong>: Aletsch, 1900–2000, simple ELA-based SMB (local data) — first run from the notebook, then in the terminal</p></li>
-<li><p><strong>Run B</strong>: any glacier from its RGI ID, climate-driven SMB, 2020–2100, +4°C → <strong>try it with your glacier!</strong></p></li>
-<li><p><strong>Run C</strong> (optional): write your own SMB module in Python</p></li>
+<li><p>Input: <code class="docutils literal notranslate"><span class="pre">data/input.nc</span></code> (prepared for you), 100 m grid</p></li>
+<li><p>SMB: ELA rises from 2800 m (1900) to 2900 m (2000), with ablation/accumulation gradients</p></li>
 </ul>
+<p>Then in the <strong>notebook</strong>, section <em>Run A</em>: input data, SMB profile, dashboard, volume &amp; area, animation, modelled vs observed speeds.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-3-past-run-explore-smb-and-ice-flow-parameters">
+<h1>Step 3 — Past run: explore SMB and ice-flow parameters<a class="headerlink" href="#step-3-past-run-explore-smb-and-ice-flow-parameters" title="Link to this heading">#</a></h1>
+<p>One run = one named folder.</p>
+<ol class="arabic simple">
+<li><p><strong>ELA 200 m higher</strong>: duplicate <code class="docutils literal notranslate"><span class="pre">params_A_aletsch.yaml</span></code> → <code class="docutils literal notranslate"><span class="pre">params_A_ela.yaml</span></code>, add 200 to the <code class="docutils literal notranslate"><span class="pre">ela</span></code> column, then</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_ela<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/A_ela_plus200
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>More slippery bed</strong> (default here: <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = 0.325 MPa) and 3. <strong>softer ice</strong> (default: <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = 78):</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_aletsch<span class="w"> </span>processes.iceflow.physics.sliding.tau_ref<span class="o">=</span><span class="m">0</span>.15<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/A_tau015
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_aletsch<span class="w"> </span>processes.iceflow.physics.viscosity.arrhenius<span class="o">=</span><span class="m">150</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/A_arrh150
+</pre></div>
+</div>
+<p>Notebook: <code class="docutils literal notranslate"><span class="pre">compare_runs([...])</span></code>. How do volume and speeds change? Which run matches the observed speeds best?</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-4-a-future-run-your-glacier-20202100">
+<h1>Step 4 — A future run: your glacier 2020–2100<a class="headerlink" href="#step-4-a-future-run-your-glacier-20202100" title="Link to this heading">#</a></h1>
+<p>Your RGI v7 ID: <code class="docutils literal notranslate"><span class="pre">session1/1e-choose-your-glacier.md</span></code> (here: Findelengletscher). In the <strong>terminal</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_B_any_glacier<span class="w"> </span>inputs.oggm_shop.RGI_ID<span class="o">=</span>RGI2000-v7.0-G-11-01189<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>hydra.run.dir<span class="o">=</span>outputs/B_RGI2000-v7.0-G-11-01189
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>First run: <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> downloads the data (≈ 1 min), stored in <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <strong>re-used</strong> next time</p></li>
+<li><p>Climate: observed 1901–2019, then random years of 1960–1990 + <strong>+4 °C in 2100</strong> (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>)</p></li>
+</ul>
+<p>Notebook, section <em>Run B</em>: set <code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>, then plot input data, climate, dashboard, time series, speeds.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-5-future-run-explore-the-climate">
+<h1>Step 5 — Future run: explore the climate<a class="headerlink" href="#step-5-future-run-explore-the-climate" title="Link to this heading">#</a></h1>
+<p>Weaker warming: <strong>+2 °C</strong> (vs 1960–1990) in 2100, into another folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_B_any_glacier<span class="w"> </span>inputs.oggm_shop.RGI_ID<span class="o">=</span>RGI2000-v7.0-G-11-01189<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s1">&#39;processes.climate.oggm.clim_trend_array=[[time,delta_temp,prec_scal],[2020,1.3,1.0],[2100,2.0,1.0]]&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>hydra.run.dir<span class="o">=</span>outputs/B_plus2
+</pre></div>
+</div>
+<p>Notebook: <code class="docutils literal notranslate"><span class="pre">compare_runs([run_B,</span> <span class="pre">&quot;outputs/B_plus2&quot;],</span> <span class="pre">[&quot;+4°C&quot;,</span> <span class="pre">&quot;+2°C&quot;])</span></code></p>
+<ul class="simple">
+<li><p>Is the modelled speed in 2020 close to the observed one? Which parameter would you change?</p></li>
+<li><p>Also try a stronger melt: <code class="docutils literal notranslate"><span class="pre">processes.smb.oggm.melt_enhancer=1.5</span></code></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-mini-project-model-your-own-glacier">
+<h1>The mini-project: model your own glacier<a class="headerlink" href="#the-mini-project-model-your-own-glacier" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?</strong></p>
+</div></blockquote>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Part</p></th>
+<th class="head"><p>What</p></th>
+<th class="head"><p>When</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>A. Common base</strong> (everyone)</p></td>
+<td><p>Present → Past (LIA, calibration) → Future (scenarios)</p></td>
+<td><p>Sessions 2–3</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>B. Explorations</strong> (≥ 1)</p></td>
+<td><p>B1 SMB model, B2 ice-flow parameters</p></td>
+<td><p><strong>today</strong></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>B3 response time, B4 moraines</p></td>
+<td><p>Session 3</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>C. Extensions</strong> (optional)</p></td>
+<td><p>open questions</p></td>
+<td><p>Session 3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then: the report (Lecture 3). Deadline: <em>to be announced</em></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="the-project-folder-project-my-glacier">
+<h1>The project folder: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code><a class="headerlink" href="#the-project-folder-project-my-glacier" title="Link to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-glacier/                         ← run igm_run from HERE
+├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
+├── run_future.sh                   A:  the future scenarios, one after the other
+├── run_sensitivity.sh              B2: grid of ice-flow parameters
+├── experiment/
+│   ├── common/my_glacier.yaml      YOUR RGI ID + GRID (coarsening) + ICE FLOW, shared by all
+│   ├── params_past.yaml            A:  1700-2020, climate-driven SMB
+│   ├── params_future.yaml          A:  2020-2100, one scenario
+│   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
+│   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
+│   └── params_past_moraines.yaml   B4: past run + debris particles
+└── outputs/, figures/, data/       created by IGM and the notebook
+</pre></div>
+</div>
+<p><strong>First thing to do</strong>: put the RGI ID of your glacier in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="part-a-step-1-present-check-the-initial-state">
+<h1>Part A, Step 1 — Present: check the initial state<a class="headerlink" href="#part-a-step-1-present-check-the-initial-state" title="Link to this heading">#</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod/project/my-glacier
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<span class="w"> </span>processes.time.end<span class="o">=</span><span class="m">2021</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/check
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Downloads the data (once) to <code class="docutils literal notranslate"><span class="pre">data/</span></code>, gives today’s modelled speeds</p></li>
+<li><p>Notebook: <code class="docutils literal notranslate"><span class="pre">plot_input_data</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> (area, volume, thickness, observed speeds, climate)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>: too fast / too slow? ➡️ adjust <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> or <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> in <code class="docutils literal notranslate"><span class="pre">common/my_glacier.yaml</span></code> (see B2)</p></li>
+<li><p>Compare with what you know: GLAMOS, swisstopo thickness map</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="part-a-step-2-past-from-the-lia-to-today">
+<h1>Part A, Step 2 — Past: from the LIA to today<a class="headerlink" href="#part-a-step-2-past-from-the-lia-to-today" title="Link to this heading">#</a></h1>
+<p>We do not know the past geometry. Trick: <strong>start in 1700 from today’s geometry</strong>, cool the climate ➡️ advance to the LIA maximum (~1850), then retreat with the observed climate 1901–2019.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_v1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Calibrate the <strong>pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></strong> (LIA maximum) and <strong><code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (today’s extent)</p></li>
+<li><p>Validate: LIA moraines, Siegfried map, today’s extent and volume</p></li>
+<li><p>One file / one folder per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/past_v2</span></code>), keep a run log in the notebook</p></li>
+<li><p>Mind the <strong>response time</strong>: the 1700–1850 spin-up must be long enough</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="part-a-step-3-future-20202100">
+<h1>Part A, Step 3 — Future: 2020–2100<a class="headerlink" href="#part-a-step-3-future-20202100" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (<code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> prints the offsets):</p>
+<ul class="simple">
+<li><p><strong>2020</strong>: today’s offset (≈ +1.3 °C at Findelen)</p></li>
+<li><p><strong>2100</strong>: 1981–2010 offset <strong>+</strong> scenario warming (CH2018, Switzerland, ~2085 vs 1981–2010):</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>RCP2.6 / SSP1-2.6</p></th>
+<th class="head"><p>RCP4.5 / SSP2-4.5</p></th>
+<th class="head"><p>RCP8.5 / SSP5-8.5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>≈ +0.6 to +1.9 °C</p></td>
+<td><p>≈ +2.0 to +3.3 °C</p></td>
+<td><p>≈ +3.3 to +5.4 °C</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code>: set your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> and the 2 offsets at the top, then <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code> ➡️ committed (today’s climate), RCP2.6, RCP4.5, RCP8.5</p>
+<p>Volume and area loss, front retreat, when does the glacier (nearly) disappear?</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="exploration-b1-does-the-smb-model-matter">
+<h1>Exploration B1 — Does the SMB model matter?<a class="headerlink" href="#exploration-b1-does-the-smb-model-matter" title="Link to this heading">#</a></h1>
+<p><em>(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_simple_v1
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Past with the <strong>ELA-based</strong> SMB (<code class="docutils literal notranslate"><span class="pre">params_past_simple.yaml</span></code>): set today’s ELA (snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS); LIA ELAs ≈ 100–200 m lower</p></li>
+<li><p>Compare with the <strong>climate-driven</strong> SMB (<code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code>) with <code class="docutils literal notranslate"><span class="pre">compare_runs</span></code>: LIA maximum, retreat, 2020</p></li>
+<li><p>Which one is easier to calibrate? Which one would you trust for the future, and why?</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="exploration-b2-how-well-do-we-know-the-ice-flow">
+<h1>Exploration B2 — How well do we know the ice flow?<a class="headerlink" href="#exploration-b2-how-well-do-we-know-the-ice-flow" title="Link to this heading">#</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>run_sensitivity.sh<span class="w">        </span><span class="c1"># 3 x 4 combinations of arrhenius x tau_ref, 12 short runs (≈ 3 min)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">compare_velocity_misfit</span></code>: which combination fits the observed surface speeds best?</p></li>
+<li><p>Are several combinations equally good (trade-off between deformation and sliding)?</p></li>
+<li><p>Redo the past or one scenario with the best one(s): how much does 2100 change?</p></li>
+</ul>
+<p>Commands and plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4. <strong>Save your work</strong> (YAML, notebook, figures) to SWITCHdrive!</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -873,11 +1165,11 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
       </div>
     </a>
     <a class="right-next"
-       href="tutorial-2/tutorial-2-igm.html"
+       href="first-runs/analysis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial 2 — First steps with IGM</p>
+        <p class="prev-next-title">First IGM runs — visualize the results</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -904,23 +1196,37 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_A_alets
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-tutorial-1-to-igm">From Tutorial 1 to IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-tutorial-to-igm">From the tutorial to IGM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#igm-in-one-picture-a-3d-glacier-evolution-model">IGM in one picture: a 3D glacier evolution model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-igm-solve">What does IGM solve?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-machine-learning">Where is the machine learning?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#igm-is-modular">IGM is modular</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-an-igm-run-folder">Structure of an IGM run folder</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-parameter-file-experiment-params-yaml">A parameter file (<code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code>)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-parameters">Changing parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-for-any-glacier-oggm-shop">Data for any glacier: <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oggm-shop-module-to-retrieve-glacier-data"><code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to retrieve glacier data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-force-the-smb">Two ways to force the SMB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-parameters">Ice-flow parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid-and-a-small-emulator">Fast runs: coarse grid and a small emulator</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-get">What you get</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modelling-workflow-for-your-project">The modelling workflow for your project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-with-igm-three-tools">How to work with IGM: three tools</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-igm-in-the-terminal">Run IGM in the terminal</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-2-now">Tutorial 2 (now)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-a-past-run-and-a-future-run-1-hour">Hands-on: a past run and a future run (≈ 1 hour)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-up-your-screen">Step 1 — Set up your screen</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-a-past-run-aletsch-19002000">Step 2 — A past run: Aletsch 1900–2000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-past-run-explore-smb-and-ice-flow-parameters">Step 3 — Past run: explore SMB and ice-flow parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-a-future-run-your-glacier-20202100">Step 4 — A future run: your glacier 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-future-run-explore-the-climate">Step 5 — Future run: explore the climate</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mini-project-model-your-own-glacier">The mini-project: model your own glacier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-project-folder-project-my-glacier">The project folder: <code class="docutils literal notranslate"><span class="pre">project/my-glacier/</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-1-present-check-the-initial-state">Part A, Step 1 — Present: check the initial state</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-2-past-from-the-lia-to-today">Part A, Step 2 — Past: from the LIA to today</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-step-3-future-20202100">Part A, Step 3 — Future: 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-b1-does-the-smb-model-matter">Exploration B1 — Does the SMB model matter?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-b2-how-well-do-we-know-the-ice-flow">Exploration B2 — How well do we know the ice flow?</a></li>
 </ul>
 
   </nav></div>

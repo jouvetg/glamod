@@ -127,7 +127,7 @@ where $D(h)$ is the ice diffusivity
 
 $$ D(h) = \frac{2A}{5} (\rho g)^3 h^5 \left(\frac{\partial z}{\partial x}\right)^2 \qquad (4) $$
 
-➡️ This is exactly what you will code/play with in **Tutorial 1**.
+➡️ This is exactly what you will code/play with in **the tutorial**.
 
 ---
 
@@ -173,7 +173,7 @@ The algorithm updates the glacier surface at each time step, accounting for both
 
 # Numerical models
 
-- The SIA-based equations can be solved in a few lines of code (Tutorial 1), see also the course on [numerical modelling](https://jouvetg.github.io/modnum/).
+- The SIA-based equations can be solved in a few lines of code (Tutorial), see also the course on [numerical modelling](https://jouvetg.github.io/modnum/).
 
 - There exists many glacier evolution models developed by glacier modellers: 
 [Elmer/Ice](https://elmerice.elmerfem.org/), [PISM](https://www.pism.io/), ISSM, CISM, [OGGM](https://oggm.org), IcePack, ...

@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Session 4 — Glacier du Mont Miné: modelling deglaciation dates" href="../../session4/mont-mine/tutorial-4-mont-mine.html" />
-    <link rel="prev" title="Mini-project: model your own glacier" href="../project.html" />
+    <link rel="prev" title="Glacier Modelling" href="../../session3/lecture-3-application-and-report.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -278,10 +278,15 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../../session1/1d-tutorial-1-sia-model.html">Tutorial 1 — A simple glacier model (SIA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session1/1d-tutorial-sia-model.html">Tutorial — A simple glacier model (SIA)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../../session1/1e-choose-your-glacier.html">Choose your glacier</a></li>
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 2: Introduction to IGM</span></p>
 <ul class="nav bd-sidenav">
@@ -304,7 +309,21 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../../session2/tutorial-2/tutorial-2-igm.html">Tutorial 2 — First steps with IGM</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../session2/first-runs/analysis.html">First IGM runs — visualize the results</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -318,10 +337,16 @@
 
 
 
+
+
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mini-project</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../project.html">Mini-project: model your own glacier</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
@@ -476,7 +501,14 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-download-the-data-and-check-the-initial-state">1. Present: download the data and check the initial state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today">2. Past: from the Little Ice Age to today</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-scenarios-20202100">3. Future: scenarios 2020–2100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">4. Figures for the report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explorations-part-b-choose-at-least-one">4. Explorations (Part B: choose at least one)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-two-types-of-smb-model">B1 — Two types of SMB model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-ice-flow-parameters-arrhenius-tau-ref">B2 — Ice-flow parameters (arrhenius × tau_ref)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-your-own-igm-module-oscillating-ela">B3 — Response time (your own IGM module, oscillating ELA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-with-particles">B4 — Moraines with particles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">5. Figures for the report</a></li>
 </ul>
             </nav>
         </div>
@@ -490,8 +522,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="my-glacier-analysis-notebook-mini-project">
 <h1>My glacier — analysis notebook (mini-project)<a class="headerlink" href="#my-glacier-analysis-notebook-mini-project" title="Link to this heading">#</a></h1>
-<p>This notebook is your <strong>lab book</strong> for the mini-project (see <code class="docutils literal notranslate"><span class="pre">project/project.md</span></code>). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
-<p><strong>How we work</strong> (as in Tutorial 2):</p>
+<p>This notebook is your <strong>lab book</strong> for the mini-project (guidelines: Lecture 2 for Part A and B1–B2, Lecture 3 for B3–B4 and the report). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
+<p><strong>How we work</strong> (as in Session 2):</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>What</p></th>
@@ -517,6 +549,7 @@
 <li><p><strong>Present</strong>: download the data, check the initial state</p></li>
 <li><p><strong>Past</strong>: Little Ice Age → today (calibration)</p></li>
 <li><p><strong>Future</strong>: scenarios 2020–2100 (<code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code>)</p></li>
+<li><p><strong>Explorations</strong> (choose at least one): B1–B2 in Session 2, B3–B4 in Session 3</p></li>
 <li><p>Figures for the report → <code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></li>
 </ol>
 <p>⚠️ Copy your notebook, YAML files and figures to your SWITCHdrive folder regularly.</p>
@@ -634,7 +667,7 @@
 </section>
 <section id="future-scenarios-20202100">
 <h2>3. Future: scenarios 2020–2100<a class="headerlink" href="#future-scenarios-20202100" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (see <code class="docutils literal notranslate"><span class="pre">project.md</span></code>):</p>
+<p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (see Lecture 2, Part A, Step 3):</p>
 <ul class="simple">
 <li><p>2020 row: present-day offset (printed by <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> above)</p></li>
 <li><p>2100 row: 1981–2010 offset + CH2018 warming of the scenario</p></li>
@@ -661,8 +694,73 @@
 </div>
 </div>
 </section>
+<section id="explorations-part-b-choose-at-least-one">
+<h2>4. Explorations (Part B: choose at least one)<a class="headerlink" href="#explorations-part-b-choose-at-least-one" title="Link to this heading">#</a></h2>
+<p>Session 2: B1 (SMB model), B2 (ice-flow parameters). Session 3: B3 (response time), B4 (moraines).</p>
+<section id="b1-two-types-of-smb-model">
+<h3>B1 — Two types of SMB model<a class="headerlink" href="#b1-two-types-of-smb-model" title="Link to this heading">#</a></h3>
+<p>▶ <strong>In the terminal</strong>: adapt the ELA history in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA from the snowline / GLAMOS), then</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_simple_v1
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_smb_simple</span><span class="p">(</span><span class="n">ela</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">gradabl</span><span class="o">=</span><span class="mf">0.009</span><span class="p">,</span> <span class="n">gradacc</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">accmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>   <span class="c1"># &lt;- your ELA and gradients</span>
+<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/past_v1&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/past_simple_v1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;climate-driven SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;ELA-based SMB&quot;</span><span class="p">],</span> <span class="n">observations</span><span class="o">=</span><span class="n">obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b2-ice-flow-parameters-arrhenius-tau-ref">
+<h3>B2 — Ice-flow parameters (arrhenius × tau_ref)<a class="headerlink" href="#b2-ice-flow-parameters-arrhenius-tau-ref" title="Link to this heading">#</a></h3>
+<p>▶ <strong>In the terminal</strong> (12 runs of 1 year, ≈ 3 min): <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_sensitivity.sh</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="n">sens_runs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;outputs/sens_*&quot;</span><span class="p">))</span>
+<span class="n">compare_velocity_misfit</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">sens_runs</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b3-response-time-your-own-igm-module-oscillating-ela">
+<h3>B3 — Response time (your own IGM module, oscillating ELA)<a class="headerlink" href="#b3-response-time-your-own-igm-module-oscillating-ela" title="Link to this heading">#</a></h3>
+<p>▶ <strong>In the terminal</strong> (400 model years, a few minutes); other periods with <code class="docutils literal notranslate"><span class="pre">processes.smb_oscillating.period=...</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/response_200
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time<span class="w"> </span>processes.smb_oscillating.period<span class="o">=</span><span class="m">100</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/response_100
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_response_time</span><span class="p">(</span><span class="s2">&quot;outputs/response_200&quot;</span><span class="p">)</span>
+<span class="c1"># plot_response_time(&quot;outputs/response_100&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b4-moraines-with-particles">
+<h3>B4 — Moraines with particles<a class="headerlink" href="#b4-moraines-with-particles" title="Link to this heading">#</a></h3>
+<p>▶ <strong>In the terminal</strong>: put your calibrated <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> and <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_moraines.yaml</span></code>, then</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_moraines
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_p</span> <span class="o">=</span> <span class="s2">&quot;outputs/past_moraines&quot;</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1850</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">2020</span><span class="p">]:</span>
+    <span class="n">plot_particles</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">)</span>                <span class="c1"># all particles, coloured by depth</span>
+<span class="n">plot_particles</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">rh_min</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>       <span class="c1"># debris at the surface only: where moraines form</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="figures-for-the-report">
-<h2>4. Figures for the report<a class="headerlink" href="#figures-for-the-report" title="Link to this heading">#</a></h2>
+<h2>5. Figures for the report<a class="headerlink" href="#figures-for-the-report" title="Link to this heading">#</a></h2>
 <p>The helper functions in <code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code> are meant for quick looks. For the report, make your own figures: copy the code of a helper into a cell below and adapt it (years shown, titles, units, colors, fonts), then save it into <code class="docutils literal notranslate"><span class="pre">figures/</span></code> <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;figures/fig_volume.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
 </pre></div>
@@ -708,12 +806,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../project.html"
+       href="../../session3/lecture-3-application-and-report.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mini-project: model your own glacier</p>
+        <p class="prev-next-title">Glacier Modelling</p>
       </div>
     </a>
     <a class="right-next"
@@ -747,7 +845,14 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-download-the-data-and-check-the-initial-state">1. Present: download the data and check the initial state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today">2. Past: from the Little Ice Age to today</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-scenarios-20202100">3. Future: scenarios 2020–2100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">4. Figures for the report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explorations-part-b-choose-at-least-one">4. Explorations (Part B: choose at least one)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-two-types-of-smb-model">B1 — Two types of SMB model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-ice-flow-parameters-arrhenius-tau-ref">B2 — Ice-flow parameters (arrhenius × tau_ref)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-your-own-igm-module-oscillating-ela">B3 — Response time (your own IGM module, oscillating ELA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-with-particles">B4 — Moraines with particles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">5. Figures for the report</a></li>
 </ul>
   </nav></div>
 

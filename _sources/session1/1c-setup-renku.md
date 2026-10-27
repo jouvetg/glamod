@@ -8,7 +8,7 @@ color: white
 
 # Glacier Modelling
 
-## Session 1 — Hour 3: Setting up RenkuLab, then Tutorial 1
+## Session 1 — Hour 3: Setting up RenkuLab, then the tutorial
 
 ---
 
@@ -49,7 +49,7 @@ On [renkulab.io](https://renkulab.io), a platform of the Swiss Data Science Cent
 1. Open **your** project → *Sessions* → **Launch** (`glamod` launcher)
 2. Wait 1–3 min (longer the first time) → JupyterLab opens in your browser
 3. File browser (left): `glamod/` = course material, plus your SWITCHdrive folder
-4. Open `glamod/session1/1d-tutorial-1-sia-model.ipynb` → run the cells top to bottom (Shift+Enter)
+4. Open `glamod/session1/1d-tutorial-sia-model.ipynb` → run the cells top to bottom (Shift+Enter)
 
 At the end of the afternoon: **Pause** the session (do not delete it).
 
