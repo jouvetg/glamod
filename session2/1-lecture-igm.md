@@ -14,8 +14,6 @@ p > img:only-child:not(.emoji) { display: block; margin: 0 auto; }
 section.center-img p { text-align: center; }
 </style>
 
-# Glacier Modelling
-
 ## Session 2 — Lecture 2: Introduction to IGM
   
 
@@ -80,14 +78,14 @@ using a **convolutional neural network** on a **raster grid**:
 # Structure of an IGM run folder
 
 ```
-first-runs/                      ← run igm_run from HERE
+my-glacier/                      ← run igm_run from HERE
 ├── experiment/                  PARAMETERS
-│   ├── params_A_aletsch.yaml        one YAML file = one experiment
-│   └── common/iceflow_offline.yaml  shared settings (ice-flow emulator)
-├── data/                        INPUTS
-│   └── input.nc                     topography, thickness, velocities, climate...
+│   ├── params_past.yaml             one YAML file = one experiment
+│   └── common/                      shared settings (your glacier, grid, ice flow)
+├── data/                        INPUTS (downloaded by oggm_shop at the first run)
+│   └── input_<RGI_ID>.nc            topography, thickness, velocities, climate...
 └── outputs/                     OUTPUTS: one folder per run (hydra.run.dir=...)
-    └── A_reference/
+    └── past_v1/
         ├── output.nc                maps through time
         ├── output_ts.nc             volume and area through time
         ├── dashboard_*.png          quick-look images
@@ -147,7 +145,7 @@ Give an RGI v7 ID; IGM downloads (via [OGGM](https://oggm.org)) and maps to a 50
 - monthly climate 1901–present (GSWP3-W5E5)
 - calibrated SMB parameters (to match Hugonnet et al. 2021 elevation change)
 
-Everything ends up in `data/input.nc`, cached for the next runs.
+Everything ends up in `data/input_<RGI_ID>.nc`, cached for the next runs.
 
 ---
 
@@ -252,12 +250,12 @@ Drag the tabs to split the screen.
 # Run IGM in the terminal
 
 ```bash
-cd ~/work/glamod/session2/first-runs          # the folder that contains experiment/
-igm_run +experiment=params_A_aletsch hydra.run.dir=outputs/A_reference
+cd ~/work/my-glacier          # the folder that contains experiment/
+igm_run +experiment=params_past hydra.run.dir=outputs/past_v1
 ```
 
-- `+experiment=params_A_aletsch` → reads `experiment/params_A_aletsch.yaml`
-- `hydra.run.dir=outputs/A_reference` → **always name your run folder**: this name is how you find it in the notebook
+- `+experiment=params_past` → reads `experiment/params_past.yaml`
+- `hydra.run.dir=outputs/past_v1` → **always name your run folder**: this name is how you find it in the notebook
 - Stop a run: **Ctrl+C**. Recall the last command: **↑**
 
 Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `dashboard_*.png` (quick looks) and `.hydra/` (**all** parameters used).
@@ -268,9 +266,9 @@ Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `das
 
 ```python
 from helper import *                      # course plotting helpers (utils/helper.py)
-show_dashboard("outputs/A_reference")     # last dashboard images
-compare_runs(["outputs/A_reference", "outputs/A_ela_plus200"],
-             ["reference", "ELA +200 m"])  # volume and area through time
+show_dashboard("outputs/past_v1")         # last dashboard images
+compare_runs(["outputs/past_v1", "outputs/past_v2"],
+             ["v1", "v2"])                 # volume and area through time
 ```
 
 - Re-run the notebook as often as you like: it only **reads** the run folders
@@ -294,102 +292,6 @@ Ask the assistant!
 
 ---
 
-# Hands-on: a past run and a future run (≈ 1 hour)
-
-In `session2/first-runs/`:
-
-| Step | |
-|---|---|
-| 1 | Set up the screen: YAML + terminal + notebook |
-| 2–3 | **Past** run: Aletsch, 1900–2000, ELA-based SMB ➡️ explore **SMB** and **ice-flow** parameters |
-| 4–5 | **Future** run: **your glacier** (RGI ID), climate-driven SMB, 2020–2100 ➡️ explore the **climate** |
-| 6 | Your project: the same for your glacier, LIA → 2100 |
-
-All runs in the **terminal**; `analysis.ipynb` (one section per run) **only plots**.
-
----
-
-# Step 1 — Set up your screen
-
-1. File browser → `glamod/session2/first-runs/`
-2. Open `analysis.ipynb`, run the first cell (loads the plotting helpers)
-3. *File → New → Terminal*, drag it next to the notebook, then:
-
-```bash
-cd ~/work/glamod/session2/first-runs
-ls experiment/
-```
-
-4. Double-click `experiment/params_A_aletsch.yaml` to read it: which **inputs**, **processes**, **outputs**? Which SMB?
-
----
-
-# Step 2 — A past run: Aletsch 1900–2000
-
-In the **terminal** (≈ 1–2 min on CPU):
-
-```bash
-igm_run +experiment=params_A_aletsch hydra.run.dir=outputs/A_reference
-```
-
-- Input: `data/input.nc` (prepared for you), 100 m grid
-- SMB: ELA rises from 2800 m (1900) to 2900 m (2000), with ablation/accumulation gradients
-
-Then in the **notebook**, section *Run A*: input data, SMB profile, dashboard, volume & area, animation, modelled vs observed speeds.
-
----
-
-# Step 3 — Past run: explore SMB and ice-flow parameters
-
-One run = one named folder.
-
-1. **ELA 200 m higher**: duplicate `params_A_aletsch.yaml` → `params_A_ela.yaml`, add 200 to the `ela` column, then
-```bash
-igm_run +experiment=params_A_ela hydra.run.dir=outputs/A_ela_plus200
-```
-2. **More slippery bed** (default here: `tau_ref` = 0.325 MPa) and 3. **softer ice** (default: `arrhenius` = 78):
-```bash
-igm_run +experiment=params_A_aletsch processes.iceflow.physics.sliding.tau_ref=0.15 hydra.run.dir=outputs/A_tau015
-igm_run +experiment=params_A_aletsch processes.iceflow.physics.viscosity.arrhenius=150 hydra.run.dir=outputs/A_arrh150
-```
-
-Notebook: `compare_runs([...])`. How do volume and speeds change? Which run matches the observed speeds best?
-
----
-
-# Step 4 — A future run: your glacier 2020–2100
-
-Your RGI v7 ID: `session1/1e-choose-your-glacier.md` (here: Findelengletscher). In the **terminal**:
-
-```bash
-igm_run +experiment=params_B_any_glacier inputs.oggm_shop.RGI_ID=RGI2000-v7.0-G-11-01189 \
-  hydra.run.dir=outputs/B_RGI2000-v7.0-G-11-01189
-```
-
-- First run: `oggm_shop` downloads the data (≈ 1 min), stored in `data/` and **re-used** next time
-- Climate: observed 1901–2019, then random years of 1960–1990 + **+4 °C in 2100** (`clim_trend_array`)
-
-Notebook, section *Run B*: set `RGI_ID`, then plot input data, climate, dashboard, time series, speeds.
-
----
-
-# Step 5 — Future run: explore the climate
-
-Weaker warming: **+2 °C** (vs 1960–1990) in 2100, into another folder:
-
-```bash
-igm_run +experiment=params_B_any_glacier inputs.oggm_shop.RGI_ID=RGI2000-v7.0-G-11-01189 \
-  'processes.climate.oggm.clim_trend_array=[[time,delta_temp,prec_scal],[2020,1.3,1.0],[2100,2.0,1.0]]' \
-  hydra.run.dir=outputs/B_plus2
-```
-
-Notebook: `compare_runs([run_B, "outputs/B_plus2"], ["+4°C", "+2°C"])`
-
-- Is the modelled speed in 2020 close to the observed one? Which parameter would you change?
-- Also try a stronger melt: `processes.smb.oggm.melt_enhancer=1.5`
-
----
-
 # The mini-project: model your own glacier
 
 > **How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?**
@@ -405,31 +307,58 @@ Then: the report (Lecture 3). Deadline: *to be announced*
 
 ---
 
-# The project folder: `project/my-glacier/`
+# Hands-on: start your project (≈ 1 hour, then hours 2–4)
+
+| Step | |
+|---|---|
+| 0 | **Your own copy** of the template folder, your glacier, your screen |
+| 1 | **Present**: download the data, check the initial state |
+| 2 | **Past**: LIA → today ➡️ explore SMB/climate and ice-flow parameters, calibrate |
+| 3 | **Future**: climate scenarios 2020–2100 |
+| 4 | Explorations **B1** (SMB model) and **B2** (ice-flow parameters) |
+
+All runs in the **terminal**; `analysis.ipynb` (one section per step) **only plots**.
+
+---
+
+# Step 0 — Your own copy of the template
+
+Once, in a terminal (**your** folder, outside the course material, which may be updated):
+
+```bash
+cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier
+cd ~/work/my-glacier
+```
+
+1. Put the RGI ID of **your** glacier in `experiment/common/my_glacier.yaml` (default: Findelengletscher)
+2. Open `analysis.ipynb`, run the first cell; drag the terminal next to it
+3. **Save** to your SWITCHdrive folder at the end of each afternoon (YAML, notebook, scripts, figures)
+
+---
+
+# The template: `my-glacier/`
 
 ```
 my-glacier/                         ← run igm_run from HERE
 ├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
-├── run_future.sh                   A:  the future scenarios, one after the other
+├── run_future.sh                   Step 3: the future scenarios, one after the other
 ├── run_sensitivity.sh              B2: grid of ice-flow parameters
 ├── experiment/
 │   ├── common/my_glacier.yaml      YOUR RGI ID + GRID (coarsening) + ICE FLOW, shared by all
-│   ├── params_past.yaml            A:  1700-2020, climate-driven SMB
-│   ├── params_future.yaml          A:  2020-2100, one scenario
+│   ├── params_past.yaml            Step 2: 1700-2020, climate-driven SMB
+│   ├── params_future.yaml          Step 1 (check) and 3: 2020-2100, one scenario
 │   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
 │   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
 │   └── params_past_moraines.yaml   B4: past run + debris particles
 └── outputs/, figures/, data/       created by IGM and the notebook
 ```
 
-**First thing to do**: put the RGI ID of your glacier in `experiment/common/my_glacier.yaml`
-
 ---
 
-# Part A, Step 1 — Present: check the initial state
+# Step 1 — Present: check the initial state
 
 ```bash
-cd ~/work/glamod/project/my-glacier
+cd ~/work/my-glacier
 igm_run +experiment=params_future processes.time.end=2021 hydra.run.dir=outputs/check
 ```
 
@@ -440,22 +369,22 @@ igm_run +experiment=params_future processes.time.end=2021 hydra.run.dir=outputs/
 
 ---
 
-# Part A, Step 2 — Past: from the LIA to today
+# Step 2 — Past: from the LIA to today
 
-We do not know the past geometry. Trick: **start in 1700 from today's geometry**, cool the climate ➡️ advance to the LIA maximum (~1850), then retreat with the observed climate 1901–2019.
+Trick: **start in 1700 from today's geometry**, cool the climate ➡️ LIA maximum (~1850), then retreat with the observed climate 1901–2019.
 
 ```bash
 igm_run +experiment=params_past hydra.run.dir=outputs/past_v1
 ```
 
-- Calibrate the **pre-1901 `delta_temp`** (LIA maximum) and **`melt_enhancer`** (today's extent)
-- Validate: LIA moraines, Siegfried map, today's extent and volume
-- One file / one folder per try (`params_past_v2.yaml` ➡️ `outputs/past_v2`), keep a run log in the notebook
-- Mind the **response time**: the 1700–1850 spin-up must be long enough
+- **Explore and calibrate**, one parameter at a time, one file / folder per try (`params_past_v2` ➡️ `outputs/past_v2`):
+  - climate/SMB: **pre-1901 `delta_temp`** (LIA maximum), **`melt_enhancer`** (today's extent)
+  - ice flow: `tau_ref`, `arrhenius` in `common/my_glacier.yaml`
+- Validate: LIA moraines, Siegfried map, today's extent
 
 ---
 
-# Part A, Step 3 — Future: 2020–2100
+# Step 3 — Future: 2020–2100
 
 `delta_temp` is relative to **1960–1990** (`plot_climate` prints the offsets):
 - **2020**: today's offset (≈ +1.3 °C at Findelen)
@@ -471,7 +400,7 @@ Volume and area loss, front retreat, when does the glacier (nearly) disappear?
 
 ---
 
-# Exploration B1 — Does the SMB model matter?
+# Step 4 — Exploration B1: does the SMB model matter?
 
 *(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)*
 
@@ -485,7 +414,7 @@ igm_run +experiment=params_past_simple hydra.run.dir=outputs/past_simple_v1
 
 ---
 
-# Exploration B2 — How well do we know the ice flow?
+# Step 4 — Exploration B2: how well do we know the ice flow?
 
 ```bash
 bash run_sensitivity.sh        # 3 x 4 combinations of arrhenius x tau_ref, 12 short runs (≈ 3 min)

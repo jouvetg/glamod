@@ -8,10 +8,9 @@ glamod/
 ├── setup/renku.md            RenkuLab guide (students + teaching team setup)
 ├── environment/              Dockerfile + requirements of the session image (Jupyter + IGM, main branch)
 ├── session1/                 1a/1b lectures (Marp, incl. Ebener case), 1c RenkuLab setup slides, 1d tutorial (SIA toy model), 1e choose-your-glacier + candidate list
-├── session2/                 lecture 2 (IGM, Marp), first-runs/ (IGM runs A and B + analysis notebook)
+├── session2/                 lecture 2 (IGM, Marp) + my-glacier/ (the project template: students copy it to ~/work/my-glacier)
 ├── session3/                 lecture 3 (additional experiments, report)
 ├── session4/                 lecture 4 (Marp, taught in the course 'Dates and Rates') + mont-mine/ (experiment, samples, analysis notebook): deglaciation vs sample ages
-├── project/                  my-glacier/ template (YAML experiments, run_future.sh, run_sensitivity.sh, user module, analysis notebook)
 ├── utils/helper.py           plotting helpers used by all notebooks
 └── archive/                  old scripts (not published)
 ```

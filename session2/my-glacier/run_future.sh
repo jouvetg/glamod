@@ -1,7 +1,7 @@
 #!/bin/bash
 # FUTURE scenarios 2020-2100 for my glacier.
 # 1. Set the 3 numbers below (from the past calibration and plot_climate in analysis.ipynb).
-# 2. In a terminal, from project/my-glacier/:   bash run_future.sh
+# 2. In a terminal, from your copy ~/work/my-glacier/:   bash run_future.sh
 # Each scenario runs params_future.yaml with a different 2100 delta_temp, into outputs/future_<name>/.
 # (The values actually used are recorded in outputs/future_<name>/.hydra/overrides.yaml.)
 
