@@ -7,7 +7,7 @@ color: white
 math: katex
 ---
 
-## Session 3 — Lecture 3: Additional experiments and reporting
+# Session 3 — Lecture 3: Additional experiments and reporting
 
 Guillaume Jouvet
 

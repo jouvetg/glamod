@@ -14,7 +14,7 @@ p > img:only-child:not(.emoji) { display: block; margin: 0 auto; }
 section.center-img p { text-align: center; }
 </style>
 
-## Session 2 — Lecture 2: Introduction to IGM
+# Session 2 — Lecture 2: Introduction to IGM
   
 
 ---
