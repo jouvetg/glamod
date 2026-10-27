@@ -6,7 +6,7 @@ backgroundColor: black
 color: white
 ---
 
-## Session 1 — Lecture 1b: Numerical modelling of Glaciers
+# Session 1 — Lecture 1b: Numerical modelling of Glaciers
 
 Guillaume Jouvet
 

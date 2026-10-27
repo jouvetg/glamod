@@ -7,7 +7,7 @@ color: white
 math: katex
 ---
 
-## Session 4 — Glacier du Mont Miné: modelling deglaciation dates
+# Session 4 — Glacier du Mont Miné: modelling deglaciation dates
 
 Guillaume Jouvet
 

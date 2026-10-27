@@ -6,7 +6,7 @@ backgroundColor: black
 color: white
 ---
 
-## Session 1 — Hour 3: Setting up RenkuLab, then the tutorial
+# Session 1 — Hour 3: Setting up RenkuLab, then the tutorial
 
 ---
 
