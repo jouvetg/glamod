@@ -25,4 +25,5 @@ parts:
       - file: project/my-glacier/analysis
   - caption: "Session 4: Mont Miné (course Dates & Rates)"
     chapters:
-      - file: session4/mont-mine/tutorial-4-mont-mine
+      - file: session4/lecture-4-mont-mine
+      - file: session4/mont-mine/analysis

@@ -10,3 +10,6 @@ archive/**/data/
 # Slides not distributed (kept locally only): Ebener case, glacier goo
 session1/case-ebener.pdf
 session2/2-glacier-goo.md
+
+# Marp exports (generated locally from the .md slides)
+session*/*.html

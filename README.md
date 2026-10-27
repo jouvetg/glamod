@@ -10,7 +10,7 @@ glamod/
 ├── session1/                 1a/1b lectures (Marp, incl. Ebener case), 1c RenkuLab setup slides, 1d tutorial (SIA toy model), 1e choose-your-glacier + candidate list
 ├── session2/                 lecture 2 (IGM, Marp), first-runs/ (IGM runs A and B + analysis notebook)
 ├── session3/                 lecture 3 (additional experiments, report)
-├── session4/mont-mine/       Mont Miné notebook (taught in the course 'Dates and Rates'), deglaciation vs sample ages
+├── session4/                 lecture 4 (Marp, taught in the course 'Dates and Rates') + mont-mine/ (experiment, samples, analysis notebook): deglaciation vs sample ages
 ├── project/                  my-glacier/ template (YAML experiments, run_future.sh, run_sensitivity.sh, user module, analysis notebook)
 ├── utils/helper.py           plotting helpers used by all notebooks
 └── archive/                  old scripts (not published)
