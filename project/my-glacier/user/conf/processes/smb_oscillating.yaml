@@ -1,0 +1,7 @@
+smb_oscillating:
+  ela_mean: null      # mean ELA (m); null = 40 % quantile of today's glacier surface
+  amplitude: 200.0    # amplitude of the ELA oscillation (m)
+  period: 200.0       # period of the oscillation (yr)
+  gradabl: 0.009      # ablation gradient (m ice / yr / m)
+  gradacc: 0.005      # accumulation gradient
+  accmax: 2.0         # maximum accumulation (m ice / yr)

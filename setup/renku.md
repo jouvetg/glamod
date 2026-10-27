@@ -4,7 +4,7 @@ All computations of this course run **online** on [RenkuLab](https://renkulab.io
 
 ## For students
 
-The same guide is presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3: setup, then Tutorial 1). How to work with IGM is presented in Lecture 2.
+The same guide is presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3: setup, then the tutorial). How to work with IGM is presented in Lecture 2.
 
 | Renku | What it is for you |
 |---|---|
@@ -28,11 +28,11 @@ The same guide is presented in the slides `session1/1c-setup-renku.md` (Session 
 
 ```
 glamod/
-├── session1/     lectures, 1d-tutorial-1-sia-model.ipynb, 1e-choose-your-glacier.md
-├── session2/     lecture on IGM, tutorial-2/ (IGM hands-on)
-├── session3/     project goals & report guidelines
+├── session1/     lectures, 1d-tutorial-sia-model.ipynb, 1e-choose-your-glacier.md
+├── session2/     lecture on IGM, first-runs/ (first IGM runs)
+├── session3/     additional experiments & report guidelines
 ├── session4/     Mont Miné (course "Dates and Rates")
-├── project/      mini-project guide + my-glacier/ (your project template)
+├── project/      my-glacier/ (your mini-project folder; guidelines in the Lectures 2 and 3)
 └── utils/        plotting helpers used by the notebooks
 ```
 
@@ -49,7 +49,7 @@ glamod/
 Drag the tabs to put them side by side. In the terminal, from the folder that contains `experiment/`:
 
 ```bash
-cd ~/work/glamod/session2/tutorial-2
+cd ~/work/glamod/session2/first-runs
 igm_run +experiment=params_A_aletsch hydra.run.dir=outputs/A_reference
 ```
 
@@ -111,22 +111,24 @@ Results are written to the named folder `outputs/A_reference/` (`output.nc`, `ou
    - **Resource class**: the GPU class of the course resource pool (students can pick the CPU class at launch if no GPU is free).
    - Name: `glamod` → *Add session launcher*.
 6. **Mark the project as a template**: *Settings* → toggle *Template project*. Make it visible to the students (public, or within the course group), and post the link on Moodle.
-7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/1d-tutorial-1-sia-model.ipynb`, `session2/tutorial-2/tutorial-2-igm.ipynb` and the project (`project/my-glacier/`: check run, `params_past`, `bash run_future.sh`, then `analysis.ipynb`), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
+7. **Dry run** with the assistant (as a student account): copy the template, add a SWITCHdrive data connector, launch, run `session1/1d-tutorial-sia-model.ipynb`, the Session 2 runs A and B (`session2/first-runs/`, steps in the lecture) and the project (`project/my-glacier/`: check run, `params_past`, `bash run_future.sh`, then `analysis.ipynb`), save a file to SWITCHdrive, pause and resume the session. Check that the GPU is used (`nvidia-smi` in a terminal while IGM runs), measure the times against the CPU table below, and check the idle/hibernation rules of the resource pool with the Renku team.
 
 **Updating the material during the course**: students' copies keep a link to the GitHub repository; a new session clones the latest version. In an existing (paused) session, run `git pull` in `~/work/glamod` (students' own changes may conflict: they should work in copies of the files, e.g. in their SWITCHdrive folder or with new file names).
 
-### Timings measured on CPU (IGM 3.2.0 + emulators, laptop CPU, no GPU) — GPU timings to be measured during the dry run
+### Timings measured on CPU (IGM main `d368b9e`, emulator `dahunet_edu`, grid coarsening 2, laptop CPU, no GPU)
 
 | Run | What | Wall time |
 |---|---|---|
-| `params_A_aletsch` | Aletsch, 100 m, 1900–2000, simple SMB, off-line emulator | ~80 s |
-| `params_B_any_glacier` | data download + Findelen, 2020–2100, OGGM climate SMB | ~80 s |
-| `params_C_custom_smb` | Aletsch, 1900–2300, user SMB module | ~4 min |
-| project `params_past` | Findelen, 1700–2020, climate SMB | ~4.5 min |
-| project `params_past_simple` | Findelen, 1700–2020, ELA SMB | ~4.5 min |
-| project `params_future` | Findelen, 2020–2100, climate SMB | ~1 min |
+| `params_A_aletsch` | Aletsch, 1900–2000, simple SMB (coarsening 2 / 1) | ~25 s / ~40 s |
+| `params_B_any_glacier` | data download + Findelen, 2020–2100, OGGM climate SMB | ~30 s |
+| project check run | Findelen, 1 year | ~12 s |
+| project `params_past` | Findelen, 1700–2020, climate SMB | ~50 s |
+| project `run_future.sh` | 4 scenarios 2020–2100 | ~1.5 min |
+| project `params_response_time` | 400 years, user SMB module | ~1 min |
+| project `params_past_moraines` | 1700–2020 + particles | ~2 min |
+| project `run_sensitivity.sh` | 12 runs of 1 year | ~2.5 min |
 
-Larger glaciers take somewhat longer (for reference, Aletsch, 82 km², runs 100 years in ~80 s). These timings used ~8 CPU cores (TensorFlow uses all available cores): with 2 CPUs per session, expect runs 2–4× slower. Re-measure during the dry run, and size the resource class accordingly (4 CPUs per session would be comfortable). Executing the whole of Tutorial 2, or the whole project notebook (past + 4 scenarios), took ~9 min each on 8 cores. 20 students running at the same time need a correspondingly sized resource pool.
+Larger glaciers take somewhat longer (for reference, Aletsch, 82 km², runs 100 years in ~80 s). These timings used ~8 CPU cores (TensorFlow uses all available cores): with 2 CPUs per session, expect runs 2–4× slower. Re-measure during the dry run, and size the resource class accordingly (4 CPUs per session would be comfortable). Executing all runs of Session 2 (A and B), or the whole project notebook (past + 4 scenarios), took ~9 min each on 8 cores. 20 students running at the same time need a correspondingly sized resource pool.
 
 ### Check the glacier list
 

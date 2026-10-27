@@ -25,17 +25,24 @@ inputs:
     filename: input_${inputs.oggm_shop.RGI_ID}.nc   # one data file per glacier (re-used if it exists!)
   local:
     filename: ${inputs.oggm_shop.filename}          # load the file written by oggm_shop
+    coarsening:
+      ratio: 2              # GRID: 2 = twice coarser grid -> fast test runs; set 1 for your final runs
 
 processes:
   time:
     start: 2020.0
     end: 2100.0
     save: 10.0
-  iceflow:
+  iceflow:                  # ICE FLOW (off-line emulator, see common/iceflow_offline.yaml)
+    unified:
+      network:
+        pretrained_path: "dahunet_edu.keras"   # emulator: dahunet_edu (smallest, fastest)
     physics:
       sliding:
-        tau_ref: 0.215
-        u_ref: 100.0
+        tau_ref: 0.215         # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
+        u_ref: 100.0          # (m/yr)
+      viscosity:
+        arrhenius: 78.0       # ice softness A (MPa^-3 a^-1): higher = softer ice
   climate:
     method: oggm            # historical climate (GSWP3-W5E5, 1901-2019) + a trend
     oggm:

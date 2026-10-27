@@ -8,7 +8,7 @@
 # (ii) matches the present-day extent/volume in 2020.
 
 defaults:
-  - common: my_glacier
+  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
   - override /inputs: [oggm_shop, local]
   - override /processes: [climate, smb, iceflow, time, thk]
   - override /outputs: [local, live_dashboard]

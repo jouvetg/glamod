@@ -1,6 +1,7 @@
 # @package _global_
 #
-# Settings shared by ALL experiments of the project: your glacier, data and ice flow.
+# Settings shared by ALL experiments of the project: your glacier, the GRID (coarsening)
+# and the ICE FLOW (emulator, sliding, ice softness).
 # Change the RGI ID here ONCE (or on the command line: inputs.oggm_shop.RGI_ID=...).
 # Experiments include this file with `- common: my_glacier` (first line of their defaults).
 
@@ -14,15 +15,20 @@ inputs:
     filename: input_${inputs.oggm_shop.RGI_ID}.nc       # one data file per glacier, re-used if it exists
   local:
     filename: ${inputs.oggm_shop.filename}
+    coarsening:
+      ratio: 2              # GRID: 2 = twice coarser grid -> fast test runs; set 1 for your final runs
 
 processes:
-  iceflow:
+  iceflow:                  # ICE FLOW (off-line emulator, see common/iceflow_offline.yaml)
+    unified:
+      network:
+        pretrained_path: "dahunet_edu.keras"   # emulator: dahunet_edu (smallest, fastest)
     physics:
       sliding:
-        tau_ref: 0.215       # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
-        u_ref: 100.0         # (m/yr)
+        tau_ref: 0.215         # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
+        u_ref: 100.0          # (m/yr)
       viscosity:
-        arrhenius: 78.0      # ice softness A (MPa^-3 a^-1): higher = softer ice
+        arrhenius: 78.0       # ice softness A (MPa^-3 a^-1): higher = softer ice
 
 outputs:
   live_dashboard:

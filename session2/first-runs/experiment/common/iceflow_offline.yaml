@@ -12,7 +12,8 @@
 # It is merged on top of IGM's global defaults and below the experiment's own
 # body, so the experiment can still override individual keys (e.g. sliding.tau_ref).
 #
-# This fragment: the off-line trained iceflow emulator (frozen pretrained dahunet_mini).
+# This fragment: the off-line trained iceflow emulator (frozen pretrained network).
+# dahunet_edu = the smallest and fastest emulator shipped with IGM (others: dahunet_micro, dahunet_mini, dahunet).
 processes:
   iceflow:
     method: unified
@@ -26,5 +27,5 @@ processes:
       nbit_init: 0
       retrain_freq: 0
       network:
-        pretrained_path: "dahunet_mini.keras"
+        pretrained_path: "dahunet_edu.keras"
         pretrained: true

@@ -663,6 +663,8 @@ def compare_modeled_observed_velocity(input_file='data/input.nc', output_file='o
     
     # Load output data with modeled velocities
     ds_output = xr.open_dataset(output_file)
+    # observations on the model grid (the run may use a coarser grid: inputs.local.coarsening)
+    ds_input = ds_input.interp(x=ds_output['x'], y=ds_output['y'])
     
     # Calculate observed velocity magnitude from components
     uvelsurfobs = ds_input['uvelsurfobs'].values
@@ -923,6 +925,121 @@ def compare_runs(run_dirs, labels=None, observations=None):
         ax.legend()
     plt.tight_layout()
     plt.show()
+
+
+def plot_response_time(run_dir):
+    """Response-time experiment (params_response_time): ELA forcing and volume response through time.
+
+    Reads the oscillation parameters in run_dir/.hydra/config.yaml, plots the ELA and the ice
+    volume, and estimates the lag between the ELA minimum and the volume maximum.
+    """
+    import os, yaml
+    with open(os.path.join(run_dir, '.hydra', 'config.yaml')) as f:
+        cfg = yaml.safe_load(f)
+    p = cfg['processes']['smb_oscillating']
+    t0 = cfg['processes']['time']['start']
+    ds = xr.open_dataset(os.path.join(run_dir, 'output_ts.nc'))
+    t, vol = ds['time'].values, ds['vol'].values
+    ds.close()
+    ela_anom = -p['amplitude'] * np.sin(2 * np.pi * (t - t0) / p['period'])
+    fig, ax1 = plt.subplots(figsize=(10, 4))
+    ax1.plot(t, ela_anom, color='tab:red', lw=2)
+    ax1.set_ylabel('ELA anomaly (m)', color='tab:red')
+    ax1.invert_yaxis()   # low ELA (glacier-friendly) up
+    ax2 = ax1.twinx()
+    ax2.plot(t, vol, color='tab:blue', lw=2)
+    ax2.set_ylabel('Ice volume (km$^3$)', color='tab:blue')
+    ax1.set_xlabel('Model time (yr)')
+    ax1.grid(alpha=0.3)
+    # lag between an ELA minimum (at t0 + period/4 + n*period) and the volume maximum of the last period
+    late = t >= t[-1] - p['period']
+    if t[-1] - t0 >= 2 * p['period']:
+        t_vol_max = t[late][np.argmax(vol[late])]
+        lag = (t_vol_max - t0 - p['period'] / 4) % p['period']
+        ax1.set_title(f"Period {p['period']:.0f} yr, amplitude {p['amplitude']:.0f} m: "
+                      f"volume peaks ~{lag:.0f} yr after the ELA minimum")
+        print(f"Lag between ELA minimum and volume maximum: ~{lag:.0f} yr "
+              f"(volume amplitude: {vol[late].max() - vol[late].min():.3f} km3)")
+    plt.show()
+
+
+def plot_particles(run_dir, year=None, rh_min=0.0):
+    """Moraine experiment (params_past_moraines): particles (debris) on top of the ice thickness map.
+
+    run_dir : run folder containing output.nc and trajectories/traj-<year>.csv
+    year : year to show (default: last one); the closest particle file is used
+    rh_min : keep particles with relative height >= rh_min (0 = bed, 1 = surface), e.g. 0.95 for
+             the debris at the surface only (where moraines form)
+    Colour = relative height in the ice.
+    """
+    import os, glob
+    files = sorted(glob.glob(os.path.join(run_dir, 'trajectories', 'traj-*.csv')))
+    if not files:
+        print("No particle files found (run params_past_moraines first)")
+        return
+    years = np.array([float(os.path.basename(f)[5:-4].replace('-', '.')) for f in files])
+    i = len(files) - 1 if year is None else int(np.argmin(np.abs(years - year)))
+    P = np.loadtxt(files[i], delimiter=',', skiprows=1, ndmin=2)   # columns: Id, x, y, z, rh, t
+    P = P[P[:, 4] >= rh_min] if len(P) else P
+    ds = xr.open_dataset(os.path.join(run_dir, 'output.nc'))
+    k = int(np.argmin(np.abs(ds['time'].values - years[i])))
+    thk = ds['thk'].isel(time=k)
+    x, y = ds['x'].values, ds['y'].values
+    fig, ax = plt.subplots(figsize=(8, 7))
+    ax.imshow(thk.where(thk > 1), origin='lower', extent=[x.min(), x.max(), y.min(), y.max()],
+              cmap='Blues')
+    if len(P):
+        sc = ax.scatter(P[:, 1], P[:, 2], c=P[:, 4], s=2, cmap='copper_r', vmin=0, vmax=1)
+        plt.colorbar(sc, ax=ax, shrink=0.8, label='relative height (0 = bed, 1 = surface)')
+    ax.set_title(f"Particles in {years[i]:.0f} ({len(P)} particles)")
+    ax.set_xlabel('x (m)')
+    ax.set_ylabel('y (m)')
+    plt.show()
+    ds.close()
+
+
+def compare_velocity_misfit(input_file, run_dirs, year=2020):
+    """Ice-flow parameter exploration (run_sensitivity.sh): modelled vs observed surface speed for several runs.
+
+    For each run, reads arrhenius and tau_ref in .hydra/config.yaml and computes the RMSE and the
+    mean bias (model - observation) of the surface speed on the glacier. Returns a table (DataFrame)
+    and, if the runs form an arrhenius x tau_ref grid, shows the RMSE as a map.
+    """
+    import os, yaml
+    import pandas as pd
+    ds_in = xr.open_dataset(input_file)
+    rows = []
+    for run in run_dirs:
+        with open(os.path.join(run, '.hydra', 'config.yaml')) as f:
+            phys = yaml.safe_load(f)['processes']['iceflow']['physics']
+        ds = xr.open_dataset(os.path.join(run, 'output.nc'))
+        obs = ds_in.interp(x=ds['x'], y=ds['y'])    # observations on the model grid (coarsening)
+        vobs = np.sqrt(obs['uvelsurfobs']**2 + obs['vvelsurfobs']**2).values
+        k = int(np.argmin(np.abs(ds['time'].values - year)))
+        vmod = np.sqrt(ds['uvelsurf'].isel(time=k)**2 + ds['vvelsurf'].isel(time=k)**2).values
+        mask = (ds['thk'].isel(time=k).values > 1) & np.isfinite(vobs) & (vobs > 0)
+        ds.close()
+        d = vmod[mask] - vobs[mask]
+        rows.append({'run': os.path.basename(os.path.normpath(run)),
+                     'arrhenius': phys['viscosity']['arrhenius'],
+                     'tau_ref': phys['sliding']['tau_ref'],
+                     'rmse (m/yr)': np.sqrt(np.mean(d**2)), 'bias (m/yr)': np.mean(d)})
+    ds_in.close()
+    df = pd.DataFrame(rows)
+    grid = df.pivot_table(index='arrhenius', columns='tau_ref', values='rmse (m/yr)')
+    if grid.shape[0] > 1 and grid.shape[1] > 1:
+        fig, ax = plt.subplots(figsize=(6, 4.5))
+        im = ax.imshow(grid.values, origin='lower', cmap='viridis_r')
+        ax.set_xticks(range(grid.shape[1]), [f"{v:g}" for v in grid.columns])
+        ax.set_yticks(range(grid.shape[0]), [f"{v:g}" for v in grid.index])
+        for (r, c), v in np.ndenumerate(grid.values):
+            ax.text(c, r, f"{v:.0f}", ha='center', va='center', color='w')
+        ax.set_xlabel('tau_ref (MPa)')
+        ax.set_ylabel('arrhenius (MPa$^{-3}$ a$^{-1}$)')
+        plt.colorbar(im, ax=ax, label='speed RMSE (m/yr)')
+        ax.set_title(f"Modelled vs observed surface speed ({year})")
+        plt.show()
+    return df.sort_values('rmse (m/yr)')
 
 
 # ---------------------------------------------------------------------------

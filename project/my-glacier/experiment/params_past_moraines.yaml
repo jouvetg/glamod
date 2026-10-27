@@ -1,0 +1,40 @@
+# @package _global_
+
+# EXPLORATION "moraines": same as params_past.yaml (put YOUR calibrated values below),
+# plus Lagrangian PARTICLES (debris) carried by the 3D ice flow. Particles are seeded at the
+# surface of the accumulation area, buried, transported, and re-emerge in the ablation area:
+# where they gather at the surface, medial / lateral moraines form.
+# Particle positions are written in outputs/<run>/trajectories/traj-<year>.csv.
+
+defaults:
+  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [climate, smb, iceflow, time, thk, particles]
+  - override /outputs: [local, live_dashboard]
+
+processes:
+  time:
+    start: 1700.0
+    end: 2020.0
+    save: 10.0
+  climate:
+    method: oggm
+    oggm:
+      # Used only BEFORE 1901: random years of 1960-1990 shifted by delta_temp (°C).
+      # From 1901 to 2019, the observed climate is used (this table is ignored).
+      clim_trend_array:
+        - ["time", "delta_temp", "prec_scal"]
+        - [ 1700,          -1.0,         1.0]
+        - [ 1850,          -1.0,         1.0]
+        - [ 1900,          -0.5,         1.0]
+  iceflow:
+    vertical_velocity:
+      enabled: true          # needed to track the particles in 3D
+  particles:
+    seeding:
+      frequency: 10.0        # seed new particles every 10 years
+      density: 0.2           # on 1 grid cell out of 5 in each direction
+  smb:
+    method: oggm
+    oggm:
+      melt_enhancer: 1.0     # > 1: more melt, < 1: less melt

@@ -14,19 +14,19 @@ This course gives an overview of the basic physical processes that govern the ev
 
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
-| **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial 1) | **Choose your glacier** for the mini-project |
-| **Session 2** | Lecture 2: Introduction to IGM and first IGM run (Tutorial 2) | Mini-project | Mini-project | Mini-project |
-| **Session 3** | Lecture 3: Project goals, how to write the report | Mini-project | Mini-project | Mini-project |
+| **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial) | **Choose your glacier** for the mini-project |
+| **Session 2** | Lecture 2: Introduction to IGM, then a past and a future run (step by step) | Mini-project | Mini-project | Mini-project |
+| **Session 3** | Lecture 3: Additional experiments (response time, moraines), how to write the report | Mini-project | Mini-project | Mini-project |
 
 Then: write the report (deadline: *to be announced*).
 
 ## Material
 
-- **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Setting up RenkuLab](session1/1c-setup-renku.md), [Tutorial 1](session1/1d-tutorial-1-sia-model.ipynb), [Choose your glacier](session1/1e-choose-your-glacier.md)
-- **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [Tutorial 2](session2/tutorial-2/tutorial-2-igm.ipynb)
+- **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Setting up RenkuLab](session1/1c-setup-renku.md), [Tutorial](session1/1d-tutorial-sia-model.ipynb), [Choose your glacier](session1/1e-choose-your-glacier.md)
+- **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [first runs: analysis notebook](session2/first-runs/analysis.ipynb)
 - **Session 3**: [Lecture 3](session3/lecture-3-application-and-report.md)
 - **Session 4** (taught in the course *Dates and Rates of landscape evolution*): [Mont Miné notebook](session4/mont-mine/tutorial-4-mont-mine.ipynb)
-- **Mini-project**: [Project guide](project/project.md), [analysis notebook](project/my-glacier/analysis.ipynb)
+- **Mini-project**: guidelines in Lectures 2 and 3, template folder `project/my-glacier/` ([analysis notebook](project/my-glacier/analysis.ipynb))
 
 ## Computing environment
 

@@ -6,7 +6,7 @@
 # Estimate today's ELA (end-of-summer snowline, GLAMOS) and adapt the values below.
 
 defaults:
-  - common: my_glacier
+  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
   - override /inputs: [oggm_shop, local]
   - override /processes: [smb, iceflow, time, thk]
   - override /outputs: [local, live_dashboard]

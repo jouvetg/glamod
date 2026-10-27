@@ -5,7 +5,7 @@
 # Make one copy of this file per scenario (params_future_ssp126.yaml, ...), or override on the command line.
 
 defaults:
-  - common: my_glacier
+  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
   - override /inputs: [oggm_shop, local]
   - override /processes: [climate, smb, iceflow, time, thk]
   - override /outputs: [local, live_dashboard]
@@ -20,7 +20,7 @@ processes:
     oggm:
       # After 2019 (end of the climate record), each year is drawn from 1960-1990 and shifted
       # by delta_temp (°C, RELATIVE TO 1960-1990). Use plot_climate(RGI_ID) to get the
-      # present-day offset (2020 row), then add the scenario warming (2100 row), see project.md.
+      # present-day offset (2020 row), then add the scenario warming (2100 row), see Lecture 2 (Part A, Step 3).
       clim_trend_array:
         - ["time", "delta_temp", "prec_scal"]
         - [ 2020,           1.3,         1.0]

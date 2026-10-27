@@ -1,0 +1,23 @@
+# @package _global_
+
+# EXPLORATION "response time": your glacier under an ELA that oscillates in time
+# (user module user/code/processes/smb_oscillating.py, parameters in
+# user/conf/processes/smb_oscillating.yaml). Compare the timing of the ELA signal
+# with the timing of the volume response: the lag is related to the response time.
+# Try other periods (e.g. 50, 100, 400 years): how does the amplitude of the response change?
+
+defaults:
+  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
+  - /user/conf/processes@processes: smb_oscillating   # parameters of the user module
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [smb_oscillating, iceflow, time, thk]   # user module instead of smb
+  - override /outputs: [local, live_dashboard]
+
+processes:
+  smb_oscillating:
+    period: 200.0
+    amplitude: 200.0
+  time:
+    start: 0.0
+    end: 400.0            # 2 periods (model years, not calendar years)
+    save: 5.0

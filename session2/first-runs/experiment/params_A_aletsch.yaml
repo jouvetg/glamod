@@ -19,6 +19,8 @@ defaults:
 inputs:
   local:
     filename: input.nc      # read from the data/ folder
+    coarsening:
+      ratio: 2              # GRID: 2 = twice coarser grid -> fast test runs; set 1 for your final runs
 
 processes:
   smb:
@@ -33,11 +35,16 @@ processes:
     start: 1900.0
     end: 2000.0
     save: 10.0              # write results every 10 years
-  iceflow:
+  iceflow:                  # ICE FLOW (off-line emulator, see common/iceflow_offline.yaml)
+    unified:
+      network:
+        pretrained_path: "dahunet_edu.keras"   # emulator: dahunet_edu (smallest, fastest)
     physics:
       sliding:
-        tau_ref: 0.325      # basal shear stress (MPa) required to ...
-        u_ref: 100.0        # ... achieve u_ref basal sliding speed (m/yr)
+        tau_ref: 0.325         # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
+        u_ref: 100.0          # (m/yr)
+      viscosity:
+        arrhenius: 78.0       # ice softness A (MPa^-3 a^-1): higher = softer ice
 
 outputs:
   live_dashboard:

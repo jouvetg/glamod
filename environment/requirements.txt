@@ -1,7 +1,7 @@
 # IGM installed from the HEAD of its main branch, pinned to a commit for reproducibility.
 # (GitHub archive of the commit, not git+https: the igm-doc submodule has an SSH URL that fails in the CI build.)
 # To update: replace the hash by the latest one (git ls-remote https://github.com/instructed-glacier-model/igm.git main), then push.
-igm-model @ https://github.com/instructed-glacier-model/igm/archive/41085b087f875f80fc5b913340bf9ca3653bda67.tar.gz
+igm-model @ https://github.com/instructed-glacier-model/igm/archive/d368b9e65631725dc750869dfb867f08665aab21.tar.gz
 xarray
 netCDF4
 scipy

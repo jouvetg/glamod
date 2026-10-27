@@ -4,11 +4,12 @@ theme: default
 class: invert
 backgroundColor: black
 color: white
+math: katex
 ---
 
 # Glacier Modelling
 
-## Session 3 — Lecture 3: Project goals and reporting
+## Session 3 — Lecture 3: Additional experiments and reporting
 
 Guillaume Jouvet
 
@@ -18,9 +19,9 @@ Guillaume Jouvet
 
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
-| **Week 1** | Glacier processes | Glacier modelling | *Tuto 1* | *Glacier selection* |
-| **Week 2** | Intro to IGM, *Tuto 2* | *Project* | *Project* | *Project* |
-| **Week 3** | **Project goals, report** | **Project** | **Project** | **Project** |
+| **Week 1** | Glacier processes | Glacier modelling | *Tutorial* | *Glacier selection* |
+| **Week 2** | Intro to IGM, *past & future runs* | *Project* | *Project* | *Project* |
+| **Week 3** | **Extra experiments, report** | **Project** | **Project** | **Project** |
 | *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
  
 
@@ -35,7 +36,101 @@ Guillaume Jouvet
 2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? → calibration / validation with moraines, Siegfried map, GLAMOS length changes
 3. **Future**: glacier evolution 2020–2100 under ≥ 2 climate scenarios (e.g. SSP1-2.6 ≈ +1.5°C, SSP2-4.5 ≈ +2.5°C, SSP5-8.5 ≈ +4.5°C)
 
-Optional: your own question (moraines with particles, sensitivity to sliding/softness, response time, lake formation, ...).
+➡️ **A. Common base** (everyone): one model of your glacier, calibrated on the past, used for the future
+
+---
+
+# Finish the calibration: tips
+
+| Problem | Try |
+|---|---|
+| Glacier grows without limit / disappears | more / less melt: `delta_temp`, `melt_enhancer` |
+| No LIA advance | colder pre-1901 `delta_temp`, longer spin-up |
+| Speeds too high / too low | higher / lower `tau_ref`, lower / higher `arrhenius` |
+
+- **One parameter at a time**, run log in the notebook; no perfect fit: **discuss** the mismatch
+- Tests with `ratio: 2`, **final runs with `ratio: 1`**
+
+---
+
+# Part 2 — Additional experiments
+
+Choose **at least one** exploration:
+
+| | Question | |
+|---|---|---|
+| **B1** | Does the SMB model matter? (ELA-based vs climate) | Session 2 |
+| **B2** | Which `arrhenius` × `tau_ref` fit the observed speeds? | Session 2 |
+| **B3** | Response time: how fast does your glacier react? | **today** |
+| **B4** | Moraines: where does the debris go? | **today** |
+
+Commands and plots: `project/my-glacier/analysis.ipynb`, section 4
+
+---
+
+# B3 — Response time: write your own IGM module
+
+`user/code/processes/smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
+
+```python
+def update(cfg, state):                        # called at each time step
+    p = cfg.processes.smb_oscillating
+    t = float(state.t.numpy()) - cfg.processes.time.start
+    state.ela = state.ela_mean - p.amplitude * math.sin(2 * math.pi * t / p.period)
+    smb = state.usurf - state.ela              # SMB linear in elevation
+    state.smb = ...
+```
+
+```bash
+igm_run +experiment=params_response_time hydra.run.dir=outputs/response_200
+```
+
+---
+
+# B3 — Response time: example (Findelengletscher)
+
+![height:250px](fig/response-time-findelen.png)
+
+- The volume peaks **~40 years** after the ELA minimum (period 200 yr, amplitude 200 m)
+- Other periods (50, 100, 400 yr, `processes.smb_oscillating.period=100`): how do lag and amplitude change? Compare with $\tau \approx H/(-b_{terminus})$ (Lecture 1a) and the tutorial
+- Read the module: how to extend IGM with `initialize`, `update`, `finalize`
+
+---
+
+# B4 — Moraines: tracking debris with particles
+
+![width:700px](fig/particles-rhone.png)
+
+Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) ➡️ **moraines**, **debris cover**
+
+`params_past_moraines.yaml` = your **calibrated** past run + `particles` (seeded every 10 yr in the accumulation area)
+
+---
+
+# B4 — Moraines: questions
+
+```bash
+igm_run +experiment=params_past_moraines hydra.run.dir=outputs/past_moraines
+```
+
+Notebook: `plot_particles(run, year=...)`, and `rh_min=0.95` for the debris at the surface only
+
+- Where do the particles re-emerge at the surface? Do they form medial / lateral moraines?
+- Compare with the moraines on aerial photos (map.geo.admin.ch) and with the LIA moraines
+- Particles left on ice-free terrain: debris deposited where the glacier retreated
+- How old is the debris when it reaches the front?
+
+---
+
+# C. Extensions (optional, discuss them with us first)
+
+- **Uncertainty**: small ensembles (melt factor, initial thickness, `prec_scal`, CH2018 ranges)
+- **Precipitation**: ±20 % precipitation vs ±1 °C?
+- **Committed loss**: today's climate kept, when does the glacier stabilize (beyond 2100)?
+- **Tributaries and lakes**: disconnections, proglacial lakes in bed overdeepenings (`topg`)
+- **Validation**: GLAMOS series, Siegfried / Dufour maps, swisstopo thickness
+- **Your own question**: hazards, water resources, landscape evolution...
+
 
 ---
 
@@ -47,9 +142,11 @@ Optional: your own question (moraines with particles, sensitivity to sliding/sof
 - Write down for each run: what you changed, why, and the outcome (a simple table/log)
 - Explore **uncertainty**: run a small ensemble (e.g. 3 values of a parameter) rather than one "perfect" run
 
+
+ 
 ---
 
-# Part 2 — The report
+# Part 3 — The report
 
 - **≤ 1500 words** (excluding captions and references), PDF
 - Written like a short scientific paper:
@@ -114,7 +211,10 @@ Deadline: **to be announced**. Questions? Ask the assistant during the project h
 Checklist for today:
 - [ ] Past run that reaches a plausible LIA maximum and today's extent
 - [ ] ≥ 2 future scenarios
+- [ ] ≥ 1 exploration (B1–B4)
 - [ ] Figures drafted
 - [ ] Report outline written
 
-`project/project.md` — `project/my-glacier/` (YAML + terminal + `analysis.ipynb`)
+`project/my-glacier/` (YAML + terminal + `analysis.ipynb`)
+
+**Save** your YAML files, notebook, scripts and figures to your **SWITCHdrive folder** regularly: RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.
