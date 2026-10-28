@@ -25,7 +25,7 @@ UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive ca
 1. *Dashboard* → *My sessions* → **Resume** your paused session. Terminal: `cd ~/work/glamod && git pull` (latest material). Your project work lives in your own copy `~/work/my-glacier/` (made once in Session 2, Lecture 2).
 2. Work with **YAML** files (parameters) + a **terminal** (`igm_run ...`) + a **notebook** (plots): see Lecture 2.
 3. **Back up**: `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → right-click → *Download* → UNIL OneDrive. Restore in a new session: upload the file to `~/work`, `tar xzf my-glacier.tar.gz`.
-4. At the end: **Pause** the session (not *Delete*). Paused sessions are deleted after some weeks (15 days by default on renkulab.io, configurable per resource pool).
+4. At the end: **Pause session** button (top left corner, next to the back button) (not *Delete*). Paused sessions are deleted after some weeks (15 days by default on renkulab.io, configurable per resource pool).
 
 ### If something goes wrong
 

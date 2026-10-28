@@ -39,7 +39,7 @@ Your files live on the **disk of your session**: they stay there as long as the 
 2. Open the course project: **[renkulab.io/p/guillaume.jouvet-1/glamod](https://renkulab.io/p/guillaume.jouvet-1/glamod)** (also on the course page)
 3. *Launchers* → `glamod` → **Launch**
 4. Wait 1–3 min (longer the first time) → JupyterLab opens in your browser
-5. File browser (left): `glamod/` = the course material
+5. File browser (left): `work/glamod/` = the course material
 
 **Keep this one session for the whole course**: do not launch a new one each week.
 
@@ -47,9 +47,9 @@ Your files live on the **disk of your session**: they stay there as long as the 
 
 # Step 2: the tutorial
 
-Open `glamod/session1/1d-tutorial-sia-model.ipynb` → run the cells from top to bottom (**Shift+Enter**)
+Open `work/glamod/session1/1d-tutorial-sia-model.ipynb` → run the cells **one by one**, from top to bottom: **Shift+Enter** runs the current cell and moves to the next one
 
-At the end of the afternoon: ▾ next to *Open* → **Pause** the session (**not** *Delete*)
+At the end of the afternoon: **Pause session** button (top left corner, next to the back button) (**not** *Delete*)
 
 ---
 
@@ -63,7 +63,7 @@ At the end of the afternoon: ▾ next to *Open* → **Pause** the session (**not
 cd ~/work/glamod && git pull
 ```
 
-4. At the end: **Pause** (not *Delete*)
+4. At the end: **Pause session** button (top left corner, next to the back button) (not *Delete*)
 
 ---
 
