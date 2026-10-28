@@ -280,6 +280,8 @@
 
 
 
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial — A simple glacier model</a></li>
 
 
@@ -502,7 +504,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tutorial — A simple glacier model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-2d">Glacier in 2D</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-flowline-glacier-1d">A flowline glacier (1D)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-deformation">Ice Deformation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
@@ -515,7 +517,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-implementation">Numerical Implementation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-3d">Glacier in 3D</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glacier-in-map-view-2d-gorner-glacier">A glacier in map view (2D): Gorner Glacier</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap-up</a></li>
 </ul>
 </li>
@@ -534,7 +536,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="tutorial-a-simple-glacier-model">
 <h1>Tutorial — A simple glacier model<a class="headerlink" href="#tutorial-a-simple-glacier-model" title="Link to this heading">#</a></h1>
 <p><em>Session 1, hands-on (≈ 1 hour). No IGM needed: only numpy and matplotlib.</em></p>
-<p>Run this notebook in your RenkuLab session (set up just before, see <code class="docutils literal notranslate"><span class="pre">setup/renku.md</span></code>): open <code class="docutils literal notranslate"><span class="pre">session1/1d-tutorial-sia-model.ipynb</span></code> and run the cells from top to bottom (Shift+Enter). At the end, copy your notebook to your SWITCHdrive folder.</p>
+<p>Run this notebook in your RenkuLab session (set up just before, see <code class="docutils literal notranslate"><span class="pre">session1/1c-setup-renku.md</span></code>): run the cells from top to bottom (Shift+Enter). At the end of the afternoon, <strong>Pause</strong> your session (not <em>Delete</em>): your notebook will be there next week.</p>
 <p><strong>Goals of this tutorial</strong></p>
 <ul class="simple">
 <li><p>Get familiar with a simple SIA-based glacier model in 1D (flowline) and 2D (map view)</p></li>
@@ -543,8 +545,8 @@
 </ul>
 <p>Here we play with a simple glacier evolution model based on simplified equations of ice physics. In Session 2, we will use a more elaborate model (IGM) to model the evolution of a real glacier with a state-of-the-art approach. We start with a flowline (“1D”) idealized glacier for simplicity.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="glacier-in-2d">
-<h1>Glacier in 2D<a class="headerlink" href="#glacier-in-2d" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="a-flowline-glacier-1d">
+<h1>A flowline glacier (1D)<a class="headerlink" href="#a-flowline-glacier-1d" title="Link to this heading">#</a></h1>
 <img src="https://svs.gsfc.nasa.gov/vis/a000000/a003800/a003849/antarctica_flows_1_00120_1024x576.jpg" alt="Map of Antarctica" width="40%">
 <p><em>Ice flow field in Antarctica, the pink areas (ice shelves where the ice is floating) display the zone for the ice is the fastest. Check a the <a class="reference external" href="https://svs.gsfc.nasa.gov/3849/">NASA website</a> for animations.</em></p>
 <section id="ice-deformation">
@@ -554,7 +556,7 @@
 <p>Ice is often considered a non-Newtonian fluid, meaning that its flow behavior is not linear with respect to stress. This unique characteristic is primarily due to ice’s crystalline structure and the way it deforms under stress. Glen’s flow law provides a mathematical description of this behavior, quantifying how ice flow is related to stress. According to Glen’s law, the ice strain rate <span class="math notranslate nohighlight">\( \dot{\epsilon} \)</span> is proportional to the applied stress <span class="math notranslate nohighlight">\( \tau \)</span> raised to a power n=3, expressed as:</p>
 <div class="math notranslate nohighlight">
 \[ \dot{\epsilon} = A \tau^n \]</div>
-<p>Here, <span class="math notranslate nohighlight">\( A \)</span> is a temperature-dependent flow parameter, its unit is <span class="math notranslate nohighlight">\(Pa^{-3} \, y^{-1} \)</span>. Glen’s exponent is very commonly taken as n=3. This non-linear relation illustrates that as stress increases, the rate of ice deformation also increases but at an accelerating rate, which is a fundamental concept in understanding ice dynamics.</p>
+<p>Here, <span class="math notranslate nohighlight">\( A \)</span> is a temperature-dependent flow parameter, its unit is <span class="math notranslate nohighlight">\(Pa^{-3} \, y^{-1} \)</span>. In IGM (Session 2), the same parameter is called <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> and is given in <span class="math notranslate nohighlight">\(MPa^{-3} \, y^{-1}\)</span>: the default value for temperate ice, <code class="docutils literal notranslate"><span class="pre">arrhenius:</span> <span class="pre">78</span></code>, corresponds to <span class="math notranslate nohighlight">\(A = 7.8 \times 10^{-17} \, Pa^{-3} \, y^{-1}\)</span>. Glen’s exponent is very commonly taken as n=3. This non-linear relation illustrates that as stress increases, the rate of ice deformation also increases but at an accelerating rate, which is a fundamental concept in understanding ice dynamics.</p>
 <p>Glen’s flow law, together with the momentum conservation equations, yields a set of Stokes equations, which can be solved to derive the ice flow velocity of an ice body subject to gravitational deformation.</p>
 </section>
 <section id="shallow-ice-approximation-sia">
@@ -594,6 +596,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/235a418cb3bc55c15cdf0cb7957c13a7b614be677b5fcda4c46514b2328ee690.png" src="../_images/235a418cb3bc55c15cdf0cb7957c13a7b614be677b5fcda4c46514b2328ee690.png" />
+</div>
 </div>
 </section>
 </section>
@@ -621,6 +626,7 @@
 \[ h^{n+1} = h^{n} + dt \left(  \frac{\partial}{\partial x} \left( D(h^n) \frac{\partial z^n}{\partial x} \right) + SMB^n(z) \right), \]</div>
 <p>where we compute the ice thickness variable <span class="math notranslate nohighlight">\(h\)</span> at time <span class="math notranslate nohighlight">\(t^0\)</span>, <span class="math notranslate nohighlight">\(t^1\)</span>, <span class="math notranslate nohighlight">\(t^2\)</span>, …, <span class="math notranslate nohighlight">\(t^n\)</span>, …</p>
 <p>The same way, the domain of the glacier is discretized into small intervall, <span class="math notranslate nohighlight">\(x^0\)</span>, <span class="math notranslate nohighlight">\(x^1\)</span>, …, <span class="math notranslate nohighlight">\(x^m\)</span>, … and the ice thickness evolution is computed only at these points of the discretization.</p>
+<p>📘 <strong>To learn more</strong> about the numerical solving (finite differences, nonlinear diffusion, stability of the time step), see Session 10 of the course <em>Modélisation numérique</em> (in French): <a class="reference external" href="https://jouvetg.github.io/modnum/10_cours/10_cours.html">lecture</a>, <a class="reference external" href="https://jouvetg.github.io/modnum/10_tutoriel/10_tutoriel.html">tutorial</a>, <a class="reference external" href="https://jouvetg.github.io/modnum/10_exercice/10_exercice.html">exercises</a>.</p>
 </section>
 <section id="climate">
 <h2>Climate<a class="headerlink" href="#climate" title="Link to this heading">#</a></h2>
@@ -691,7 +697,7 @@ z_{bed}(x)  = 13522.8 - 1000 \times \log(x + 1000)
 <td><p><span class="math notranslate nohighlight">\( 2.5 \times 10^{-15} [Pa^{-3} yr^{-1}]\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>model length <span class="math notranslate nohighlight">\( L \)</span></p></td>
-<td><p>100 km</p></td>
+<td><p>140 km</p></td>
 </tr>
 <tr class="row-even"><td><p>initial ice thickness</p></td>
 <td><p>0 m</p></td>
@@ -706,7 +712,7 @@ z_{bed}(x)  = 13522.8 - 1000 \times \log(x + 1000)
 <td><p>9.81 m <span class="math notranslate nohighlight">\(s^{-2}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>altitude of the equilibrium line <span class="math notranslate nohighlight">\( z_{\mathrm{ELA}} \)</span></p></td>
-<td><p>1200 m</p></td>
+<td><p>3000 m</p></td>
 </tr>
 <tr class="row-odd"><td><p>maximum mass balance <span class="math notranslate nohighlight">\( b_{\mathrm{max}} \)</span></p></td>
 <td><p>0.3 m/yr</p></td>
@@ -715,7 +721,7 @@ z_{bed}(x)  = 13522.8 - 1000 \times \log(x + 1000)
 <td><p>0.001</p></td>
 </tr>
 <tr class="row-odd"><td><p>total time</p></td>
-<td><p>3000 y</p></td>
+<td><p>5000 y</p></td>
 </tr>
 </tbody>
 </table>
@@ -734,89 +740,91 @@ z_{bed}(x)  = 13522.8 - 1000 \times \log(x + 1000)
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
 
-<span class="k">def</span> <span class="nf">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">):</span>
-     
-    <span class="n">Lx</span> <span class="o">=</span> <span class="mf">1.4e5</span>  <span class="c1"># model length, m</span>
-  
-    <span class="n">rhog</span> <span class="o">=</span> <span class="mi">910</span> <span class="o">*</span> <span class="mf">9.81</span>  <span class="c1"># ice density kg/m^3 * gravity m/s^{-2}</span>
-    <span class="n">kD</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span>  <span class="o">*</span> <span class="n">rhog</span><span class="o">**</span><span class="mi">3</span>  <span class="c1"># lump all constants for diffusivity together</span>
+<span class="k">def</span> <span class="nf">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">total_time</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flowline glacier model: solves dh/dt = d/dx(D dz/dx) + SMB, starting from no ice.</span>
+<span class="sd">    smb_fct(surface, time) must return the SMB (m/y) at each point and the ELA (m).&quot;&quot;&quot;</span>
 
-    <span class="c1"># Numerics</span>
-    <span class="n">nx</span> <span class="o">=</span> <span class="mi">201</span>  <span class="c1"># number of cells</span>
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span> <span class="o">/</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># number of cells </span>
-    <span class="n">dtmax</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># initial dt, will be changed within loop, yr</span>
-    <span class="n">dt</span>    <span class="o">=</span> <span class="n">dtmax</span>  <span class="c1"># initial dt, will be changed within loop, yr</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>  <span class="c1"># x-coordinates</span>
-    <span class="n">nout</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># frequency of plotting</span>
+    <span class="c1"># Physical parameters</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="mf">1.4e5</span>                        <span class="c1"># length of the domain (m)</span>
+    <span class="n">rho_g</span> <span class="o">=</span> <span class="mi">910</span> <span class="o">*</span> <span class="mf">9.81</span>                    <span class="c1"># ice density (kg/m^3) x gravity (m/s^2)</span>
+    <span class="n">diff_const</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">rho_g</span><span class="o">**</span><span class="mi">3</span> <span class="c1"># all the constants of the diffusivity D lumped together</span>
 
-    <span class="c1"># Initialization</span>
-    <span class="n">Z_bed</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">13522.8</span> <span class="c1"># topography</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>  <span class="c1"># ice thickness</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># initialize time</span>
-    <span class="n">nplot</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># counter for plotting</span>
+    <span class="c1"># Grid in space</span>
+    <span class="n">nx</span> <span class="o">=</span> <span class="mi">201</span>                              <span class="c1"># number of grid points</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>                <span class="c1"># distance between two grid points (m)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>        <span class="c1"># x-coordinate of the grid points (m)</span>
 
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z_bed</span> <span class="o">+</span> <span class="n">H</span>  <span class="c1"># ice surface</span>
+    <span class="c1"># Time stepping</span>
+    <span class="n">dt_max</span> <span class="o">=</span> <span class="mi">1</span>                            <span class="c1"># maximum time step (y)</span>
+    <span class="n">plot_every</span> <span class="o">=</span> <span class="mi">500</span>                      <span class="c1"># plot every &#39;plot_every&#39; time steps</span>
 
-    <span class="n">time</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">it</span><span class="o">=</span><span class="mi">0</span>
+    <span class="c1"># Initial state</span>
+    <span class="n">bed</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mf">13522.8</span>   <span class="c1"># bedrock elevation (m)</span>
+    <span class="n">thickness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>                    <span class="c1"># ice thickness (m): no ice at the start</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">bed</span> <span class="o">+</span> <span class="n">thickness</span>                   <span class="c1"># ice surface elevation (m)</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="p">((</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">))</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="mf">0.0</span>                            <span class="c1"># current time (y)</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>                              <span class="c1"># time step counter</span>
 
-    <span class="n">eps</span><span class="o">=</span><span class="p">[]</span>
-    
-    <span class="c1"># Time loop</span>
-    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">ttot</span><span class="p">:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-        <span class="c1"># compute dHdt due to diffusion</span>
-        <span class="n">H_av</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">H</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>            <span class="c1"># average height between cells (nx-1)</span>
-        <span class="n">D</span> <span class="o">=</span> <span class="n">kD</span> <span class="o">*</span> <span class="n">H_av</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># diffusivity (nx-1)</span>
-        <span class="n">qx</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                <span class="c1"># ice flux</span>
-        <span class="n">dHdt</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qx</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                 <span class="c1"># change in ice thickness from flow</span>
+    <span class="c1"># Time loop: each iteration moves the glacier forward by dt years</span>
+    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">total_time</span><span class="p">:</span>
 
-        <span class="c1"># update time step as function of D</span>
-        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dtmax</span><span class="p">,</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)))</span>  <span class="c1"># update time step </span>
+        <span class="c1"># 1. Ice flow (SIA). D, slope and flux are computed between two grid points (nx-1 values)</span>
+        <span class="n">thickness_mid</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">thickness</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>   <span class="c1"># thickness between grid points</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">surface</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                            <span class="c1"># surface slope dz/dx</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">diff_const</span> <span class="o">*</span> <span class="n">thickness_mid</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="n">slope</span><span class="o">**</span><span class="mi">2</span>             <span class="c1"># diffusivity D(h) (m^2/y)</span>
+        <span class="n">flux</span> <span class="o">=</span> <span class="o">-</span><span class="n">D</span> <span class="o">*</span> <span class="n">slope</span>                                        <span class="c1"># ice flux q = -D dz/dx (m^2/y)</span>
+        <span class="n">dhdt_flow</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">flux</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                          <span class="c1"># thickness change due to flow -dq/dx (m/y), at the inner points</span>
 
-        <span class="c1"># update thickness of ice (iceflow)</span>
-        <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dHdt</span>                 
+        <span class="c1"># 2. Time step: the largest stable one for an explicit scheme (CFL condition), at most dt_max</span>
+        <span class="c1">#    (+1e-10 avoids a division by 0 when there is no ice yet)</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dt_max</span><span class="p">,</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">))</span>
 
-        <span class="c1"># update ice thickness (mass balance)</span>
-        <span class="n">smb</span><span class="p">,</span> <span class="n">z_ELA</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">)</span>
-        <span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="c1"># 3. Update the thickness with the ice flow (inner points only)</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dhdt_flow</span>
 
-        <span class="n">H</span><span class="p">[</span><span class="n">H</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># set any negative thickness to 0</span>
+        <span class="c1"># 4. Update the thickness with the surface mass balance (accumulation - ablation)</span>
+        <span class="n">smb</span><span class="p">,</span> <span class="n">z_ela</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># boundary conditions</span>
-        <span class="n">H</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># boundary conditions</span>
- 
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">Z_bed</span> <span class="o">+</span> <span class="n">H</span>  <span class="c1"># update ice surface</span>
-        <span class="n">time</span> <span class="o">+=</span> <span class="n">dt</span>  <span class="c1"># update time</span>
+        <span class="c1"># 5. No negative ice (where ablation removed more than the available ice)</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="n">thickness</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span> 
+        <span class="c1"># 6. Boundary conditions: no ice at both ends of the domain</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="c1"># Visualization</span>
-        <span class="k">if</span> <span class="n">it</span> <span class="o">%</span> <span class="n">nout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  
+        <span class="c1"># 7. New ice surface, next time step</span>
+        <span class="n">surface</span> <span class="o">=</span> <span class="n">bed</span> <span class="o">+</span> <span class="n">thickness</span>
+        <span class="n">time</span> <span class="o">+=</span> <span class="n">dt</span>
+        <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Clear the output in VS Code</span>
+        <span class="c1"># Plot every &#39;plot_every&#39; steps</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">plot_every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>      <span class="c1"># replace the previous figure</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">Z_bed</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="n">z_ELA</span><span class="p">,</span> <span class="n">z_ELA</span><span class="p">],</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
-            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Z_bed</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Z_bed</span><span class="p">)])</span>
+            <span class="c1"># Left: glacier geometry</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>               <span class="c1"># ice surface</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">bed</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>                   <span class="c1"># bedrock</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="n">z_ela</span><span class="p">,</span> <span class="n">z_ela</span><span class="p">],</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>         <span class="c1"># ELA</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">bed</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">bed</span><span class="p">)])</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Elevation, m&#39;</span><span class="p">)</span>
-            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Glacier after &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; years&#39;</span><span class="p">)</span>
-    
-            <span class="c1"># ax2.subplot(2, 2, 3,aspect=20.0)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Glacier after &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; years&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Right: surface mass balance along the flowline</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">smb</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Surface mass balance&#39;</span><span class="p">)</span>
-            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;SMB, m/y&#39;</span><span class="p">)</span> 
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;SMB, m/y&#39;</span><span class="p">)</span>
 
             <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
- 
 </pre></div>
 </div>
 </div>
@@ -834,19 +842,23 @@ Take the following code, and play with it to answer the following questions:</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
-<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
-<span class="n">z_ELA</span><span class="o">=</span><span class="mi">3000</span>
-<span class="n">A</span><span class="o">=</span><span class="mf">2.5e-15</span>
-<span class="n">ttot</span><span class="o">=</span><span class="mi">5000</span>
+<span class="n">b_max</span> <span class="o">=</span> <span class="mf">0.3</span>        <span class="c1"># maximum mass balance (m/y)</span>
+<span class="n">grad_b</span> <span class="o">=</span> <span class="mf">0.001</span>     <span class="c1"># mass balance gradient (m/y per m of elevation)</span>
+<span class="n">z_ELA</span> <span class="o">=</span> <span class="mi">3000</span>       <span class="c1"># equilibrium line altitude (m)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">2.5e-15</span>        <span class="c1"># ice softness, Glen&#39;s law (Pa^-3 y^-1)</span>
+<span class="n">total_time</span> <span class="o">=</span> <span class="mi">5000</span>  <span class="c1"># duration of the simulation (y)</span>
 
-<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span> <span class="p">,</span> <span class="n">z_ELA</span>
+<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="c1"># SMB linear in elevation, capped at b_max; returns the SMB and the ELA (for the plot)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">surface</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">),</span> <span class="n">z_ELA</span>
 
-<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">)</span>
- 
+<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">total_time</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4d3585e9f2a6d1b67f966884bd28158e5cbd423eabd0151637226ded13b55289.png" src="../_images/4d3585e9f2a6d1b67f966884bd28158e5cbd423eabd0151637226ded13b55289.png" />
+<img alt="../_images/4d3585e9f2a6d1b67f966884bd28158e5cbd423eabd0151637226ded13b55289.png" src="../_images/4d3585e9f2a6d1b67f966884bd28158e5cbd423eabd0151637226ded13b55289.png" />
 </div>
 </div>
 <p>In the next exercise, we will make the ELA vary with time, following a cosine curve to mimic a series of cooling and warming events as follows:</p>
@@ -856,42 +868,54 @@ Take the following code, and play with it to answer the following questions:</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="mi">3300</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2000</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [years]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ELA [m]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example of ELA as a function of time with a frequency of 2000 years&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Example of ELA as a function of time with a period of 4000 years&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Example of ELA as a function of time with a period of 4000 years&#39;)
+</pre></div>
 </div>
-<p>Observe the time lapse between the minimum (resp. maximum) in ELA, and the time the glacier reach its maximum (resp. minimum). This is due to the fact that glacier have a certain inertia as system. Try increasing or decreasing the frequency of these climate warming and cooling cycles.
+<img alt="../_images/7a564e74a06ccf54e6858fa598b3409961dfabc9aaf36c3ef69c2d1a455d63ae.png" src="../_images/7a564e74a06ccf54e6858fa598b3409961dfabc9aaf36c3ef69c2d1a455d63ae.png" />
+</div>
+</div>
+<p>Observe the time lapse between the minimum (resp. maximum) in ELA, and the time the glacier reach its maximum (resp. minimum). This is due to the fact that glacier have a certain inertia as system. Try shorter and longer cycles (<code class="docutils literal notranslate"><span class="pre">freq</span></code> is half the period of the cycle, in years). How do the lag and the amplitude of the glacier response change? Compare the lag with the response time <span class="math notranslate nohighlight">\(\tau \approx H / (-b_{terminus})\)</span> of Lecture 1a. In Session 3 (exploration B3), you will do the same experiment with IGM on your own glacier.
 ✅ <strong>Your turn!</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
-<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.001</span>
-<span class="n">A</span><span class="o">=</span><span class="mf">2.5e-14</span>
-<span class="n">freq</span><span class="o">=</span><span class="mi">2000</span>
-<span class="n">ttot</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">b_max</span> <span class="o">=</span> <span class="mf">0.3</span>        <span class="c1"># maximum mass balance (m/y)</span>
+<span class="n">grad_b</span> <span class="o">=</span> <span class="mf">0.001</span>     <span class="c1"># mass balance gradient (m/y per m of elevation)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">2.5e-14</span>        <span class="c1"># ice softness, Glen&#39;s law (Pa^-3 y^-1)</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="mi">2000</span>        <span class="c1"># half-period of the ELA cycle (y)</span>
+<span class="n">total_time</span> <span class="o">=</span> <span class="mi">20000</span> <span class="c1"># duration of the simulation (y)</span>
 
 <span class="k">def</span> <span class="nf">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="c1"># ELA oscillating around 3300 m, +/- 1000 m</span>
     <span class="k">return</span> <span class="mi">3300</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">freq</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">b_max</span><span class="p">),</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="c1"># SMB linear in elevation, capped at b_max; returns the SMB and the ELA (for the plot)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">surface</span> <span class="o">-</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">b_max</span><span class="p">),</span> <span class="n">ela_fct</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 
-<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">ttot</span><span class="p">)</span>
+<span class="n">model_glacier_1d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">total_time</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/66f015dc5fe15465f2723498594f9c22085dab1a725c3d97bdba4e12a1cca224.png" src="../_images/66f015dc5fe15465f2723498594f9c22085dab1a725c3d97bdba4e12a1cca224.png" />
+<img alt="../_images/66f015dc5fe15465f2723498594f9c22085dab1a725c3d97bdba4e12a1cca224.png" src="../_images/66f015dc5fe15465f2723498594f9c22085dab1a725c3d97bdba4e12a1cca224.png" />
+</div>
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="glacier-in-3d">
-<h1>Glacier in 3D<a class="headerlink" href="#glacier-in-3d" title="Link to this heading">#</a></h1>
-<p>We will now consider a more complex situation involving a three-dimensional glacier, namely Gorner Glacier located near Zermatt.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="a-glacier-in-map-view-2d-gorner-glacier">
+<h1>A glacier in map view (2D): Gorner Glacier<a class="headerlink" href="#a-glacier-in-map-view-2d-gorner-glacier" title="Link to this heading">#</a></h1>
+<p>We will now consider a more realistic situation: a glacier in map view (2D), namely Gorner Glacier located near Zermatt.</p>
 <img src="https://images.contenthub.dev/xshiytapvw9a/e404ac0c4deb0f9ef3d3bd6859603bb2/Gornergletscher%20Wanderung%20Rotenboden.jpg?fm=avif&fit=fill&q=45&h=640&w=1140"  width="50%">
 <p><em>Gorner Glacier</em></p>
-<p>The objective of this exercise is to implement the ice equation to simulate a glacial landscape. In 3D, the evolution of ice thickness is represented by</p>
+<p>The objective of this exercise is to implement the ice equation to simulate a glacial landscape. In 2D, the evolution of ice thickness is represented by</p>
 <p>\begin{equation}
 \frac{\partial h}{\partial t} - \frac{\partial}{\partial x} \left( D(h,z) \frac{\partial z}{\partial x} \right) - \frac{\partial}{\partial y} \left( D(h,z) \frac{\partial z}{\partial y} \right) =  SMB(z), \quad (1)
 \end{equation}</p>
@@ -899,7 +923,7 @@ Take the following code, and play with it to answer the following questions:</p>
 <p>\begin{equation}
 D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
 \end{equation}</p>
-<p>where <span class="math notranslate nohighlight">\( ||\nabla S|| \)</span> is the norm of the local slope of the ice surface. At first glance, the problem is very similar to the 1D case, but the exact positioning of all values on the model grid is more complex in 2D.</p>
+<p>where <span class="math notranslate nohighlight">\( ||\nabla S|| \)</span> is the norm of the local slope of the ice surface. At first glance, the problem is very similar to the 1D case, but the exact positioning of all values on the model grid is more complex in 2D. This 2D model and the Gorner Glacier experiment are explained in detail in Session 11 of the course <em>Modélisation numérique</em> (in French): <a class="reference external" href="https://jouvetg.github.io/modnum/11_cours/11_cours.html">lecture</a>, <a class="reference external" href="https://jouvetg.github.io/modnum/11_tutoriel/11_tutoriel.html">tutorial</a>, <a class="reference external" href="https://jouvetg.github.io/modnum/11_exercice/11_exercice.html">exercises</a>.</p>
 <p>The following code implements the model with the following setup:</p>
 <ul class="simple">
 <li><p>Use an initial ice thickness of 0 m, and maintain a thickness of 0 at the edges of the model (boundary conditions).</p></li>
@@ -926,7 +950,7 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
 <td><p>0.3 m/yr</p></td>
 </tr>
 <tr class="row-even"><td><p>mass balance gradient <span class="math notranslate nohighlight">\( b_\mathrm{grad} \)</span></p></td>
-<td><p>0.001</p></td>
+<td><p>0.002</p></td>
 </tr>
 <tr class="row-odd"><td><p>total time</p></td>
 <td><p>5000 y</p></td>
@@ -938,113 +962,116 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
 
 <span class="k">def</span> <span class="nf">model_glacier_2d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map-view (2D) glacier model of the Gorner Glacier area: solves</span>
+<span class="sd">    dh/dt = div(D grad z) + SMB, starting from no ice. smb_fct(surface) returns the SMB (m/y).&quot;&quot;&quot;</span>
 
     <span class="c1"># Physical parameters</span>
-    <span class="n">ttot</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># Time limit (yr) </span>
-    <span class="n">rho</span> <span class="o">=</span> <span class="mf">910.0</span>   <span class="c1"># Ice density (g/m^3)</span>
-    <span class="n">g</span>   <span class="o">=</span> <span class="mf">9.81</span>    <span class="c1"># Earth&#39;s gravity (m/s^2)</span>
-    <span class="n">A</span>   <span class="o">=</span> <span class="mf">2.5e-18</span>   <span class="c1"># Deformation constant (Pa^-3 y^-1) </span>
-    <span class="n">xz</span> <span class="o">=</span> <span class="mi">6327</span>   <span class="c1"># x-coordinate of Zermatt</span>
-    <span class="n">yz</span> <span class="o">=</span> <span class="mi">14672</span>  <span class="c1"># y-coordinate of Zermatt</span>
+    <span class="n">total_time</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># duration of the simulation (y)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="mf">910.0</span>         <span class="c1"># ice density (kg/m^3)</span>
+    <span class="n">g</span>   <span class="o">=</span> <span class="mf">9.81</span>          <span class="c1"># gravity (m/s^2)</span>
+    <span class="n">A</span>   <span class="o">=</span> <span class="mf">2.5e-18</span>       <span class="c1"># ice softness, Glen&#39;s law (Pa^-3 y^-1)</span>
+    <span class="n">x_zermatt</span> <span class="o">=</span> <span class="mi">6327</span>    <span class="c1"># x-coordinate of Zermatt (m)</span>
+    <span class="n">y_zermatt</span> <span class="o">=</span> <span class="mi">14672</span>   <span class="c1"># y-coordinate of Zermatt (m)</span>
 
-    <span class="c1"># load the topography of Gorner Glacier</span>
-    <span class="n">Z_topo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;topg.txt&#39;</span><span class="p">)[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">]</span> 
-    <span class="n">ny</span><span class="p">,</span><span class="n">nx</span> <span class="o">=</span> <span class="n">Z_topo</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># Bedrock topography of the Gorner Glacier area (one point out of two -&gt; 200 m grid)</span>
+    <span class="n">bed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;topg.txt&#39;</span><span class="p">)[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">bed</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># number of grid points in y and x</span>
 
-    <span class="n">dx</span><span class="o">=</span><span class="mi">200</span>
-    <span class="n">dy</span><span class="o">=</span><span class="mi">200</span>
-    
-    <span class="n">Lx</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="n">nx</span>
-    <span class="n">Ly</span> <span class="o">=</span> <span class="n">dy</span><span class="o">*</span><span class="n">ny</span>
+    <span class="c1"># Grid in space</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mi">200</span>            <span class="c1"># grid spacing in x (m)</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="mi">200</span>            <span class="c1"># grid spacing in y (m)</span>
+    <span class="n">length_x</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">nx</span>  <span class="c1"># size of the domain in x (m)</span>
+    <span class="n">length_y</span> <span class="o">=</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">ny</span>  <span class="c1"># size of the domain in y (m)</span>
 
-    <span class="n">nout</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Frequency of plotting</span>
-    <span class="n">dtmax</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># maximum time step</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">dtmax</span>  <span class="c1"># Initial time step</span>
- 
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>  <span class="c1"># x-coordinates</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>  <span class="c1"># y-coordinates</span>
+    <span class="c1"># Time stepping</span>
+    <span class="n">plot_every</span> <span class="o">=</span> <span class="mi">1000</span>   <span class="c1"># plot every &#39;plot_every&#39; time steps</span>
+    <span class="n">dt_max</span> <span class="o">=</span> <span class="mi">1</span>          <span class="c1"># maximum time step (y)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">dt_max</span>         <span class="c1"># current time step (y)</span>
 
-    <span class="n">H_ice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">))</span>  <span class="c1"># Initial ice thickness</span>
-    <span class="n">Z_surf</span> <span class="o">=</span> <span class="n">Z_topo</span> <span class="o">+</span> <span class="n">H_ice</span>  <span class="c1"># Initial ice surface</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initial time</span>
-    <span class="n">it</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Initial state</span>
+    <span class="n">thickness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">))</span>   <span class="c1"># ice thickness (m): no ice at the start</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">bed</span> <span class="o">+</span> <span class="n">thickness</span>        <span class="c1"># ice surface elevation (m)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>                         <span class="c1"># current time (y)</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>                         <span class="c1"># time step counter</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">length_x</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length_y</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">]</span>   <span class="c1"># map extent in km, for the plots</span>
 
-    <span class="n">s</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4800</span><span class="p">)</span>
-    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation (m)&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-    <span class="n">ss</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H_ice</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="n">H_ice</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">ccbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ice Thickness (m)&#39;</span><span class="p">)</span>
-    
-    <span class="c1"># Loop</span>
-    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">ttot</span><span class="p">:</span>
-        
-        <span class="c1"># Update time</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">4800</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Elevation (m)&#39;</span><span class="p">)</span>
+
+    <span class="n">ss</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">thickness</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ice Thickness (m)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Time loop: each iteration moves the glacier forward by dt years</span>
+    <span class="k">while</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">total_time</span><span class="p">:</span>
+
         <span class="n">time</span> <span class="o">+=</span> <span class="n">dt</span>
-        <span class="n">it</span>   <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="c1"># Calculate H_avg, size (ny-1,nx-1)</span>
-        <span class="n">H_avg</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">H_ice</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># 1. Thickness at the centre of each cell of 4 grid points, size (ny-1, nx-1)</span>
+        <span class="n">thickness_mid</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">thickness</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">thickness</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-        <span class="c1"># Compute Snorm, size (ny-1,nx-1)</span>
-        <span class="n">Sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>
-        <span class="n">Sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
-        <span class="n">Sx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">Sx</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">Sx</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
-        <span class="n">Sy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">Sy</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Sy</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
-        <span class="n">Snorm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Sy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 2. Surface slope at the same cell centres, size (ny-1, nx-1)</span>
+        <span class="n">slope_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>                 <span class="c1"># dz/dx between two points in x</span>
+        <span class="n">slope_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>                 <span class="c1"># dz/dy between two points in y</span>
+        <span class="n">slope_x</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">slope_x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">slope_x</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>      <span class="c1"># averaged to the cell centres</span>
+        <span class="n">slope_y</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">slope_y</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">slope_y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:])</span>
+        <span class="n">slope_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">slope_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">slope_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>           <span class="c1"># norm of the surface slope |grad z|</span>
 
-        <span class="c1"># Compute D, size (ny-1,nx-1)</span>
-        <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span><span class="p">)</span><span class="o">**</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">H_avg</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="n">Snorm</span><span class="o">**</span><span class="mi">2</span>
+        <span class="c1"># 3. Diffusivity D(h, z) at the cell centres (m^2/y), size (ny-1, nx-1)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">g</span><span class="p">)</span><span class="o">**</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">thickness_mid</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="n">slope_norm</span><span class="o">**</span><span class="mi">2</span>
 
-        <span class="c1"># Compute dt</span>
-        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)),</span> <span class="n">dtmax</span><span class="p">)</span>
+        <span class="c1"># 4. Time step: the largest stable one for an explicit scheme (CFL condition), at most dt_max</span>
+        <span class="c1">#    (+1e-10 avoids a division by 0 when there is no ice yet)</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">),</span> <span class="n">dt_max</span><span class="p">)</span>
 
-        <span class="c1"># Compute qx, size (ny-2,nx-1)</span>
-        <span class="n">qx</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>
+        <span class="c1"># 5. Ice flux q = -D grad z in x, between two grid points in x, size (ny-2, nx-1)</span>
+        <span class="n">flux_x</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">surface</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span>
 
-        <span class="c1"># Compute qy, size (ny-1,nx-2)</span>
-        <span class="n">qy</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
+        <span class="c1"># 6. Ice flux in y, between two grid points in y, size (ny-1, nx-2)</span>
+        <span class="n">flux_y</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">surface</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
 
-        <span class="c1"># Update rule (diffusion)</span>
-        <span class="n">dHdt</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qx</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">qy</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span><span class="p">)</span>
-        <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dHdt</span> <span class="c1"># size (ny-2,nx-2)</span>
+        <span class="c1"># 7. Thickness change due to flow, -div(q), at the inner points, size (ny-2, nx-2)</span>
+        <span class="n">dhdt_flow</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">flux_x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">flux_y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span><span class="p">)</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dhdt_flow</span>
 
-        <span class="n">smb</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">)</span>
+        <span class="c1"># 8. Thickness change due to the surface mass balance (accumulation - ablation)</span>
+        <span class="n">smb</span> <span class="o">=</span> <span class="n">smb_fct</span><span class="p">(</span><span class="n">surface</span><span class="p">)</span>
+        <span class="n">thickness</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1"># Update rule (mass balance)</span>
-        <span class="n">H_ice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">smb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># 9. No negative ice (the borders stay at 0: no ice at the edges of the domain)</span>
+        <span class="n">thickness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">thickness</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        <span class="c1"># Update rule (positive thickness)</span>
-        <span class="n">H_ice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">H_ice</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># 10. New ice surface</span>
+        <span class="n">surface</span> <span class="o">=</span> <span class="n">bed</span> <span class="o">+</span> <span class="n">thickness</span>
 
-        <span class="c1"># updatesurface topography</span>
-        <span class="n">Z_surf</span> <span class="o">=</span> <span class="n">Z_topo</span> <span class="o">+</span> <span class="n">H_ice</span>
-    
-        <span class="c1"># Display</span>
-        <span class="k">if</span> <span class="n">it</span> <span class="o">%</span> <span class="n">nout</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Plot every &#39;plot_every&#39; steps</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">plot_every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 
-            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Clear the output in VS Code</span>
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>      <span class="c1"># replace the previous figure</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
-    
-            <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z_surf</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">yz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Surface at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span> 
-            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+
+            <span class="c1"># Left: ice surface elevation, Zermatt as a black dot</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_zermatt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">y_zermatt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Surface at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
- 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H_ice</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="n">H_ice</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span> 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">yz</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Thickness at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span> 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
-            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span> 
+
+            <span class="c1"># Right: ice thickness (no colour where there is no ice)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">thickness</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_zermatt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">y_zermatt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ice Thickness at &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; y&#39;</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance, km&#39;</span><span class="p">)</span>
             <span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
             <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 </pre></div>
@@ -1056,12 +1083,13 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">b_max</span><span class="o">=</span><span class="mf">0.3</span>
-<span class="n">grad_b</span><span class="o">=</span><span class="mf">0.002</span>
-<span class="n">z_ELA</span><span class="o">=</span><span class="mi">3100</span>
+<span class="n">b_max</span> <span class="o">=</span> <span class="mf">0.3</span>      <span class="c1"># maximum mass balance (m/y)</span>
+<span class="n">grad_b</span> <span class="o">=</span> <span class="mf">0.002</span>   <span class="c1"># mass balance gradient (m/y per m of elevation)</span>
+<span class="n">z_ELA</span> <span class="o">=</span> <span class="mi">3100</span>     <span class="c1"># equilibrium line altitude (m)</span>
 
-<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">Z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">Z</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span> 
+<span class="k">def</span> <span class="nf">smb_fct</span><span class="p">(</span><span class="n">surface</span><span class="p">):</span>
+    <span class="c1"># SMB linear in elevation, capped at b_max</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">grad_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">surface</span> <span class="o">-</span> <span class="n">z_ELA</span><span class="p">),</span> <span class="n">b_max</span><span class="p">)</span>
 
 <span class="n">model_glacier_2d</span><span class="p">(</span><span class="n">smb_fct</span><span class="p">)</span>
 </pre></div>
@@ -1147,7 +1175,7 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tutorial — A simple glacier model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-2d">Glacier in 2D</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-flowline-glacier-1d">A flowline glacier (1D)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-deformation">Ice Deformation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glen-s-flow-law">Glen’s flow law</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-ice-approximation-sia">Shallow Ice Approximation (SIA)</a></li>
@@ -1160,7 +1188,7 @@ D(h,z) = \frac{2 A}{5} (\rho g)^3 h^5 ||\nabla S||^2 \qquad (2)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-implementation">Numerical Implementation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glacier-in-3d">Glacier in 3D</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glacier-in-map-view-2d-gorner-glacier">A glacier in map view (2D): Gorner Glacier</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap-up</a></li>
 </ul>
 </li>

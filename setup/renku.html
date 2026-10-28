@@ -278,6 +278,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-sia-model.html">Tutorial — A simple glacier model</a></li>
 
 
@@ -536,34 +538,34 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Project</strong></p></td>
-<td><p>Your copy of the course: material + launcher + storage</p></td>
+<tr class="row-even"><td><p><strong>Project</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
+<td><p>The course project (link on Moodle), shared by everyone</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Session</strong></p></td>
-<td><p>Your running machine with IGM + JupyterLab: <strong>temporary!</strong></p></td>
+<tr class="row-odd"><td><p><strong>Launcher</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
+<td><p>The <strong>Launch</strong> button: starts a machine with IGM + JupyterLab</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Data connector</strong></p></td>
-<td><p>Your SWITCHdrive folder, where you <strong>save</strong> your work</p></td>
+<tr class="row-even"><td><p><strong>Session</strong></p></td>
+<td><p><strong>Your</strong> private machine, with its own disk: kept while <strong>paused</strong>, lost when deleted</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive cannot be mounted in Renku: students work on the disk of their session and back it up to OneDrive.</p>
 <section id="once-session-1">
 <h3>Once (Session 1)<a class="headerlink" href="#once-session-1" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Log in to <a class="reference external" href="https://renkulab.io">renkulab.io</a> with your <strong>SWITCH edu-ID</strong>.</p></li>
-<li><p>Open the course project (<strong>link on Moodle</strong>) and <strong>copy</strong> it (button in the banner).</p></li>
-<li><p>In your copy, add a <strong>data connector</strong> to a <strong>SWITCHdrive</strong> folder (e.g. <code class="docutils literal notranslate"><span class="pre">glamod-work</span></code>).</p></li>
-<li><p><em>Settings</em> → <em>Members</em>: add the teacher and the assistant (viewer).</p></li>
+<li><p>Open the course project <code class="docutils literal notranslate"><span class="pre">glamod</span></code> (<strong>link on Moodle</strong>) → <em>Launchers</em> → <code class="docutils literal notranslate"><span class="pre">glamod</span></code> → <strong>Launch</strong> (1–3 min). No need to copy the project.</p></li>
+<li><p>Keep this <strong>one session</strong> for the whole course.</p></li>
 </ol>
 </section>
 <section id="every-afternoon">
 <h3>Every afternoon<a class="headerlink" href="#every-afternoon" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><strong>Your</strong> project → <em>Sessions</em> → <strong>Launch</strong> (<code class="docutils literal notranslate"><span class="pre">glamod</span></code> launcher, 1–3 min). JupyterLab opens with the course material in <code class="docutils literal notranslate"><span class="pre">~/work/glamod/</span></code> and your SWITCHdrive folder. Your project work lives in your own copy <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (made once in Session 2, Lecture 2).</p></li>
+<li><p><em>Dashboard</em> → <em>My sessions</em> → <strong>Resume</strong> your paused session. Terminal: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/glamod</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">pull</span></code> (latest material). Your project work lives in your own copy <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (made once in Session 2, Lecture 2).</p></li>
 <li><p>Work with <strong>YAML</strong> files (parameters) + a <strong>terminal</strong> (<code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">...</span></code>) + a <strong>notebook</strong> (plots): see Lecture 2.</p></li>
-<li><p><strong>Save</strong> your YAML files, notebooks, scripts and figures to SWITCHdrive (drag &amp; drop, or <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span></code>). Run folders can be re-created by re-running IGM.</p></li>
-<li><p>At the end: <strong>Pause</strong> the session (do not delete it). Sessions inactive for too long are deleted: never leave without saving.</p></li>
+<li><p><strong>Back up</strong>: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → right-click → <em>Download</em> → UNIL OneDrive. Restore in a new session: upload the file to <code class="docutils literal notranslate"><span class="pre">~/work</span></code>, <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xzf</span> <span class="pre">my-glacier.tar.gz</span></code>.</p></li>
+<li><p>At the end: <strong>Pause</strong> the session (not <em>Delete</em>). Paused sessions are deleted after some weeks (15 days by default on <a class="reference external" href="http://renkulab.io">renkulab.io</a>, configurable per resource pool).</p></li>
 </ol>
 </section>
 <section id="if-something-goes-wrong">
@@ -576,7 +578,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>The session does not start</p></td>
-<td><p>Wait, retry; check that you launched from <strong>your</strong> project</p></td>
+<td><p>Wait 5 min; then ▾ → <em>Delete</em> and launch again</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">igm_run:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code></p></td>
 <td><p>Use the <code class="docutils literal notranslate"><span class="pre">glamod</span></code> launcher</p></td>
@@ -598,7 +600,7 @@
 <hr class="docutils" />
 <section id="for-the-teaching-team">
 <h2>For the teaching team<a class="headerlink" href="#for-the-teaching-team" title="Link to this heading">#</a></h2>
-<p><strong>Set-up</strong>: the GitHub repository <code class="docutils literal notranslate"><span class="pre">jouvetg/glamod</span></code> is the <em>code repository</em> of one Renku 2.0 <strong>template project</strong>; the session runs the Docker image <code class="docutils literal notranslate"><span class="pre">ghcr.io/jouvetg/glamod:2026</span></code> (<code class="docutils literal notranslate"><span class="pre">environment/</span></code>, IGM pinned to a commit of its main branch), built by GitHub Actions on every change in <code class="docutils literal notranslate"><span class="pre">environment/</span></code>. Docs: <a class="reference external" href="https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/">Renku for teaching</a>, <a class="reference external" href="https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session">own Docker image</a>.</p>
+<p><strong>Set-up</strong>: the GitHub repository <code class="docutils literal notranslate"><span class="pre">jouvetg/glamod</span></code> is the <em>code repository</em> of one public Renku 2.0 project (<code class="docutils literal notranslate"><span class="pre">guillaume.jouvet-1/glamod</span></code>); the session runs the Docker image <code class="docutils literal notranslate"><span class="pre">ghcr.io/jouvetg/glamod:2026</span></code> (<code class="docutils literal notranslate"><span class="pre">environment/</span></code>, IGM pinned to a commit of its main branch), built by GitHub Actions on every change in <code class="docutils literal notranslate"><span class="pre">environment/</span></code>. Docs: <a class="reference external" href="https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/">Renku for teaching</a>, <a class="reference external" href="https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session">own Docker image</a>.</p>
 <section id="steps">
 <h3>Steps<a class="headerlink" href="#steps" title="Link to this heading">#</a></h3>
 <ol class="arabic">
@@ -614,8 +616,8 @@
 </li>
 </ul>
 </li>
-<li><p><strong>Template</strong>: <em>Settings</em> → <em>Template project</em>, make it visible to the students, post the link on Moodle.</p></li>
-<li><p><strong>Dry run</strong> with a student account: copy, connect SWITCHdrive, launch, run the tutorial, copy <code class="docutils literal notranslate"><span class="pre">session2/my-glacier</span></code> to <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> and run the project steps (check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), save to SWITCHdrive, pause and resume.</p></li>
+<li><p><strong>Students</strong>: the project is <strong>public</strong>, so its launcher is available to every logged-in user and each student gets a private session: post the project link on Moodle. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).</p></li>
+<li><p><strong>Dry run</strong> with a student account: launch from the course project, run the tutorial, copy <code class="docutils literal notranslate"><span class="pre">session2/my-glacier</span></code> to <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> and run the project steps (check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), back up with <code class="docutils literal notranslate"><span class="pre">tar</span></code>, pause and resume.</p></li>
 </ol>
 <p><strong>Updating during the course</strong>: the <strong>image</strong> only holds the software (IGM + packages): build it once, and rebuild only if <code class="docutils literal notranslate"><span class="pre">environment/</span></code> changes (new IGM commit). The <strong>course material</strong> comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in <code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>. Their own work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> is never touched by a pull; changes to the template <code class="docutils literal notranslate"><span class="pre">session2/my-glacier/</span></code> after they copied it must be copied by hand (e.g. a new script: <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">~/work/glamod/session2/my-glacier/run_xxx.sh</span> <span class="pre">~/work/my-glacier/</span></code>).</p>
 </section>

@@ -215,4 +215,4 @@ Checklist for today:
 
 `~/work/my-glacier/` (your copy: YAML + terminal + `analysis.ipynb`)
 
-**Save** your YAML files, notebook, scripts and figures to your **SWITCHdrive folder** regularly: RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.
+**Back up** at the end of each afternoon (`cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive): RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.

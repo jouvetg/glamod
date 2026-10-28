@@ -280,6 +280,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="../session1/1d-tutorial-sia-model.html">Tutorial — A simple glacier model</a></li>
 
 
@@ -784,8 +786,8 @@ softer ice → faster deformation</p></li>
 <h1>Back in RenkuLab<a class="headerlink" href="#back-in-renkulab" title="Link to this heading">#</a></h1>
 <p>Same as in Session 1:</p>
 <ol class="arabic simple">
-<li><p>Open <strong>your</strong> project on <a class="reference external" href="http://renkulab.io">renkulab.io</a> → <strong>Resume</strong> your paused session (or <strong>Launch</strong> a new one)</p></li>
-<li><p>Course material in <code class="docutils literal notranslate"><span class="pre">~/work/glamod/</span></code>, your SWITCHdrive folder next to it</p></li>
+<li><p><a class="reference external" href="http://renkulab.io">renkulab.io</a> → <em>My sessions</em> → <strong>Resume</strong> your paused session</p></li>
+<li><p>Terminal: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/glamod</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">pull</span></code> (latest course material)</p></li>
 </ol>
 <p>New today: we run <strong>IGM</strong>, a command-line program.</p>
 <p>We work with <strong>three tools</strong>, side by side in JupyterLab.</p>
@@ -845,7 +847,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <li><p>Re-run the notebook as often as you like: it only <strong>reads</strong> the run folders</p></li>
 <li><p>Figures for the report: <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;figures/fig_volume.png&quot;,</span> <span class="pre">dpi=200,</span> <span class="pre">bbox_inches=&quot;tight&quot;)</span></code></p></li>
 </ul>
-<p><strong>Save your work</strong>: YAML files, notebook and figures → SWITCHdrive folder. Run folders can always be re-created.</p>
+<p><strong>Back up your work</strong> at the end of each afternoon (Session 1, Step 4): <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → UNIL OneDrive. Run folders can always be re-created.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="when-something-goes-wrong">
@@ -953,7 +955,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <ol class="arabic simple">
 <li><p>Put the RGI ID of <strong>your</strong> glacier in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code> (default: Findelengletscher)</p></li>
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, run the first cell; drag the terminal next to it</p></li>
-<li><p><strong>Save</strong> to your SWITCHdrive folder at the end of each afternoon (YAML, notebook, scripts, figures)</p></li>
+<li><p><strong>Back up</strong> at the end of each afternoon: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → OneDrive</p></li>
 </ol>
 </section>
 <hr class="docutils" />
@@ -1055,7 +1057,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 <li><p>Are several combinations equally good (trade-off between deformation and sliding)?</p></li>
 <li><p>Redo the past or one scenario with the best one(s): how much does 2100 change?</p></li>
 </ul>
-<p>Commands and plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4. <strong>Save your work</strong> (YAML, notebook, figures) to SWITCHdrive!</p>
+<p>Commands and plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4. <strong>Back up your work</strong> (<code class="docutils literal notranslate"><span class="pre">my-glacier.tar.gz</span></code> → OneDrive)!</p>
 </section>
 
     <script type="text/x-thebe-config">

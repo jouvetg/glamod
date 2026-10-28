@@ -278,6 +278,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="1d-tutorial-sia-model.html">Tutorial — A simple glacier model</a></li>
 
 
@@ -502,9 +504,11 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 1 — Hour 3: Setting up RenkuLab, then the tutorial</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-we-compute">Where do we compute?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renkulab-the-vocabulary">RenkuLab: the vocabulary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-your-own-copy-of-the-course-once-now">Step 1: your own copy of the course (once, now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-launch-a-session-every-afternoon">Step 2: launch a session (every afternoon)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-save-your-work">Step 3: save your work ⚠️</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-your-session-now">Step 1: start your session (now)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-tutorial">Step 2: the tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-every-following-afternoon">Step 3: every following afternoon</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-back-up-your-work">Step 4: back up your work ⚠️</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-something-goes-wrong">If something goes wrong</a></li>
 </ul>
 
             </nav>
@@ -527,8 +531,8 @@
 <ul class="simple">
 <li><p>JupyterLab <strong>in your browser</strong>: nothing to install on your laptop</p></li>
 <li><p>Python, IGM and all packages are <strong>pre-installed</strong> in the course environment</p></li>
-<li><p>Runs on Swiss servers, with resources reserved for this course</p></li>
-<li><p>Login with your <strong>SWITCH edu-ID</strong> (UNIL account)</p></li>
+<li><p>Runs on Swiss servers</p></li>
+<li><p>Login with your <strong>SWITCH edu-ID</strong> (your UNIL account)</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -541,52 +545,66 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Project</strong></p></td>
-<td><p>Your copy of the course: material (code repository) + launcher + storage</p></td>
+<tr class="row-even"><td><p><strong>Project</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
+<td><p>The course project (link on Moodle), shared by everyone</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Session launcher</strong></p></td>
-<td><p>The “Launch” button: starts a machine with Python, IGM and JupyterLab</p></td>
+<tr class="row-odd"><td><p><strong>Launcher</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
+<td><p>The <strong>Launch</strong> button: starts a machine with Python, IGM and JupyterLab</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Session</strong></p></td>
-<td><p>Your running machine (CPU, RAM, disk): temporary!</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Data connector</strong></p></td>
-<td><p>Your SWITCHdrive folder, mounted in the session: <strong>where you save your work</strong></p></td>
+<td><p><strong>Your</strong> private machine (CPU, RAM, disk), started from the launcher. Only you see it</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Your files live on the <strong>disk of your session</strong>: they stay there as long as the session is <strong>paused</strong>, not deleted.</p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-1-your-own-copy-of-the-course-once-now">
-<h1>Step 1: your own copy of the course (once, now)<a class="headerlink" href="#step-1-your-own-copy-of-the-course-once-now" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="step-1-start-your-session-now">
+<h1>Step 1: start your session (now)<a class="headerlink" href="#step-1-start-your-session-now" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
-<li><p>Go to <strong><a class="reference external" href="http://renkulab.io">renkulab.io</a></strong> → <em>Log in</em> with SWITCH edu-ID</p></li>
-<li><p>Open the course project (link on Moodle)</p></li>
-<li><p>Click the banner button to <strong>copy the project</strong> → this is now <em>your</em> project</p></li>
-<li><p>In your project: add a <strong>data connector</strong> → <em>SWITCHdrive</em> → choose a folder (e.g. <code class="docutils literal notranslate"><span class="pre">glamod-work</span></code>)</p></li>
-<li><p><em>Settings</em> → <em>Members</em>: add the teacher and the assistant as <strong>viewers</strong></p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-2-launch-a-session-every-afternoon">
-<h1>Step 2: launch a session (every afternoon)<a class="headerlink" href="#step-2-launch-a-session-every-afternoon" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>Open <strong>your</strong> project → <em>Sessions</em> → <strong>Launch</strong> (<code class="docutils literal notranslate"><span class="pre">glamod</span></code> launcher)</p></li>
+<li><p>Go to <strong><a class="reference external" href="http://renkulab.io">renkulab.io</a></strong> → <em>Log in</em> → <strong>SWITCH edu-ID</strong> (UNIL account)</p></li>
+<li><p>Open the course project <code class="docutils literal notranslate"><span class="pre">glamod</span></code> (<strong>link on Moodle</strong>)</p></li>
+<li><p><em>Launchers</em> → <code class="docutils literal notranslate"><span class="pre">glamod</span></code> → <strong>Launch</strong></p></li>
 <li><p>Wait 1–3 min (longer the first time) → JupyterLab opens in your browser</p></li>
-<li><p>File browser (left): <code class="docutils literal notranslate"><span class="pre">glamod/</span></code> = course material, plus your SWITCHdrive folder</p></li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">glamod/session1/1d-tutorial-sia-model.ipynb</span></code> → run the cells top to bottom (Shift+Enter)</p></li>
+<li><p>File browser (left): <code class="docutils literal notranslate"><span class="pre">glamod/</span></code> = the course material</p></li>
 </ol>
-<p>At the end of the afternoon: <strong>Pause</strong> the session (do not delete it).</p>
+<p><strong>Keep this one session for the whole course</strong>: do not launch a new one each week.</p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-3-save-your-work">
-<h1>Step 3: save your work ⚠️<a class="headerlink" href="#step-3-save-your-work" title="Link to this heading">#</a></h1>
-<p>A session is a <strong>temporary machine</strong>: it may be deleted after a period of inactivity.</p>
-<ul class="simple">
-<li><p>Copy what matters to your <strong>SWITCHdrive folder</strong> (drag &amp; drop in the file browser), or right-click → <em>Download</em></p></li>
-<li><p><strong>Rule</strong>: never finish an afternoon without saving your notebooks (and later your YAML files and figures)</p></li>
-</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="step-2-the-tutorial">
+<h1>Step 2: the tutorial<a class="headerlink" href="#step-2-the-tutorial" title="Link to this heading">#</a></h1>
+<p>Open <code class="docutils literal notranslate"><span class="pre">glamod/session1/1d-tutorial-sia-model.ipynb</span></code> → run the cells from top to bottom (<strong>Shift+Enter</strong>)</p>
+<p>At the end of the afternoon: ▾ next to <em>Open</em> → <strong>Pause</strong> the session (<strong>not</strong> <em>Delete</em>)</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-3-every-following-afternoon">
+<h1>Step 3: every following afternoon<a class="headerlink" href="#step-3-every-following-afternoon" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong><a class="reference external" href="http://renkulab.io">renkulab.io</a></strong> → <em>Dashboard</em> → <em>My sessions</em> (or the course project) → your paused session → <strong>Resume</strong></p></li>
+<li><p>Your files are back where you left them</p></li>
+<li><p>Get the latest course material: <em>File → New → Terminal</em>, then</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>At the end: <strong>Pause</strong> (not <em>Delete</em>)</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-4-back-up-your-work">
+<h1>Step 4: back up your work ⚠️<a class="headerlink" href="#step-4-back-up-your-work" title="Link to this heading">#</a></h1>
+<p>A paused session is <strong>deleted after some time of inactivity</strong> (a few weeks). From Session 2, back up your project <strong>at the end of each afternoon</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>czf<span class="w"> </span>my-glacier.tar.gz<span class="w"> </span>--exclude<span class="o">=</span>outputs<span class="w"> </span>--exclude<span class="o">=</span>data<span class="w"> </span>my-glacier
+</pre></div>
+</div>
+<p>→ right-click <code class="docutils literal notranslate"><span class="pre">my-glacier.tar.gz</span></code> in the file browser → <strong>Download</strong> → put it in your <strong>UNIL OneDrive</strong></p>
+<p>Lost session? Launch a new one, upload the file (⬆ button) to <code class="docutils literal notranslate"><span class="pre">~/work</span></code>, then <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">xzf</span> <span class="pre">my-glacier.tar.gz</span></code>. Run folders (<code class="docutils literal notranslate"><span class="pre">outputs/</span></code>) are re-created by re-running IGM.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="if-something-goes-wrong">
+<h1>If something goes wrong<a class="headerlink" href="#if-something-goes-wrong" title="Link to this heading">#</a></h1>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Symptom</p></th>
@@ -594,14 +612,17 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Session does not start</p></td>
-<td><p>Wait, retry (or choose the CPU resource class); check you launched from <strong>your</strong> project</p></td>
+<tr class="row-even"><td><p>The session does not start after 5 min</p></td>
+<td><p>▾ → <em>Delete</em>, launch again; still stuck: call us</p></td>
 </tr>
-<tr class="row-odd"><td><p>Kernel dies / very slow</p></td>
-<td><p>Restart the kernel (<em>Kernel → Restart</em>); close other notebooks</p></td>
+<tr class="row-odd"><td><p>I cannot find my session</p></td>
+<td><p><em>Dashboard</em> → <em>My sessions</em>; are you logged in with your edu-ID?</p></td>
 </tr>
-<tr class="row-even"><td><p>Lost files</p></td>
-<td><p>Were they in the SWITCHdrive folder?</p></td>
+<tr class="row-even"><td><p>Kernel dies / very slow</p></td>
+<td><p><em>Kernel → Restart</em>; close the notebooks you do not use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> refuses (local changes)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> then <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (or call us)</p></td>
 </tr>
 </tbody>
 </table>
@@ -677,9 +698,11 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 1 — Hour 3: Setting up RenkuLab, then the tutorial</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-we-compute">Where do we compute?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renkulab-the-vocabulary">RenkuLab: the vocabulary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-your-own-copy-of-the-course-once-now">Step 1: your own copy of the course (once, now)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-launch-a-session-every-afternoon">Step 2: launch a session (every afternoon)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-save-your-work">Step 3: save your work ⚠️</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-your-session-now">Step 1: start your session (now)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-the-tutorial">Step 2: the tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-every-following-afternoon">Step 3: every following afternoon</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-back-up-your-work">Step 4: back up your work ⚠️</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-something-goes-wrong">If something goes wrong</a></li>
 </ul>
 
   </nav></div>
