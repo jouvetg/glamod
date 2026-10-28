@@ -31,7 +31,7 @@ Then: write the report (deadline: *to be announced*).
 
 ## Computing environment
 
-Everything runs **online on [RenkuLab](https://renkulab.io)** with your SWITCH edu-ID: IGM and all Python packages are pre-installed. Nothing to install on your laptop. You set it up in Session 1 (hour 3). See [Working online with RenkuLab](setup/renku.md).
+Everything runs **online on [RenkuLab](https://renkulab.io)** with your SWITCH edu-ID, in the course project **[renkulab.io/p/guillaume.jouvet-1/glamod](https://renkulab.io/p/guillaume.jouvet-1/glamod)** (*Launchers* → `glamod` → **Launch**): IGM and all Python packages are pre-installed. Nothing to install on your laptop. You set it up in Session 1 (hour 3). See [Working online with RenkuLab](setup/renku.md).
 
 How we work with IGM: **edit parameters in YAML files, run IGM in a terminal, analyse the results in a notebook** (all three side by side in JupyterLab).
 
