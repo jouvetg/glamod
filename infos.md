@@ -5,6 +5,7 @@
 - Teacher: Guillaume Jouvet (guillaume.jouvet (at) unil.ch)
 - Assistant: Brandon Finley
 - Format: **3 afternoons × 4 hours**
+- Room: **Geopolis 2208** for all sessions (except the extra Session 4, held within the course *Dates and Rates of landscape evolution*)
 
 ## Course objective
 
@@ -36,7 +37,6 @@ How we work with IGM: **edit parameters in YAML files, run IGM in a terminal, an
 
 ## Further resources
 
-- https://www.antarcticglaciers.org — the best website to learn more about glacier processes.
-- "Karthaus Summer School Lecture Notes", for the mechanics and the maths: https://link.springer.com/book/10.1007/978-3-030-42584-5
-- IGM documentation and examples: https://igm-model.org, https://github.com/instructed-glacier-model/igm-examples
+- https://www.antarcticglaciers.org — the best website to learn more about glacier processes. 
+- IGM documentation and examples: https://igm-model.org 
 - Swiss glaciers: [map.geo.admin.ch](https://map.geo.admin.ch), [GLAMOS](https://www.glamos.ch)

@@ -8,29 +8,30 @@ Presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3).
 
 | Renku | What it is for you |
 |---|---|
-| **Project** | Your copy of the course: material + launcher + storage |
-| **Session** | Your running machine with IGM + JupyterLab: **temporary!** |
-| **Data connector** | Your SWITCHdrive folder, where you **save** your work |
+| **Project** `glamod` | The course project (link on Moodle), shared by everyone |
+| **Launcher** `glamod` | The **Launch** button: starts a machine with IGM + JupyterLab |
+| **Session** | **Your** private machine, with its own disk: kept while **paused**, lost when deleted |
+
+UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive cannot be mounted in Renku: students work on the disk of their session and back it up to OneDrive.
 
 ### Once (Session 1)
 
 1. Log in to [renkulab.io](https://renkulab.io) with your **SWITCH edu-ID**.
-2. Open the course project (**link on Moodle**) and **copy** it (button in the banner).
-3. In your copy, add a **data connector** to a **SWITCHdrive** folder (e.g. `glamod-work`).
-4. *Settings* → *Members*: add the teacher and the assistant (viewer).
+2. Open the course project `glamod` (**link on Moodle**) → *Launchers* → `glamod` → **Launch** (1–3 min). No need to copy the project.
+3. Keep this **one session** for the whole course.
 
 ### Every afternoon
 
-1. **Your** project → *Sessions* → **Launch** (`glamod` launcher, 1–3 min). JupyterLab opens with the course material in `~/work/glamod/` and your SWITCHdrive folder. Your project work lives in your own copy `~/work/my-glacier/` (made once in Session 2, Lecture 2).
+1. *Dashboard* → *My sessions* → **Resume** your paused session. Terminal: `cd ~/work/glamod && git pull` (latest material). Your project work lives in your own copy `~/work/my-glacier/` (made once in Session 2, Lecture 2).
 2. Work with **YAML** files (parameters) + a **terminal** (`igm_run ...`) + a **notebook** (plots): see Lecture 2.
-3. **Save** your YAML files, notebooks, scripts and figures to SWITCHdrive (drag & drop, or `cp -r`). Run folders can be re-created by re-running IGM.
-4. At the end: **Pause** the session (do not delete it). Sessions inactive for too long are deleted: never leave without saving.
+3. **Back up**: `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → right-click → *Download* → UNIL OneDrive. Restore in a new session: upload the file to `~/work`, `tar xzf my-glacier.tar.gz`.
+4. At the end: **Pause** the session (not *Delete*). Paused sessions are deleted after some weeks (15 days by default on renkulab.io, configurable per resource pool).
 
 ### If something goes wrong
 
 | Symptom | Fix |
 |---|---|
-| The session does not start | Wait, retry; check that you launched from **your** project |
+| The session does not start | Wait 5 min; then ▾ → *Delete* and launch again |
 | `igm_run: command not found` | Use the `glamod` launcher |
 | `Parameter 'experiment' does not exist` | `cd` to the folder that contains `experiment/` |
 | Kernel dies / very slow | Out of memory: restart the kernel, close other notebooks |
@@ -40,7 +41,7 @@ Presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3).
 
 ## For the teaching team
 
-**Set-up**: the GitHub repository `jouvetg/glamod` is the *code repository* of one Renku 2.0 **template project**; the session runs the Docker image `ghcr.io/jouvetg/glamod:2026` (`environment/`, IGM pinned to a commit of its main branch), built by GitHub Actions on every change in `environment/`. Docs: [Renku for teaching](https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/), [own Docker image](https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session).
+**Set-up**: the GitHub repository `jouvetg/glamod` is the *code repository* of one public Renku 2.0 project (`guillaume.jouvet-1/glamod`); the session runs the Docker image `ghcr.io/jouvetg/glamod:2026` (`environment/`, IGM pinned to a commit of its main branch), built by GitHub Actions on every change in `environment/`. Docs: [Renku for teaching](https://docs.renkulab.io/en/2.14.1/docs/users/use-cases/teaching/), [own Docker image](https://docs.renkulab.io/en/2.18.1/docs/users/sessions/guides/environments/use-your-own-docker-image-for-renku-session).
 
 ### Steps
 
@@ -52,8 +53,8 @@ Presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3).
      ```
      ["jupyter server --ServerApp.ip=0.0.0.0 --ServerApp.port=8888 --ServerApp.base_url=$RENKU_BASE_URL_PATH --ServerApp.token=\"\" --ServerApp.password=\"\" --ServerApp.allow_remote_access=true --ContentsManager.allow_hidden=true --ServerApp.allow_origin=*"]
      ```
-4. **Template**: *Settings* → *Template project*, make it visible to the students, post the link on Moodle.
-5. **Dry run** with a student account: copy, connect SWITCHdrive, launch, run the tutorial, copy `session2/my-glacier` to `~/work/my-glacier` and run the project steps (check run, `params_past`, `bash run_future.sh`, `analysis.ipynb`), save to SWITCHdrive, pause and resume.
+4. **Students**: the project is **public**, so its launcher is available to every logged-in user and each student gets a private session: post the project link on Moodle. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).
+5. **Dry run** with a student account: launch from the course project, run the tutorial, copy `session2/my-glacier` to `~/work/my-glacier` and run the project steps (check run, `params_past`, `bash run_future.sh`, `analysis.ipynb`), back up with `tar`, pause and resume.
 
 **Updating during the course**: the **image** only holds the software (IGM + packages): build it once, and rebuild only if `environment/` changes (new IGM commit). The **course material** comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run `git pull` in `~/work/glamod`. Their own work in `~/work/my-glacier/` is never touched by a pull; changes to the template `session2/my-glacier/` after they copied it must be copied by hand (e.g. a new script: `cp ~/work/glamod/session2/my-glacier/run_xxx.sh ~/work/my-glacier/`).
 

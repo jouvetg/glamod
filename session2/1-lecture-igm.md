@@ -226,8 +226,8 @@ Helpers in `utils/helper.py` (used in the notebooks): `show_dashboard`, `compare
 
 Same as in Session 1:
 
-1. Open **your** project on renkulab.io → **Resume** your paused session (or **Launch** a new one)
-2. Course material in `~/work/glamod/`, your SWITCHdrive folder next to it
+1. renkulab.io → *My sessions* → **Resume** your paused session
+2. Terminal: `cd ~/work/glamod && git pull` (latest course material)
 
 New today: we run **IGM**, a command-line program. 
 
@@ -274,7 +274,7 @@ compare_runs(["outputs/past_v1", "outputs/past_v2"],
 - Re-run the notebook as often as you like: it only **reads** the run folders
 - Figures for the report: `plt.savefig("figures/fig_volume.png", dpi=200, bbox_inches="tight")`
 
-**Save your work**: YAML files, notebook and figures → SWITCHdrive folder. Run folders can always be re-created.
+**Back up your work** at the end of each afternoon (Session 1, Step 4): `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → UNIL OneDrive. Run folders can always be re-created.
 
 ---
 
@@ -332,7 +332,7 @@ cd ~/work/my-glacier
 
 1. Put the RGI ID of **your** glacier in `experiment/common/my_glacier.yaml` (default: Findelengletscher)
 2. Open `analysis.ipynb`, run the first cell; drag the terminal next to it
-3. **Save** to your SWITCHdrive folder at the end of each afternoon (YAML, notebook, scripts, figures)
+3. **Back up** at the end of each afternoon: `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive
 
 ---
 
@@ -424,4 +424,4 @@ bash run_sensitivity.sh        # 3 x 4 combinations of arrhenius x tau_ref, 12 s
 - Are several combinations equally good (trade-off between deformation and sliding)?
 - Redo the past or one scenario with the best one(s): how much does 2100 change?
 
-Commands and plots: `analysis.ipynb`, section 4. **Save your work** (YAML, notebook, figures) to SWITCHdrive!
+Commands and plots: `analysis.ipynb`, section 4. **Back up your work** (`my-glacier.tar.gz` → OneDrive)!

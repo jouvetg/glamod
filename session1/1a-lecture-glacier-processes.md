@@ -52,7 +52,7 @@ color: white
 
 # Recommended External resources
 
-- Excelent website covering glacier processes in depth: https://www.antarcticglaciers.org
+- Excellent website covering glacier processes in depth: https://www.antarcticglaciers.org
 
 - IGM documentation: https://igm-model.org
 
