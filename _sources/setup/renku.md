@@ -8,7 +8,7 @@ Presented in the slides `session1/1c-setup-renku.md` (Session 1, hour 3).
 
 | Renku | What it is for you |
 |---|---|
-| **Project** `glamod` | The course project (link on Moodle), shared by everyone |
+| **Project** `glamod` | The course project [renkulab.io/p/guillaume.jouvet-1/glamod](https://renkulab.io/p/guillaume.jouvet-1/glamod), shared by everyone |
 | **Launcher** `glamod` | The **Launch** button: starts a machine with IGM + JupyterLab |
 | **Session** | **Your** private machine, with its own disk: kept while **paused**, lost when deleted |
 
@@ -17,7 +17,7 @@ UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive ca
 ### Once (Session 1)
 
 1. Log in to [renkulab.io](https://renkulab.io) with your **SWITCH edu-ID**.
-2. Open the course project `glamod` (**link on Moodle**) → *Launchers* → `glamod` → **Launch** (1–3 min). No need to copy the project.
+2. Open the course project: **[renkulab.io/p/guillaume.jouvet-1/glamod](https://renkulab.io/p/guillaume.jouvet-1/glamod)** → *Launchers* → `glamod` → **Launch** (1–3 min). No need to copy the project.
 3. Keep this **one session** for the whole course.
 
 ### Every afternoon
@@ -53,7 +53,7 @@ UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive ca
      ```
      ["jupyter server --ServerApp.ip=0.0.0.0 --ServerApp.port=8888 --ServerApp.base_url=$RENKU_BASE_URL_PATH --ServerApp.token=\"\" --ServerApp.password=\"\" --ServerApp.allow_remote_access=true --ContentsManager.allow_hidden=true --ServerApp.allow_origin=*"]
      ```
-4. **Students**: the project is **public**, so its launcher is available to every logged-in user and each student gets a private session: post the project link on Moodle. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).
+4. **Students**: the project is **public**, so its launcher is available to every logged-in user and each student gets a private session: its link is given on the course page (`infos.md`) and in the Session 1 slides. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).
 5. **Dry run** with a student account: launch from the course project, run the tutorial, copy `session2/my-glacier` to `~/work/my-glacier` and run the project steps (check run, `params_past`, `bash run_future.sh`, `analysis.ipynb`), back up with `tar`, pause and resume.
 
 **Updating during the course**: the **image** only holds the software (IGM + packages): build it once, and rebuild only if `environment/` changes (new IGM commit). The **course material** comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run `git pull` in `~/work/glamod`. Their own work in `~/work/my-glacier/` is never touched by a pull; changes to the template `session2/my-glacier/` after they copied it must be copied by hand (e.g. a new script: `cp ~/work/glamod/session2/my-glacier/run_xxx.sh ~/work/my-glacier/`).

@@ -25,7 +25,7 @@ On [renkulab.io](https://renkulab.io), a platform of the Swiss Data Science Cent
 
 | Renku | What it is for you |
 |---|---|
-| **Project** `glamod` | The course project (link on Moodle), shared by everyone |
+| **Project** `glamod` | The course project, shared by everyone |
 | **Launcher** `glamod` | The **Launch** button: starts a machine with Python, IGM and JupyterLab |
 | **Session** | **Your** private machine (CPU, RAM, disk), started from the launcher. Only you see it |
 
@@ -36,7 +36,7 @@ Your files live on the **disk of your session**: they stay there as long as the 
 # Step 1: start your session (now)
 
 1. Go to **renkulab.io** → *Log in* → **SWITCH edu-ID** (UNIL account)
-2. Open the course project `glamod` (**link on Moodle**)
+2. Open the course project: **[renkulab.io/p/guillaume.jouvet-1/glamod](https://renkulab.io/p/guillaume.jouvet-1/glamod)** (also on the course page)
 3. *Launchers* → `glamod` → **Launch**
 4. Wait 1–3 min (longer the first time) → JupyterLab opens in your browser
 5. File browser (left): `glamod/` = the course material

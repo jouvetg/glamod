@@ -539,7 +539,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Project</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
-<td><p>The course project (link on Moodle), shared by everyone</p></td>
+<td><p>The course project <a class="reference external" href="https://renkulab.io/p/guillaume.jouvet-1/glamod">renkulab.io/p/guillaume.jouvet-1/glamod</a>, shared by everyone</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Launcher</strong> <code class="docutils literal notranslate"><span class="pre">glamod</span></code></p></td>
 <td><p>The <strong>Launch</strong> button: starts a machine with IGM + JupyterLab</p></td>
@@ -555,7 +555,7 @@
 <h3>Once (Session 1)<a class="headerlink" href="#once-session-1" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Log in to <a class="reference external" href="https://renkulab.io">renkulab.io</a> with your <strong>SWITCH edu-ID</strong>.</p></li>
-<li><p>Open the course project <code class="docutils literal notranslate"><span class="pre">glamod</span></code> (<strong>link on Moodle</strong>) → <em>Launchers</em> → <code class="docutils literal notranslate"><span class="pre">glamod</span></code> → <strong>Launch</strong> (1–3 min). No need to copy the project.</p></li>
+<li><p>Open the course project: <strong><a class="reference external" href="https://renkulab.io/p/guillaume.jouvet-1/glamod">renkulab.io/p/guillaume.jouvet-1/glamod</a></strong> → <em>Launchers</em> → <code class="docutils literal notranslate"><span class="pre">glamod</span></code> → <strong>Launch</strong> (1–3 min). No need to copy the project.</p></li>
 <li><p>Keep this <strong>one session</strong> for the whole course.</p></li>
 </ol>
 </section>
@@ -616,7 +616,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>Students</strong>: the project is <strong>public</strong>, so its launcher is available to every logged-in user and each student gets a private session: post the project link on Moodle. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).</p></li>
+<li><p><strong>Students</strong>: the project is <strong>public</strong>, so its launcher is available to every logged-in user and each student gets a private session: its link is given on the course page (<code class="docutils literal notranslate"><span class="pre">infos.md</span></code>) and in the Session 1 slides. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).</p></li>
 <li><p><strong>Dry run</strong> with a student account: launch from the course project, run the tutorial, copy <code class="docutils literal notranslate"><span class="pre">session2/my-glacier</span></code> to <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> and run the project steps (check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), back up with <code class="docutils literal notranslate"><span class="pre">tar</span></code>, pause and resume.</p></li>
 </ol>
 <p><strong>Updating during the course</strong>: the <strong>image</strong> only holds the software (IGM + packages): build it once, and rebuild only if <code class="docutils literal notranslate"><span class="pre">environment/</span></code> changes (new IGM commit). The <strong>course material</strong> comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in <code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>. Their own work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> is never touched by a pull; changes to the template <code class="docutils literal notranslate"><span class="pre">session2/my-glacier/</span></code> after they copied it must be copied by hand (e.g. a new script: <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">~/work/glamod/session2/my-glacier/run_xxx.sh</span> <span class="pre">~/work/my-glacier/</span></code>).</p>
