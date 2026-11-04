@@ -323,7 +323,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/tutorial.html">My glacier — tutorial (Session 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -344,6 +345,7 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session3/tutorial-session3.html">My glacier — tutorial (Session 3): moraines and figures for the report</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -619,7 +621,7 @@
 </ul>
 </li>
 <li><p><strong>Students</strong>: the project is <strong>public</strong>, so its launcher is available to every logged-in user and each student gets a private session: its link is given on the course page (<code class="docutils literal notranslate"><span class="pre">infos.md</span></code>) and in the Session 1 slides. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).</p></li>
-<li><p><strong>Dry run</strong> with a student account: launch from the course project, run the tutorial, copy <code class="docutils literal notranslate"><span class="pre">session2/my-glacier</span></code> to <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> and run the project steps (check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">params_future</span></code>, <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>), back up with <code class="docutils literal notranslate"><span class="pre">tar</span></code>, pause and resume.</p></li>
+<li><p><strong>Dry run</strong> with a student account: launch from the course project, run the tutorial, copy <code class="docutils literal notranslate"><span class="pre">session2/my-glacier</span></code> to <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> and run the project steps (check run, <code class="docutils literal notranslate"><span class="pre">params_past</span></code>, <code class="docutils literal notranslate"><span class="pre">params_future</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>), back up with <code class="docutils literal notranslate"><span class="pre">tar</span></code>, pause and resume.</p></li>
 </ol>
 <p><strong>Updating during the course</strong>: the <strong>image</strong> only holds the software (IGM + packages): build it once, and rebuild only if <code class="docutils literal notranslate"><span class="pre">environment/</span></code> changes (new IGM commit). The <strong>course material</strong> comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in <code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>. Their own work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> is never touched by a pull; changes to the template <code class="docutils literal notranslate"><span class="pre">session2/my-glacier/</span></code> after they copied it must be copied by hand (e.g. a new parameter file: <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">~/work/glamod/session2/my-glacier/experiment/params_xxx.yaml</span> <span class="pre">~/work/my-glacier/experiment/</span></code>).</p>
 </section>
@@ -632,7 +634,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Project (Findelen): check / past 1700–2020 / future (4 scenarios)</p></td>
+<tr class="row-even"><td><p>Project (Findelen, similar for the Rhone): check / past 1700–2020 / future (4 scenarios)</p></td>
 <td><p>~12 s / ~50 s / ~1.5 min</p></td>
 </tr>
 <tr class="row-odd"><td><p>Project: response time / moraines (particles) / <code class="docutils literal notranslate"><span class="pre">params_sensitivity</span></code> (12 runs)</p></td>

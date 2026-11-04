@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="My glacier — analysis notebook (mini-project)" href="my-glacier/analysis.html" />
+    <link rel="next" title="My glacier — tutorial (Session 2)" href="my-glacier/tutorial.html" />
     <link rel="prev" title="Choose your glacier" href="../session1/1e-choose-your-glacier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -325,7 +325,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="my-glacier/tutorial.html">My glacier — tutorial (Session 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -346,6 +347,7 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../session3/tutorial-session3.html">My glacier — tutorial (Session 3): moraines and figures for the report</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -524,18 +526,19 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-with-igm-three-tools">How to work with IGM: three tools</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-few-commands-you-need">The terminal: the few commands you need</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-igm-in-the-terminal">Run IGM in the terminal</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mini-project-model-your-own-glacier">The mini-project: model your own glacier</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-start-your-project-1-hour-then-hours-24">Hands-on: start your project (≈ 1 hour, then hours 2–4)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-follow-tutorial-ipynb">Hands-on: follow <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code> ⚠️</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-your-own-copy-of-the-template">Step 0 — Your own copy of the template</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-template-my-glacier">The template: <code class="docutils literal notranslate"><span class="pre">my-glacier/</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-present-check-the-initial-state">Step 1 — Present: check the initial state</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-past-from-the-lia-to-today">Step 2 — Past: from the LIA to today</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-future-20202100">Step 3 — Future: 2020–2100</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-exploration-b1-does-the-smb-model-matter">Step 4 — Exploration B1: does the SMB model matter?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-exploration-b2-how-well-do-we-know-the-ice-flow">Step 4 — Exploration B2: how well do we know the ice flow?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calibration-1-the-ice-flow">Step 2 — Calibration 1: the ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-past-from-the-lia-to-today-calibration-2">Step 3 — Past: from the LIA to today (Calibration 2)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-future-20202100">Step 4 — Future: 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-a-simple-smb-model-ela-based">Step 5 — A simple SMB model: ELA-based</a></li>
 </ul>
 
             </nav>
@@ -643,7 +646,7 @@ using a convolutional neural network / image-to-image mapping:
 │   └── params_past.yaml             one YAML file = one experiment
 ├── data/                        INPUTS (downloaded by oggm_shop at the first run)
 │   └── input_&lt;RGI_ID&gt;.nc            topography, thickness, velocities, climate...
-└── outputs/                     OUTPUTS: one folder per run, named after the parameter file
+└── outputs/                     OUTPUTS: one folder per run (hydra: run: dir: at the end of the file)
     └── params_past/
         ├── output.nc                maps through time
         ├── output_ts.nc             volume and area through time
@@ -686,7 +689,7 @@ using a convolutional neural network / image-to-image mapping:
 <h1>Changing parameters<a class="headerlink" href="#changing-parameters" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Change parameters <strong>in the YAML file</strong>, and <strong>keep 1 file per experiment</strong>: copy it before changing it (<code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code> → <code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code>), so that every experiment stays documented</p></li>
-<li><p>Run it: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_past_v2</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code> (the run folder is named after the file), with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
+<li><p>Run it: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_past_v2</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code> (<strong>change the run folder at the end of the copied file</strong>: <code class="docutils literal notranslate"><span class="pre">hydra:</span> <span class="pre">run:</span> <span class="pre">dir:</span> <span class="pre">outputs/params_past_v2</span></code>), with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
 <li><p>All parameters and their defaults: <a class="reference external" href="https://igm-model.org">https://igm-model.org</a> (Modules)</p></li>
 </ul>
 </section>
@@ -865,6 +868,51 @@ maps of <code class="docutils literal notranslate"><span class="pre">thk</span><
 </table>
 </div>
 <p>Drag the tabs to split the screen.</p>
+<hr class="docutils" />
+<style scoped>table { font-size: 0.6em; } p, li { font-size: 0.8em; }</style>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-terminal-the-few-commands-you-need">
+<h1>The terminal: the few commands you need<a class="headerlink" href="#the-terminal-the-few-commands-you-need" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Does</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></td>
+<td><p>where am I?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ls</span></code></p></td>
+<td><p>list files</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">outputs/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cd</span></code></p></td>
+<td><p>change folder (<code class="docutils literal notranslate"><span class="pre">..</span></code> = up)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/my-glacier</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cp</span></code></p></td>
+<td><p>copy (<code class="docutils literal notranslate"><span class="pre">-r</span></code>: folder)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">params_past.yaml</span> <span class="pre">params_v2.yaml</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mv</span></code></p></td>
+<td><p>rename / move</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">old.yaml</span> <span class="pre">new.yaml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rm</span></code></p></td>
+<td><p>delete (<code class="docutils literal notranslate"><span class="pre">-r</span></code>: folder), <strong>no undo!</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">outputs/params_v2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Tab</strong> completes names, <strong>↑</strong> recalls commands, <strong>Ctrl+C</strong> stops a run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~</span></code> = home folder, <code class="docutils literal notranslate"><span class="pre">.</span></code> = current folder, <code class="docutils literal notranslate"><span class="pre">..</span></code> = parent folder</p></li>
+<li><p>Copy / rename / delete also work in the file browser (right-click)</p></li>
+</ul>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="run-igm-in-the-terminal">
@@ -875,7 +923,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">+experiment=params_past</span></code> → reads <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code></p></li>
-<li><p>Results go to <code class="docutils literal notranslate"><span class="pre">outputs/params_past/</span></code>: <strong>the run folder has the name of the parameter file</strong> (set at the end of each file), so a new file = a new folder</p></li>
+<li><p>Results go to <code class="docutils literal notranslate"><span class="pre">outputs/params_past/</span></code>: <strong>the run folder is set at the end of each file</strong> (<code class="docutils literal notranslate"><span class="pre">hydra:</span> <span class="pre">run:</span> <span class="pre">dir:</span></code>): when you copy a file, change it, or the results overwrite the previous run</p></li>
 <li><p>Stop a run: <strong>Ctrl+C</strong>. Recall the last command: <strong>↑</strong></p></li>
 </ul>
 <p>Each run folder contains <code class="docutils literal notranslate"><span class="pre">output.nc</span></code> (maps), <code class="docutils literal notranslate"><span class="pre">output_ts.nc</span></code> (volume, area), <code class="docutils literal notranslate"><span class="pre">dashboard_*.png</span></code> (quick looks) and <code class="docutils literal notranslate"><span class="pre">.hydra/</span></code> (<strong>all</strong> parameters used).</p>
@@ -940,19 +988,15 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>A. Common base</strong> (everyone)</p></td>
-<td><p>Present → Past (LIA, calibration) → Future (scenarios)</p></td>
-<td><p>Sessions 2–3</p></td>
+<td><p>Present → ice-flow calibration → Past (SMB calibration) → Future</p></td>
+<td><p><strong>today</strong></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>B. Explorations</strong> (≥ 1)</p></td>
-<td><p>B1 SMB model, B2 ice-flow parameters</p></td>
+<tr class="row-odd"><td><p><strong>B. Explorations</strong></p></td>
+<td><p>simple SMB model, response time</p></td>
 <td><p><strong>today</strong></p></td>
 </tr>
 <tr class="row-even"><td><p></p></td>
-<td><p>B3 response time, B4 moraines</p></td>
-<td><p>Session 3</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>C. Extensions</strong> (optional)</p></td>
-<td><p>open questions</p></td>
+<td><p>moraines (particles), figures for the report</p></td>
 <td><p>Session 3</p></td>
 </tr>
 </tbody>
@@ -961,34 +1005,38 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 <p>Then: the report (Lecture 3). Deadline: <em>to be announced</em></p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="hands-on-start-your-project-1-hour-then-hours-24">
-<h1>Hands-on: start your project (≈ 1 hour, then hours 2–4)<a class="headerlink" href="#hands-on-start-your-project-1-hour-then-hours-24" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="hands-on-follow-tutorial-ipynb">
+<h1>Hands-on: follow <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code> ⚠️<a class="headerlink" href="#hands-on-follow-tutorial-ipynb" title="Link to this heading">#</a></h1>
+<p><strong>Your guide for the afternoon is the notebook <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code></strong>: follow it from top to bottom, it tells you which file to edit and which command to run.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
-<th class="head"><p></p></th>
+<th class="head"><p>(= section of <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>)</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>0</p></td>
-<td><p><strong>Your own copy</strong> of the template folder, your glacier, your screen</p></td>
+<td><p><strong>Your own copy</strong> of the template folder, your glacier</p></td>
 </tr>
 <tr class="row-odd"><td><p>1</p></td>
 <td><p><strong>Present</strong>: download the data, check the initial state</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
-<td><p><strong>Past</strong>: LIA → today ➡️ explore SMB/climate and ice-flow parameters, calibrate</p></td>
+<td><p><strong>Calibration 1</strong>: ice-flow parameters (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) on the observed speeds</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
-<td><p><strong>Future</strong>: climate scenarios 2020–2100</p></td>
+<td><p><strong>Past</strong>: LIA → today, <strong>Calibration 2</strong>: SMB (<code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>)</p></td>
 </tr>
 <tr class="row-even"><td><p>4</p></td>
-<td><p>Explorations <strong>B1</strong> (SMB model) and <strong>B2</strong> (ice-flow parameters)</p></td>
+<td><p><strong>Future</strong>: climate scenarios 2020–2100</p></td>
+</tr>
+<tr class="row-odd"><td><p>5–6</p></td>
+<td><p>A simple SMB model (ELA), response time</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>All runs in the <strong>terminal</strong>; <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code> (one section per step) <strong>only plots</strong>.</p>
+<p>All runs in the <strong>terminal</strong>; the notebook <strong>only plots</strong>.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="step-0-your-own-copy-of-the-template">
@@ -999,25 +1047,24 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>Put the RGI ID of <strong>your</strong> glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in <strong>each</strong> file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code> (default: Findelengletscher)</p></li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, run the first cell; drag the terminal next to it</p></li>
-<li><p><strong>Back up</strong> at the end of each afternoon: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → OneDrive</p></li>
+<li><p>Put the RGI ID of <strong>your</strong> glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in <strong>each</strong> file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code> (default: Rhone Glacier)</p></li>
+<li><p>Open <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code></strong>, run the first cell; drag the terminal next to it</p></li>
 </ol>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="the-template-my-glacier">
 <h1>The template: <code class="docutils literal notranslate"><span class="pre">my-glacier/</span></code><a class="headerlink" href="#the-template-my-glacier" title="Link to this heading">#</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-glacier/                         ← run igm_run from HERE
-├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
+├── tutorial.ipynb                  YOUR GUIDE: follow it step by step (plots only)
 ├── experiment/
 │   │                               (each file: YOUR RGI ID + GRID + ICE FLOW + its experiment)
 │   ├── params_present.yaml         Step 1: 1-year check run
-│   ├── params_past.yaml            Step 2: 1700-2020, climate-driven SMB
-│   ├── params_future.yaml          Step 3: 2020-2100, all climate scenarios
-│   ├── params_sensitivity.yaml     B2: grid of ice-flow parameters
-│   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
-│   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
-│   └── params_past_moraines.yaml   B4: past run + debris particles
+│   ├── params_sensitivity.yaml     Step 2: grid of ice-flow parameters (igm_run -m)
+│   ├── params_past.yaml            Step 3: 1700-2020, climate-driven SMB
+│   ├── params_future.yaml          Step 4: 2020-2100, climate scenarios (igm_run -m)
+│   ├── params_past_simple.yaml     Step 5: 1700-2020, ELA-based SMB
+│   ├── params_response_time.yaml   Step 6: oscillating ELA (your own module in user/)
+│   └── params_past_moraines.yaml   Session 3: past run + debris particles
 └── outputs/, figures/, data/       created by IGM and the notebook
 </pre></div>
 </div>
@@ -1032,34 +1079,45 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 <ul class="simple">
 <li><p>Downloads the data (once) to <code class="docutils literal notranslate"><span class="pre">data/</span></code>, gives today’s modelled speeds</p></li>
 <li><p>Notebook: <code class="docutils literal notranslate"><span class="pre">plot_input_data</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> (area, volume, thickness, observed speeds, climate)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>: too fast / too slow? ➡️ adjust <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> or <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> (<code class="docutils literal notranslate"><span class="pre">iceflow</span></code> block of the parameter files, see B2)</p></li>
 <li><p>Compare with what you know: GLAMOS, swisstopo thickness map</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-2-past-from-the-lia-to-today">
-<h1>Step 2 — Past: from the LIA to today<a class="headerlink" href="#step-2-past-from-the-lia-to-today" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="step-2-calibration-1-the-ice-flow">
+<h1>Step 2 — Calibration 1: the ice flow<a class="headerlink" href="#step-2-calibration-1-the-ice-flow" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>: too fast / too slow with the default parameters? Then all combinations <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> × <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> (<code class="docutils literal notranslate"><span class="pre">-m</span></code> = multirun, one 1-year run per combination, ≈ 3 min):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>-m<span class="w"> </span>+experiment<span class="o">=</span>params_sensitivity<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>processes.iceflow.physics.viscosity.arrhenius<span class="o">=</span><span class="m">25</span>,50,100<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>processes.iceflow.physics.sliding.tau_ref<span class="o">=</span><span class="m">0</span>.1,0.2,0.4,0.8
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_sensitivity/0</span></code> … <code class="docutils literal notranslate"><span class="pre">11</span></code>; <code class="docutils literal notranslate"><span class="pre">compare_velocity_misfit</span></code>: maps of the speed difference, look for <strong>bias ≈ 0</strong>, small RMSE</p></li>
+<li><p>Several combinations equally good? (trade-off deformation / sliding)</p></li>
+<li><p>✅ Put your values in the <code class="docutils literal notranslate"><span class="pre">iceflow</span></code> block of <strong>all</strong> files (Rhone: <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> 30, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> 0.315)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="step-3-past-from-the-lia-to-today-calibration-2">
+<h1>Step 3 — Past: from the LIA to today (Calibration 2)<a class="headerlink" href="#step-3-past-from-the-lia-to-today-calibration-2" title="Link to this heading">#</a></h1>
 <p>Trick: <strong>start in 1700 from today’s geometry</strong>, cool the climate ➡️ LIA maximum (~1850), then retreat with the observed climate 1901–2019.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>Explore and calibrate</strong>, one parameter at a time, one file per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>):</p>
-<ul>
-<li><p>climate/SMB: <strong>pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></strong> (LIA maximum), <strong><code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (today’s extent)</p></li>
-<li><p>ice flow: <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> (<code class="docutils literal notranslate"><span class="pre">iceflow</span></code> block)</p></li>
-</ul>
-</li>
-<li><p>Validate: LIA moraines, Siegfried map, today’s extent</p></li>
+<li><p>Keep the pre-1901 climate (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>) of <code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code></p></li>
+<li><p><strong>Calibrate <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (start: 1.0, explore 0.5–2), one file per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>, set at the end of the file)</p></li>
+<li><p>Validate: LIA moraines, Siegfried map, today’s area and volume</p></li>
+<li><p>✅ Put your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> in <code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code> (and <code class="docutils literal notranslate"><span class="pre">params_past_moraines.yaml</span></code>)</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-3-future-20202100">
-<h1>Step 3 — Future: 2020–2100<a class="headerlink" href="#step-3-future-20202100" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="step-4-future-20202100">
+<h1>Step 4 — Future: 2020–2100<a class="headerlink" href="#step-4-future-20202100" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (<code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> prints the offsets):</p>
 <ul class="simple">
-<li><p><strong>2020</strong>: today’s offset (≈ +1.3 °C at Findelen)</p></li>
-<li><p><strong>2100</strong>: 1981–2010 offset <strong>+</strong> scenario warming (CH2018):</p></li>
+<li><p><strong>2020</strong> (in the file): today’s offset (≈ +1.3 °C for the Rhone Glacier)</p></li>
+<li><p><strong>2100</strong> (command line): 1981–2010 offset <strong>+</strong> scenario warming (CH2018):</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1076,34 +1134,23 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 </tbody>
 </table>
 </div>
-<p>In <code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>: your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, the 2020 offset, and the 2100 values of the 4 scenarios (end of file); then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_future</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_future/0</span></code> … <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
-<p>Volume and area loss, front retreat: when does the glacier (nearly) disappear?</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>-m<span class="w"> </span>+experiment<span class="o">=</span>params_future<span class="w"> </span>processes.climate.oggm.clim_trend_array.2.1<span class="o">=</span><span class="m">1</span>.3,2.0,3.4,5.1
+</pre></div>
+</div>
+<p>➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_future/0</span></code> … <code class="docutils literal notranslate"><span class="pre">3</span></code>. When does the glacier (nearly) disappear?</p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-4-exploration-b1-does-the-smb-model-matter">
-<h1>Step 4 — Exploration B1: does the SMB model matter?<a class="headerlink" href="#step-4-exploration-b1-does-the-smb-model-matter" title="Link to this heading">#</a></h1>
-<p><em>(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)</em></p>
+<section class="tex2jax_ignore mathjax_ignore" id="step-5-a-simple-smb-model-ela-based">
+<h1>Step 5 — A simple SMB model: ELA-based<a class="headerlink" href="#step-5-a-simple-smb-model-ela-based" title="Link to this heading">#</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Past with the <strong>ELA-based</strong> SMB (<code class="docutils literal notranslate"><span class="pre">params_past_simple.yaml</span></code>): set today’s ELA (snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS); LIA ELAs ≈ 100–200 m lower</p></li>
-<li><p>Compare with the <strong>climate-driven</strong> SMB (<code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code>) with <code class="docutils literal notranslate"><span class="pre">compare_runs</span></code>: LIA maximum, retreat, 2020</p></li>
+<li><p>Prescribe the <strong>ELA history</strong> yourself (<code class="docutils literal notranslate"><span class="pre">params_past_simple.yaml</span></code>): today’s ELA (snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS); LIA ELAs ≈ 100–200 m lower</p></li>
+<li><p><strong>Try to reproduce the volume curve</strong> of your calibrated past run (<code class="docutils literal notranslate"><span class="pre">compare_runs</span></code>) by playing with the ELAs</p></li>
 <li><p>Which one is easier to calibrate? Which one would you trust for the future, and why?</p></li>
 </ul>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="step-4-exploration-b2-how-well-do-we-know-the-ice-flow">
-<h1>Step 4 — Exploration B2: how well do we know the ice flow?<a class="headerlink" href="#step-4-exploration-b2-how-well-do-we-know-the-ice-flow" title="Link to this heading">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_sensitivity
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>All combinations of the <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> × <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> values listed at the end of <code class="docutils literal notranslate"><span class="pre">params_sensitivity.yaml</span></code>: 3 × 4 = 12 one-year runs (≈ 3 min) ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_sensitivity/0</span></code> … <code class="docutils literal notranslate"><span class="pre">11</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">compare_velocity_misfit</span></code>: which combination fits the observed surface speeds best?</p></li>
-<li><p>Are several combinations equally good (trade-off between deformation and sliding)?</p></li>
-<li><p>Redo the past or one scenario with the best one(s): how much does 2100 change? (plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4)</p></li>
-</ul>
+<p>Step 6 — Response time: see the end of <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code> (and Lecture 3)</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1146,11 +1193,11 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
       </div>
     </a>
     <a class="right-next"
-       href="my-glacier/analysis.html"
+       href="my-glacier/tutorial.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">My glacier — analysis notebook (mini-project)</p>
+        <p class="prev-next-title">My glacier — tutorial (Session 2)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1191,18 +1238,19 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-work-with-igm-three-tools">How to work with IGM: three tools</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-terminal-the-few-commands-you-need">The terminal: the few commands you need</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-igm-in-the-terminal">Run IGM in the terminal</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#look-at-the-results-in-a-notebook">Look at the results in a notebook</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-something-goes-wrong">When something goes wrong</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mini-project-model-your-own-glacier">The mini-project: model your own glacier</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-start-your-project-1-hour-then-hours-24">Hands-on: start your project (≈ 1 hour, then hours 2–4)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-follow-tutorial-ipynb">Hands-on: follow <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code> ⚠️</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-your-own-copy-of-the-template">Step 0 — Your own copy of the template</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-template-my-glacier">The template: <code class="docutils literal notranslate"><span class="pre">my-glacier/</span></code></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-present-check-the-initial-state">Step 1 — Present: check the initial state</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-past-from-the-lia-to-today">Step 2 — Past: from the LIA to today</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-future-20202100">Step 3 — Future: 2020–2100</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-exploration-b1-does-the-smb-model-matter">Step 4 — Exploration B1: does the SMB model matter?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-exploration-b2-how-well-do-we-know-the-ice-flow">Step 4 — Exploration B2: how well do we know the ice flow?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-calibration-1-the-ice-flow">Step 2 — Calibration 1: the ice flow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-past-from-the-lia-to-today-calibration-2">Step 3 — Past: from the LIA to today (Calibration 2)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-future-20202100">Step 4 — Future: 2020–2100</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-a-simple-smb-model-ela-based">Step 5 — A simple SMB model: ELA-based</a></li>
 </ul>
 
   </nav></div>

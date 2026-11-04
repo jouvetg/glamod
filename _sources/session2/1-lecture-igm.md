@@ -81,7 +81,7 @@ my-glacier/                      ← run igm_run from HERE
 │   └── params_past.yaml             one YAML file = one experiment
 ├── data/                        INPUTS (downloaded by oggm_shop at the first run)
 │   └── input_<RGI_ID>.nc            topography, thickness, velocities, climate...
-└── outputs/                     OUTPUTS: one folder per run, named after the parameter file
+└── outputs/                     OUTPUTS: one folder per run (hydra: run: dir: at the end of the file)
     └── params_past/
         ├── output.nc                maps through time
         ├── output_ts.nc             volume and area through time
@@ -126,7 +126,7 @@ Run it: `igm_run +experiment=params`
 # Changing parameters
 
 - Change parameters **in the YAML file**, and **keep 1 file per experiment**: copy it before changing it (`params_past.yaml` → `params_past_v2.yaml`), so that every experiment stays documented
-- Run it: `igm_run +experiment=params_past_v2` ➡️ results in `outputs/params_past_v2/` (the run folder is named after the file), with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
+- Run it: `igm_run +experiment=params_past_v2` ➡️ results in `outputs/params_past_v2/` (**change the run folder at the end of the copied file**: `hydra: run: dir: outputs/params_past_v2`), with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
 - All parameters and their defaults: https://igm-model.org (Modules)
 
 ---
@@ -267,6 +267,25 @@ Drag the tabs to split the screen.
 
 ---
 
+<style scoped>table { font-size: 0.6em; } p, li { font-size: 0.8em; }</style>
+
+# The terminal: the few commands you need
+
+| Command | Does | Example |
+|---|---|---|
+| `pwd` | where am I? | `pwd` |
+| `ls` | list files | `ls outputs/` |
+| `cd` | change folder (`..` = up) | `cd ~/work/my-glacier` |
+| `cp` | copy (`-r`: folder) | `cp params_past.yaml params_v2.yaml` |
+| `mv` | rename / move | `mv old.yaml new.yaml` |
+| `rm` | delete (`-r`: folder), **no undo!** | `rm -r outputs/params_v2` |
+
+- **Tab** completes names, **↑** recalls commands, **Ctrl+C** stops a run
+- `~` = home folder, `.` = current folder, `..` = parent folder
+- Copy / rename / delete also work in the file browser (right-click)
+
+---
+
 # Run IGM in the terminal
 
 ```bash
@@ -275,7 +294,7 @@ igm_run +experiment=params_past
 ```
 
 - `+experiment=params_past` → reads `experiment/params_past.yaml`
-- Results go to `outputs/params_past/`: **the run folder has the name of the parameter file** (set at the end of each file), so a new file = a new folder
+- Results go to `outputs/params_past/`: **the run folder is set at the end of each file** (`hydra: run: dir:`): when you copy a file, change it, or the results overwrite the previous run
 - Stop a run: **Ctrl+C**. Recall the last command: **↑**
 
 Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `dashboard_*.png` (quick looks) and `.hydra/` (**all** parameters used).
@@ -318,26 +337,28 @@ Ask the assistant!
 
 | Part | What | When |
 |---|---|---|
-| **A. Common base** (everyone) | Present → Past (LIA, calibration) → Future (scenarios) | Sessions 2–3 |
-| **B. Explorations** (≥ 1) | B1 SMB model, B2 ice-flow parameters | **today** |
-| | B3 response time, B4 moraines | Session 3 |
-| **C. Extensions** (optional) | open questions | Session 3 |
+| **A. Common base** (everyone) | Present → ice-flow calibration → Past (SMB calibration) → Future | **today** |
+| **B. Explorations** | simple SMB model, response time | **today** |
+| | moraines (particles), figures for the report | Session 3 |
 
 Then: the report (Lecture 3). Deadline: *to be announced*
 
 ---
 
-# Hands-on: start your project (≈ 1 hour, then hours 2–4)
+# Hands-on: follow `tutorial.ipynb` ⚠️
 
-| Step | |
+**Your guide for the afternoon is the notebook `tutorial.ipynb`**: follow it from top to bottom, it tells you which file to edit and which command to run.
+
+| Step | (= section of `tutorial.ipynb`) |
 |---|---|
-| 0 | **Your own copy** of the template folder, your glacier, your screen |
+| 0 | **Your own copy** of the template folder, your glacier |
 | 1 | **Present**: download the data, check the initial state |
-| 2 | **Past**: LIA → today ➡️ explore SMB/climate and ice-flow parameters, calibrate |
-| 3 | **Future**: climate scenarios 2020–2100 |
-| 4 | Explorations **B1** (SMB model) and **B2** (ice-flow parameters) |
+| 2 | **Calibration 1**: ice-flow parameters (`arrhenius`, `tau_ref`) on the observed speeds |
+| 3 | **Past**: LIA → today, **Calibration 2**: SMB (`melt_enhancer`) |
+| 4 | **Future**: climate scenarios 2020–2100 |
+| 5–6 | A simple SMB model (ELA), response time |
 
-All runs in the **terminal**; `analysis.ipynb` (one section per step) **only plots**.
+All runs in the **terminal**; the notebook **only plots**.
 
 ---
 
@@ -350,9 +371,8 @@ cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier
 cd ~/work/my-glacier
 ```
 
-1. Put the RGI ID of **your** glacier (`RGI_ID`) in **each** file of `experiment/` (default: Findelengletscher)
-2. Open `analysis.ipynb`, run the first cell; drag the terminal next to it
-3. **Back up** at the end of each afternoon: `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive
+1. Put the RGI ID of **your** glacier (`RGI_ID`) in **each** file of `experiment/` (default: Rhone Glacier)
+2. Open **`tutorial.ipynb`**, run the first cell; drag the terminal next to it
 
 ---
 
@@ -360,16 +380,16 @@ cd ~/work/my-glacier
 
 ```
 my-glacier/                         ← run igm_run from HERE
-├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
+├── tutorial.ipynb                  YOUR GUIDE: follow it step by step (plots only)
 ├── experiment/
 │   │                               (each file: YOUR RGI ID + GRID + ICE FLOW + its experiment)
 │   ├── params_present.yaml         Step 1: 1-year check run
-│   ├── params_past.yaml            Step 2: 1700-2020, climate-driven SMB
-│   ├── params_future.yaml          Step 3: 2020-2100, all climate scenarios
-│   ├── params_sensitivity.yaml     B2: grid of ice-flow parameters
-│   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
-│   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
-│   └── params_past_moraines.yaml   B4: past run + debris particles
+│   ├── params_sensitivity.yaml     Step 2: grid of ice-flow parameters (igm_run -m)
+│   ├── params_past.yaml            Step 3: 1700-2020, climate-driven SMB
+│   ├── params_future.yaml          Step 4: 2020-2100, climate scenarios (igm_run -m)
+│   ├── params_past_simple.yaml     Step 5: 1700-2020, ELA-based SMB
+│   ├── params_response_time.yaml   Step 6: oscillating ELA (your own module in user/)
+│   └── params_past_moraines.yaml   Session 3: past run + debris particles
 └── outputs/, figures/, data/       created by IGM and the notebook
 ```
 
@@ -384,12 +404,27 @@ igm_run +experiment=params_present
 
 - Downloads the data (once) to `data/`, gives today's modelled speeds
 - Notebook: `plot_input_data`, `plot_climate` (area, volume, thickness, observed speeds, climate)
-- `compare_modeled_observed_velocity`: too fast / too slow? ➡️ adjust `tau_ref` or `arrhenius` (`iceflow` block of the parameter files, see B2)
 - Compare with what you know: GLAMOS, swisstopo thickness map
 
 ---
 
-# Step 2 — Past: from the LIA to today
+# Step 2 — Calibration 1: the ice flow
+
+`compare_modeled_observed_velocity`: too fast / too slow with the default parameters? Then all combinations `arrhenius` × `tau_ref` (`-m` = multirun, one 1-year run per combination, ≈ 3 min):
+
+```bash
+igm_run -m +experiment=params_sensitivity \
+   processes.iceflow.physics.viscosity.arrhenius=25,50,100 \
+   processes.iceflow.physics.sliding.tau_ref=0.1,0.2,0.4,0.8
+```
+
+- ➡️ `outputs/params_sensitivity/0` … `11`; `compare_velocity_misfit`: maps of the speed difference, look for **bias ≈ 0**, small RMSE
+- Several combinations equally good? (trade-off deformation / sliding)
+- ✅ Put your values in the `iceflow` block of **all** files (Rhone: `arrhenius` 30, `tau_ref` 0.315)
+
+---
+
+# Step 3 — Past: from the LIA to today (Calibration 2)
 
 Trick: **start in 1700 from today's geometry**, cool the climate ➡️ LIA maximum (~1850), then retreat with the observed climate 1901–2019.
 
@@ -397,50 +432,39 @@ Trick: **start in 1700 from today's geometry**, cool the climate ➡️ LIA maxi
 igm_run +experiment=params_past
 ```
 
-- **Explore and calibrate**, one parameter at a time, one file per try (`params_past_v2.yaml` ➡️ `outputs/params_past_v2/`):
-  - climate/SMB: **pre-1901 `delta_temp`** (LIA maximum), **`melt_enhancer`** (today's extent)
-  - ice flow: `tau_ref`, `arrhenius` (`iceflow` block)
-- Validate: LIA moraines, Siegfried map, today's extent
+- Keep the pre-1901 climate (`clim_trend_array`) of `params_past.yaml`
+- **Calibrate `melt_enhancer`** (start: 1.0, explore 0.5–2), one file per try (`params_past_v2.yaml` ➡️ `outputs/params_past_v2/`, set at the end of the file)
+- Validate: LIA moraines, Siegfried map, today's area and volume
+- ✅ Put your `melt_enhancer` in `params_future.yaml` (and `params_past_moraines.yaml`)
 
 ---
 
-# Step 3 — Future: 2020–2100
+# Step 4 — Future: 2020–2100
 
 `delta_temp` is relative to **1960–1990** (`plot_climate` prints the offsets):
-- **2020**: today's offset (≈ +1.3 °C at Findelen)
-- **2100**: 1981–2010 offset **+** scenario warming (CH2018):
+- **2020** (in the file): today's offset (≈ +1.3 °C for the Rhone Glacier)
+- **2100** (command line): 1981–2010 offset **+** scenario warming (CH2018):
 
 | RCP2.6 / SSP1-2.6 | RCP4.5 / SSP2-4.5 | RCP8.5 / SSP5-8.5 |
 |---|---|---|
 | ≈ +0.6 to +1.9 °C | ≈ +2.0 to +3.3 °C | ≈ +3.3 to +5.4 °C |
 
-In `params_future.yaml`: your `melt_enhancer`, the 2020 offset, and the 2100 values of the 4 scenarios (end of file); then `igm_run +experiment=params_future` ➡️ `outputs/params_future/0` … `3`
+```bash
+igm_run -m +experiment=params_future processes.climate.oggm.clim_trend_array.2.1=1.3,2.0,3.4,5.1
+```
 
-Volume and area loss, front retreat: when does the glacier (nearly) disappear?
+➡️ `outputs/params_future/0` … `3`. When does the glacier (nearly) disappear?
 
 ---
 
-# Step 4 — Exploration B1: does the SMB model matter?
-
-*(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)*
+# Step 5 — A simple SMB model: ELA-based
 
 ```bash
 igm_run +experiment=params_past_simple
 ```
 
-- Past with the **ELA-based** SMB (`params_past_simple.yaml`): set today's ELA (snowline on map.geo.admin.ch, GLAMOS); LIA ELAs ≈ 100–200 m lower
-- Compare with the **climate-driven** SMB (`params_past.yaml`) with `compare_runs`: LIA maximum, retreat, 2020
+- Prescribe the **ELA history** yourself (`params_past_simple.yaml`): today's ELA (snowline on map.geo.admin.ch, GLAMOS); LIA ELAs ≈ 100–200 m lower
+- **Try to reproduce the volume curve** of your calibrated past run (`compare_runs`) by playing with the ELAs
 - Which one is easier to calibrate? Which one would you trust for the future, and why?
 
----
-
-# Step 4 — Exploration B2: how well do we know the ice flow?
-
-```bash
-igm_run +experiment=params_sensitivity
-```
-
-- All combinations of the `arrhenius` × `tau_ref` values listed at the end of `params_sensitivity.yaml`: 3 × 4 = 12 one-year runs (≈ 3 min) ➡️ `outputs/params_sensitivity/0` … `11`
-- `compare_velocity_misfit`: which combination fits the observed surface speeds best?
-- Are several combinations equally good (trade-off between deformation and sliding)?
-- Redo the past or one scenario with the best one(s): how much does 2100 change? (plots: `analysis.ipynb`, section 4)
+Step 6 — Response time: see the end of `tutorial.ipynb` (and Lecture 3)

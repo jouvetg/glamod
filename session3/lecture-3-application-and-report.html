@@ -66,8 +66,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Session 4 — Glacier du Mont Miné: modelling deglaciation dates" href="../session4/lecture-4-mont-mine.html" />
-    <link rel="prev" title="My glacier — analysis notebook (mini-project)" href="../session2/my-glacier/analysis.html" />
+    <link rel="next" title="My glacier — tutorial (Session 3): moraines and figures for the report" href="tutorial-session3.html" />
+    <link rel="prev" title="My glacier — tutorial (Session 2)" href="../session2/my-glacier/tutorial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -325,7 +325,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/tutorial.html">My glacier — tutorial (Session 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="current nav bd-sidenav">
@@ -346,6 +347,7 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="tutorial-session3.html">My glacier — tutorial (Session 3): moraines and figures for the report</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -510,8 +512,8 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-goals-of-your-mini-project">Part 1 — Goals of your mini-project</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-the-calibration-tips">Finish the calibration: tips</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-additional-experiments">Part 2 — Additional experiments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-write-your-own-igm-module">B3 — Response time: write your own IGM module</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-findelengletscher">B3 — Response time: example (Findelengletscher)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-session-2-your-own-igm-module">B3 — Response time (Session 2): your own IGM module</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-rhone-glacier">B3 — Response time: example (Rhone Glacier)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-tracking-debris-with-particles">B4 — Moraines: tracking debris with particles</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-questions">B4 — Moraines: questions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extensions-optional-discuss-them-with-us-first">C. Extensions (optional, discuss them with us first)</a></li>
@@ -558,13 +560,13 @@
 <td><p><em>Glacier selection</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Week 2</strong></p></td>
-<td><p>Intro to IGM, <em>past &amp; future runs</em></p></td>
+<td><p>Intro to IGM, <em>calibration, past &amp; future runs</em></p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Week 3</strong></p></td>
-<td><p><strong>Extra experiments, report</strong></p></td>
+<td><p><strong>Moraines, report</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
@@ -601,19 +603,19 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Glacier grows without limit / disappears</p></td>
-<td><p>more / less melt: <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
+<td><p>more / less melt: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>No LIA advance</p></td>
-<td><p>colder pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>, longer spin-up</p></td>
+<tr class="row-odd"><td><p>No LIA advance / too large</p></td>
+<td><p>colder / warmer pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>)</p></td>
 </tr>
 <tr class="row-even"><td><p>Speeds too high / too low</p></td>
-<td><p>higher / lower <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, lower / higher <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code></p></td>
+<td><p>refine the grid of <code class="docutils literal notranslate"><span class="pre">params_sensitivity</span></code> (<code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">-m</span></code>) around your best values</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <ul class="simple">
-<li><p><strong>One parameter at a time</strong>, run log in the notebook; no perfect fit: <strong>discuss</strong> the mismatch</p></li>
+<li><p><strong>One parameter at a time</strong>, keep your calibrated values in the ✅ boxes of <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>; no perfect fit: <strong>discuss</strong> the mismatch</p></li>
 <li><p>Tests with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">2</span></code>, <strong>final runs with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code></strong></p></li>
 </ul>
 </section>
@@ -631,28 +633,27 @@
 <tbody>
 <tr class="row-even"><td><p><strong>B1</strong></p></td>
 <td><p>Does the SMB model matter? (ELA-based vs climate)</p></td>
-<td><p>Session 2</p></td>
+<td><p>Session 2 (<code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, 5)</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>B2</strong></p></td>
-<td><p>Which <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> × <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> fit the observed speeds?</p></td>
-<td><p>Session 2</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>B3</strong></p></td>
+<tr class="row-odd"><td><p><strong>B3</strong></p></td>
 <td><p>Response time: how fast does your glacier react?</p></td>
-<td><p><strong>today</strong></p></td>
+<td><p>Session 2 (<code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, 6)</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>B4</strong></p></td>
+<tr class="row-even"><td><p><strong>B4</strong></p></td>
 <td><p>Moraines: where does the debris go?</p></td>
-<td><p><strong>today</strong></p></td>
+<td><p><strong>today</strong> (<code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Commands and plots: <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/analysis.ipynb</span></code>, section 4</p>
+<p>Today: copy the Session 3 notebook into your project, and follow it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span class="w"> </span>~/work/my-glacier/
+</pre></div>
+</div>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-write-your-own-igm-module">
-<h1>B3 — Response time: write your own IGM module<a class="headerlink" href="#b3-response-time-write-your-own-igm-module" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-session-2-your-own-igm-module">
+<h1>B3 — Response time (Session 2): your own IGM module<a class="headerlink" href="#b3-response-time-session-2-your-own-igm-module" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code>: the ELA oscillates, the glacier follows… with a delay</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>                        <span class="c1"># called at each time step</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">processes</span><span class="o">.</span><span class="n">smb_oscillating</span>
@@ -667,11 +668,11 @@
 </div>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-example-findelengletscher">
-<h1>B3 — Response time: example (Findelengletscher)<a class="headerlink" href="#b3-response-time-example-findelengletscher" title="Link to this heading">#</a></h1>
-<p><img alt="height:250px" src="../_images/response-time-findelen.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-example-rhone-glacier">
+<h1>B3 — Response time: example (Rhone Glacier)<a class="headerlink" href="#b3-response-time-example-rhone-glacier" title="Link to this heading">#</a></h1>
+<p><img alt="height:250px" src="../_images/response-time-rhone.png" /></p>
 <ul class="simple">
-<li><p>The volume peaks <strong>~40 years</strong> after the ELA minimum (period 200 yr, amplitude 200 m)</p></li>
+<li><p>The volume peaks <strong>~45 years</strong> after the ELA minimum (period 200 yr, amplitude 200 m)</p></li>
 <li><p>Other periods (50, 100, 400 yr): copy the file (<code class="docutils literal notranslate"><span class="pre">params_response_100.yaml</span></code>), set <code class="docutils literal notranslate"><span class="pre">period:</span> <span class="pre">100</span></code> in it: how do lag and amplitude change? Compare with <span class="math notranslate nohighlight">\(\tau \approx H/(-b_{terminus})\)</span> (Lecture 1a) and the tutorial</p></li>
 <li><p>Read the module: how to extend IGM with <code class="docutils literal notranslate"><span class="pre">initialize</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">finalize</span></code></p></li>
 </ul>
@@ -806,7 +807,7 @@
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figures drafted</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Report outline written</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (your copy: YAML + terminal + <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (your copy: YAML + terminal + <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>)</p>
 <p><strong>Back up</strong> at the end of each afternoon (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → OneDrive): RenkuLab sessions are not permanent storage. Data problem? Delete <code class="docutils literal notranslate"><span class="pre">data/input_&lt;RGI_ID&gt;.nc</span></code> and run again.</p>
 </section>
 
@@ -841,20 +842,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../session2/my-glacier/analysis.html"
+       href="../session2/my-glacier/tutorial.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">My glacier — analysis notebook (mini-project)</p>
+        <p class="prev-next-title">My glacier — tutorial (Session 2)</p>
       </div>
     </a>
     <a class="right-next"
-       href="../session4/lecture-4-mont-mine.html"
+       href="tutorial-session3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Session 4 — Glacier du Mont Miné: modelling deglaciation dates</p>
+        <p class="prev-next-title">My glacier — tutorial (Session 3): moraines and figures for the report</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -881,8 +882,8 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-goals-of-your-mini-project">Part 1 — Goals of your mini-project</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-the-calibration-tips">Finish the calibration: tips</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-additional-experiments">Part 2 — Additional experiments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-write-your-own-igm-module">B3 — Response time: write your own IGM module</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-findelengletscher">B3 — Response time: example (Findelengletscher)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-session-2-your-own-igm-module">B3 — Response time (Session 2): your own IGM module</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-rhone-glacier">B3 — Response time: example (Rhone Glacier)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-tracking-debris-with-particles">B4 — Moraines: tracking debris with particles</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-questions">B4 — Moraines: questions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extensions-optional-discuss-them-with-us-first">C. Extensions (optional, discuss them with us first)</a></li>
