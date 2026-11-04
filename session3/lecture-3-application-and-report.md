@@ -173,7 +173,7 @@ A reader who does not know IGM must understand what you did, and be able to repr
 
 # Figures convey your results
 
-- Typical figures: map of the glacier (thickness/speed) at key dates, **time series** of volume/area/length, **flowline profiles**, model vs. observations
+- Typical figures: map of the glacier (thickness/speed) at key dates, **time series** of ice volume, **flowline profiles**, model vs. observations
 - Every figure: axes with units, legend, readable font, a caption that says what to see
 - Compare model with **observations** whenever possible (LIA extent, GLAMOS length changes, observed speeds)
 - Fewer, better figures (4–6 is a good number)

@@ -307,7 +307,7 @@ Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `das
 from helper import *                      # course plotting helpers (utils/helper.py)
 show_dashboard("outputs/params_past")     # last dashboard images
 compare_runs(["outputs/params_past", "outputs/params_past_v2"],
-             ["v1", "v2"])                 # volume and area through time
+             ["v1", "v2"])                 # ice volume through time
 ```
 
 - Re-run the notebook as often as you like: it only **reads** the run folders
@@ -434,7 +434,7 @@ igm_run +experiment=params_past
 
 - Keep the pre-1901 climate (`clim_trend_array`) of `params_past.yaml`
 - **Calibrate `melt_enhancer`** (start: 1.0, explore 0.5–2), one file per try (`params_past_v2.yaml` ➡️ `outputs/params_past_v2/`, set at the end of the file)
-- Validate: LIA moraines, Siegfried map, today's area and volume
+- Validate: LIA moraines, Siegfried map, today's ice volume
 - ✅ Put your `melt_enhancer` in `params_future.yaml` (and `params_past_moraines.yaml`)
 
 ---

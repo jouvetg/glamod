@@ -109,69 +109,18 @@ def animate_glacier_evolution(nc_file='output.nc', variable='thk', log_scale=Fal
 
 
 def analyze_time_series(ts_file):
-    """
-    Analyze and visualize glacier time series data from output_ts.nc
-    
-    Parameters:
-    -----------
-    ts_file : str
-        Path to the time series file (output_ts.nc)
-    
-    Returns:
-    --------
-    None (displays plots and prints statistics)
-    """
-    print(f"Reading time series data from: {ts_file}\n")
-    
-    # Load the time series dataset
+    """Ice volume through time of one run (output_ts.nc), and its initial / final values."""
     ds_ts = xr.open_dataset(ts_file)
-    
-    # Create figure with two subplots
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
-    
-    # Plot ice volume over time
-    ds_ts['vol'].plot(ax=ax1, linewidth=2, color='blue')
-    ax1.set_ylabel('Ice Volume [km³]', fontsize=12)
-    ax1.set_xlabel('Time [years]', fontsize=12)
-    ax1.set_title('Glacier Ice Volume Evolution', fontsize=14, fontweight='bold')
-    ax1.grid(True, alpha=0.3)
-    
-    # Plot ice area over time
-    ds_ts['area'].plot(ax=ax2, linewidth=2, color='green')
-    ax2.set_ylabel('Ice Area [km²]', fontsize=12)
-    ax2.set_xlabel('Time [years]', fontsize=12)
-    ax2.set_title('Glacier Ice Area Evolution', fontsize=14, fontweight='bold')
-    ax2.grid(True, alpha=0.3)
-    
+    fig, ax = plt.subplots(figsize=(9, 4))
+    ax.plot(ds_ts['time'], ds_ts['vol'], lw=2, color='C0')
+    ax.set_ylabel('Ice volume (km$^3$)')
+    ax.set_xlabel('Year')
+    ax.set_title('Ice volume')
+    ax.grid(alpha=0.3)
     plt.tight_layout()
     plt.show()
-    
-    # Print summary statistics
-    print("\n" + "="*60)
-    print("SUMMARY STATISTICS")
-    print("="*60)
-    
-    initial_volume = float(ds_ts['vol'].isel(time=0))
-    final_volume = float(ds_ts['vol'].isel(time=-1))
-    volume_change = final_volume - initial_volume
-    
-    print(f"\nIce Volume:")
-    print(f"  Initial: {initial_volume:.2f} km³")
-    print(f"  Final:   {final_volume:.2f} km³")
-    print(f"  Change:  {volume_change:.2f} km³")
-    
-    initial_area = float(ds_ts['area'].isel(time=0))
-    final_area = float(ds_ts['area'].isel(time=-1))
-    area_change = final_area - initial_area
-    
-    print(f"\nIce Area:")
-    print(f"  Initial: {initial_area:.2f} km²")
-    print(f"  Final:   {final_area:.2f} km²")
-    print(f"  Change:  {area_change:.2f} km²")
-    
-    print("="*60)
-    
-    # Close the dataset
+    v0, v1 = float(ds_ts['vol'].isel(time=0)), float(ds_ts['vol'].isel(time=-1))
+    print(f"Ice volume: {v0:.2f} km3 ({float(ds_ts.time[0]):.0f}) -> {v1:.2f} km3 ({float(ds_ts.time[-1]):.0f}), change {v1 - v0:+.2f} km3")
     ds_ts.close()
 
 
@@ -899,30 +848,25 @@ def plot_climate(rgi_id, data_dir='data', window_years=10):
 
 def compare_runs(run_dirs, labels=None, observations=None):
     """
-    Compare ice volume and area through time of several IGM runs (e.g. scenarios).
+    Compare the ice volume through time of several IGM runs (e.g. scenarios).
 
     run_dirs : list of run folders (each containing output_ts.nc)
     labels : list of legend labels (default: folder names)
-    observations : optional dict {'area': (years, values), 'vol': (years, values)} to overlay
+    observations : optional dict {'vol': (years, values)} to overlay
     """
     import os
     labels = labels or [os.path.basename(os.path.normpath(r)) for r in run_dirs]
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 4.5))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
     for run, lab in zip(run_dirs, labels):
         ds = xr.open_dataset(os.path.join(run, 'output_ts.nc'))
-        ax1.plot(ds['time'], ds['vol'], lw=2, label=lab)
-        ax2.plot(ds['time'], ds['area'], lw=2, label=lab)
+        ax.plot(ds['time'], ds['vol'], lw=2, label=lab)
         ds.close()
-    if observations:
-        for key, ax in (('vol', ax1), ('area', ax2)):
-            if key in observations:
-                ax.plot(*observations[key], 'ko', label='observations')
-    ax1.set_ylabel('Ice volume (km$^3$)')
-    ax2.set_ylabel('Glaciated area (km$^2$)')
-    for ax in (ax1, ax2):
-        ax.set_xlabel('Year')
-        ax.grid(alpha=0.3)
-        ax.legend()
+    if observations and 'vol' in observations:
+        ax.plot(*observations['vol'], 'ko', label='observation')
+    ax.set_ylabel('Ice volume (km$^3$)')
+    ax.set_xlabel('Year')
+    ax.grid(alpha=0.3)
+    ax.legend()
     plt.tight_layout()
     plt.show()
 
