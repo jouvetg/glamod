@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>My glacier — tutorial (Session 2) &#8212; Glacier Modelling course</title>
+    <title>Modelling a glacier with IGM — tutorial (Session 2) &#8212; Glacier Modelling course</title>
   
   
   
@@ -60,6 +60,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session2/my-glacier/tutorial';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -324,7 +326,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">My glacier — tutorial (Session 2)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling a glacier with IGM — tutorial (Session 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -495,7 +497,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>My glacier — tutorial (Session 2)</h1>
+    <h1>Modelling a glacier with IGM — tutorial (Session 2)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -522,9 +524,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="my-glacier-tutorial-session-2">
-<h1>My glacier — tutorial (Session 2)<a class="headerlink" href="#my-glacier-tutorial-session-2" title="Link to this heading">#</a></h1>
-<p><strong>Follow this notebook from top to bottom</strong>: it guides you through the mini-project step by step. It lives in <strong>your own copy</strong> of the template, <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (copied once from <code class="docutils literal notranslate"><span class="pre">~/work/glamod/session2/my-glacier/</span></code>). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="modelling-a-glacier-with-igm-tutorial-session-2">
+<h1>Modelling a glacier with IGM — tutorial (Session 2)<a class="headerlink" href="#modelling-a-glacier-with-igm-tutorial-session-2" title="Link to this heading">#</a></h1>
+<p>This tutorial carries out a series of <strong>numerical experiments with IGM</strong> on the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Rhone_Glacier">Rhone Glacier</a></strong> (Valais, ~15 km², the source of the Rhone river; RGI ID <code class="docutils literal notranslate"><span class="pre">RGI2000-v7.0-G-11-01706</span></code>, set by default in all parameter files). Step by step, you calibrate the model on observations, reconstruct the glacier since the Little Ice Age, project it until 2100, and explore two key concepts (the SMB model, the response time).</p>
+<p>It is the <strong>basis of your mini-project</strong>: once you have gone through it with the Rhone Glacier, do the same with <strong>your own glacier</strong> (put its RGI ID in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>, and keep the same steps).</p>
+<p><strong>Follow this notebook from top to bottom.</strong> It lives in <strong>your own copy</strong> of the template, <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (copied once from <code class="docutils literal notranslate"><span class="pre">~/work/glamod/session2/my-glacier/</span></code>). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>What</p></th>
@@ -544,8 +548,7 @@
 </tbody>
 </table>
 </div>
-<p>Steps:
-0. Put the RGI ID of your glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code></p>
+<p>Steps:</p>
 <ol class="arabic simple">
 <li><p><strong>Present</strong>: download the data, check the initial state</p></li>
 <li><p><strong>Calibration of the ice-flow parameters</strong> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) on the observed speeds</p></li>
@@ -573,6 +576,7 @@
 </div>
 <section id="present-download-the-data-and-check-the-initial-state">
 <h2>1. Present: download the data and check the initial state<a class="headerlink" href="#present-download-the-data-and-check-the-initial-state" title="Link to this heading">#</a></h2>
+<p><strong>What happens here</strong>: <code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> downloads everything IGM needs for the glacier: the topography, the glacier outline, an estimate of the ice thickness (Millan et al., 2022), the observed surface speeds and the climate (1901–2019). Before any experiment, we check that these data make sense (thickness, speeds, climate trend), since the whole project relies on them.</p>
 <p>▶ <strong>In the terminal</strong>: a 1-year run downloads the data (≈ 1 min the first time):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 </pre></div>
@@ -588,6 +592,7 @@
 </section>
 <section id="calibration-of-the-ice-flow-parameters">
 <h2>2. Calibration of the ice-flow parameters<a class="headerlink" href="#calibration-of-the-ice-flow-parameters" title="Link to this heading">#</a></h2>
+<p><strong>Why?</strong> The ice flow depends on two poorly known parameters: the ice softness (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, deformation) and the basal sliding (<code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>). The modelled speeds must match the <strong>observed</strong> ones, otherwise the glacier moves too much or too little ice downstream, and its evolution is wrong. We calibrate these two parameters <strong>once, on today’s glacier</strong>, and then keep them for all other experiments.</p>
 <p>First, compare the speeds modelled with the default parameters (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = 78, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = 0.215) with the observed ones (Millan et al., 2022):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -618,7 +623,9 @@
 </section>
 <section id="past-from-the-little-ice-age-to-today-calibration-of-the-smb">
 <h2>3. Past: from the Little Ice Age to today — calibration of the SMB<a class="headerlink" href="#past-from-the-little-ice-age-to-today-calibration-of-the-smb" title="Link to this heading">#</a></h2>
-<p>Start in 1700 from today’s geometry, advance to the LIA maximum (~1850), retreat with the observed climate 1901–2019 (≈ a few minutes). Keep the pre-1901 climate (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>) of <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code> and <strong>adjust <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (start with 1.0, explore 0.5–2) until the glacier (i) reaches the LIA moraines around 1850 (Siegfried map on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>) and (ii) matches today’s area and volume in 2020.</p>
+<p><strong>Why?</strong> The SMB computed from the climate (temperature, precipitation) is uncertain. We calibrate it by checking that the model reproduces the <strong>known history</strong> of the glacier: an advance until the Little Ice Age maximum (~1850, marked by moraines), then the retreat until today. If the model gets the past right, we can trust it more for the future.</p>
+<p><strong>Experiment</strong>: we do not know the glacier geometry in 1700, so we start from <strong>today’s</strong> geometry with a cooler pre-industrial climate: the glacier grows to its LIA maximum, then retreats with the observed climate 1901–2019. A single parameter is calibrated: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> (more or less melt).</p>
+<p>Start in 1700 from today’s geometry, advance to the LIA maximum (~1850), retreat with the observed climate 1901–2019 (≈ a few minutes). Keep the pre-1901 climate (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>) of <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code> and <strong>adjust <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (start: 0.8, explore 0.5–2) until the glacier (i) reaches the LIA moraines around 1850 (Siegfried map on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>) and (ii) matches today’s ice volume in 2020.</p>
 <p>▶ <strong>In the terminal</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
@@ -644,10 +651,9 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare several past runs with today&#39;s observed area / volume (from the input data)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare the volume of several past runs with today&#39;s volume (ice thickness of the input data)</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">INPUT</span><span class="p">);</span> <span class="n">dx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">obs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">([</span><span class="mi">2020</span><span class="p">],</span> <span class="p">[</span><span class="nb">float</span><span class="p">((</span><span class="n">ds</span><span class="o">.</span><span class="n">thk</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">]),</span>
-       <span class="s2">&quot;vol&quot;</span><span class="p">:</span>  <span class="p">([</span><span class="mi">2020</span><span class="p">],</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">thk</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">])}</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;vol&quot;</span><span class="p">:</span> <span class="p">([</span><span class="mi">2020</span><span class="p">],</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">thk</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">])}</span>
 <span class="n">past_runs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">]</span>              <span class="c1"># &lt;- add your other past runs here</span>
 <span class="n">compare_runs</span><span class="p">(</span><span class="n">past_runs</span><span class="p">,</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">past_runs</span><span class="p">],</span> <span class="n">observations</span><span class="o">=</span><span class="n">obs</span><span class="p">)</span>
 </pre></div>
@@ -661,6 +667,7 @@
 </section>
 <section id="future-climate-scenarios-20202100">
 <h2>4. Future: climate scenarios 2020–2100<a class="headerlink" href="#future-climate-scenarios-20202100" title="Link to this heading">#</a></h2>
+<p><strong>Why?</strong> With the calibrated ice flow (section 2) and SMB (section 3), we project the glacier until 2100 under several <strong>climate scenarios</strong> (from “committed”, i.e. today’s climate kept constant, to RCP8.5, strong warming). The comparison tells how much of the glacier is already lost whatever we do, and how much depends on future emissions.</p>
 <p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (see Lecture 2):</p>
 <ul class="simple">
 <li><p>2020 row (in <code class="docutils literal notranslate"><span class="pre">experiment/params_future.yaml</span></code>): present-day offset (2000–2019, printed by <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> above)</p></li>
@@ -690,7 +697,9 @@
 </section>
 <section id="a-simple-smb-model-ela-based">
 <h2>5. A simple SMB model: ELA-based<a class="headerlink" href="#a-simple-smb-model-ela-based" title="Link to this heading">#</a></h2>
-<p>Instead of the climate, prescribe the ELA history yourself. <strong>Try to reproduce the volume curve of your calibrated past run</strong> by playing with the ELAs (and gradients) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA: end-of-summer snowline, GLAMOS).</p>
+<p><strong>Why?</strong> The climate-driven SMB hides many processes (temperature, precipitation, melt factors). Here we take a simpler approach: we prescribe the <strong>ELA directly</strong>. This forces us to think about <strong>which ELAs must have prevailed</strong> to drive the glacier evolution we observe (LIA advance, then retreat).</p>
+<p><strong>Goal</strong>: try to reproduce the volume curve of your calibrated past run (section 3) by playing with the ELAs (and gradients) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA: end-of-summer snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS; LIA ELAs ≈ 100–200 m lower).</p>
+<p><strong>Difficulty</strong>: a glacier does not react immediately. It has a <strong>response time</strong>: after an ELA change, it takes years to decades to adjust its geometry. So the ELA must change <em>before</em> the volume does. This is studied in section 6.</p>
 <p>▶ <strong>In the terminal</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
@@ -706,6 +715,8 @@
 </section>
 <section id="response-time-your-own-igm-module-oscillating-ela">
 <h2>6. Response time (your own IGM module, oscillating ELA)<a class="headerlink" href="#response-time-your-own-igm-module-oscillating-ela" title="Link to this heading">#</a></h2>
+<p>Here the ELA oscillates like a sine wave (period 200 yr, amplitude 200 m) and we look at how the glacier volume follows.</p>
+<p><strong>Look at the module first</strong>: this SMB is not part of IGM, it is a <strong>user module</strong> written in Python: <code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code> (its parameters: <code class="docutils literal notranslate"><span class="pre">user/conf/processes/smb_oscillating.yaml</span></code>). Open it: like any IGM module, it has 3 functions, <code class="docutils literal notranslate"><span class="pre">initialize</span></code> (called once), <code class="docutils literal notranslate"><span class="pre">update</span></code> (at each time step: computes the ELA at time t, then the SMB from the surface elevation) and <code class="docutils literal notranslate"><span class="pre">finalize</span></code>. This is how you can extend IGM with your own processes.</p>
 <p>▶ <strong>In the terminal</strong> (400 model years, a few minutes). For another period, copy <code class="docutils literal notranslate"><span class="pre">experiment/params_response_time.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">experiment/params_response_100.yaml</span></code>, set <code class="docutils literal notranslate"><span class="pre">period:</span> <span class="pre">100</span></code> and the run folder <code class="docutils literal notranslate"><span class="pre">outputs/params_response_100</span></code> in it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time
 igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_100
@@ -719,6 +730,15 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_respons
 </div>
 </div>
 </div>
+<p><strong>What you should see</strong>:</p>
+<ul class="simple">
+<li><p>The volume <strong>lags behind</strong> the ELA: the volume is maximal some decades <strong>after</strong> the ELA is lowest (e.g. ~45 years for the Rhone Glacier, period 200 yr).</p></li>
+<li><p>With a <strong>shorter</strong> period (50–100 yr), the glacier has no time to adjust: the volume oscillation is <strong>small</strong> and strongly delayed. With a <strong>longer</strong> period (400 yr), the glacier nearly follows the ELA: <strong>large</strong> oscillation.</p></li>
+<li><p>The lag gives an estimate of the <strong>response time</strong> of your glacier. Compare with <span class="math notranslate nohighlight">\(\tau \approx H / (-b_{\text{terminus}})\)</span> (Lecture 1a; <span class="math notranslate nohighlight">\(H\)</span>: typical thickness, <span class="math notranslate nohighlight">\(b_{\text{terminus}}\)</span>: SMB at the front) and with the 1D tutorial of Session 1.</p></li>
+</ul>
+<blockquote>
+<div><p>✅ <strong>Conclusion — response time</strong> (double-click to edit): the response time of my glacier is about … years. Consequence for the future: by 2100, the glacier is still / no longer responding to the warming of today because …</p>
+</div></blockquote>
 </section>
 </section>
 

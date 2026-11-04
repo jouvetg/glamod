@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="My glacier — tutorial (Session 2)" href="my-glacier/tutorial.html" />
+    <link rel="next" title="Modelling a glacier with IGM — tutorial (Session 2)" href="my-glacier/tutorial.html" />
     <link rel="prev" title="Choose your glacier" href="../session1/1e-choose-your-glacier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -326,7 +326,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="my-glacier/tutorial.html">My glacier — tutorial (Session 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="my-glacier/tutorial.html">Modelling a glacier with IGM — tutorial (Session 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -934,7 +934,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">helper</span> <span class="kn">import</span> <span class="o">*</span>                      <span class="c1"># course plotting helpers (utils/helper.py)</span>
 <span class="n">show_dashboard</span><span class="p">(</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">)</span>     <span class="c1"># last dashboard images</span>
 <span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/params_past_v2&quot;</span><span class="p">],</span>
-             <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>                 <span class="c1"># volume and area through time</span>
+             <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>                 <span class="c1"># ice volume through time</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -1047,8 +1047,8 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>Put the RGI ID of <strong>your</strong> glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in <strong>each</strong> file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code> (default: Rhone Glacier)</p></li>
 <li><p>Open <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code></strong>, run the first cell; drag the terminal next to it</p></li>
+<li><p>Go through it with the <strong>Rhone Glacier</strong> (default in all files), then do the same with <strong>your</strong> glacier: put its RGI ID (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in <strong>each</strong> file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code></p></li>
 </ol>
 </section>
 <hr class="docutils" />
@@ -1106,8 +1106,8 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 </div>
 <ul class="simple">
 <li><p>Keep the pre-1901 climate (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>) of <code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code></p></li>
-<li><p><strong>Calibrate <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (start: 1.0, explore 0.5–2), one file per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>, set at the end of the file)</p></li>
-<li><p>Validate: LIA moraines, Siegfried map, today’s area and volume</p></li>
+<li><p><strong>Calibrate <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (start: 0.8, explore 0.5–2), one file per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>, set at the end of the file)</p></li>
+<li><p>Validate: LIA moraines, Siegfried map, today’s ice volume</p></li>
 <li><p>✅ Put your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> in <code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code> (and <code class="docutils literal notranslate"><span class="pre">params_past_moraines.yaml</span></code>)</p></li>
 </ul>
 </section>
@@ -1197,7 +1197,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">My glacier — tutorial (Session 2)</p>
+        <p class="prev-next-title">Modelling a glacier with IGM — tutorial (Session 2)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
