@@ -1023,12 +1023,11 @@ def compare_velocity_misfit(input_file, run_dirs, year=2020):
     """Ice-flow calibration (igm_run -m, params_sensitivity): one map per run of the speed
     difference (modelled - observed), arranged as a grid arrhenius (rows) x tau_ref (columns),
     with the RMSE and the mean bias in the title. Look for the run with a bias close to 0 and
-    a small RMSE. Returns the table of RMSE / bias (DataFrame), sorted by |bias|.
+    a small RMSE.
     """
     import os, yaml
-    import pandas as pd
     ds_in = xr.open_dataset(input_file)
-    rows, maps = [], {}
+    maps = {}
     for run in run_dirs:
         with open(os.path.join(run, '.hydra', 'config.yaml')) as f:
             phys = yaml.safe_load(f)['processes']['iceflow']['physics']
@@ -1045,8 +1044,6 @@ def compare_velocity_misfit(input_file, run_dirs, year=2020):
         d = diff[mask]
         rmse, bias = float(np.sqrt(np.mean(d**2))), float(np.mean(d))
         maps[(A, tau)] = (diff, rmse, bias, os.path.basename(os.path.normpath(run)))
-        rows.append({'run': os.path.basename(os.path.normpath(run)), 'arrhenius': A, 'tau_ref': tau,
-                     'rmse (m/yr)': round(rmse, 1), 'bias (m/yr)': round(bias, 1)})
     ds_in.close()
     As = sorted({k[0] for k in maps}, reverse=True)
     taus = sorted({k[1] for k in maps})
@@ -1071,8 +1068,6 @@ def compare_velocity_misfit(input_file, run_dirs, year=2020):
     fig.colorbar(im, ax=axes, shrink=0.6, extend='both', label='speed difference, modelled - observed (m/yr)')
     fig.suptitle(f"Surface speed: modelled ({year}) - observed (red: too fast, blue: too slow)")
     plt.show()
-    df = pd.DataFrame(rows)
-    return df.reindex(df['bias (m/yr)'].abs().sort_values().index).reset_index(drop=True)
 
 
 # ---------------------------------------------------------------------------
