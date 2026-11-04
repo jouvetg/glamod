@@ -13,3 +13,6 @@ session2/2-glacier-goo.md
 
 # Marp exports (generated locally from the .md slides)
 session*/*.html
+# Glaciations in the Alps (slides 7-32 of the 2022 course): image rights to check, kept locally only
+session1/1-glaciations.md
+session1/fig_glaciation/

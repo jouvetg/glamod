@@ -998,8 +998,29 @@ def plot_particles(run_dir, year=None, rh_min=0.0):
     ds.close()
 
 
+def sweep_runs(folder):
+    """Runs of a multirun (igm_run -m ...): the numbered sub-folders of `folder` (0, 1, 2, ...),
+    with labels made of the swept values (read in .hydra/overrides.yaml). Returns (runs, labels)."""
+    import glob, os, yaml
+    short = {'processes.climate.oggm.clim_trend_array.2.1': 'dT2100',
+             'processes.iceflow.physics.viscosity.arrhenius': 'A',
+             'processes.iceflow.physics.sliding.tau_ref': 'tau_ref'}
+    runs = sorted([d for d in glob.glob(os.path.join(folder, '*')) if os.path.basename(d).isdigit()],
+                  key=lambda d: int(os.path.basename(d)))
+    labels = []
+    for run in runs:
+        with open(os.path.join(run, '.hydra', 'overrides.yaml')) as f:
+            overrides = [o for o in yaml.safe_load(f) if not o.startswith('+experiment')]
+        items = []
+        for o in overrides:
+            key, value = o.split('=', 1)
+            items.append(f"{short.get(key, key.split('.')[-1])}={value}")
+        labels.append(', '.join(items) or os.path.basename(run))
+    return runs, labels
+
+
 def compare_velocity_misfit(input_file, run_dirs, year=2020):
-    """Ice-flow parameter exploration (run_sensitivity.sh): modelled vs observed surface speed for several runs.
+    """Ice-flow parameter exploration (igm_run -m, see B2): modelled vs observed surface speed for several runs.
 
     For each run, reads arrhenius and tau_ref in .hydra/config.yaml and computes the RMSE and the
     mean bias (model - observation) of the surface speed on the glacier. Returns a table (DataFrame)

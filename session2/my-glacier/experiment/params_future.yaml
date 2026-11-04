@@ -1,14 +1,24 @@
 # @package _global_
 
-# FUTURE: 2020-2100, climate-driven SMB, one warming scenario.
-# Starts from today's glacier (data downloaded by oggm_shop).
-# Make one copy of this file per scenario (params_future_ssp126.yaml, ...), or override on the command line.
+# FUTURE: 2020-2100, climate-driven SMB, from today's glacier, for several climate SCENARIOS.
+# Set your calibrated melt_enhancer, today's offset (2020 row) and the 2100 delta_temp of each
+# scenario (at the end of this file), then:  igm_run +experiment=params_future
+# One run per scenario: outputs/params_future/0, 1, 2, 3 (in the order of the list).
 
 defaults:
-  - common: my_glacier     # your glacier + GRID (coarsening) + ICE FLOW parameters: see common/my_glacier.yaml
   - override /inputs: [oggm_shop, local]
   - override /processes: [climate, smb, iceflow, time, thk]
   - override /outputs: [local, live_dashboard]
+
+inputs:
+  oggm_shop:
+    RGI_ID: "RGI2000-v7.0-G-11-01189"              # <-- YOUR GLACIER (here: Findelengletscher): the same in all files!
+    thk_source: millan_ice_thickness                # initial ice thickness (Millan et al., 2022)
+    filename: input_${inputs.oggm_shop.RGI_ID}.nc   # one data file per glacier, re-used if it exists
+  local:
+    filename: ${inputs.oggm_shop.filename}
+    coarsening:
+      ratio: 2              # GRID: 2 = twice coarser grid -> fast tests; 1 for the final runs of your report
 
 processes:
   time:
@@ -24,8 +34,40 @@ processes:
       clim_trend_array:
         - ["time", "delta_temp", "prec_scal"]
         - [ 2020,           1.3,         1.0]
-        - [ 2100,           4.0,         1.0]
+        - [ 2100,           4.0,         1.0]   # 2100 value replaced by each scenario (end of file)
   smb:
     method: oggm
     oggm:
-      melt_enhancer: 1.0     # use the value calibrated with the past run!
+      melt_enhancer: 1.0    # use the value calibrated with the past run!
+  iceflow:                  # ICE FLOW
+    physics:                # ICE-FLOW PARAMETERS: calibrate them on the observed speeds
+      sliding:
+        tau_ref: 0.215      # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
+      viscosity:
+        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 30-150)
+    # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
+    numerics:
+      Nz: 2
+      basis_horizontal: q1
+      basis_vertical: molho
+    unified:
+      nbit_init: 0
+      retrain_freq: 0
+      network:
+        pretrained: true
+        pretrained_path: dahunet_edu.keras
+
+outputs:
+  live_dashboard:
+    headless: true          # no screen in the cloud: saves dashboard_*.png images in the run folder
+
+hydra:
+  mode: MULTIRUN             # several runs, one per value below (or combination of values)
+  sweep:
+    dir: outputs/${hydra.runtime.choices.experiment}   # RUN FOLDERS: outputs/<file name>/0, 1, 2...
+    subdir: ${hydra:job.num}
+  sweeper:
+    params:
+      # delta_temp in 2100 (vs 1960-1990) = 1981-2010 offset + CH2018 warming (Lecture 2, Step 3)
+      # scenarios:                           committed, RCP2.6, RCP4.5, RCP8.5 (here for Findelen)
+      processes.climate.oggm.clim_trend_array.2.1: 1.3, 2.0, 3.4, 5.1

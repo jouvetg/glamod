@@ -80,7 +80,7 @@ def update(cfg, state):                        # called at each time step
 ```
 
 ```bash
-igm_run +experiment=params_response_time hydra.run.dir=outputs/response_200
+igm_run +experiment=params_response_time
 ```
 
 ---
@@ -90,7 +90,7 @@ igm_run +experiment=params_response_time hydra.run.dir=outputs/response_200
 ![height:250px](fig/response-time-findelen.png)
 
 - The volume peaks **~40 years** after the ELA minimum (period 200 yr, amplitude 200 m)
-- Other periods (50, 100, 400 yr, `processes.smb_oscillating.period=100`): how do lag and amplitude change? Compare with $\tau \approx H/(-b_{terminus})$ (Lecture 1a) and the tutorial
+- Other periods (50, 100, 400 yr): copy the file (`params_response_100.yaml`), set `period: 100` in it: how do lag and amplitude change? Compare with $\tau \approx H/(-b_{terminus})$ (Lecture 1a) and the tutorial
 - Read the module: how to extend IGM with `initialize`, `update`, `finalize`
 
 ---
@@ -108,7 +108,7 @@ Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) ➡️ **morain
 # B4 — Moraines: questions
 
 ```bash
-igm_run +experiment=params_past_moraines hydra.run.dir=outputs/past_moraines
+igm_run +experiment=params_past_moraines
 ```
 
 Notebook: `plot_particles(run, year=...)`, and `rh_min=0.95` for the debris at the surface only

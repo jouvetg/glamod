@@ -6,7 +6,6 @@
 # at the sample sites match the measured (OSL / exposure) ages.
 
 defaults:
-  - common: iceflow_offline   # off-line pretrained ice-flow emulator
   - override /inputs: [oggm_shop, local]
   - override /processes: [smb, iceflow, time, thk]
   - override /outputs: [local, live_dashboard]
@@ -14,7 +13,7 @@ defaults:
 inputs:
   oggm_shop:
     RGI_ID: "RGI2000-v7.0-G-11-00907"                  # Glacier du Mont Miné
-    thk_source: millan_ice_thickness
+    thk_source: millan_ice_thickness                # initial ice thickness (Millan et al., 2022)
     filename: input_${inputs.oggm_shop.RGI_ID}.nc
   local:
     filename: ${inputs.oggm_shop.filename}
@@ -37,17 +36,28 @@ processes:
         - [ 1900,      0.009,     0.005,  3000,      2.0]
         - [ 2000,      0.009,     0.005,  3100,      2.0]
         - [ 2024,      0.009,     0.005,  3100,      2.0]
-  iceflow:                  # ICE FLOW (off-line emulator, see common/iceflow_offline.yaml)
-    unified:
-      network:
-        pretrained_path: "dahunet_edu.keras"   # emulator: dahunet_edu (smallest, fastest)
-    physics:
+  iceflow:                  # ICE FLOW
+    physics:                # ICE-FLOW PARAMETERS
       sliding:
-        tau_ref: 0.215         # basal shear stress (MPa) needed to slide at u_ref: lower = more sliding
-        u_ref: 100.0          # (m/yr)
+        tau_ref: 0.215      # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
       viscosity:
-        arrhenius: 78.0       # ice softness A (MPa^-3 a^-1): higher = softer ice
+        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 30-150)
+    # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
+    numerics:
+      Nz: 2
+      basis_horizontal: q1
+      basis_vertical: molho
+    unified:
+      nbit_init: 0
+      retrain_freq: 0
+      network:
+        pretrained: true
+        pretrained_path: dahunet_edu.keras
 
 outputs:
   live_dashboard:
-    headless: true
+    headless: true          # no screen in the cloud: saves dashboard_*.png images in the run folder
+
+hydra:
+  run:
+    dir: outputs/${hydra.runtime.choices.experiment}   # RUN FOLDER = name of this file: outputs/<file name>/
