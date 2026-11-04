@@ -371,8 +371,8 @@ cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier
 cd ~/work/my-glacier
 ```
 
-1. Put the RGI ID of **your** glacier (`RGI_ID`) in **each** file of `experiment/` (default: Rhone Glacier)
-2. Open **`tutorial.ipynb`**, run the first cell; drag the terminal next to it
+1. Open **`tutorial.ipynb`**, run the first cell; drag the terminal next to it
+2. Go through it with the **Rhone Glacier** (default in all files), then do the same with **your** glacier: put its RGI ID (`RGI_ID`) in **each** file of `experiment/`
 
 ---
 
