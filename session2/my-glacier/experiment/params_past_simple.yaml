@@ -36,11 +36,11 @@ processes:
         - [ 2000,     0.009,     0.005,  3200,      2.0]
         - [ 2020,     0.009,     0.005,  3300,      2.0]
   iceflow:                  # ICE FLOW
-    physics:                # ICE-FLOW PARAMETERS: calibrate them on the observed speeds
+    physics:                # ICE-FLOW PARAMETERS: put YOUR calibrated values (params_sensitivity)
       sliding:
         tau_ref: 0.215      # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
       viscosity:
-        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 30-150)
+        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 20-150)
     # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
     numerics:
       Nz: 2
@@ -59,4 +59,4 @@ outputs:
 
 hydra:
   run:
-    dir: outputs/${hydra.runtime.choices.experiment}   # RUN FOLDER = name of this file: outputs/<file name>/
+    dir: outputs/params_past_simple       # RUN FOLDER (where the results go): keep it equal to the file name

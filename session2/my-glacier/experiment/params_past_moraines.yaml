@@ -33,24 +33,24 @@ processes:
       # From 1901 to 2019, the observed climate is used (this table is ignored).
       clim_trend_array:
         - ["time", "delta_temp", "prec_scal"]
-        - [ 1700,          -1.0,         1.0]
+        - [ 1700,          -0.5,         1.0]
         - [ 1850,          -1.0,         1.0]
-        - [ 1900,          -0.5,         1.0]
+        - [ 1900,           1.0,         1.0]
   smb:
     method: oggm
     oggm:
-      melt_enhancer: 1.0    # > 1: more melt, < 1: less melt (explore 0.5-2)
+      melt_enhancer: 1.0    # use YOUR calibrated value (params_past.yaml)
   particles:
     seeding:
       frequency: 10.0       # seed new particles every 10 years (in the accumulation area)
   iceflow:                  # ICE FLOW
     vertical_velocity:
       enabled: true         # needed to track the particles in 3D
-    physics:                # ICE-FLOW PARAMETERS: calibrate them on the observed speeds
+    physics:                # ICE-FLOW PARAMETERS: put YOUR calibrated values (params_sensitivity)
       sliding:
         tau_ref: 0.215      # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
       viscosity:
-        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 30-150)
+        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 20-150)
     # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
     numerics:
       Nz: 2
@@ -69,4 +69,4 @@ outputs:
 
 hydra:
   run:
-    dir: outputs/${hydra.runtime.choices.experiment}   # RUN FOLDER = name of this file: outputs/<file name>/
+    dir: outputs/params_past_moraines       # RUN FOLDER (where the results go): keep it equal to the file name

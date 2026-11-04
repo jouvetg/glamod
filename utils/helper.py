@@ -1020,47 +1020,59 @@ def sweep_runs(folder):
 
 
 def compare_velocity_misfit(input_file, run_dirs, year=2020):
-    """Ice-flow parameter exploration (igm_run -m, see B2): modelled vs observed surface speed for several runs.
-
-    For each run, reads arrhenius and tau_ref in .hydra/config.yaml and computes the RMSE and the
-    mean bias (model - observation) of the surface speed on the glacier. Returns a table (DataFrame)
-    and, if the runs form an arrhenius x tau_ref grid, shows the RMSE as a map.
+    """Ice-flow calibration (igm_run -m, params_sensitivity): one map per run of the speed
+    difference (modelled - observed), arranged as a grid arrhenius (rows) x tau_ref (columns),
+    with the RMSE and the mean bias in the title. Look for the run with a bias close to 0 and
+    a small RMSE. Returns the table of RMSE / bias (DataFrame), sorted by |bias|.
     """
     import os, yaml
     import pandas as pd
     ds_in = xr.open_dataset(input_file)
-    rows = []
+    rows, maps = [], {}
     for run in run_dirs:
         with open(os.path.join(run, '.hydra', 'config.yaml')) as f:
             phys = yaml.safe_load(f)['processes']['iceflow']['physics']
+        A, tau = phys['viscosity']['arrhenius'], phys['sliding']['tau_ref']
         ds = xr.open_dataset(os.path.join(run, 'output.nc'))
         obs = ds_in.interp(x=ds['x'], y=ds['y'])    # observations on the model grid (coarsening)
         vobs = np.sqrt(obs['uvelsurfobs']**2 + obs['vvelsurfobs']**2).values
         k = int(np.argmin(np.abs(ds['time'].values - year)))
         vmod = np.sqrt(ds['uvelsurf'].isel(time=k)**2 + ds['vvelsurf'].isel(time=k)**2).values
-        mask = (ds['thk'].isel(time=k).values > 1) & np.isfinite(vobs) & (vobs > 0)
+        mask = (ds['thk'].isel(time=k).values > 1) & np.isfinite(vobs)
+        extent = [float(ds.x.min()), float(ds.x.max()), float(ds.y.min()), float(ds.y.max())]
         ds.close()
-        d = vmod[mask] - vobs[mask]
-        rows.append({'run': os.path.basename(os.path.normpath(run)),
-                     'arrhenius': phys['viscosity']['arrhenius'],
-                     'tau_ref': phys['sliding']['tau_ref'],
-                     'rmse (m/yr)': np.sqrt(np.mean(d**2)), 'bias (m/yr)': np.mean(d)})
+        diff = np.where(mask, vmod - vobs, np.nan)
+        d = diff[mask]
+        rmse, bias = float(np.sqrt(np.mean(d**2))), float(np.mean(d))
+        maps[(A, tau)] = (diff, rmse, bias, os.path.basename(os.path.normpath(run)))
+        rows.append({'run': os.path.basename(os.path.normpath(run)), 'arrhenius': A, 'tau_ref': tau,
+                     'rmse (m/yr)': round(rmse, 1), 'bias (m/yr)': round(bias, 1)})
     ds_in.close()
+    As = sorted({k[0] for k in maps}, reverse=True)
+    taus = sorted({k[1] for k in maps})
+    vmax = np.nanmedian([np.nanpercentile(np.abs(m[0]), 95) for m in maps.values()])   # colour scale (saturates for bad runs)
+    fig, axes = plt.subplots(len(As), len(taus), figsize=(3.2 * len(taus), 3.0 * len(As)),
+                             squeeze=False, sharex=True, sharey=True)
+    for i, A in enumerate(As):
+        for j, tau in enumerate(taus):
+            ax = axes[i, j]
+            ax.set_xticks([]); ax.set_yticks([])
+            if (A, tau) not in maps:
+                ax.axis('off'); continue
+            diff, rmse, bias, name = maps[(A, tau)]
+            im = ax.imshow(diff, origin='lower', extent=extent, cmap='RdBu_r', vmin=-vmax, vmax=vmax)
+            best = abs(bias) == min(abs(m[2]) for m in maps.values())
+            ax.set_title(f"RMSE {rmse:.0f}, bias {bias:+.0f} m/yr", fontsize=10,
+                         fontweight='bold' if best else 'normal', color='C3' if best else 'k')
+            if j == 0:
+                ax.set_ylabel(f"arrhenius = {A:g}", fontsize=11)
+            if i == len(As) - 1:
+                ax.set_xlabel(f"tau_ref = {tau:g}", fontsize=11)
+    fig.colorbar(im, ax=axes, shrink=0.6, extend='both', label='speed difference, modelled - observed (m/yr)')
+    fig.suptitle(f"Surface speed: modelled ({year}) - observed (red: too fast, blue: too slow)")
+    plt.show()
     df = pd.DataFrame(rows)
-    grid = df.pivot_table(index='arrhenius', columns='tau_ref', values='rmse (m/yr)')
-    if grid.shape[0] > 1 and grid.shape[1] > 1:
-        fig, ax = plt.subplots(figsize=(6, 4.5))
-        im = ax.imshow(grid.values, origin='lower', cmap='viridis_r')
-        ax.set_xticks(range(grid.shape[1]), [f"{v:g}" for v in grid.columns])
-        ax.set_yticks(range(grid.shape[0]), [f"{v:g}" for v in grid.index])
-        for (r, c), v in np.ndenumerate(grid.values):
-            ax.text(c, r, f"{v:.0f}", ha='center', va='center', color='w')
-        ax.set_xlabel('tau_ref (MPa)')
-        ax.set_ylabel('arrhenius (MPa$^{-3}$ a$^{-1}$)')
-        plt.colorbar(im, ax=ax, label='speed RMSE (m/yr)')
-        ax.set_title(f"Modelled vs observed surface speed ({year})")
-        plt.show()
-    return df.sort_values('rmse (m/yr)')
+    return df.reindex(df['bias (m/yr)'].abs().sort_values().index).reset_index(drop=True)
 
 
 # ---------------------------------------------------------------------------

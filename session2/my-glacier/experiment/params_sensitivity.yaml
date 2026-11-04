@@ -1,8 +1,9 @@
 # @package _global_
 
-# EXPLORATION B2 "ice-flow parameters": 1-year runs (2020-2021) from today's glacier for all
-# combinations of ice softness (arrhenius) x basal sliding (tau_ref) listed at the end of this file
-# (3 x 4 = 12 runs, ~3 min). Compare the modelled speeds with the observed ones in analysis.ipynb.
+# ICE-FLOW CALIBRATION: 1-year runs (2020-2021) from today's glacier for all combinations of
+# ice softness (arrhenius) x basal sliding (tau_ref) given in the command line (-m = multirun):
+#   igm_run -m +experiment=params_sensitivity processes.iceflow.physics.viscosity.arrhenius=25,50,100 processes.iceflow.physics.sliding.tau_ref=0.1,0.2,0.4,0.8
+# (3 x 4 = 12 runs, ~3 min). Compare the modelled speeds with the observed ones in tutorial.ipynb.
 # One run per combination: outputs/params_sensitivity/0, 1, ..., 11.
 
 defaults:
@@ -38,13 +39,13 @@ processes:
   smb:
     method: oggm
     oggm:
-      melt_enhancer: 1.0    # use the value calibrated with the past run!
+      melt_enhancer: 1.0    # use YOUR calibrated value (params_past.yaml)
   iceflow:                  # ICE FLOW
-    physics:                # ICE-FLOW PARAMETERS: calibrate them on the observed speeds
+    physics:                # ICE-FLOW PARAMETERS: replaced by the values of the command line (see top of file)
       sliding:
         tau_ref: 0.215      # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
       viscosity:
-        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 30-150)
+        arrhenius: 78.0     # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 20-150)
     # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
     numerics:
       Nz: 2
@@ -62,12 +63,5 @@ outputs:
     headless: true          # no screen in the cloud: saves dashboard_*.png images in the run folder
 
 hydra:
-  mode: MULTIRUN             # several runs, one per value below (or combination of values)
   sweep:
-    dir: outputs/${hydra.runtime.choices.experiment}   # RUN FOLDERS: outputs/<file name>/0, 1, 2...
-    subdir: ${hydra:job.num}
-  sweeper:
-    params:
-      # all combinations of these values:
-      processes.iceflow.physics.viscosity.arrhenius: 50, 78, 150
-      processes.iceflow.physics.sliding.tau_ref: 0.1, 0.215, 0.4, 0.8
+    dir: outputs/params_sensitivity       # RUN FOLDERS of `igm_run -m` (one per value): outputs/params_sensitivity/0, 1, 2, ...

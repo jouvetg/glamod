@@ -17,15 +17,15 @@ This course gives an overview of the basic physical processes that govern the ev
 |---|---|---|---|---|
 | **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial) | **Choose your glacier** for the mini-project |
 | **Session 2** | Lecture 2: Introduction to IGM, then a past and a future run (step by step) | Mini-project | Mini-project | Mini-project |
-| **Session 3** | Lecture 3: Additional experiments (response time, moraines), how to write the report | Mini-project | Mini-project | Mini-project |
+| **Session 3** | Lecture 3: Additional experiments (moraines), how to write the report | Mini-project | Mini-project | Mini-project |
 
 Then: write the report (deadline: *to be announced*).
 
 ## Material
 
 - **Session 1**: [Lecture 1a](session1/1a-lecture-glacier-processes.md), [Lecture 1b](session1/1b-lecture-glacier-modelling.md), [Setting up RenkuLab](session1/1c-setup-renku.md), [Tutorial](session1/1d-tutorial-sia-model.ipynb), [Choose your glacier](session1/1e-choose-your-glacier.md)
-- **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [project template `my-glacier/`](session2/my-glacier/analysis.ipynb) (copied once to `~/work/my-glacier`)
-- **Session 3**: [Lecture 3](session3/lecture-3-application-and-report.md)
+- **Session 2**: [Lecture 2](session2/1-lecture-igm.md), [project template `my-glacier/`](session2/my-glacier/tutorial.ipynb) (copied once to `~/work/my-glacier`, follow `tutorial.ipynb`)
+- **Session 3**: [Lecture 3](session3/lecture-3-application-and-report.md), [tutorial (moraines, figures)](session3/tutorial-session3.ipynb)
 - **Session 4** (taught in the course *Dates and Rates of landscape evolution*): [Lecture 4: Mont Miné](session4/lecture-4-mont-mine.md), [analysis notebook](session4/mont-mine/analysis.ipynb)
 - **Mini-project**: guidelines in Lectures 2 and 3, in your own copy of `session2/my-glacier/`
 

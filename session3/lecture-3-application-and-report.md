@@ -57,12 +57,15 @@ Choose **at least one** exploration:
 
 | | Question | |
 |---|---|---|
-| **B1** | Does the SMB model matter? (ELA-based vs climate) | Session 2 |
-| **B2** | Which `arrhenius` × `tau_ref` fit the observed speeds? | Session 2 |
-| **B3** | Response time: how fast does your glacier react? | **today** |
-| **B4** | Moraines: where does the debris go? | **today** |
+| **B1** | Does the SMB model matter? (ELA-based vs climate) | Session 2 (`tutorial.ipynb`, 5) |
+| **B3** | Response time: how fast does your glacier react? | Session 2 (`tutorial.ipynb`, 6) |
+| **B4** | Moraines: where does the debris go? | **today** (`tutorial-session3.ipynb`) |
 
-Commands and plots: `~/work/my-glacier/analysis.ipynb`, section 4
+Today: copy the Session 3 notebook into your project, and follow it:
+
+```bash
+cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
+```
 
 ---
 
@@ -213,6 +216,6 @@ Checklist for today:
 - [ ] Figures drafted
 - [ ] Report outline written
 
-`~/work/my-glacier/` (your copy: YAML + terminal + `analysis.ipynb`)
+`~/work/my-glacier/` (your copy: YAML + terminal + `tutorial.ipynb`, `tutorial-session3.ipynb`)
 
 **Back up** at the end of each afternoon (`cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive): RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.

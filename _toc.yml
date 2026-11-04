@@ -16,10 +16,11 @@ parts:
   - caption: "Session 2: Introduction to IGM"
     chapters:
       - file: session2/1-lecture-igm
-      - file: session2/my-glacier/analysis
+      - file: session2/my-glacier/tutorial
   - caption: "Session 3: Application and report"
     chapters:
       - file: session3/lecture-3-application-and-report
+      - file: session3/tutorial-session3
   - caption: "Session 4: Mont Miné (course Dates & Rates)"
     chapters:
       - file: session4/lecture-4-mont-mine

@@ -54,7 +54,7 @@ UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive ca
      ["jupyter server --ServerApp.ip=0.0.0.0 --ServerApp.port=8888 --ServerApp.base_url=$RENKU_BASE_URL_PATH --ServerApp.token=\"\" --ServerApp.password=\"\" --ServerApp.allow_remote_access=true --ContentsManager.allow_hidden=true --ServerApp.allow_origin=*"]
      ```
 4. **Students**: the project is **public**, so its launcher is available to every logged-in user and each student gets a private session: its link is given on the course page (`infos.md`) and in the Session 1 slides. Ask the Renku team for a course resource pool (CPU, ~10 GB disk, paused sessions kept ≥ 8 weeks).
-5. **Dry run** with a student account: launch from the course project, run the tutorial, copy `session2/my-glacier` to `~/work/my-glacier` and run the project steps (check run, `params_past`, `params_future`, `analysis.ipynb`), back up with `tar`, pause and resume.
+5. **Dry run** with a student account: launch from the course project, run the tutorial, copy `session2/my-glacier` to `~/work/my-glacier` and run the project steps (check run, `params_past`, `params_future`, `tutorial.ipynb`), back up with `tar`, pause and resume.
 
 **Updating during the course**: the **image** only holds the software (IGM + packages): build it once, and rebuild only if `environment/` changes (new IGM commit). The **course material** comes from the GitHub repository: push changes any time; a new session clones the latest version, and in a paused session students run `git pull` in `~/work/glamod`. Their own work in `~/work/my-glacier/` is never touched by a pull; changes to the template `session2/my-glacier/` after they copied it must be copied by hand (e.g. a new parameter file: `cp ~/work/glamod/session2/my-glacier/experiment/params_xxx.yaml ~/work/my-glacier/experiment/`).
 
@@ -62,7 +62,7 @@ UNIL has no SWITCHdrive any more (replaced by OneDrive in 2024), and OneDrive ca
 
 | Run | Wall time |
 |---|---|
-| Project (Findelen): check / past 1700–2020 / future (4 scenarios) | ~12 s / ~50 s / ~1.5 min |
+| Project (Findelen, similar for the Rhone): check / past 1700–2020 / future (4 scenarios) | ~12 s / ~50 s / ~1.5 min |
 | Project: response time / moraines (particles) / `params_sensitivity` (12 runs) | ~1 min / ~2 min / ~2.5 min |
 
 With fewer cores, expect runs 2–4× slower; with `coarsening: ratio: 1`, ~1.5–2× slower.
