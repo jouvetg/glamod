@@ -40,7 +40,7 @@ processes:
   smb:
     method: oggm
     oggm:
-      melt_enhancer: 1.0    # SMB CALIBRATION: > 1 more melt, < 1 less melt (explore 0.5-2)
+      melt_enhancer: 0.8    # SMB CALIBRATION: > 1 more melt, < 1 less melt (explore 0.5-2)
   iceflow:                  # ICE FLOW
     physics:                # ICE-FLOW PARAMETERS: put YOUR calibrated values (params_sensitivity)
       sliding:
