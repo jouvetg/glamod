@@ -18,8 +18,8 @@ Guillaume Jouvet
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
 | **Week 1** | Glacier processes | Glacier modelling | *Tutorial* | *Glacier selection* |
-| **Week 2** | Intro to IGM, *past & future runs* | *Project* | *Project* | *Project* |
-| **Week 3** | **Extra experiments, report** | **Project** | **Project** | **Project** |
+| **Week 2** | Intro to IGM, *calibration, past & future runs* | *Project* | *Project* | *Project* |
+| **Week 3** | **Moraines, report** | **Project** | **Project** | **Project** |
 | *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
  
 
@@ -42,11 +42,11 @@ Guillaume Jouvet
 
 | Problem | Try |
 |---|---|
-| Glacier grows without limit / disappears | more / less melt: `delta_temp`, `melt_enhancer` |
-| No LIA advance | colder pre-1901 `delta_temp`, longer spin-up |
-| Speeds too high / too low | higher / lower `tau_ref`, lower / higher `arrhenius` |
+| Glacier grows without limit / disappears | more / less melt: `melt_enhancer` |
+| No LIA advance / too large | colder / warmer pre-1901 `delta_temp` (`clim_trend_array`) |
+| Speeds too high / too low | refine the grid of `params_sensitivity` (`igm_run -m`) around your best values |
 
-- **One parameter at a time**, run log in the notebook; no perfect fit: **discuss** the mismatch
+- **One parameter at a time**, keep your calibrated values in the ✅ boxes of `tutorial.ipynb`; no perfect fit: **discuss** the mismatch
 - Tests with `ratio: 2`, **final runs with `ratio: 1`**
 
 ---
@@ -69,7 +69,7 @@ cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
 
 ---
 
-# B3 — Response time: write your own IGM module
+# B3 — Response time (Session 2): your own IGM module
 
 `user/code/processes/smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
 
@@ -88,11 +88,11 @@ igm_run +experiment=params_response_time
 
 ---
 
-# B3 — Response time: example (Findelengletscher)
+# B3 — Response time: example (Rhone Glacier)
 
-![height:250px](fig/response-time-findelen.png)
+![height:250px](fig/response-time-rhone.png)
 
-- The volume peaks **~40 years** after the ELA minimum (period 200 yr, amplitude 200 m)
+- The volume peaks **~45 years** after the ELA minimum (period 200 yr, amplitude 200 m)
 - Other periods (50, 100, 400 yr): copy the file (`params_response_100.yaml`), set `period: 100` in it: how do lag and amplitude change? Compare with $\tau \approx H/(-b_{terminus})$ (Lecture 1a) and the tutorial
 - Read the module: how to extend IGM with `initialize`, `update`, `finalize`
 

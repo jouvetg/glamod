@@ -16,7 +16,7 @@ This course gives an overview of the basic physical processes that govern the ev
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
 | **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial) | **Choose your glacier** for the mini-project |
-| **Session 2** | Lecture 2: Introduction to IGM, then a past and a future run (step by step) | Mini-project | Mini-project | Mini-project |
+| **Session 2** | Lecture 2: Introduction to IGM, then calibration, past and future runs, response time (step by step, `tutorial.ipynb`) | Mini-project | Mini-project | Mini-project |
 | **Session 3** | Lecture 3: Additional experiments (moraines), how to write the report | Mini-project | Mini-project | Mini-project |
 
 Then: write the report (deadline: *to be announced*).
