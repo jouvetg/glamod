@@ -323,6 +323,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
@@ -573,9 +575,8 @@
 ├── Samples_2024.csv             sample sites (ID, CH1903 x/y, UTM32 x/y)
 ├── Samples_XXXX.csv             a second set of sample sites (19FER...)
 ├── experiment/
-│   ├── params.yaml              1700-2024, ELA-based SMB
-│   └── common/iceflow_offline.yaml   ice-flow emulator (do not touch)
-└── outputs/, data/              created by IGM
+│   └── params.yaml              1700-2024, ELA-based SMB (+ ice flow, emulator, run folder)
+└── outputs/, data/              created by IGM (outputs/params/ = run of params.yaml)
 </pre></div>
 </div>
 <p>Same tools as before: <strong>YAML</strong> (parameters) + <strong>terminal</strong> (runs) + <strong>notebook</strong> (plots)</p>
@@ -603,11 +604,11 @@
 <li><p><em>File → New → Terminal</em>, next to the notebook:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod/session4/mont-mine
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/run_v1
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The first run downloads the data (≈ 1 min), then runs 1700–2024 (a few minutes)</p></li>
+<li><p>The first run downloads the data (≈ 1 min), then runs 1700–2024 (a few minutes) ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params/</span></code></p></li>
 <li><p>Notebook, section 1: the SMB profile, the dashboard, volume and area through time</p></li>
 </ul>
 </section>
@@ -625,8 +626,8 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="step-3-calibration-your-turn">
 <h1>Step 3 — Calibration: your turn!<a class="headerlink" href="#step-3-calibration-your-turn" title="Link to this heading">#</a></h1>
-<p>Copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>), change <strong>one thing at a time</strong>, run into a new folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_v2<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/run_v2
+<p>Copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>), change <strong>one thing at a time</strong>, run it (➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_v2/</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_v2
 </pre></div>
 </div>
 <ol class="arabic simple">

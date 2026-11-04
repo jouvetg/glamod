@@ -321,6 +321,8 @@
 
 
 
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
@@ -548,11 +550,11 @@
 </table>
 </div>
 <p>Steps:
-0. Set your glacier in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code> (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>)</p>
+0. Put the RGI ID of your glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code></p>
 <ol class="arabic simple">
 <li><p><strong>Present</strong>: download the data, check the initial state</p></li>
 <li><p><strong>Past</strong>: Little Ice Age → today (calibration)</p></li>
-<li><p><strong>Future</strong>: scenarios 2020–2100 (<code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code>)</p></li>
+<li><p><strong>Future</strong>: scenarios 2020–2100 (all in <code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>)</p></li>
 <li><p><strong>Explorations</strong> (choose at least one): B1–B2 in Session 2, B3–B4 in Session 3</p></li>
 <li><p>Figures for the report → <code class="docutils literal notranslate"><span class="pre">figures/</span></code></p></li>
 </ol>
@@ -564,7 +566,7 @@
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../../utils&quot;</span><span class="p">))</span>               <span class="c1"># (same, when run inside the course folder)</span>
 <span class="kn">from</span> <span class="nn">helper</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;experiment/common/my_glacier.yaml&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;experiment/params_past.yaml&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">RGI_ID</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;oggm_shop&quot;</span><span class="p">][</span><span class="s2">&quot;RGI_ID&quot;</span><span class="p">]</span>
 <span class="n">INPUT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;data/input_</span><span class="si">{</span><span class="n">RGI_ID</span><span class="si">}</span><span class="s2">.nc&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My glacier:&quot;</span><span class="p">,</span> <span class="n">RGI_ID</span><span class="p">)</span>
@@ -586,8 +588,8 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outputs/check</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">params_future</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outputs/params_present</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">params_present</span></code></p></td>
 <td><p>1-year test run</p></td>
 <td><p>download data</p></td>
 <td><p></p></td>
@@ -605,7 +607,7 @@
 <section id="present-download-the-data-and-check-the-initial-state">
 <h2>1. Present: download the data and check the initial state<a class="headerlink" href="#present-download-the-data-and-check-the-initial-state" title="Link to this heading">#</a></h2>
 <p>▶ <strong>In the terminal</strong>: a 1-year run downloads the data (≈ 1 min the first time) and gives the modelled velocity field of today’s glacier:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<span class="w"> </span>processes.time.end<span class="o">=</span><span class="m">2021</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/check
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -618,8 +620,8 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modelled (2020) vs observed surface speeds -&gt; adjust tau_ref / arrhenius in common/my_glacier.yaml if needed</span>
-<span class="n">compare_modeled_observed_velocity</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="s2">&quot;outputs/check/output.nc&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modelled (2020) vs observed surface speeds -&gt; adjust tau_ref / arrhenius (iceflow block of the parameter files) if needed</span>
+<span class="n">compare_modeled_observed_velocity</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="s2">&quot;outputs/params_present/output.nc&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -633,13 +635,13 @@
 <h2>2. Past: from the Little Ice Age to today<a class="headerlink" href="#past-from-the-little-ice-age-to-today" title="Link to this heading">#</a></h2>
 <p>Start in 1700 from today’s geometry, advance to the LIA maximum (~1850), retreat with the observed climate 1901–2019. A 320-year run takes a few minutes.</p>
 <p>▶ <strong>In the terminal</strong>: edit <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code> (or a copy, e.g. <code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code>), then run it into a <strong>new folder</strong> each time:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_v1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <p>Then set <code class="docutils literal notranslate"><span class="pre">run</span></code> below to the folder of the run you want to look at, and add it to the comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/past_v1&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/params_past&quot;</span>
 <span class="n">show_dashboard</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">analyze_time_series</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output_ts.nc&quot;</span><span class="p">))</span>
 </pre></div>
@@ -661,13 +663,13 @@
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">INPUT</span><span class="p">);</span> <span class="n">dx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ds</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">obs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">([</span><span class="mi">2020</span><span class="p">],</span> <span class="p">[</span><span class="nb">float</span><span class="p">((</span><span class="n">ds</span><span class="o">.</span><span class="n">thk</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">]),</span>
        <span class="s2">&quot;vol&quot;</span><span class="p">:</span>  <span class="p">([</span><span class="mi">2020</span><span class="p">],</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">thk</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">])}</span>
-<span class="n">past_runs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;outputs/past_v1&quot;</span><span class="p">]</span>              <span class="c1"># &lt;- add your other past runs here</span>
+<span class="n">past_runs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">]</span>              <span class="c1"># &lt;- add your other past runs here</span>
 <span class="n">compare_runs</span><span class="p">(</span><span class="n">past_runs</span><span class="p">,</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">past_runs</span><span class="p">],</span> <span class="n">observations</span><span class="o">=</span><span class="n">obs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>✅ Is the LIA maximum reached around 1850? Does the front reach the LIA moraines (compare with the Siegfried map on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>)? Is today’s extent right? If not, change <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (before 1901) or <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, save as a new file / run folder (<code class="docutils literal notranslate"><span class="pre">past_v2</span></code>, …), and compare.</p>
+<p>✅ Is the LIA maximum reached around 1850? Does the front reach the LIA moraines (compare with the Siegfried map on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>)? Is today’s extent right? If not, change <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (before 1901) or <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, save as a new file (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>), and compare.</p>
 <p><strong>Calibrated values</strong>: <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (pre-1901) = …, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> = …</p>
 </section>
 <section id="future-scenarios-20202100">
@@ -677,23 +679,23 @@
 <li><p>2020 row: present-day offset (printed by <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> above)</p></li>
 <li><p>2100 row: 1981–2010 offset + CH2018 warming of the scenario</p></li>
 </ul>
-<p>▶ <strong>In the terminal</strong>: open <code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code>, set the 3 numbers at the top (your calibrated <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> and the two offsets printed by <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code>), save, then run the 4 scenarios (committed, RCP2.6, RCP4.5, RCP8.5) one after the other (a few minutes):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>run_future.sh
+<p>▶ In <code class="docutils literal notranslate"><span class="pre">experiment/params_future.yaml</span></code>, set your calibrated <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, the 2020 offset, and (at the end of the file) the 2100 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> of the 4 scenarios (committed = today’s offset, RCP2.6, RCP4.5, RCP8.5). Then, <strong>in the terminal</strong> (all scenarios, a few minutes):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future
 </pre></div>
 </div>
-<p>Each scenario goes to <code class="docutils literal notranslate"><span class="pre">outputs/future_&lt;name&gt;/</span></code>. The values used are recorded in <code class="docutils literal notranslate"><span class="pre">outputs/future_&lt;name&gt;/.hydra/overrides.yaml</span></code>.</p>
+<p>One run per scenario: <code class="docutils literal notranslate"><span class="pre">outputs/params_future/0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code> (in the order of the list).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;committed&quot;</span><span class="p">,</span> <span class="s2">&quot;rcp26&quot;</span><span class="p">,</span> <span class="s2">&quot;rcp45&quot;</span><span class="p">,</span> <span class="s2">&quot;rcp85&quot;</span><span class="p">]</span>
-<span class="n">compare_runs</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;outputs/future_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="p">],</span> <span class="n">scenarios</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">runs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">sweep_runs</span><span class="p">(</span><span class="s2">&quot;outputs/params_future&quot;</span><span class="p">)</span>    <span class="c1"># the scenario runs, labelled by their 2100 delta_temp</span>
+<span class="n">compare_runs</span><span class="p">(</span><span class="n">runs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Maps for one scenario</span>
-<span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="s2">&quot;outputs/future_rcp45/output.nc&quot;</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;thk&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Maps for one scenario (here the third one: RCP4.5)</span>
+<span class="n">animate_glacier_evolution</span><span class="p">(</span><span class="n">runs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/output.nc&quot;</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;thk&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -705,13 +707,13 @@
 <section id="b1-two-types-of-smb-model">
 <h3>B1 — Two types of SMB model<a class="headerlink" href="#b1-two-types-of-smb-model" title="Link to this heading">#</a></h3>
 <p>▶ <strong>In the terminal</strong>: adapt the ELA history in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA from the snowline / GLAMOS), then</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_simple_v1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_smb_simple</span><span class="p">(</span><span class="n">ela</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">gradabl</span><span class="o">=</span><span class="mf">0.009</span><span class="p">,</span> <span class="n">gradacc</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">accmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>   <span class="c1"># &lt;- your ELA and gradients</span>
-<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/past_v1&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/past_simple_v1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;climate-driven SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;ELA-based SMB&quot;</span><span class="p">],</span> <span class="n">observations</span><span class="o">=</span><span class="n">obs</span><span class="p">)</span>
+<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/params_past_simple&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;climate-driven SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;ELA-based SMB&quot;</span><span class="p">],</span> <span class="n">observations</span><span class="o">=</span><span class="n">obs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,12 +721,14 @@
 </section>
 <section id="b2-ice-flow-parameters-arrhenius-tau-ref">
 <h3>B2 — Ice-flow parameters (arrhenius × tau_ref)<a class="headerlink" href="#b2-ice-flow-parameters-arrhenius-tau-ref" title="Link to this heading">#</a></h3>
-<p>▶ <strong>In the terminal</strong> (12 runs of 1 year, ≈ 3 min): <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_sensitivity.sh</span></code></p>
+<p>▶ <strong>In the terminal</strong>: 1-year runs for all combinations of the <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> and <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> values listed at the end of <code class="docutils literal notranslate"><span class="pre">experiment/params_sensitivity.yaml</span></code> (3 × 4 = 12 runs, ≈ 3 min):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_sensitivity
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
-<span class="n">sens_runs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;outputs/sens_*&quot;</span><span class="p">))</span>
-<span class="n">compare_velocity_misfit</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">sens_runs</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">runs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">sweep_runs</span><span class="p">(</span><span class="s2">&quot;outputs/params_sensitivity&quot;</span><span class="p">)</span>   <span class="c1"># the 12 runs</span>
+<span class="n">compare_velocity_misfit</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -732,15 +736,15 @@
 </section>
 <section id="b3-response-time-your-own-igm-module-oscillating-ela">
 <h3>B3 — Response time (your own IGM module, oscillating ELA)<a class="headerlink" href="#b3-response-time-your-own-igm-module-oscillating-ela" title="Link to this heading">#</a></h3>
-<p>▶ <strong>In the terminal</strong> (400 model years, a few minutes); other periods with <code class="docutils literal notranslate"><span class="pre">processes.smb_oscillating.period=...</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/response_200
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time<span class="w"> </span>processes.smb_oscillating.period<span class="o">=</span><span class="m">100</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/response_100
+<p>▶ <strong>In the terminal</strong> (400 model years, a few minutes). For another period, copy <code class="docutils literal notranslate"><span class="pre">experiment/params_response_time.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">experiment/params_response_100.yaml</span></code> and set <code class="docutils literal notranslate"><span class="pre">period:</span> <span class="pre">100</span></code> in it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_100
 </pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_response_time</span><span class="p">(</span><span class="s2">&quot;outputs/response_200&quot;</span><span class="p">)</span>
-<span class="c1"># plot_response_time(&quot;outputs/response_100&quot;)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_response_time</span><span class="p">(</span><span class="s2">&quot;outputs/params_response_time&quot;</span><span class="p">)</span>
+<span class="c1"># plot_response_time(&quot;outputs/params_response_100&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -749,12 +753,12 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_respons
 <section id="b4-moraines-with-particles">
 <h3>B4 — Moraines with particles<a class="headerlink" href="#b4-moraines-with-particles" title="Link to this heading">#</a></h3>
 <p>▶ <strong>In the terminal</strong>: put your calibrated <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> and <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_moraines.yaml</span></code>, then</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_moraines
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines
 </pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_p</span> <span class="o">=</span> <span class="s2">&quot;outputs/past_moraines&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_p</span> <span class="o">=</span> <span class="s2">&quot;outputs/params_past_moraines&quot;</span>
 <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1850</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">2020</span><span class="p">]:</span>
     <span class="n">plot_particles</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">)</span>                <span class="c1"># all particles, coloured by depth</span>
 <span class="n">plot_particles</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">rh_min</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>       <span class="c1"># debris at the surface only: where moraines form</span>

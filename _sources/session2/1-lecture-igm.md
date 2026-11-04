@@ -39,11 +39,9 @@ A "real" glacier model needs:
 - **real data**: topography, ice thickness, outlines, velocities, climate
 - a **better ice-flow model** than SIA (steep, narrow valleys; sliding)
 - a **better SMB model** (driven by temperature and precipitation)
-- **efficiency**: many runs (calibration, scenarios), on a laptop or in the cloud
+- **efficiency**: many runs to explore parameters (calibration, scenarios)
 
-➡️ IGM: an open-source Python model developed @ UNIL 
-
-https://igm-model.org
+➡️ IGM: an open-source Python model developed @ UNIL, https://igm-model.org
 
 ![height:100px](fig/logo_igm.png)
 
@@ -58,13 +56,13 @@ https://igm-model.org
 
 # What does IGM solve?
 
-Same structure as the tutorial, at each time step:
+Same structure as the tutorial, at each time step, on a raster grid:
 
 1. **Surface mass balance**: $SMB(x,y,t)$ from an ELA or from climate
-2. **Ice flow**: 3D velocity field from a higher-order ice flow approximation, 
-using a **convolutional neural network** on a **raster grid**:
+2. **Ice flow**: velocity field from a higher-order ice flow approximation (no SIA), 
+using a convolutional neural network / image-to-image mapping:
 ![width:300px](fig/igm-cnn-mapping.png)
-3. **Mass conservation**: $\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = SMB$ using an upwind scheme.
+3. **Mass conservation**: $\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = SMB$.
 4. Update time, write outputs
  
 ---
@@ -80,12 +78,11 @@ using a **convolutional neural network** on a **raster grid**:
 ```
 my-glacier/                      ← run igm_run from HERE
 ├── experiment/                  PARAMETERS
-│   ├── params_past.yaml             one YAML file = one experiment
-│   └── common/                      shared settings (your glacier, grid, ice flow)
+│   └── params_past.yaml             one YAML file = one experiment
 ├── data/                        INPUTS (downloaded by oggm_shop at the first run)
 │   └── input_<RGI_ID>.nc            topography, thickness, velocities, climate...
-└── outputs/                     OUTPUTS: one folder per run (hydra.run.dir=...)
-    └── past_v1/
+└── outputs/                     OUTPUTS: one folder per run, named after the parameter file
+    └── params_past/
         ├── output.nc                maps through time
         ├── output_ts.nc             volume and area through time
         ├── dashboard_*.png          quick-look images
@@ -94,25 +91,32 @@ my-glacier/                      ← run igm_run from HERE
 
 ---
 
+<style scoped>pre { font-size: 0.62em; }</style>
+
 # A parameter file (`experiment/params.yaml`)
 
 ```yaml
 defaults:
-  - common: iceflow_offline                          # pre-trained ice-flow emulator
   - override /inputs: [local]                        # 1) which data
   - override /processes: [smb, iceflow, time, thk]   # 2) which physics, in order
   - override /outputs: [local, live_dashboard]       # 3) which outputs
 
 inputs:
   local:
-    coarsening: {ratio: 2}           # GRID: 2 = fast tests, 1 = final runs
+    coarsening:
+      ratio: 2                       # GRID: 2 = fast tests, 1 = final runs
 processes:                           # only what differs from the defaults
   smb:
     method: simple                   # + the ELA history (array)
   iceflow:                           # ICE FLOW
     physics:
-      sliding: {tau_ref: 0.325}
-  time: {start: 1900.0, end: 2000.0, save: 10.0}
+      sliding:
+        tau_ref: 0.325
+    # + the emulator settings (set for you, do not modify)
+  time:
+    start: 1900.0
+    end: 2000.0
+    save: 10.0
 ```
 
 Run it: `igm_run +experiment=params`
@@ -121,15 +125,8 @@ Run it: `igm_run +experiment=params`
 
 # Changing parameters
 
-- Edit the YAML file, and **keep 1 file per experiment** (copy it before changing it), or
-- override from the command line, without editing the file:
-
-```bash
-igm_run +experiment=params processes.time.end=2050
-igm_run +experiment=params inputs.oggm_shop.RGI_ID="RGI2000-v7.0-G-11-01189"
-```
-
-- Results go to the folder given by `hydra.run.dir=...`, with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
+- Change parameters **in the YAML file**, and **keep 1 file per experiment**: copy it before changing it (`params_past.yaml` → `params_past_v2.yaml`), so that every experiment stays documented
+- Run it: `igm_run +experiment=params_past_v2` ➡️ results in `outputs/params_past_v2/` (the run folder is named after the file), with a copy of the full configuration (`.hydra/config.yaml`): every run is **reproducible**.
 - All parameters and their defaults: https://igm-model.org (Modules)
 
 ---
@@ -139,7 +136,7 @@ igm_run +experiment=params inputs.oggm_shop.RGI_ID="RGI2000-v7.0-G-11-01189"
 Give an RGI v7 ID; IGM downloads (via [OGGM](https://oggm.org)) and maps to a 50 m / 100 m grid:
 
 - surface topography (Copernicus DEM)
-- ice thickness estimate (Millan et al. 2022, or consensus)
+- ice thickness estimate (Millan et al. 2022)
 - glacier outline (RGI v7)
 - observed surface velocities (Millan et al. 2022)
 - monthly climate 1901–present (GSWP3-W5E5)
@@ -171,37 +168,60 @@ clim_trend_array:
 
 # Ice-flow parameters
 
-- **Ice softness** $A$ (`arrhenius`, default 78 MPa⁻³ a⁻¹): 
-softer ice → faster deformation
-- **Basal sliding**: Weertman-type law, parametrized by
-  - `tau_ref`: basal shear stress (MPa) needed to slide at `u_ref`=100 m/yr
-  - lower `tau_ref` → more slippery bed → faster sliding
+- **Ice softness** $A$ (`arrhenius`): softer ice → faster deformation
+- **Basal sliding** (Weertman-type law): `tau_ref` = basal shear stress (MPa) needed to slide at 100 m/yr; lower `tau_ref` → more slippery bed → faster sliding
 
-Tuned so that modelled speeds match **observed** ones. In every parameter file:
+Tuned so that modelled speeds match the **observed** ones. Only the `physics` block of `iceflow` is yours:
 
 ```yaml
   iceflow:
-    unified: {network: {pretrained_path: "dahunet_edu.keras"}}   # off-line emulator
-    physics: {sliding: {tau_ref: 0.215, u_ref: 100.0}, viscosity: {arrhenius: 78.0}}
+    physics:
+      sliding:
+        tau_ref: 0.215        # explore 0.1-0.8
+      viscosity:
+        arrhenius: 78.0       # explore 30-150
+    # --- emulator settings (numerics, unified): set for you, DO NOT MODIFY ---
 ```
 
 ---
 
-# Fast runs: coarse grid and a small emulator
+<style scoped>table { font-size: 0.8em; }</style>
 
-- **Grid coarsening**: `inputs.local.coarsening.ratio: 2` ➡️ cells 2× larger (e.g. 100 m → 200 m), **4× fewer cells**, much faster runs
+# Parameters to explore (and their ranges)
+
+| Parameter | YAML key | Default | Explore | Calibrated on |
+|---|---|---|---|---|
+| Ice softness $A$ (higher = softer) | `iceflow` → `arrhenius` | 78 MPa⁻³ a⁻¹ | 30–150 | observed speeds |
+| Basal sliding (higher = less sliding) | `iceflow` → `tau_ref` | 0.215 MPa | 0.1–0.3 | observed speeds |
+| Melt (higher = more melt) | `smb` → `melt_enhancer` | 1.0 | 0.5–2 | today's extent |
+| Pre-1901 climate | `climate` → `delta_temp` | –1 °C | –2 to 0 °C | LIA maximum |
+
+One parameter at a time, one file per try!
+
+---
+
+# The ice-flow emulator `dahunet_edu`
+
+- Solving the 3D (higher-order) ice-flow equations at each time step is **expensive**
+- IGM uses instead a **convolutional neural network** :
+ maps of `thk`, `usurf`, `arrhenius`, `tau_ref` ➡️ 3D ice velocity
+- `dahunet_edu` was **trained off-line**, once and for all, on a large **catalogue of glaciers**, to reproduce the solutions of the physical equations
+- We use it **as it is** (no re-training): take it as a trusted ice-flow model for mountain glaciers at ~50–250 m resolution
+- Fast: 300 years of a mountain glacier in about a minute on CPU
+
+⚠️ **do not modify** `numerics` and `unified` in the parameter files.
+
+---
+
+# Fast runs: coarse grid
+
+**Grid coarsening**: `inputs.local.coarsening.ratio: 2` 
+
+➡️ cells 2× larger (e.g. 100 m → 200 m), **4× fewer cells**, much faster runs
   - use `ratio: 2` to **test and calibrate** (many runs)
-  - switch to `ratio: 1` to **finalize** (runs and figures of your report):
+  - switch to `ratio: 1` to **finalize** (runs and figures of your report): copy your calibrated file (e.g. `params_past_final.yaml`) and set `ratio: 1` in it
 
-```bash
-igm_run +experiment=params_past inputs.local.coarsening.ratio=1 hydra.run.dir=outputs/past_final
-```
-
-- **Emulator** `dahunet_edu`: the smallest and fastest pre-trained ice-flow network of IGM (trained on mountain glaciers)
-
-➡️ Your project: both are set **once** in `experiment/common/my_glacier.yaml`
-
-
+ 
 ---
 
 # What you get
@@ -251,11 +271,11 @@ Drag the tabs to split the screen.
 
 ```bash
 cd ~/work/my-glacier          # the folder that contains experiment/
-igm_run +experiment=params_past hydra.run.dir=outputs/past_v1
+igm_run +experiment=params_past
 ```
 
 - `+experiment=params_past` → reads `experiment/params_past.yaml`
-- `hydra.run.dir=outputs/past_v1` → **always name your run folder**: this name is how you find it in the notebook
+- Results go to `outputs/params_past/`: **the run folder has the name of the parameter file** (set at the end of each file), so a new file = a new folder
 - Stop a run: **Ctrl+C**. Recall the last command: **↑**
 
 Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `dashboard_*.png` (quick looks) and `.hydra/` (**all** parameters used).
@@ -266,15 +286,15 @@ Each run folder contains `output.nc` (maps), `output_ts.nc` (volume, area), `das
 
 ```python
 from helper import *                      # course plotting helpers (utils/helper.py)
-show_dashboard("outputs/past_v1")         # last dashboard images
-compare_runs(["outputs/past_v1", "outputs/past_v2"],
+show_dashboard("outputs/params_past")     # last dashboard images
+compare_runs(["outputs/params_past", "outputs/params_past_v2"],
              ["v1", "v2"])                 # volume and area through time
 ```
 
 - Re-run the notebook as often as you like: it only **reads** the run folders
 - Figures for the report: `plt.savefig("figures/fig_volume.png", dpi=200, bbox_inches="tight")`
 
-**Back up your work** at the end of each afternoon (Session 1, Step 4): `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → UNIL OneDrive. Run folders can always be re-created.
+**You may back up your work** at the end of each afternoon (Session 1, Step 4): `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → UNIL OneDrive. Run folders can always be re-created.
 
 ---
 
@@ -284,7 +304,7 @@ compare_runs(["outputs/past_v1", "outputs/past_v2"],
 |---|---|
 | `igm_run: command not found` | Wrong launcher/environment → use the `glamod` launcher |
 | `Parameter 'experiment' does not exist` | You are not in the folder that contains `experiment/` → `cd` there |
-| `FileNotFoundError: outputs/...` in the notebook | The run is not finished, or the folder name differs from `hydra.run.dir` |
+| `FileNotFoundError: outputs/...` in the notebook | The run is not finished, or the folder name differs from the parameter file name |
 | Kernel dies / very slow | Out of memory: restart the kernel, shorten the run, close other notebooks |
 | Data download (`oggm_shop`) fails | Retry: the server may be busy when 20 students download at once |
 
@@ -330,7 +350,7 @@ cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier
 cd ~/work/my-glacier
 ```
 
-1. Put the RGI ID of **your** glacier in `experiment/common/my_glacier.yaml` (default: Findelengletscher)
+1. Put the RGI ID of **your** glacier (`RGI_ID`) in **each** file of `experiment/` (default: Findelengletscher)
 2. Open `analysis.ipynb`, run the first cell; drag the terminal next to it
 3. **Back up** at the end of each afternoon: `cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive
 
@@ -341,12 +361,12 @@ cd ~/work/my-glacier
 ```
 my-glacier/                         ← run igm_run from HERE
 ├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
-├── run_future.sh                   Step 3: the future scenarios, one after the other
-├── run_sensitivity.sh              B2: grid of ice-flow parameters
 ├── experiment/
-│   ├── common/my_glacier.yaml      YOUR RGI ID + GRID (coarsening) + ICE FLOW, shared by all
+│   │                               (each file: YOUR RGI ID + GRID + ICE FLOW + its experiment)
+│   ├── params_present.yaml         Step 1: 1-year check run
 │   ├── params_past.yaml            Step 2: 1700-2020, climate-driven SMB
-│   ├── params_future.yaml          Step 1 (check) and 3: 2020-2100, one scenario
+│   ├── params_future.yaml          Step 3: 2020-2100, all climate scenarios
+│   ├── params_sensitivity.yaml     B2: grid of ice-flow parameters
 │   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
 │   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
 │   └── params_past_moraines.yaml   B4: past run + debris particles
@@ -359,12 +379,12 @@ my-glacier/                         ← run igm_run from HERE
 
 ```bash
 cd ~/work/my-glacier
-igm_run +experiment=params_future processes.time.end=2021 hydra.run.dir=outputs/check
+igm_run +experiment=params_present
 ```
 
 - Downloads the data (once) to `data/`, gives today's modelled speeds
 - Notebook: `plot_input_data`, `plot_climate` (area, volume, thickness, observed speeds, climate)
-- `compare_modeled_observed_velocity`: too fast / too slow? ➡️ adjust `tau_ref` or `arrhenius` in `common/my_glacier.yaml` (see B2)
+- `compare_modeled_observed_velocity`: too fast / too slow? ➡️ adjust `tau_ref` or `arrhenius` (`iceflow` block of the parameter files, see B2)
 - Compare with what you know: GLAMOS, swisstopo thickness map
 
 ---
@@ -374,12 +394,12 @@ igm_run +experiment=params_future processes.time.end=2021 hydra.run.dir=outputs/
 Trick: **start in 1700 from today's geometry**, cool the climate ➡️ LIA maximum (~1850), then retreat with the observed climate 1901–2019.
 
 ```bash
-igm_run +experiment=params_past hydra.run.dir=outputs/past_v1
+igm_run +experiment=params_past
 ```
 
-- **Explore and calibrate**, one parameter at a time, one file / folder per try (`params_past_v2` ➡️ `outputs/past_v2`):
+- **Explore and calibrate**, one parameter at a time, one file per try (`params_past_v2.yaml` ➡️ `outputs/params_past_v2/`):
   - climate/SMB: **pre-1901 `delta_temp`** (LIA maximum), **`melt_enhancer`** (today's extent)
-  - ice flow: `tau_ref`, `arrhenius` in `common/my_glacier.yaml`
+  - ice flow: `tau_ref`, `arrhenius` (`iceflow` block)
 - Validate: LIA moraines, Siegfried map, today's extent
 
 ---
@@ -388,15 +408,15 @@ igm_run +experiment=params_past hydra.run.dir=outputs/past_v1
 
 `delta_temp` is relative to **1960–1990** (`plot_climate` prints the offsets):
 - **2020**: today's offset (≈ +1.3 °C at Findelen)
-- **2100**: 1981–2010 offset **+** scenario warming (CH2018, Switzerland, ~2085 vs 1981–2010):
+- **2100**: 1981–2010 offset **+** scenario warming (CH2018):
 
 | RCP2.6 / SSP1-2.6 | RCP4.5 / SSP2-4.5 | RCP8.5 / SSP5-8.5 |
 |---|---|---|
 | ≈ +0.6 to +1.9 °C | ≈ +2.0 to +3.3 °C | ≈ +3.3 to +5.4 °C |
 
-`run_future.sh`: set your `melt_enhancer` and the 2 offsets at the top, then `bash run_future.sh` ➡️ committed (today's climate), RCP2.6, RCP4.5, RCP8.5
+In `params_future.yaml`: your `melt_enhancer`, the 2020 offset, and the 2100 values of the 4 scenarios (end of file); then `igm_run +experiment=params_future` ➡️ `outputs/params_future/0` … `3`
 
-Volume and area loss, front retreat, when does the glacier (nearly) disappear?
+Volume and area loss, front retreat: when does the glacier (nearly) disappear?
 
 ---
 
@@ -405,7 +425,7 @@ Volume and area loss, front retreat, when does the glacier (nearly) disappear?
 *(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)*
 
 ```bash
-igm_run +experiment=params_past_simple hydra.run.dir=outputs/past_simple_v1
+igm_run +experiment=params_past_simple
 ```
 
 - Past with the **ELA-based** SMB (`params_past_simple.yaml`): set today's ELA (snowline on map.geo.admin.ch, GLAMOS); LIA ELAs ≈ 100–200 m lower
@@ -417,11 +437,10 @@ igm_run +experiment=params_past_simple hydra.run.dir=outputs/past_simple_v1
 # Step 4 — Exploration B2: how well do we know the ice flow?
 
 ```bash
-bash run_sensitivity.sh        # 3 x 4 combinations of arrhenius x tau_ref, 12 short runs (≈ 3 min)
+igm_run +experiment=params_sensitivity
 ```
 
+- All combinations of the `arrhenius` × `tau_ref` values listed at the end of `params_sensitivity.yaml`: 3 × 4 = 12 one-year runs (≈ 3 min) ➡️ `outputs/params_sensitivity/0` … `11`
 - `compare_velocity_misfit`: which combination fits the observed surface speeds best?
 - Are several combinations equally good (trade-off between deformation and sliding)?
-- Redo the past or one scenario with the best one(s): how much does 2100 change?
-
-Commands and plots: `analysis.ipynb`, section 4. **Back up your work** (`my-glacier.tar.gz` → OneDrive)!
+- Redo the past or one scenario with the best one(s): how much does 2100 change? (plots: `analysis.ipynb`, section 4)

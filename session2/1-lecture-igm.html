@@ -323,6 +323,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
@@ -515,7 +517,9 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oggm-shop-module-to-retrieve-glacier-data"><code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to retrieve glacier data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-force-the-smb">Two ways to force the SMB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-parameters">Ice-flow parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid-and-a-small-emulator">Fast runs: coarse grid and a small emulator</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-to-explore-and-their-ranges">Parameters to explore (and their ranges)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ice-flow-emulator-dahunet-edu">The ice-flow emulator <code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid">Fast runs: coarse grid</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-get">What you get</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>
@@ -603,10 +607,9 @@ section.center-img p { text-align: center; }
 <li><p><strong>real data</strong>: topography, ice thickness, outlines, velocities, climate</p></li>
 <li><p>a <strong>better ice-flow model</strong> than SIA (steep, narrow valleys; sliding)</p></li>
 <li><p>a <strong>better SMB model</strong> (driven by temperature and precipitation)</p></li>
-<li><p><strong>efficiency</strong>: many runs (calibration, scenarios), on a laptop or in the cloud</p></li>
+<li><p><strong>efficiency</strong>: many runs to explore parameters (calibration, scenarios)</p></li>
 </ul>
-<p>➡️ IGM: an open-source Python model developed &#64; UNIL</p>
-<p><a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p>
+<p>➡️ IGM: an open-source Python model developed &#64; UNIL, <a class="reference external" href="https://igm-model.org">https://igm-model.org</a></p>
 <p><img alt="height:100px" src="../_images/logo_igm.png" /></p>
 </section>
 <hr class="docutils" />
@@ -617,13 +620,13 @@ section.center-img p { text-align: center; }
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="what-does-igm-solve">
 <h1>What does IGM solve?<a class="headerlink" href="#what-does-igm-solve" title="Link to this heading">#</a></h1>
-<p>Same structure as the tutorial, at each time step:</p>
+<p>Same structure as the tutorial, at each time step, on a raster grid:</p>
 <ol class="arabic simple">
 <li><p><strong>Surface mass balance</strong>: <span class="math notranslate nohighlight">\(SMB(x,y,t)\)</span> from an ELA or from climate</p></li>
-<li><p><strong>Ice flow</strong>: 3D velocity field from a higher-order ice flow approximation,
-using a <strong>convolutional neural network</strong> on a <strong>raster grid</strong>:
+<li><p><strong>Ice flow</strong>: velocity field from a higher-order ice flow approximation (no SIA),
+using a convolutional neural network / image-to-image mapping:
 <img alt="width:300px" src="../_images/igm-cnn-mapping.png" /></p></li>
-<li><p><strong>Mass conservation</strong>: <span class="math notranslate nohighlight">\(\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = SMB\)</span> using an upwind scheme.</p></li>
+<li><p><strong>Mass conservation</strong>: <span class="math notranslate nohighlight">\(\dfrac{\partial h}{\partial t} + \nabla\cdot(\bar{\mathbf{u}}\,h) = SMB\)</span>.</p></li>
 <li><p>Update time, write outputs</p></li>
 </ol>
 </section>
@@ -637,38 +640,43 @@ using a <strong>convolutional neural network</strong> on a <strong>raster grid</
 <h1>Structure of an IGM run folder<a class="headerlink" href="#structure-of-an-igm-run-folder" title="Link to this heading">#</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-glacier/                      ← run igm_run from HERE
 ├── experiment/                  PARAMETERS
-│   ├── params_past.yaml             one YAML file = one experiment
-│   └── common/                      shared settings (your glacier, grid, ice flow)
+│   └── params_past.yaml             one YAML file = one experiment
 ├── data/                        INPUTS (downloaded by oggm_shop at the first run)
 │   └── input_&lt;RGI_ID&gt;.nc            topography, thickness, velocities, climate...
-└── outputs/                     OUTPUTS: one folder per run (hydra.run.dir=...)
-    └── past_v1/
+└── outputs/                     OUTPUTS: one folder per run, named after the parameter file
+    └── params_past/
         ├── output.nc                maps through time
         ├── output_ts.nc             volume and area through time
         ├── dashboard_*.png          quick-look images
         └── .hydra/                  all parameters used (config.yaml)
 </pre></div>
 </div>
-</section>
 <hr class="docutils" />
+<style scoped>pre { font-size: 0.62em; }</style>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="a-parameter-file-experiment-params-yaml">
 <h1>A parameter file (<code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code>)<a class="headerlink" href="#a-parameter-file-experiment-params-yaml" title="Link to this heading">#</a></h1>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">common</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iceflow_offline</span><span class="w">                          </span><span class="c1"># pre-trained ice-flow emulator</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /inputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">local</span><span class="p p-Indicator">]</span><span class="w">                        </span><span class="c1"># 1) which data</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /processes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">smb</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">iceflow</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">time</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">thk</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># 2) which physics, in order</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">override /outputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">local</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">live_dashboard</span><span class="p p-Indicator">]</span><span class="w">       </span><span class="c1"># 3) which outputs</span>
 
 <span class="nt">inputs</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">local</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">coarsening</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">ratio</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span><span class="w">           </span><span class="c1"># GRID: 2 = fast tests, 1 = final runs</span>
+<span class="w">    </span><span class="nt">coarsening</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">                       </span><span class="c1"># GRID: 2 = fast tests, 1 = final runs</span>
 <span class="nt">processes</span><span class="p">:</span><span class="w">                           </span><span class="c1"># only what differs from the defaults</span>
 <span class="w">  </span><span class="nt">smb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple</span><span class="w">                   </span><span class="c1"># + the ELA history (array)</span>
 <span class="w">  </span><span class="nt">iceflow</span><span class="p">:</span><span class="w">                           </span><span class="c1"># ICE FLOW</span>
 <span class="w">    </span><span class="nt">physics</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">0.325</span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="nv">1900.0</span><span class="p p-Indicator">,</span><span class="nt"> end</span><span class="p">:</span><span class="w"> </span><span class="nv">2000.0</span><span class="p p-Indicator">,</span><span class="nt"> save</span><span class="p">:</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="nt">sliding</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.325</span>
+<span class="w">    </span><span class="c1"># + the emulator settings (set for you, do not modify)</span>
+<span class="w">  </span><span class="nt">time</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1900.0</span>
+<span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000.0</span>
+<span class="w">    </span><span class="nt">save</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
 </pre></div>
 </div>
 <p>Run it: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code></p>
@@ -677,15 +685,8 @@ using a <strong>convolutional neural network</strong> on a <strong>raster grid</
 <section class="tex2jax_ignore mathjax_ignore" id="changing-parameters">
 <h1>Changing parameters<a class="headerlink" href="#changing-parameters" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Edit the YAML file, and <strong>keep 1 file per experiment</strong> (copy it before changing it), or</p></li>
-<li><p>override from the command line, without editing the file:</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span class="w"> </span>processes.time.end<span class="o">=</span><span class="m">2050</span>
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span class="w"> </span>inputs.oggm_shop.RGI_ID<span class="o">=</span><span class="s2">&quot;RGI2000-v7.0-G-11-01189&quot;</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Results go to the folder given by <code class="docutils literal notranslate"><span class="pre">hydra.run.dir=...</span></code>, with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
+<li><p>Change parameters <strong>in the YAML file</strong>, and <strong>keep 1 file per experiment</strong>: copy it before changing it (<code class="docutils literal notranslate"><span class="pre">params_past.yaml</span></code> → <code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code>), so that every experiment stays documented</p></li>
+<li><p>Run it: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_past_v2</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code> (the run folder is named after the file), with a copy of the full configuration (<code class="docutils literal notranslate"><span class="pre">.hydra/config.yaml</span></code>): every run is <strong>reproducible</strong>.</p></li>
 <li><p>All parameters and their defaults: <a class="reference external" href="https://igm-model.org">https://igm-model.org</a> (Modules)</p></li>
 </ul>
 </section>
@@ -695,7 +696,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <p>Give an RGI v7 ID; IGM downloads (via <a class="reference external" href="https://oggm.org">OGGM</a>) and maps to a 50 m / 100 m grid:</p>
 <ul class="simple">
 <li><p>surface topography (Copernicus DEM)</p></li>
-<li><p>ice thickness estimate (Millan et al. 2022, or consensus)</p></li>
+<li><p>ice thickness estimate (Millan et al. 2022)</p></li>
 <li><p>glacier outline (RGI v7)</p></li>
 <li><p>observed surface velocities (Millan et al. 2022)</p></li>
 <li><p>monthly climate 1901–present (GSWP3-W5E5)</p></li>
@@ -730,40 +731,85 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params<span cl
 <section class="tex2jax_ignore mathjax_ignore" id="ice-flow-parameters">
 <h1>Ice-flow parameters<a class="headerlink" href="#ice-flow-parameters" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Ice softness</strong> <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, default 78 MPa⁻³ a⁻¹):
-softer ice → faster deformation</p></li>
-<li><p><strong>Basal sliding</strong>: Weertman-type law, parametrized by</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>: basal shear stress (MPa) needed to slide at <code class="docutils literal notranslate"><span class="pre">u_ref</span></code>=100 m/yr</p></li>
-<li><p>lower <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> → more slippery bed → faster sliding</p></li>
+<li><p><strong>Ice softness</strong> <span class="math notranslate nohighlight">\(A\)</span> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>): softer ice → faster deformation</p></li>
+<li><p><strong>Basal sliding</strong> (Weertman-type law): <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = basal shear stress (MPa) needed to slide at 100 m/yr; lower <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> → more slippery bed → faster sliding</p></li>
 </ul>
-</li>
-</ul>
-<p>Tuned so that modelled speeds match <strong>observed</strong> ones. In every parameter file:</p>
+<p>Tuned so that modelled speeds match the <strong>observed</strong> ones. Only the <code class="docutils literal notranslate"><span class="pre">physics</span></code> block of <code class="docutils literal notranslate"><span class="pre">iceflow</span></code> is yours:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">iceflow</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">unified</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">pretrained_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;dahunet_edu.keras&quot;</span><span class="p p-Indicator">}}</span><span class="w">   </span><span class="c1"># off-line emulator</span>
-<span class="w">    </span><span class="nt">physics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">sliding</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">0.215</span><span class="p p-Indicator">,</span><span class="nt"> u_ref</span><span class="p">:</span><span class="w"> </span><span class="nv">100.0</span><span class="p p-Indicator">},</span><span class="nt"> viscosity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">arrhenius</span><span class="p">:</span><span class="w"> </span><span class="nv">78.0</span><span class="p p-Indicator">}}</span>
+<span class="w">    </span><span class="nt">physics</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">sliding</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tau_ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.215</span><span class="w">        </span><span class="c1"># explore 0.1-0.8</span>
+<span class="w">      </span><span class="nt">viscosity</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">arrhenius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">78.0</span><span class="w">       </span><span class="c1"># explore 30-150</span>
+<span class="w">    </span><span class="c1"># --- emulator settings (numerics, unified): set for you, DO NOT MODIFY ---</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+<style scoped>table { font-size: 0.8em; }</style>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="parameters-to-explore-and-their-ranges">
+<h1>Parameters to explore (and their ranges)<a class="headerlink" href="#parameters-to-explore-and-their-ranges" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>YAML key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Explore</p></th>
+<th class="head"><p>Calibrated on</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ice softness <span class="math notranslate nohighlight">\(A\)</span> (higher = softer)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">iceflow</span></code> → <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code></p></td>
+<td><p>78 MPa⁻³ a⁻¹</p></td>
+<td><p>30–150</p></td>
+<td><p>observed speeds</p></td>
+</tr>
+<tr class="row-odd"><td><p>Basal sliding (higher = less sliding)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">iceflow</span></code> → <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code></p></td>
+<td><p>0.215 MPa</p></td>
+<td><p>0.1–0.3</p></td>
+<td><p>observed speeds</p></td>
+</tr>
+<tr class="row-even"><td><p>Melt (higher = more melt)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">smb</span></code> → <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
+<td><p>1.0</p></td>
+<td><p>0.5–2</p></td>
+<td><p>today’s extent</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-1901 climate</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">climate</span></code> → <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></p></td>
+<td><p>–1 °C</p></td>
+<td><p>–2 to 0 °C</p></td>
+<td><p>LIA maximum</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>One parameter at a time, one file per try!</p>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="fast-runs-coarse-grid-and-a-small-emulator">
-<h1>Fast runs: coarse grid and a small emulator<a class="headerlink" href="#fast-runs-coarse-grid-and-a-small-emulator" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="the-ice-flow-emulator-dahunet-edu">
+<h1>The ice-flow emulator <code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code><a class="headerlink" href="#the-ice-flow-emulator-dahunet-edu" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Grid coarsening</strong>: <code class="docutils literal notranslate"><span class="pre">inputs.local.coarsening.ratio:</span> <span class="pre">2</span></code> ➡️ cells 2× larger (e.g. 100 m → 200 m), <strong>4× fewer cells</strong>, much faster runs</p>
-<ul>
+<li><p>Solving the 3D (higher-order) ice-flow equations at each time step is <strong>expensive</strong></p></li>
+<li><p>IGM uses instead a <strong>convolutional neural network</strong> :
+maps of <code class="docutils literal notranslate"><span class="pre">thk</span></code>, <code class="docutils literal notranslate"><span class="pre">usurf</span></code>, <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> ➡️ 3D ice velocity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code> was <strong>trained off-line</strong>, once and for all, on a large <strong>catalogue of glaciers</strong>, to reproduce the solutions of the physical equations</p></li>
+<li><p>We use it <strong>as it is</strong> (no re-training): take it as a trusted ice-flow model for mountain glaciers at ~50–250 m resolution</p></li>
+<li><p>Fast: 300 years of a mountain glacier in about a minute on CPU</p></li>
+</ul>
+<p>⚠️ <strong>do not modify</strong> <code class="docutils literal notranslate"><span class="pre">numerics</span></code> and <code class="docutils literal notranslate"><span class="pre">unified</span></code> in the parameter files.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="fast-runs-coarse-grid">
+<h1>Fast runs: coarse grid<a class="headerlink" href="#fast-runs-coarse-grid" title="Link to this heading">#</a></h1>
+<p><strong>Grid coarsening</strong>: <code class="docutils literal notranslate"><span class="pre">inputs.local.coarsening.ratio:</span> <span class="pre">2</span></code></p>
+<p>➡️ cells 2× larger (e.g. 100 m → 200 m), <strong>4× fewer cells</strong>, much faster runs</p>
+<ul class="simple">
 <li><p>use <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">2</span></code> to <strong>test and calibrate</strong> (many runs)</p></li>
-<li><p>switch to <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code> to <strong>finalize</strong> (runs and figures of your report):</p></li>
+<li><p>switch to <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code> to <strong>finalize</strong> (runs and figures of your report): copy your calibrated file (e.g. <code class="docutils literal notranslate"><span class="pre">params_past_final.yaml</span></code>) and set <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code> in it</p></li>
 </ul>
-</li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>inputs.local.coarsening.ratio<span class="o">=</span><span class="m">1</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_final
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Emulator</strong> <code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code>: the smallest and fastest pre-trained ice-flow network of IGM (trained on mountain glaciers)</p></li>
-</ul>
-<p>➡️ Your project: both are set <strong>once</strong> in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="what-you-get">
@@ -824,12 +870,12 @@ softer ice → faster deformation</p></li>
 <section class="tex2jax_ignore mathjax_ignore" id="run-igm-in-the-terminal">
 <h1>Run IGM in the terminal<a class="headerlink" href="#run-igm-in-the-terminal" title="Link to this heading">#</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/my-glacier<span class="w">          </span><span class="c1"># the folder that contains experiment/</span>
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_v1
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">+experiment=params_past</span></code> → reads <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hydra.run.dir=outputs/past_v1</span></code> → <strong>always name your run folder</strong>: this name is how you find it in the notebook</p></li>
+<li><p>Results go to <code class="docutils literal notranslate"><span class="pre">outputs/params_past/</span></code>: <strong>the run folder has the name of the parameter file</strong> (set at the end of each file), so a new file = a new folder</p></li>
 <li><p>Stop a run: <strong>Ctrl+C</strong>. Recall the last command: <strong>↑</strong></p></li>
 </ul>
 <p>Each run folder contains <code class="docutils literal notranslate"><span class="pre">output.nc</span></code> (maps), <code class="docutils literal notranslate"><span class="pre">output_ts.nc</span></code> (volume, area), <code class="docutils literal notranslate"><span class="pre">dashboard_*.png</span></code> (quick looks) and <code class="docutils literal notranslate"><span class="pre">.hydra/</span></code> (<strong>all</strong> parameters used).</p>
@@ -838,8 +884,8 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <section class="tex2jax_ignore mathjax_ignore" id="look-at-the-results-in-a-notebook">
 <h1>Look at the results in a notebook<a class="headerlink" href="#look-at-the-results-in-a-notebook" title="Link to this heading">#</a></h1>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">helper</span> <span class="kn">import</span> <span class="o">*</span>                      <span class="c1"># course plotting helpers (utils/helper.py)</span>
-<span class="n">show_dashboard</span><span class="p">(</span><span class="s2">&quot;outputs/past_v1&quot;</span><span class="p">)</span>         <span class="c1"># last dashboard images</span>
-<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/past_v1&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/past_v2&quot;</span><span class="p">],</span>
+<span class="n">show_dashboard</span><span class="p">(</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">)</span>     <span class="c1"># last dashboard images</span>
+<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/params_past_v2&quot;</span><span class="p">],</span>
              <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>                 <span class="c1"># volume and area through time</span>
 </pre></div>
 </div>
@@ -847,7 +893,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <li><p>Re-run the notebook as often as you like: it only <strong>reads</strong> the run folders</p></li>
 <li><p>Figures for the report: <code class="docutils literal notranslate"><span class="pre">plt.savefig(&quot;figures/fig_volume.png&quot;,</span> <span class="pre">dpi=200,</span> <span class="pre">bbox_inches=&quot;tight&quot;)</span></code></p></li>
 </ul>
-<p><strong>Back up your work</strong> at the end of each afternoon (Session 1, Step 4): <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → UNIL OneDrive. Run folders can always be re-created.</p>
+<p><strong>You may back up your work</strong> at the end of each afternoon (Session 1, Step 4): <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → UNIL OneDrive. Run folders can always be re-created.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="when-something-goes-wrong">
@@ -866,7 +912,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <td><p>You are not in the folder that contains <code class="docutils literal notranslate"><span class="pre">experiment/</span></code> → <code class="docutils literal notranslate"><span class="pre">cd</span></code> there</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError:</span> <span class="pre">outputs/...</span></code> in the notebook</p></td>
-<td><p>The run is not finished, or the folder name differs from <code class="docutils literal notranslate"><span class="pre">hydra.run.dir</span></code></p></td>
+<td><p>The run is not finished, or the folder name differs from the parameter file name</p></td>
 </tr>
 <tr class="row-odd"><td><p>Kernel dies / very slow</p></td>
 <td><p>Out of memory: restart the kernel, shorten the run, close other notebooks</p></td>
@@ -953,7 +999,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>Put the RGI ID of <strong>your</strong> glacier in <code class="docutils literal notranslate"><span class="pre">experiment/common/my_glacier.yaml</span></code> (default: Findelengletscher)</p></li>
+<li><p>Put the RGI ID of <strong>your</strong> glacier (<code class="docutils literal notranslate"><span class="pre">RGI_ID</span></code>) in <strong>each</strong> file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code> (default: Findelengletscher)</p></li>
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, run the first cell; drag the terminal next to it</p></li>
 <li><p><strong>Back up</strong> at the end of each afternoon: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → OneDrive</p></li>
 </ol>
@@ -963,12 +1009,12 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <h1>The template: <code class="docutils literal notranslate"><span class="pre">my-glacier/</span></code><a class="headerlink" href="#the-template-my-glacier" title="Link to this heading">#</a></h1>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-glacier/                         ← run igm_run from HERE
 ├── analysis.ipynb                  notebook: plots, figures, run log = your lab book
-├── run_future.sh                   Step 3: the future scenarios, one after the other
-├── run_sensitivity.sh              B2: grid of ice-flow parameters
 ├── experiment/
-│   ├── common/my_glacier.yaml      YOUR RGI ID + GRID (coarsening) + ICE FLOW, shared by all
+│   │                               (each file: YOUR RGI ID + GRID + ICE FLOW + its experiment)
+│   ├── params_present.yaml         Step 1: 1-year check run
 │   ├── params_past.yaml            Step 2: 1700-2020, climate-driven SMB
-│   ├── params_future.yaml          Step 1 (check) and 3: 2020-2100, one scenario
+│   ├── params_future.yaml          Step 3: 2020-2100, all climate scenarios
+│   ├── params_sensitivity.yaml     B2: grid of ice-flow parameters
 │   ├── params_past_simple.yaml     B1: 1700-2020, ELA-based SMB
 │   ├── params_response_time.yaml   B3: oscillating ELA (your own module in user/)
 │   └── params_past_moraines.yaml   B4: past run + debris particles
@@ -980,13 +1026,13 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<sp
 <section class="tex2jax_ignore mathjax_ignore" id="step-1-present-check-the-initial-state">
 <h1>Step 1 — Present: check the initial state<a class="headerlink" href="#step-1-present-check-the-initial-state" title="Link to this heading">#</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/my-glacier
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<span class="w"> </span>processes.time.end<span class="o">=</span><span class="m">2021</span><span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/check
+igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_present
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Downloads the data (once) to <code class="docutils literal notranslate"><span class="pre">data/</span></code>, gives today’s modelled speeds</p></li>
 <li><p>Notebook: <code class="docutils literal notranslate"><span class="pre">plot_input_data</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> (area, volume, thickness, observed speeds, climate)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>: too fast / too slow? ➡️ adjust <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> or <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> in <code class="docutils literal notranslate"><span class="pre">common/my_glacier.yaml</span></code> (see B2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compare_modeled_observed_velocity</span></code>: too fast / too slow? ➡️ adjust <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> or <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> (<code class="docutils literal notranslate"><span class="pre">iceflow</span></code> block of the parameter files, see B2)</p></li>
 <li><p>Compare with what you know: GLAMOS, swisstopo thickness map</p></li>
 </ul>
 </section>
@@ -994,14 +1040,14 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 <section class="tex2jax_ignore mathjax_ignore" id="step-2-past-from-the-lia-to-today">
 <h1>Step 2 — Past: from the LIA to today<a class="headerlink" href="#step-2-past-from-the-lia-to-today" title="Link to this heading">#</a></h1>
 <p>Trick: <strong>start in 1700 from today’s geometry</strong>, cool the climate ➡️ LIA maximum (~1850), then retreat with the observed climate 1901–2019.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_v1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><strong>Explore and calibrate</strong>, one parameter at a time, one file / folder per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/past_v2</span></code>):</p>
+<li><p><strong>Explore and calibrate</strong>, one parameter at a time, one file per try (<code class="docutils literal notranslate"><span class="pre">params_past_v2.yaml</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_past_v2/</span></code>):</p>
 <ul>
 <li><p>climate/SMB: <strong>pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></strong> (LIA maximum), <strong><code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></strong> (today’s extent)</p></li>
-<li><p>ice flow: <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> in <code class="docutils literal notranslate"><span class="pre">common/my_glacier.yaml</span></code></p></li>
+<li><p>ice flow: <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> (<code class="docutils literal notranslate"><span class="pre">iceflow</span></code> block)</p></li>
 </ul>
 </li>
 <li><p>Validate: LIA moraines, Siegfried map, today’s extent</p></li>
@@ -1013,7 +1059,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 <p><code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> is relative to <strong>1960–1990</strong> (<code class="docutils literal notranslate"><span class="pre">plot_climate</span></code> prints the offsets):</p>
 <ul class="simple">
 <li><p><strong>2020</strong>: today’s offset (≈ +1.3 °C at Findelen)</p></li>
-<li><p><strong>2100</strong>: 1981–2010 offset <strong>+</strong> scenario warming (CH2018, Switzerland, ~2085 vs 1981–2010):</p></li>
+<li><p><strong>2100</strong>: 1981–2010 offset <strong>+</strong> scenario warming (CH2018):</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1030,14 +1076,14 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 </tbody>
 </table>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">run_future.sh</span></code>: set your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> and the 2 offsets at the top, then <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">run_future.sh</span></code> ➡️ committed (today’s climate), RCP2.6, RCP4.5, RCP8.5</p>
-<p>Volume and area loss, front retreat, when does the glacier (nearly) disappear?</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>: your <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, the 2020 offset, and the 2100 values of the 4 scenarios (end of file); then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_future</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_future/0</span></code> … <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+<p>Volume and area loss, front retreat: when does the glacier (nearly) disappear?</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="step-4-exploration-b1-does-the-smb-model-matter">
 <h1>Step 4 — Exploration B1: does the SMB model matter?<a class="headerlink" href="#step-4-exploration-b1-does-the-smb-model-matter" title="Link to this heading">#</a></h1>
 <p><em>(choose ≥ 1 exploration in total, B1–B4; B3–B4 in Session 3)</em></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple<span class="w"> </span>hydra.run.dir<span class="o">=</span>outputs/past_simple_v1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
 </div>
 <ul class="simple">
@@ -1049,15 +1095,15 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="step-4-exploration-b2-how-well-do-we-know-the-ice-flow">
 <h1>Step 4 — Exploration B2: how well do we know the ice flow?<a class="headerlink" href="#step-4-exploration-b2-how-well-do-we-know-the-ice-flow" title="Link to this heading">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>run_sensitivity.sh<span class="w">        </span><span class="c1"># 3 x 4 combinations of arrhenius x tau_ref, 12 short runs (≈ 3 min)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_sensitivity
 </pre></div>
 </div>
 <ul class="simple">
+<li><p>All combinations of the <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> × <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> values listed at the end of <code class="docutils literal notranslate"><span class="pre">params_sensitivity.yaml</span></code>: 3 × 4 = 12 one-year runs (≈ 3 min) ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_sensitivity/0</span></code> … <code class="docutils literal notranslate"><span class="pre">11</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">compare_velocity_misfit</span></code>: which combination fits the observed surface speeds best?</p></li>
 <li><p>Are several combinations equally good (trade-off between deformation and sliding)?</p></li>
-<li><p>Redo the past or one scenario with the best one(s): how much does 2100 change?</p></li>
+<li><p>Redo the past or one scenario with the best one(s): how much does 2100 change? (plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4)</p></li>
 </ul>
-<p>Commands and plots: <code class="docutils literal notranslate"><span class="pre">analysis.ipynb</span></code>, section 4. <strong>Back up your work</strong> (<code class="docutils literal notranslate"><span class="pre">my-glacier.tar.gz</span></code> → OneDrive)!</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1138,7 +1184,9 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_future<
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oggm-shop-module-to-retrieve-glacier-data"><code class="docutils literal notranslate"><span class="pre">oggm_shop</span></code> module to retrieve glacier data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-force-the-smb">Two ways to force the SMB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-parameters">Ice-flow parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid-and-a-small-emulator">Fast runs: coarse grid and a small emulator</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-to-explore-and-their-ranges">Parameters to explore (and their ranges)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ice-flow-emulator-dahunet-edu">The ice-flow emulator <code class="docutils literal notranslate"><span class="pre">dahunet_edu</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-runs-coarse-grid">Fast runs: coarse grid</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-get">What you get</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results-live-dashboard-module">Visualizing results: <code class="docutils literal notranslate"><span class="pre">live_dashboard</span></code> module</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#back-in-renkulab">Back in RenkuLab</a></li>

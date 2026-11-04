@@ -320,6 +320,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="../../session2/my-glacier/analysis.html">My glacier — analysis notebook (mini-project)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
@@ -537,7 +539,7 @@
 </div>
 <section id="the-run">
 <h2>1. The run<a class="headerlink" href="#the-run" title="Link to this heading">#</a></h2>
-<p>Terminal: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span> <span class="pre">hydra.run.dir=outputs/run_v1</span></code></p>
+<p>Terminal: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params/</span></code> (the run folder has the name of the parameter file)</p>
 <p>The SMB profile (ELA 2900 m), then the run:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -548,7 +550,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/run_v1&quot;</span>          <span class="c1"># &lt;- the run you want to look at</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/params&quot;</span>          <span class="c1"># &lt;- the run you want to look at</span>
 <span class="n">show_dashboard</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">analyze_time_series</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output_ts.nc&quot;</span><span class="p">))</span>
 </pre></div>
@@ -588,11 +590,11 @@
 </div>
 <section id="compare-your-calibration-runs">
 <h3>Compare your calibration runs<a class="headerlink" href="#compare-your-calibration-runs" title="Link to this heading">#</a></h3>
-<p>Terminal: copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>, change it, then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_v2</span> <span class="pre">hydra.run.dir=outputs/run_v2</span></code></p>
+<p>Terminal: copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>, change it, then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_v2</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_v2/</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/run_v1&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/run_v2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>
-<span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="s2">&quot;outputs/run_v2/output.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/params_v2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>
+<span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="s2">&quot;outputs/params_v2/output.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

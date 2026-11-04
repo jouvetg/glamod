@@ -47,9 +47,8 @@ mont-mine/                       ← run igm_run from HERE
 ├── Samples_2024.csv             sample sites (ID, CH1903 x/y, UTM32 x/y)
 ├── Samples_XXXX.csv             a second set of sample sites (19FER...)
 ├── experiment/
-│   ├── params.yaml              1700-2024, ELA-based SMB
-│   └── common/iceflow_offline.yaml   ice-flow emulator (do not touch)
-└── outputs/, data/              created by IGM
+│   └── params.yaml              1700-2024, ELA-based SMB (+ ice flow, emulator, run folder)
+└── outputs/, data/              created by IGM (outputs/params/ = run of params.yaml)
 ```
 
 Same tools as before: **YAML** (parameters) + **terminal** (runs) + **notebook** (plots)
@@ -76,10 +75,10 @@ $$SMB(z) = \beta\,(z - z_{ELA}), \quad \beta = \texttt{gradabl} \text{ below},\ 
 
 ```bash
 cd ~/work/glamod/session4/mont-mine
-igm_run +experiment=params hydra.run.dir=outputs/run_v1
+igm_run +experiment=params
 ```
 
-- The first run downloads the data (≈ 1 min), then runs 1700–2024 (a few minutes)
+- The first run downloads the data (≈ 1 min), then runs 1700–2024 (a few minutes) ➡️ `outputs/params/`
 - Notebook, section 1: the SMB profile, the dashboard, volume and area through time
 
 ---
@@ -98,10 +97,10 @@ Enter the **measured ages** in `ages` (calendar years, or years before 2024) to 
 
 # Step 3 — Calibration: your turn!
 
-Copy `experiment/params.yaml` (e.g. `params_v2.yaml`), change **one thing at a time**, run into a new folder:
+Copy `experiment/params.yaml` (e.g. `params_v2.yaml`), change **one thing at a time**, run it (➡️ `outputs/params_v2/`):
 
 ```bash
-igm_run +experiment=params_v2 hydra.run.dir=outputs/run_v2
+igm_run +experiment=params_v2
 ```
 
 1. **ELA history**: when and how low is the LIA maximum? How fast does the ELA rise afterwards?
