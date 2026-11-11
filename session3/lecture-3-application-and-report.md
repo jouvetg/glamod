@@ -26,18 +26,16 @@ Guillaume Jouvet
 
 ---
 
-<style scoped>section { font-size: 1.6em; }</style>
-
 # Part 1 — Goals of your mini-project
 
 **Main question**: how did *your* glacier evolve since the Little Ice Age, and how will it evolve until 2100?
 
-1. **Present**: is the model state realistic today? ( speed vs. observations)
-2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? → calibration / validation with moraines, old maps, recorded GLAMOS length changes
-3. **Future**: glacier evolution 2020–2100 under climate scenarios (e.g. RCP 2.6 ≈ +1.5°C, RCP 4.5 ≈ +2.5°C, RCP 8.5 ≈ +4.5°C), or no warming (committed loss).
+1. **Present**: is the model state realistic today? (speeds vs. observations)
+2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? (moraines, old maps, GLAMOS length changes)
+3. **Future**: 2020–2100 under climate scenarios (RCP 2.6, 4.5, 8.5).
 
-➡️ **Session 2, basic workflow** : one model of your glacier, calibrated on the speeds and on the past, used for the future
-➡️ **Session 3, experiment deepening**
+➡️ **Session 2, basic workflow**: a calibrated model of your glacier, used for the future
+➡️ **Session 3, experiment deepening**: LIA extent, then response time, moraines
 
 ---
 
@@ -49,7 +47,7 @@ Guillaume Jouvet
 | No LIA advance / too large | colder / warmer pre-1901 `delta_temp` (`clim_trend_array`) |
 | Glacier grows without limit / disappears | more / less melt: `melt_enhancer` |
 
-- **One parameter at a time**, keep your calibrated values in the ✅ boxes of `tutorial.ipynb`; no perfect fit: **discuss** the mismatch
+- **One parameter at a time**, keep your calibrated values; do not expect perfect fit, **discuss** the mismatch in the report anyway
 - Tests with `ratio: 2`, **final runs with `ratio: 1`**
 
 ---
@@ -57,11 +55,8 @@ Guillaume Jouvet
  
 # Part 2 — Experiment deepening
 
-| | Question | |
-|---|---|---|
-| **D1** | **LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past | **everyone, first** |
-| **D2** | **Response time**: how fast does your glacier react? | additional topics, |
-| **D3** | **Moraines**: where does the debris go? (particles; if relevant) | if time allows |
+1. **First, everyone — fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
+2. **Then, if time allows — extensions**: **response time**, **moraines**, or one of the other questions (optional extensions, later)
 
 Keep working in **your** `~/work/my-glacier` (from Session 2). Just update the course material and add the Session 3 notebook to it:
 
@@ -72,7 +67,22 @@ cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
 
 ---
 
-# D1 — LIA extent: the data
+# The Little Ice Age (LIA) in the Alps
+
+![width:1100px](fig/lia-temperature.png)
+
+- ~1300–1860: cooler summers (~0.5–1 °C) ➡️ repeated glacier advances, last maximum **~1850**
+- Since then: retreat, accelerating since the 1980s; the LIA moraines mark the 1850 extent
+
+---
+
+# After the LIA: the Rhone Glacier from Gletsch
+
+![height:520px](fig/rhone-gletsch-1856-2008.png)
+
+---
+
+# LIA extent: the data
 
 The LIA maximum (~1850) is the best-documented past state: **moraines**, first topographic maps
 
@@ -83,7 +93,7 @@ The LIA maximum (~1850) is the best-documented past state: **moraines**, first t
 
 ---
 
-# D1 — LIA extent: calibrate the past
+# LIA extent: calibrate the past
 
 ![bg right:42% contain](fig/lia-extent-rhone.png)
 
@@ -98,9 +108,9 @@ Rhone, `melt_enhancer` 0.8: the front goes **too far**
 
 ---
 
-# D2 — Response time
+# Response time
 
-To test the glacier response time, this is done with an  IGM user module for the SMB (instead of the default existing used so far): in `smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
+The response time is tested with an IGM **user module** for the SMB (instead of the built-in SMB used so far), `smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
 
 ```python
 def update(cfg, state):                        # called at each time step
@@ -116,7 +126,7 @@ igm_run +experiment=params_response_time
 
 ---
 
-# D2 — Response time: example (Rhone Glacier)
+# Response time: example (Rhone Glacier)
 
 ![height:250px](fig/response-time-rhone.png)
 
@@ -125,7 +135,7 @@ igm_run +experiment=params_response_time
 
 ---
 
-# D2 — Response time: what to do
+# Response time: what to do
 
 1. **Find the response time** from the lag: $\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)$ (first-order glacier, printed by `plot_response_time`)
 2. **Test other periods** $P$ (50 … 800 yr, run 2 periods): lag and amplitude? Compare $\tau$ with the theory $\tau \approx H/(-b_{terminus})$ (Lecture 1a)
@@ -134,42 +144,35 @@ igm_run +experiment=params_response_time
 
 ---
 
-# D3 — Moraines: tracking debris with particles
+# Moraines: tracking debris with particles
 
 ![width:1000px](fig/particles-rhone.png)
 
 Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) 
 
-➡️ You may add passive "particles" on the top of the simulation to simulate production and advection of supraglacial debris (use `particle` IGM module).
+➡️ Passive "particles" can be added on top of the simulation to model the supply and transport of supraglacial debris (IGM module `particles`).
 
 ---
 
-# D3 — Moraines: reproduce the LIA moraines
-
-```bash
-igm_run +experiment=params_past_moraines
-```
+# Moraines: reproduce the LIA moraines
 
 ![bg right:38% contain](fig/moraines-rhone.png)
 
-<style scoped>section { font-size: 1.5em; }</style>
+Retreat after 1850: debris left on ice-free terrain ➡️ **modelled LIA moraines**
 
-Glacier retreat after ~1850: debris left on ice-free terrain ➡️ **modelled LIA moraines**
+- Run `params_past_moraines`, then `plot_moraines`
+- Compare with **aerial photos / relief** (map.geo.admin.ch)
+- **Controls**: `seeding`, calibration of the past
+- Limits: debris comes from rock walls; moraine building not modelled
 
-- `plot_moraines(run, INPUT, year=2020)`: debris (orange), 1850 outline (red), today (black)
-- Compare with **aerial photos / relief** (map.geo.admin.ch): lateral and frontal moraines
-- **Controls**: `seeding` (`method`, `frequency`, `density`), calibration of the past (D1)
-- Limits: debris really comes from rock walls; moraine building not modelled
 ---
 
-<style scoped>section { font-size: 1.6em; }</style>
-
-# C. Extensions (optional, discuss them with us first)
+# Optional extensions
 
 - **Climate controls**: what are the main controls of the future evolution? Can a warming of +1 °C be compensated by more precipitation? If so, by how much?
 - **Committed loss**: if today's climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?
 - **Disconnection and lakes**: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (`topg`)?
-- **Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it therefore survive longer than a clean glacier?
+- **Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it therefore survive longer than a clean glacier? Can this hypothesis be tested?
 - **Society**: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?
 
 ---
@@ -187,7 +190,7 @@ Glacier retreat after ~1850: debris left on ice-free terrain ➡️ **modelled L
 # Part 3 — The report
 
 - **≤ 1500 words** (excluding captions and references), PDF
-- Written like a short scientific paper, such as (suggestion -- not a strict rule)
+- Written like a short scientific paper, for instance with this structure (a suggestion, not a strict rule):
 
 1. **Introduction**: why model glaciers? state of knowledge, your research question(s)
 2. **Study site**: location, characteristics, history, available observations
@@ -201,11 +204,11 @@ Glacier retreat after ~1850: debris left on ice-free terrain ➡️ **modelled L
 # Figures convey your results
 
 - Typical figures: map of the glacier (thickness/speed) at key dates, **time series** of ice volume, **flowline profiles**, model vs. observations
-- Every figure: axes with units, legend, readable font, a caption that says what to see
+- Every figure: axes with units, legend, readable font, a caption
 - Compare model with **observations** whenever possible (LIA extent, GLAMOS length changes, observed speeds)
-- Fewer, better figures (4–6 is a good number)
-
-Inspiration: Jouvet et al. (2011) https://doi.org/10.3189/002214311798843359 — https://doi.org/10.3189/2013AoG63A434
+- Fewer, better figures (4–6 is a good number): make a selection, do not show results you do not discuss. Quality over quantity
+- Customise your figures by adapting the provided plotting functions (`utils/helper.py`)
+- Get inspired by the figures of published papers, e.g. https://doi.org/10.3189/2013AoG63A434
 
 ---
 
@@ -215,34 +218,16 @@ Inspiration: Jouvet et al. (2011) https://doi.org/10.3189/002214311798843359 —
 - Main sources of uncertainty: initial ice thickness, SMB/climate forcing, sliding, starting from today's geometry for the past, 100 m resolution, ...
 - Does the model reproduce the observations? If not, why?
 - What would you do with more time/data?
-
----
-
-# Evaluation
-
-| Criterion | Weight |
-|---|---|
-| A. Research question, context, literature | 25% |
-| B. Modelling tools and numerical experiments | 25% |
-| C. Results and discussion | 25% |
-| D. Form and quality (structure, figures, writing) | 10% |
-| Handed in on time | |
-
-Deadline: **to be announced**. Questions? Ask the assistant during the project hours.
-
-<!-- TEACHER NOTE: weights taken from 2025 AGRADING.md (sum = 85%); confirm the remaining 15% (on-time / oral?) and the deadline. -->
-
+ 
 ---
 
 # Now: work on your project
 
-Checklist for today:
-- [ ] Basic workflow done on your glacier (Session 2)
-- [ ] D1: past compared with the 1850 extent, calibration refined, future redone if needed
-- [ ] If time allows: D2 (response time) and/or D3 (moraines)
-- [ ] Figures drafted
-- [ ] Report outline written
+Today:
+- Finish the basic workflow on your glacier (Session 2)
+- Fine-tune the calibration of the past with the 1850 extent, then re-run the future scenarios
+- If time allows: response time, moraines, or other extensions
+- Draft your figures
+- Start your report (outline, study site, methods)
 
-`~/work/my-glacier/` (your copy: YAML + terminal + `tutorial.ipynb`, `tutorial-session3.ipynb`)
-
-**Back up** at the end of each afternoon (`cd ~/work && tar czf my-glacier.tar.gz --exclude=outputs --exclude=data my-glacier` → *Download* → OneDrive): RenkuLab sessions are not permanent storage. Data problem? Delete `data/input_<RGI_ID>.nc` and run again.
+Work in `~/work/my-glacier/`. 
