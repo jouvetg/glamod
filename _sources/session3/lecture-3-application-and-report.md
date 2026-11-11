@@ -58,11 +58,12 @@ Guillaume Jouvet
 1. **First, fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
 2. **Then, work on optional extensions**: **A) response time**, **B) moraines**, or one of the other questions (C–G)
 
-Keep working in **your** `~/work/my-glacier` (from Session 2). Just update the course material and add the Session 3 notebook to it:
+Follow **`tutorial.ipynb`, sections 6–8** (Session 3 part). Keep working in **your** `~/work/my-glacier`; update the course material and the notebook (your Session 2 notebook is kept as `tutorial-session2.ipynb`):
 
 ```bash
 cd ~/work/glamod && git pull
-cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
+cd ~/work/my-glacier && mv tutorial.ipynb tutorial-session2.ipynb
+cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
 ```
 
 ---

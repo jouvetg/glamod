@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modelling a glacier with IGM — Session 2: the basic workflow &#8212; Glacier Modelling course</title>
+    <title>Modelling a glacier with IGM — tutorial (Sessions 2 and 3) &#8212; Glacier Modelling course</title>
   
   
   
@@ -60,6 +60,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session2/my-glacier/tutorial';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -324,7 +326,8 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling a glacier with IGM — Session 2: the basic workflow</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling a glacier with IGM — tutorial (Sessions 2 and 3)</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
@@ -348,7 +351,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../../session3/tutorial-session3.html">Modelling a glacier with IGM — Session 3: experiment deepening</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -498,7 +500,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modelling a glacier with IGM — Session 2: the basic workflow</h1>
+    <h1>Modelling a glacier with IGM — tutorial (Sessions 2 and 3)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -508,12 +510,22 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling a glacier with IGM — tutorial (Sessions 2 and 3)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-download-the-data-and-check-the-initial-state">1. Present: download the data and check the initial state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ice-flow-parameters">2. Calibration of the ice-flow parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today-calibration-of-the-smb">3. Past: from the Little Ice Age to today — calibration of the SMB</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-climate-scenarios-20202100">4. Future: climate scenarios 2020–2100</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one">5. Retrieving the ELA history: a simple SMB model fitted to the complex one</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#session-3-experiment-deepening">Session 3: experiment deepening</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past">6. The Little Ice Age extent: a closer calibration of the past</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-a-response-time-your-own-igm-module">7. Extension A — Response time: your own IGM module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-b-moraines-reproduce-the-lia-moraines">8. Extension B — Moraines: reproduce the LIA moraines</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -524,10 +536,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="modelling-a-glacier-with-igm-session-2-the-basic-workflow">
-<h1>Modelling a glacier with IGM — Session 2: the basic workflow<a class="headerlink" href="#modelling-a-glacier-with-igm-session-2-the-basic-workflow" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="modelling-a-glacier-with-igm-tutorial-sessions-2-and-3">
+<h1>Modelling a glacier with IGM — tutorial (Sessions 2 and 3)<a class="headerlink" href="#modelling-a-glacier-with-igm-tutorial-sessions-2-and-3" title="Link to this heading">#</a></h1>
 <p>This tutorial carries out a series of <strong>numerical experiments with IGM</strong> on the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Rhone_Glacier">Rhone Glacier</a></strong> (Valais, ~15 km², the source of the Rhone river; RGI ID <code class="docutils literal notranslate"><span class="pre">RGI2000-v7.0-G-11-01706</span></code>, set by default in all parameter files). Step by step, you go through the <strong>basic workflow</strong> of a glacier modelling study: check the data, calibrate the ice flow on the observed speeds, calibrate the melt on the past evolution, project the glacier until 2100, and retrieve the ELA history that explains its evolution.</p>
-<p>It is the <strong>basis of your mini-project</strong>: once you have gone through it with the Rhone Glacier, <strong>migrate to your own glacier</strong> (put its RGI ID in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>) and redo the same steps, still in Session 2. Session 3 then deepens some aspects of your glacier (LIA extent, response time, moraines): <code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>.</p>
+<p>It is the <strong>basis of your mini-project</strong>: once you have gone through it with the Rhone Glacier, <strong>migrate to your own glacier</strong> (put its RGI ID in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>) and redo the same steps, still in Session 2. Session 3 then deepens some experiments on your glacier (LIA extent, response time, moraines): <strong>second part of this notebook</strong> (sections 6–8).</p>
 <p><strong>Follow this notebook from top to bottom.</strong> It lives in <strong>your own copy</strong> of the template, <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (copied once from <code class="docutils literal notranslate"><span class="pre">~/work/glamod/session2/my-glacier/</span></code>). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -548,13 +560,19 @@
 </tbody>
 </table>
 </div>
-<p>Steps:</p>
+<p><strong>Session 2 — the basic workflow</strong> (sections 1–5):</p>
 <ol class="arabic simple">
 <li><p><strong>Present</strong>: download the data, check the initial state</p></li>
 <li><p><strong>Calibration of the ice-flow parameters</strong> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) on the observed speeds</p></li>
 <li><p><strong>Past</strong>: Little Ice Age → today, <strong>calibration of the SMB</strong> (<code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>)</p></li>
 <li><p><strong>Future</strong>: climate scenarios 2020–2100</p></li>
 <li><p><strong>Retrieving the ELA history</strong>: a simple (ELA-based) SMB model fitted to the complex one</p></li>
+</ol>
+<p><strong>Session 3 — experiment deepening</strong> (sections 6–8, further down, after the line <em>Session 3</em>):</p>
+<ol class="arabic simple" start="6">
+<li><p><strong>The Little Ice Age extent</strong> (<strong>everyone</strong>): a closer calibration of the past</p></li>
+<li><p><strong>Extension A — the response time</strong>: your own IGM module</p></li>
+<li><p><strong>Extension B — the moraines</strong>: debris particles</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -697,7 +715,7 @@
 <h2>5. Retrieving the ELA history: a simple SMB model fitted to the complex one<a class="headerlink" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one" title="Link to this heading">#</a></h2>
 <p><strong>Why?</strong> The climate-driven SMB hides many processes (temperature, precipitation, melt factors). Here we take a simpler approach: we prescribe the <strong>ELA directly</strong>. This forces us to think about <strong>which ELAs must have prevailed</strong> to drive the glacier evolution we observe (LIA advance, then retreat).</p>
 <p><strong>Goal</strong>: try to reproduce the volume curve of your calibrated past run (section 3) by playing with the ELAs (and gradients) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA: end-of-summer snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS; LIA ELAs ≈ 100–200 m lower).</p>
-<p><strong>Difficulty</strong>: a glacier does not react immediately. It has a <strong>response time</strong>: after an ELA change, it takes years to decades to adjust its geometry. So the ELA must change <em>before</em> the volume does. This is studied in Session 3.</p>
+<p><strong>Difficulty</strong>: a glacier does not react immediately. It has a <strong>response time</strong>: after an ELA change, it takes years to decades to adjust its geometry. So the ELA must change <em>before</em> the volume does. This is studied in Session 3 (section 7).</p>
 <p>▶ <strong>In the terminal</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
@@ -710,6 +728,121 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="session-3-experiment-deepening">
+<h1>Session 3: experiment deepening<a class="headerlink" href="#session-3-experiment-deepening" title="Link to this heading">#</a></h1>
+<p><strong>⚠️ Session 2 ends here. Sections 6–8 are for Session 3.</strong></p>
+<p>In Session 2 you went through the <strong>basic workflow</strong> (sections 1–5) with the Rhone Glacier, then with your own glacier. Session 3 <strong>deepens</strong> some experiments on your glacier, by bringing new data and by customising IGM:</p>
+<ol class="arabic simple" start="6">
+<li><p><strong>The Little Ice Age extent</strong> (<strong>everyone</strong>): compare the modelled glacier in 1850 with the mapped 1850 extent, and refine your calibration of the past</p></li>
+<li><p><strong>Extension A — the response time</strong>: write / read your own IGM module (oscillating ELA)</p></li>
+<li><p><strong>Extension B — the moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
+</ol>
+<p>Section 6 (fine-tuning the calibration on the LIA extent) is <strong>necessary for everyone</strong>. Sections 7–8 are <strong>extensions</strong>, to be taken afterwards.</p>
+<p>Keep working in <strong>your</strong> project <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> (from Session 2): do <strong>not</strong> copy the template again, your runs in <code class="docutils literal notranslate"><span class="pre">outputs/</span></code> and your YAML files stay as they are. If your copy of this notebook stops at section 5, get the updated course material and the updated notebook, in a terminal (the <code class="docutils literal notranslate"><span class="pre">mv</span></code> keeps your Session 2 notebook, with your notes, under another name):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
+<span class="nb">cd</span><span class="w"> </span>~/work/my-glacier
+mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb
+cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Then re-run the first code cell (setup) of this notebook before the cells below.</p>
+<section id="the-little-ice-age-extent-a-closer-calibration-of-the-past">
+<h2>6. The Little Ice Age extent: a closer calibration of the past<a class="headerlink" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past" title="Link to this heading">#</a></h2>
+<p><strong>Why?</strong> In Session 2 you calibrated the melt (<code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>) mostly on today’s volume, and checked the LIA maximum by eye. The LIA maximum (~1850) is the best-documented past state of Alpine glaciers: its <strong>moraines</strong> are still visible, and it was mapped on the first topographic maps. Comparing the modelled extent in 1850 with the mapped one is a strong test of the model, and helps to constrain the <strong>past climate</strong> (pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>) and the <strong>melt</strong>.</p>
+<p><strong>Resources for the 1850 extent</strong>:</p>
+<ul class="simple">
+<li><p><strong>Swiss Glacier Inventory 1850</strong> (SGI 1850, <a class="reference external" href="https://www.glamos.ch/en/downloads#inventories">GLAMOS</a>; Maisch et al., 2000): outlines of all Swiss glaciers in 1850, from historical maps and moraines. Downloaded automatically below (<code class="docutils literal notranslate"><span class="pre">data/sgi1850/</span></code>).</p></li>
+<li><p><strong>Historical maps</strong> on <a class="reference external" href="https://map.geo.admin.ch">map.geo.admin.ch</a> (<em>Journey through time</em>): Dufour map (1845–1865) and Siegfried map (1870–1926), close to the LIA maximum.</p></li>
+<li><p><strong>Moraines</strong> on the relief (<em>swissALTI3D</em> hillshade) and aerial images (<em>SWISSIMAGE</em>) of <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>: the LIA moraines are the youngest, fresh, unvegetated ridges in front of the glacier.</p></li>
+<li><p><strong>Length changes</strong> since ~1880 (GLAMOS factsheet of your glacier, e.g. <a class="reference external" href="https://www.glamos.ch/en/factsheet#/B43-03">Rhone Glacier</a>): the retreat of the front.</p></li>
+</ul>
+<p>▶ First compare your calibrated past run (Session 2) with the 1850 outline:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/params_past&quot;</span>                         <span class="c1"># &lt;- your calibrated past run (Session 2)</span>
+<span class="n">compare_lia_extent</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>
+<span class="n">compare_runs</span><span class="p">([</span><span class="n">run</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Then refine the calibration of the past</strong>: copy <code class="docutils literal notranslate"><span class="pre">experiment/params_past.yaml</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">params_past_lia.yaml</span></code>, with the run folder <code class="docutils literal notranslate"><span class="pre">outputs/params_past_lia</span></code> at the end of the file), and adjust one parameter at a time:</p>
+<ul class="simple">
+<li><p>the glacier is <strong>too small / too large in 1850</strong> ➡️ colder / warmer pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (rows 1700 and 1850 of <code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>)</p></li>
+<li><p>the glacier is <strong>too small / too large today</strong> ➡️ more / less melt: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></li>
+<li><p>the front is too thin and advances too slowly / too fast ➡️ check the ice flow again (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, section 2)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_lia
+</pre></div>
+</div>
+<p>Aim for a run that reaches the 1850 outline <strong>and</strong> today’s volume; no perfect fit is possible, <strong>discuss</strong> the remaining mismatch in your report. If your calibration changes, redo the future scenarios (<code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="s2">&quot;outputs/params_past_lia&quot;</span>
+<span class="n">compare_lia_extent</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>
+<span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params_past&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>✅ <strong>Calibration of the past, refined</strong> (double-click to edit): pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> = …  <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> = …  (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = …  <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = …)</p>
+</div></blockquote>
+</section>
+<section id="extension-a-response-time-your-own-igm-module">
+<h2>7. Extension A — Response time: your own IGM module<a class="headerlink" href="#extension-a-response-time-your-own-igm-module" title="Link to this heading">#</a></h2>
+<p><strong>Why?</strong> In section 5 you saw that the glacier does not react immediately to an ELA change. How long does it take, and what does it mean for its future?</p>
+<p><strong>The experiment</strong>: the ELA oscillates like a sine wave (period <span class="math notranslate nohighlight">\(P\)</span> = 200 yr, amplitude 200 m) and we look at how the glacier volume follows. This SMB is not part of IGM: it is a <strong>user module</strong>, <code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code> (parameters: <code class="docutils literal notranslate"><span class="pre">user/conf/processes/smb_oscillating.yaml</span></code>). Open it to see how you can extend IGM with your own processes.</p>
+<p>▶ <strong>In the terminal</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_response_time</span><span class="p">(</span><span class="s2">&quot;outputs/params_response_time&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Your turn</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Find the response time</strong> <span class="math notranslate nohighlight">\(\tau\)</span> of your glacier from the lag between the ELA and the volume (first-order model, Lecture 3).</p></li>
+<li><p><strong>Test other periods</strong> <span class="math notranslate nohighlight">\(P\)</span> (copy the YAML file and adapt it): how do the lag and the amplitude of the volume change? Which periods give a reliable <span class="math notranslate nohighlight">\(\tau\)</span>? Compare with the theoretical estimate <span class="math notranslate nohighlight">\(\tau \approx H / (-b_{\text{terminus}})\)</span> (Lecture 1a).</p></li>
+<li><p><strong>Size</strong>: how does <span class="math notranslate nohighlight">\(\tau\)</span> relate to the thickness and volume of your glacier? Compare with other students’ glaciers.</p></li>
+<li><p><strong>Conclude</strong>: how does your glacier respond to short climate variations? to long-term trends? What does it mean for 2100?</p></li>
+</ol>
+<blockquote>
+<div><p>✅ <strong>Conclusion — response time</strong> (double-click to edit): …</p>
+</div></blockquote>
+</section>
+<section id="extension-b-moraines-reproduce-the-lia-moraines">
+<h2>8. Extension B — Moraines: reproduce the LIA moraines<a class="headerlink" href="#extension-b-moraines-reproduce-the-lia-moraines" title="Link to this heading">#</a></h2>
+<p><strong>Why?</strong> Rocks fallen on the glacier are buried, carried by the ice flow and released at the margins and the front, where they build <strong>lateral and frontal moraines</strong>. The LIA moraines are the youngest, fresh ridges in front of today’s glaciers. Can the model reproduce <strong>where</strong> they are? IGM tracks the debris with <strong>particles</strong> moved by the 3D ice flow: when the glacier retreats after ~1850, the particles left on the ice-free terrain show where the modelled glacier dropped its debris.</p>
+<p>▶ <strong>In the terminal</strong>: put your calibrations (ice flow, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, pre-1901 climate from section 6) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_moraines.yaml</span></code>, then (a few minutes, more than the past run)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run_p</span> <span class="o">=</span> <span class="s2">&quot;outputs/params_past_moraines&quot;</span>
+<span class="n">plot_particles</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>                    <span class="c1"># debris in the glacier at the LIA maximum (colour: depth)</span>
+<span class="n">plot_moraines</span><span class="p">(</span><span class="n">run_p</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">)</span>              <span class="c1"># debris left on ice-free terrain today = modelled LIA moraines</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Compare with the real moraines</strong>: on <a class="reference external" href="https://map.geo.admin.ch">map.geo.admin.ch</a>, look at the aerial images (SWISSIMAGE) and the relief (swissALTI3D hillshade) around your glacier: where are the LIA lateral and frontal moraines (fresh, unvegetated ridges)? Are the modelled deposits at the same place, at the same height on the valley sides?</p>
+<p><strong>Play with the controls</strong> (<code class="docutils literal notranslate"><span class="pre">particles:</span> <span class="pre">seeding:</span></code> in <code class="docutils literal notranslate"><span class="pre">params_past_moraines.yaml</span></code>; copy the file and change its run folder for each try):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: <code class="docutils literal notranslate"><span class="pre">accumulation</span></code> (surface of the accumulation area, regularly) or <code class="docutils literal notranslate"><span class="pre">all</span></code> (the whole ice column, once at the start)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frequency</span></code> (years between two seedings) and <code class="docutils literal notranslate"><span class="pre">density</span></code> (fraction of grid cells seeded): how much debris</p></li>
+<li><p>your calibration of the past (section 6): a glacier too large / too small in 1850 puts its moraines too far / too close</p></li>
+</ul>
+<p><strong>Discuss the limits</strong>: real debris comes mostly from the <strong>rock walls</strong> above the glacier (rockfall), not from the whole accumulation area; the moraine ridges are built by processes not in the model (dumping, pushing, reworking).</p>
 </section>
 </section>
 
@@ -779,12 +912,22 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Modelling a glacier with IGM — tutorial (Sessions 2 and 3)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-download-the-data-and-check-the-initial-state">1. Present: download the data and check the initial state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ice-flow-parameters">2. Calibration of the ice-flow parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today-calibration-of-the-smb">3. Past: from the Little Ice Age to today — calibration of the SMB</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-climate-scenarios-20202100">4. Future: climate scenarios 2020–2100</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one">5. Retrieving the ELA history: a simple SMB model fitted to the complex one</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#session-3-experiment-deepening">Session 3: experiment deepening</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past">6. The Little Ice Age extent: a closer calibration of the past</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-a-response-time-your-own-igm-module">7. Extension A — Response time: your own IGM module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-b-moraines-reproduce-the-lia-moraines">8. Extension B — Moraines: reproduce the LIA moraines</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
