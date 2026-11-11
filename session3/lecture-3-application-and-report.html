@@ -351,6 +351,8 @@
 
 
 
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -530,6 +532,8 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-convey-your-results">Figures convey your results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-be-critical">Discussion: be critical</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#now-work-on-your-project">Now: work on your project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-course-material-glamod">Updating the course material (glamod)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-your-project-my-glacier">Updating your project (my-glacier)</a></li>
 </ul>
 
             </nav>
@@ -604,25 +608,34 @@
 <h1>Finish the calibration: tips<a class="headerlink" href="#finish-the-calibration-tips" title="Link to this heading">#</a></h1>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Problem</p></th>
-<th class="head"><p>Try</p></th>
+<tr class="row-odd"><th class="head"><p>Control ↓   Target →</p></th>
+<th class="head text-center"><p>Speeds</p></th>
+<th class="head text-center"><p>Volume today</p></th>
+<th class="head text-center"><p>1850 extent</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Speeds too high / too low</p></td>
-<td><p>refine the grid of <code class="docutils literal notranslate"><span class="pre">params_sensitivity</span></code> (<code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">-m</span></code>) around your best values</p></td>
+<tr class="row-even"><td><p><strong>Ice flow</strong>: <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code></p></td>
+<td class="text-center"><p>●●●</p></td>
+<td class="text-center"><p>●</p></td>
+<td class="text-center"><p>●●</p></td>
 </tr>
-<tr class="row-odd"><td><p>No LIA advance / too large</p></td>
-<td><p>colder / warmer pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>)</p></td>
+<tr class="row-odd"><td><p><strong>Melt</strong>: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>●●●</p></td>
+<td class="text-center"><p>●●</p></td>
 </tr>
-<tr class="row-even"><td><p>Glacier grows without limit / disappears</p></td>
-<td><p>more / less melt: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
+<tr class="row-even"><td><p><strong>Past climate</strong>: pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>●</p></td>
+<td class="text-center"><p>●●●</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <ul class="simple">
-<li><p><strong>One parameter at a time</strong>, keep your calibrated values; do not expect perfect fit, <strong>discuss</strong> the mismatch in the report anyway</p></li>
+<li><p>No single parameter fits all targets: e.g. a <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> that fits today’s volume may give a wrong 1850 extent ➡️ <strong>iterate</strong> between the three controls to find the <strong>best compromise</strong></p></li>
+<li><p>One parameter at a time; no perfect fit: <strong>discuss</strong> the mismatch in the report</p></li>
 <li><p>Tests with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">2</span></code>, <strong>final runs with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code></strong></p></li>
 </ul>
 </section>
@@ -633,8 +646,8 @@
 <li><p><strong>First, fine-tune the model with the LIA extent</strong>: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future</p></li>
 <li><p><strong>Then, work on optional extensions</strong>, by increasing difficulty: <strong>A–E</strong> (questions with the runs you know), then <strong>F) response time</strong> and <strong>G) moraines</strong></p></li>
 </ol>
-<p>Follow <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, sections 6–8</strong> (Session 3 part). Keep working in <strong>your</strong> <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code>; update the course material and the notebook (your Session 2 notebook is kept as <code class="docutils literal notranslate"><span class="pre">tutorial-session2.ipynb</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
+<p>Follow <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, sections 6–8</strong> (Session 3 part). Keep working in <strong>your</strong> <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code>; update the course material and the notebook (details: last slide):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
 <span class="nb">cd</span><span class="w"> </span>~/work/my-glacier<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb
 cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
 </pre></div>
@@ -676,6 +689,7 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 ➡️ tune <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></li>
 <li><p>Front too thin
 ➡️ tune ice flow</p></li>
+<li><p>No single parameter fits all ➡️ iterate, best compromise</p></li>
 <li><p>Then redo the future runs</p></li>
 </ul>
 </section>
@@ -803,6 +817,34 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 </ul>
 <p>Work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code>.</p>
 </section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="updating-the-course-material-glamod">
+<h1>Updating the course material (glamod)<a class="headerlink" href="#updating-the-course-material-glamod" title="Link to this heading">#</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod
+git<span class="w"> </span>restore<span class="w"> </span>.<span class="w">     </span><span class="c1"># discard any change made in glamod (it is not your project!)</span>
+git<span class="w"> </span>pull<span class="w">          </span><span class="c1"># get the latest version of the course</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>: the <strong>course material</strong>, updated by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (incl. <code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code>: <strong>your project</strong>, a <strong>local copy</strong> made last week: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> does <strong>not</strong> update it</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="updating-your-project-my-glacier">
+<h1>Updating your project (my-glacier)<a class="headerlink" href="#updating-your-project-my-glacier" title="Link to this heading">#</a></h1>
+<p>⚠️ The new template files (<code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">experiment/*.yaml</span></code>) are in <code class="docutils literal notranslate"><span class="pre">~/work/glamod/session2/my-glacier/</span></code>: copy only what you need, <strong>without overwriting your own work</strong> (calibrated values, RGI ID, notes)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/my-glacier
+mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb<span class="w">        </span><span class="c1"># keep your Session 2 notebook</span>
+cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
+</pre></div>
+</div>
+<p>For a YAML file, compare first, then copy the new lines by hand:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>diff<span class="w"> </span>experiment/params_past_moraines.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>~/work/glamod/session2/my-glacier/experiment/params_past_moraines.yaml
+</pre></div>
+</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -890,6 +932,8 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-convey-your-results">Figures convey your results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-be-critical">Discussion: be critical</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#now-work-on-your-project">Now: work on your project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-course-material-glamod">Updating the course material (glamod)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-your-project-my-glacier">Updating your project (my-glacier)</a></li>
 </ul>
 
   </nav></div>

@@ -351,6 +351,8 @@
 
 
 
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -570,9 +572,9 @@
 </ol>
 <p><strong>Session 3 — experiment deepening</strong> (sections 6–8, further down, after the line <em>Session 3</em>):</p>
 <ol class="arabic simple" start="6">
-<li><p><strong>The Little Ice Age extent</strong> (<strong>everyone</strong>): a closer calibration of the past</p></li>
-<li><p><strong>Extension F — the response time</strong>: your own IGM module</p></li>
-<li><p><strong>Extension G — the moraines</strong>: debris particles</p></li>
+<li><p><strong>The Little Ice Age extent</strong>: a closer calibration of the past</p></li>
+<li><p><strong>Extension F (optional) — the response time</strong>: your own IGM module</p></li>
+<li><p><strong>Extension G (optional) — the moraines</strong>: debris particles</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -737,13 +739,13 @@
 <p><strong>⚠️ Session 2 ends here. Sections 6–8 are for Session 3.</strong></p>
 <p>In Session 2 you went through the <strong>basic workflow</strong> (sections 1–5) with the Rhone Glacier, then with your own glacier. Session 3 <strong>deepens</strong> some experiments on your glacier, by bringing new data and by customising IGM:</p>
 <ol class="arabic simple" start="6">
-<li><p><strong>The Little Ice Age extent</strong> (<strong>everyone</strong>): compare the modelled glacier in 1850 with the mapped 1850 extent, and refine your calibration of the past</p></li>
-<li><p><strong>Extension F — the response time</strong>: write / read your own IGM module (oscillating ELA)</p></li>
-<li><p><strong>Extension G — the moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
+<li><p><strong>The Little Ice Age extent</strong>: compare the modelled glacier in 1850 with the mapped 1850 extent, and refine your calibration of the past</p></li>
+<li><p><strong>Extension F (optional) — the response time</strong>: write / read your own IGM module (oscillating ELA)</p></li>
+<li><p><strong>Extension G (optional) — the moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
 </ol>
-<p>Section 6 (fine-tuning the calibration on the LIA extent) is <strong>necessary for everyone</strong>. Then choose <strong>extensions</strong>, by increasing difficulty: <strong>A–E</strong> (questions to answer with the runs you already know, see Lecture 3), then <strong>F) response time</strong> (section 7) and <strong>G) moraines</strong> (section 8).</p>
+<p>Start with section 6 (fine-tuning the calibration on the LIA extent). Then choose <strong>optional extensions</strong>, by increasing difficulty: <strong>A–E</strong> (questions to answer with the runs you already know, see Lecture 3), then <strong>F) response time</strong> (section 7) and <strong>G) moraines</strong> (section 8).</p>
 <p>Keep working in <strong>your</strong> project <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> (from Session 2): do <strong>not</strong> copy the template again, your runs in <code class="docutils literal notranslate"><span class="pre">outputs/</span></code> and your YAML files stay as they are. If your copy of this notebook stops at section 5, get the updated course material and the updated notebook, in a terminal (the <code class="docutils literal notranslate"><span class="pre">mv</span></code> keeps your Session 2 notebook, with your notes, under another name):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull<span class="w">   </span><span class="c1"># discard changes made in glamod, then update it</span>
 <span class="nb">cd</span><span class="w"> </span>~/work/my-glacier
 mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb
 cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
@@ -779,7 +781,9 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past
 </pre></div>
 </div>
-<p>and re-run the cell above. Aim for a run that reaches the 1850 outline <strong>and</strong> today’s volume; no perfect fit is possible, <strong>discuss</strong> the remaining mismatch in your report. If your calibration changes, redo the future scenarios (<code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>).</p>
+<p>and re-run the cell above.</p>
+<p><strong>No single parameter does it all</strong>: the <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> that fits today’s volume (section 3) may give a wrong 1850 extent, and a colder or warmer pre-1901 climate also changes today’s volume a little (the glacier “remembers” the LIA). You will probably not find the right set of parameters at once: <strong>iterate</strong> between the climate (pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>), the melt (<code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>) and the ice flow (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) to find the <strong>best compromise</strong> between the three targets: the observed speeds, today’s volume and the 1850 extent.</p>
+<p>Aim for a run that reaches the 1850 outline <strong>and</strong> today’s volume; no perfect fit is possible, <strong>discuss</strong> the remaining mismatch in your report. If your calibration changes, redo the future scenarios (<code class="docutils literal notranslate"><span class="pre">params_future.yaml</span></code>).</p>
 <blockquote>
 <div><p>✅ <strong>Calibration of the past, refined</strong> (double-click to edit): pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> = …  <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> = …  (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = …  <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = …)</p>
 </div></blockquote>
