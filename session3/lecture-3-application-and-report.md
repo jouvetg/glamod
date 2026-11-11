@@ -162,52 +162,39 @@ Glacier retreat after ~1850: debris left on ice-free terrain ➡️ **modelled L
 - Limits: debris really comes from rock walls; moraine building not modelled
 ---
 
+<style scoped>section { font-size: 1.6em; }</style>
+
 # C. Extensions (optional, discuss them with us first)
 
-- What are the main controls for future climate scenarios? can a +1 °C be compensated by a precipitation increase ?
-
-- **Precipitation**: ±20 % precipitation vs ±1 °C?
-- **Committed loss**: today's climate kept, when does the glacier stabilize (beyond 2100)?
-- **Tributaries and lakes**: disconnections, proglacial lakes in bed overdeepenings (`topg`)
-- **Validation**: GLAMOS mass balance series, swisstopo thickness
-- **Your own question**: hazards, water resources, landscape evolution...
-
+- **Climate controls**: what are the main controls of the future evolution? Can a warming of +1 °C be compensated by more precipitation? If so, by how much?
+- **Committed loss**: if today's climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?
+- **Disconnection and lakes**: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (`topg`)?
+- **Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it therefore survive longer than a clean glacier?
+- **Society**: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?
 
 ---
 
-# A good experiment design
+# Tips for a good experiment design
 
 - **One question → one (or a few) experiments → one figure**
 - Change **one thing at a time** (ELA, `delta_temp`, `melt_enhancer`, `tau_ref`, ...)
 - Keep **one YAML file per experiment**, with a meaningful name (`params_past_ref.yaml`, `params_ssp585.yaml`, ...)
 - Write down for each run: what you changed, why, and the outcome (a simple table/log)
 - Explore **uncertainty**: run a small ensemble (e.g. 3 values of a parameter) rather than one "perfect" run
-
-
  
 ---
 
 # Part 3 — The report
 
 - **≤ 1500 words** (excluding captions and references), PDF
-- Written like a short scientific paper:
+- Written like a short scientific paper, such as (suggestion -- not a strict rule)
 
 1. **Introduction**: why model glaciers? state of knowledge, your research question(s)
 2. **Study site**: location, characteristics, history, available observations
-3. **Methods**: the model (what it does, *not* how you ran it: no code, no YAML), data, experiments
-4. **Results**: figures!
+3. **Methods**: the model (what it does, *not* how you ran it: no code, no YAML), data, experiments, **this is not a technical documentation**
+4. **Results**: figures, what you found
 5. **Discussion**: answer your questions, limitations, uncertainties
 6. **Conclusion** + references
-
----
-
-# Methods: describe the model, not the code
-
-❌ "We ran `igm_run +experiment=params_past` with `smb: method: oggm` and `melt_enhancer: 1.4`."
-
-✅ "Ice flow is modelled with the Instructed Glacier Model (IGM; Jouvet & Cordonnier, 2023), which solves a higher-order approximation of the Stokes equations with a physics-informed neural network. The surface mass balance is computed with a monthly temperature-index model (Maussion et al., 2019), forced by the GSWP3-W5E5 climate; melt was scaled by a factor of 1.4 to reproduce the observed front position in 2020."
-
-A reader who does not know IGM must understand what you did, and be able to reproduce it.
 
 ---
 
