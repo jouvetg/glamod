@@ -152,12 +152,14 @@ igm_run +experiment=params_past_moraines
 
 ![bg right:38% contain](fig/moraines-rhone.png)
 
-When the glacier retreats after ~1850, its debris is left on the ice-free terrain ➡️ **modelled LIA moraines**
+<style scoped>section { font-size: 1.5em; }</style>
 
-- `plot_moraines(run, INPUT, year=2020)`: deposited debris, 1850 outline (red), today (black)
-- Compare with the moraines on **aerial photos / relief** (map.geo.admin.ch: SWISSIMAGE, swissALTI3D): position of the lateral and frontal moraines, their crest height
-- Play with the **controls**: `seeding` (`method`, `frequency`, `density`), your calibration of the past (D1)
-- Limits: where does debris really come from (rock walls)? Which processes are missing?
+Glacier retreat after ~1850: debris left on ice-free terrain ➡️ **modelled LIA moraines**
+
+- `plot_moraines(run, INPUT, year=2020)`: debris (orange), 1850 outline (red), today (black)
+- Compare with **aerial photos / relief** (map.geo.admin.ch): lateral and frontal moraines
+- **Controls**: `seeding` (`method`, `frequency`, `density`), calibration of the past (D1)
+- Limits: debris really comes from rock walls; moraine building not modelled
 ---
 
 # C. Extensions (optional, discuss them with us first)
