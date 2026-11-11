@@ -17,7 +17,7 @@ This course gives an overview of the basic physical processes that govern the ev
 |---|---|---|---|---|
 | **Session 1** | Lecture 1a: Glacier processes | Lecture 1b: Glacier modelling | Set up RenkuLab,  with simple model (Tutorial) | **Choose your glacier** for the mini-project |
 | **Session 2** | Lecture 2: Introduction to IGM. **The basic workflow** (`tutorial.ipynb`): data, calibration of the ice flow and of the melt, past, future, ELA retrieval, with the Rhone Glacier | Mini-project: the basic workflow on **your** glacier | Mini-project | Mini-project |
-| **Session 3** | Lecture 3: **Experiment deepening** (`tutorial-session3.ipynb`): LIA extent, response time, moraines; how to write the report | Mini-project | Mini-project | Mini-project |
+| **Session 3** | Lecture 3: **Experiment deepening** (`tutorial-session3.ipynb`): LIA extent (everyone), then response time and moraines if time allows; how to write the report | Mini-project | Mini-project | Mini-project |
 
 Then: write the report (deadline: *to be announced*).
 

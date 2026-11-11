@@ -902,8 +902,16 @@ def plot_response_time(run_dir):
         lag = (t_vol_max - t0 - p['period'] / 4) % p['period']
         ax1.set_title(f"Period {p['period']:.0f} yr, amplitude {p['amplitude']:.0f} m: "
                       f"volume peaks ~{lag:.0f} yr after the ELA minimum")
-        print(f"Lag between ELA minimum and volume maximum: ~{lag:.0f} yr "
-              f"(volume amplitude: {vol[late].max() - vol[late].min():.3f} km3)")
+        amp = vol[late].max() - vol[late].min()
+        print(f"Lag between ELA minimum and volume maximum: ~{lag:.0f} yr")
+        print(f"Volume oscillation: {amp:.3f} km3 peak to peak, i.e. {100 * amp / vol.mean():.0f} % of the mean volume ({vol.mean():.2f} km3)")
+        # first-order glacier (dV/dt = (V_eq - V)/tau, a low-pass filter): lag = P/(2 pi) * arctan(2 pi tau / P)
+        phase = 2 * np.pi * lag / p['period']
+        if phase < 0.8 * np.pi / 2:          # (unreliable when the lag is close to P/4)
+            print(f"Response time from the lag (first-order model): tau = P/(2 pi) tan(2 pi lag / P) ~ "
+                  f"{p['period'] / (2 * np.pi) * np.tan(phase):.0f} yr")
+        else:
+            print("Lag close to a quarter period: the period is too short to estimate tau, try a longer one")
     plt.show()
 
 
@@ -1161,3 +1169,48 @@ def compare_lia_extent(run_dir, input_file, year=1850, data_dir='data'):
           f"({100 * area_mod_in / area_sgi:.0f} % of the 1850 outline is ice-covered in the model)")
     print("Look in particular at the FRONT: does the modelled glacier reach the 1850 moraines?")
     ds.close(); ds_in.close()
+
+
+def plot_moraines(run_dir, input_file, year=2020, data_dir='data'):
+    """Moraine experiment (params_past_moraines): debris DEPOSITED on ice-free terrain at `year`
+    (particles where the modelled ice has gone), on a hillshade of the topography, with the 1850
+    outline (Swiss Glacier Inventory 1850, red) and today's glacier (black). Compare the modelled
+    deposits with the LIA moraines visible on map.geo.admin.ch (SWISSIMAGE, swissALTI3D relief)."""
+    import os, glob
+    from matplotlib.colors import LightSource
+    files = sorted(glob.glob(os.path.join(run_dir, 'trajectories', 'traj-*.csv')))
+    if not files:
+        print("No particle files found (run params_past_moraines first)")
+        return
+    years = np.array([float(os.path.basename(f)[5:-4].replace('-', '.')) for f in files])
+    i = int(np.argmin(np.abs(years - year)))
+    P = np.loadtxt(files[i], delimiter=',', skiprows=1, ndmin=2)   # columns: Id, x, y, z, rh, t
+    ds = xr.open_dataset(os.path.join(run_dir, 'output.nc'))
+    k = int(np.argmin(np.abs(ds['time'].values - years[i])))
+    x, y = ds['x'].values, ds['y'].values
+    dx = float(x[1] - x[0])
+    thk = ds['thk'].isel(time=k).values
+    z = ds['usurf'].isel(time=k).values if 'usurf' in ds else ds['topg'].values
+    # particles on ice-free terrain = deposited debris
+    ix = np.clip(np.round((P[:, 1] - x[0]) / dx).astype(int), 0, len(x) - 1)
+    iy = np.clip(np.round((P[:, 2] - y[0]) / dx).astype(int), 0, len(y) - 1)
+    dep = P[thk[iy, ix] < 1]
+    extent = [x.min() - dx / 2, x.max() + dx / 2, y.min() - dx / 2, y.max() + dx / 2]
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.imshow(LightSource(azdeg=315, altdeg=45).hillshade(z, dx=dx, dy=dx), origin='lower',
+              extent=extent, cmap='gray')
+    ax.imshow(np.where(thk > 1, 1.0, np.nan), origin='lower', extent=extent, cmap='Blues', vmin=0, vmax=1.5, alpha=0.5)
+    ax.scatter(dep[:, 1], dep[:, 2], c='orange', s=4, edgecolors='none')   # deposited debris
+    try:
+        ds_in = xr.open_dataset(input_file)
+        crs = ds_in.attrs.get('pyproj_srs', ds_in.attrs.get('epsg'))
+        ax.contour(x, y, ds_in['thk'].interp(x=ds['x'], y=ds['y']).values > 1, levels=[0.5], colors='k', linewidths=1)
+        load_sgi1850(data_dir).to_crs(crs).cx[x.min():x.max(), y.min():y.max()].boundary.plot(ax=ax, color='red', linewidth=1.2)
+        ds_in.close()
+    except Exception as e:
+        print("(1850 outline not shown:", e, ")")
+    ax.set_xlim(extent[:2]); ax.set_ylim(extent[2:])
+    ax.set_title(f"Debris deposited on ice-free terrain in {years[i]:.0f} ({len(dep)} particles)\n"
+                 "orange: debris, red: 1850 outline (SGI 1850), black: today, blue: modelled ice")
+    plt.show()
+    ds.close()

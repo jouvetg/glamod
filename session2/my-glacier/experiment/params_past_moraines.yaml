@@ -1,9 +1,10 @@
 # @package _global_
 
-# EXPLORATION "moraines": same as params_past.yaml (put YOUR calibrated values below),
+# MORAINES (Session 3, D3): same as params_past.yaml (put YOUR calibrated values below),
 # plus Lagrangian PARTICLES (debris) carried by the 3D ice flow. Particles are seeded at the
-# surface of the accumulation area, buried, transported, and re-emerge in the ablation area:
-# where they gather at the surface, medial / lateral moraines form.
+# surface of the accumulation area, buried, transported, and re-emerge in the ablation area.
+# When the glacier retreats after the LIA, the debris left on ice-free terrain shows where
+# the modelled LIA moraines are: compare with aerial photos (plot_moraines in the notebook).
 # Particle positions are written in outputs/<run>/trajectories/traj-<year>.csv.
 
 defaults:
@@ -41,8 +42,10 @@ processes:
     oggm:
       melt_enhancer: 1.0    # use YOUR calibrated value (params_past.yaml)
   particles:
-    seeding:
-      frequency: 10.0       # seed new particles every 10 years (in the accumulation area)
+    seeding:                # CONTROLS of the debris supply (try them!)
+      method: accumulation  # where: accumulation = surface of the accumulation area; all = whole ice column, once
+      frequency: 10.0       # when: new particles every 10 years (lower = more debris, slower runs)
+      density: 0.2          # how many: fraction of the grid cells seeded (higher = more debris)
   iceflow:                  # ICE FLOW
     vertical_velocity:
       enabled: true         # needed to track the particles in 3D

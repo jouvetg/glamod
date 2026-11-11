@@ -57,13 +57,11 @@ Guillaume Jouvet
  
 # Part 2 — Experiment deepening
 
-**Suggestions** to deepen your study:
-
-| | Question |
-|---|---|
-| **D1** | **LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past |
-| **D2** | **Response time**: how fast does your glacier react? |
-| **D3** | **Moraines**: where does the debris go? (particles; if relevant) |
+| | Question | |
+|---|---|---|
+| **D1** | **LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past | **everyone, first** |
+| **D2** | **Response time**: how fast does your glacier react? | additional topics, |
+| **D3** | **Moraines**: where does the debris go? (particles; if relevant) | if time allows |
 
 Keep working in **your** `~/work/my-glacier` (from Session 2). Just update the course material and add the Session 3 notebook to it:
 
@@ -100,17 +98,16 @@ Rhone, `melt_enhancer` 0.8: the front goes **too far**
 
 ---
 
-# D2 — Response time: your own IGM module
+# D2 — Response time
 
-`user/code/processes/smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
+To test the glacier response time, this is done with an  IGM user module for the SMB (instead of the default existing used so far): in `smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
 
 ```python
 def update(cfg, state):                        # called at each time step
     p = cfg.processes.smb_oscillating
     t = float(state.t.numpy()) - cfg.processes.time.start
     state.ela = state.ela_mean - p.amplitude * math.sin(2 * math.pi * t / p.period)
-    smb = state.usurf - state.ela              # SMB linear in elevation
-    state.smb = ...
+    state.smb = state.usurf - state.ela
 ```
 
 ```bash
@@ -123,40 +120,50 @@ igm_run +experiment=params_response_time
 
 ![height:250px](fig/response-time-rhone.png)
 
-- The volume peaks **~45 years** after the ELA minimum (period 200 yr, amplitude 200 m)
-- Other periods (50, 100, 400 yr): copy the file (`params_response_100.yaml`), set `period: 100` in it: how do lag and amplitude change? Compare with $\tau \approx H/(-b_{terminus})$ (Lecture 1a) and the tutorial
-- Read the module: how to extend IGM with `initialize`, `update`, `finalize`
+- The volume peaks **~45 years** after the ELA minimum (period 200 yr, amplitude 200 m): close to $P/4$, the period is too short
+- Longer periods: $\tau \approx$ 75 yr ($P$ = 400 yr), 55 yr ($P$ = 800 yr); theory $H/(-b_{terminus}) \approx$ 380 m / 6 m/yr $\approx$ 65 yr
+
+---
+
+# D2 — Response time: what to do
+
+1. **Find the response time** from the lag: $\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)$ (first-order glacier, printed by `plot_response_time`)
+2. **Test other periods** $P$ (50 … 800 yr, run 2 periods): lag and amplitude? Compare $\tau$ with the theory $\tau \approx H/(-b_{terminus})$ (Lecture 1a)
+3. **Relate $\tau$ to the size / volume** of your glacier: compare with other students' glaciers
+4. **Conclude**: a glacier is a **low-pass filter**: it damps climate variations shorter than $\tau$, integrates the long-term trends ➡️ committed loss
 
 ---
 
 # D3 — Moraines: tracking debris with particles
 
-![width:700px](fig/particles-rhone.png)
+![width:1000px](fig/particles-rhone.png)
 
-Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) ➡️ **moraines**, **debris cover**
+Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) 
 
-`params_past_moraines.yaml` = your **calibrated** past run + `particles` (seeded every 10 yr in the accumulation area)
+➡️ You may add passive "particles" on the top of the simulation to simulate production and advection of supraglacial debris (use `particle` IGM module).
 
 ---
 
-# D3 — Moraines: questions
+# D3 — Moraines: reproduce the LIA moraines
 
 ```bash
 igm_run +experiment=params_past_moraines
 ```
 
-Notebook: `plot_particles(run, year=...)`, and `rh_min=0.95` for the debris at the surface only
+![bg right:38% contain](fig/moraines-rhone.png)
 
-- Where do the particles re-emerge at the surface? Do they form medial / lateral moraines?
-- Compare with the moraines on aerial photos (map.geo.admin.ch) and with the LIA moraines
-- Particles left on ice-free terrain: debris deposited where the glacier retreated
-- How old is the debris when it reaches the front?
+When the glacier retreats after ~1850, its debris is left on the ice-free terrain ➡️ **modelled LIA moraines**
 
+- `plot_moraines(run, INPUT, year=2020)`: deposited debris, 1850 outline (red), today (black)
+- Compare with the moraines on **aerial photos / relief** (map.geo.admin.ch: SWISSIMAGE, swissALTI3D): position of the lateral and frontal moraines, their crest height
+- Play with the **controls**: `seeding` (`method`, `frequency`, `density`), your calibration of the past (D1)
+- Limits: where does debris really come from (rock walls)? Which processes are missing?
 ---
 
 # C. Extensions (optional, discuss them with us first)
 
-- **Uncertainty**: small ensembles (melt factor, initial thickness, `prec_scal`, CH2018 ranges)
+- What are the main controls for future climate scenarios? can a +1 °C be compensated by a precipitation increase ?
+
 - **Precipitation**: ±20 % precipitation vs ±1 °C?
 - **Committed loss**: today's climate kept, when does the glacier stabilize (beyond 2100)?
 - **Tributaries and lakes**: disconnections, proglacial lakes in bed overdeepenings (`topg`)
@@ -242,7 +249,8 @@ Deadline: **to be announced**. Questions? Ask the assistant during the project h
 
 Checklist for today:
 - [ ] Basic workflow done on your glacier (Session 2)
-- [ ] ≥ 1 deepening (D1 LIA extent, D2 response time, D3 moraines): not all three
+- [ ] D1: past compared with the 1850 extent, calibration refined, future redone if needed
+- [ ] If time allows: D2 (response time) and/or D3 (moraines)
 - [ ] Figures drafted
 - [ ] Report outline written
 
