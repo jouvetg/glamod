@@ -1087,3 +1087,77 @@ def plot_thk_at_samples(nc_file, samples_file='Samples_2024.csv', ages=None, thk
     plt.show()
     ds.close()
     return pd.DataFrame(rows)
+
+
+# ---------------------------------------------------------------------------
+# Little Ice Age extent (session 3): Swiss Glacier Inventory 1850 (GLAMOS)
+# ---------------------------------------------------------------------------
+
+SGI1850_URL = 'https://doi.glamos.ch/data/inventory/inventory_sgi1850_r1992.zip'
+
+
+def load_sgi1850(data_dir='data'):
+    """Outlines of all Swiss glaciers in 1850 (Swiss Glacier Inventory 1850, Maisch et al., 2000),
+    downloaded once from GLAMOS into data/sgi1850/. Returns a GeoDataFrame (column SGI = glacier id)."""
+    import os, glob, zipfile, urllib.request
+    import geopandas as gpd
+    folder = os.path.join(data_dir, 'sgi1850')
+    shp = glob.glob(os.path.join(folder, '*.shp'))
+    if not shp:
+        os.makedirs(folder, exist_ok=True)
+        zfile = os.path.join(folder, 'sgi1850.zip')
+        print('Downloading the Swiss Glacier Inventory 1850 from GLAMOS (~4 MB) ...')
+        urllib.request.urlretrieve(SGI1850_URL, zfile)
+        zipfile.ZipFile(zfile).extractall(folder)
+        shp = glob.glob(os.path.join(folder, '*.shp'))
+    return gpd.read_file(shp[0])
+
+
+def compare_lia_extent(run_dir, input_file, year=1850, data_dir='data'):
+    """Modelled glacier at `year` (default: 1850, LIA maximum) vs the 1850 outline of the
+    Swiss Glacier Inventory (red), and today's glacier (black, from the input data).
+    Prints the modelled and mapped 1850 areas of the glacier."""
+    import os
+    from shapely import contains_xy
+    ds_in = xr.open_dataset(input_file)
+    crs = ds_in.attrs.get('pyproj_srs', ds_in.attrs.get('epsg'))
+    ds = xr.open_dataset(os.path.join(run_dir, 'output.nc'))
+    thk = ds['thk'].sel(time=year, method='nearest')
+    t = float(thk.time)
+    x, y = ds['x'].values, ds['y'].values
+    dx = float(x[1] - x[0])
+    X, Y = np.meshgrid(x, y)
+    ice = thk.values > 1
+    # 1850 outlines on the model grid: keep the glacier(s) that overlap the modelled ice
+    sgi = load_sgi1850(data_dir).to_crs(crs).cx[x.min():x.max(), y.min():y.max()]
+    overlap = np.array([np.sum(ice & contains_xy(g, X, Y)) for g in sgi.geometry])
+    main = sgi.iloc[[int(np.argmax(overlap))]]
+    others = sgi[(overlap > 0) & (sgi.index != main.index[0])]
+    in_main = contains_xy(main.geometry.iloc[0], X, Y)
+    in_any = contains_xy(sgi.geometry.union_all(), X, Y)       # inside any 1850 outline of the domain
+
+    extent = [x.min() - dx / 2, x.max() + dx / 2, y.min() - dx / 2, y.max() + dx / 2]
+    fig, ax = plt.subplots(figsize=(8, 8))
+    if 'usurf' in ds:
+        ax.imshow(ds['usurf'].sel(time=year, method='nearest'), origin='lower', extent=extent, cmap='gray', alpha=0.6)
+    im = ax.imshow(np.where(ice, thk, np.nan), origin='lower', extent=extent, cmap='Blues')
+    plt.colorbar(im, ax=ax, shrink=0.7, label=f'Modelled ice thickness in {t:.0f} (m)')
+    thk0 = ds_in['thk'].interp(x=ds['x'], y=ds['y'])
+    ax.contour(x, y, thk0.values > 1, levels=[0.5], colors='k', linewidths=1.2)
+    main.boundary.plot(ax=ax, color='red', linewidth=2)
+    others.boundary.plot(ax=ax, color='red', linewidth=0.8, linestyle='--')
+    ax.set_xlim(extent[:2]); ax.set_ylim(extent[2:])
+    from matplotlib.lines import Line2D
+    ax.legend(handles=[Line2D([], [], color='red', lw=2, label=f"1850 outline (SGI 1850, {main['SGI'].iloc[0]})"),
+                       Line2D([], [], color='k', lw=1.2, label='today (input data)')], loc='upper left')
+    ax.set_title(f'Modelled glacier in {t:.0f} vs mapped 1850 extent')
+    plt.show()
+
+    area_sgi = float(main.geometry.iloc[0].area) / 1e6
+    area_mod_in = float(np.sum(ice & in_main)) * dx**2 / 1e6
+    area_mod_out = float(np.sum(ice & ~in_any)) * dx**2 / 1e6
+    print(f"Glacier {main['SGI'].iloc[0]} in 1850 (SGI 1850): {area_sgi:.1f} km2")
+    print(f"Modelled ice in {t:.0f}: {area_mod_in:.1f} km2 inside this outline, {area_mod_out:.1f} km2 outside all 1850 outlines "
+          f"({100 * area_mod_in / area_sgi:.0f} % of the 1850 outline is ice-covered in the model)")
+    print("Look in particular at the FRONT: does the modelled glacier reach the 1850 moraines?")
+    ds.close(); ds_in.close()

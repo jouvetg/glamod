@@ -7,7 +7,7 @@ color: white
 math: katex
 ---
 
-# Session 3 — Lecture 3: Additional experiments and reporting
+# Session 3 — Lecture 3: Experiment deepening and reporting
 
 Guillaume Jouvet
 
@@ -18,23 +18,26 @@ Guillaume Jouvet
 | | Hour 1 | Hour 2 | Hour 3 | Hour 4 |
 |---|---|---|---|---|
 | **Week 1** | Glacier processes | Glacier modelling | *Tutorial* | *Glacier selection* |
-| **Week 2** | Intro to IGM, *calibration, past & future runs* | *Project* | *Project* | *Project* |
-| **Week 3** | **Moraines, report** | **Project** | **Project** | **Project** |
+| **Week 2** | Intro to IGM, *basic workflow* (Rhone, then your glacier) | *Project* | *Project* | *Project* |
+| **Week 3** | **Experiment deepening, report** | **Project** | **Project** | **Project** |
 | *(Week 4* | *dates and rate add-on* | *G. King's course* | *Project* | *Project)* |
  
 
 
 ---
 
+<style scoped>section { font-size: 1.6em; }</style>
+
 # Part 1 — Goals of your mini-project
 
 **Main question**: how did *your* glacier evolve since the Little Ice Age, and how will it evolve until 2100?
 
-1. **Present**: is the model state realistic today? (thickness, speed vs. observations)
-2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? → calibration / validation with moraines, Siegfried map, GLAMOS length changes
-3. **Future**: glacier evolution 2020–2100 under ≥ 2 climate scenarios (e.g. SSP1-2.6 ≈ +1.5°C, SSP2-4.5 ≈ +2.5°C, SSP5-8.5 ≈ +4.5°C)
+1. **Present**: is the model state realistic today? ( speed vs. observations)
+2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? → calibration / validation with moraines, old maps, recorded GLAMOS length changes
+3. **Future**: glacier evolution 2020–2100 under climate scenarios (e.g. RCP 2.6 ≈ +1.5°C, RCP 4.5 ≈ +2.5°C, RCP 8.5 ≈ +4.5°C), or no warming (committed loss).
 
-➡️ **A. Common base** (everyone): one model of your glacier, calibrated on the past, used for the future
+➡️ **Session 2, basic workflow** : one model of your glacier, calibrated on the speeds and on the past, used for the future
+➡️ **Session 3, experiment deepening**
 
 ---
 
@@ -42,34 +45,62 @@ Guillaume Jouvet
 
 | Problem | Try |
 |---|---|
-| Glacier grows without limit / disappears | more / less melt: `melt_enhancer` |
-| No LIA advance / too large | colder / warmer pre-1901 `delta_temp` (`clim_trend_array`) |
 | Speeds too high / too low | refine the grid of `params_sensitivity` (`igm_run -m`) around your best values |
+| No LIA advance / too large | colder / warmer pre-1901 `delta_temp` (`clim_trend_array`) |
+| Glacier grows without limit / disappears | more / less melt: `melt_enhancer` |
 
 - **One parameter at a time**, keep your calibrated values in the ✅ boxes of `tutorial.ipynb`; no perfect fit: **discuss** the mismatch
 - Tests with `ratio: 2`, **final runs with `ratio: 1`**
 
 ---
 
-# Part 2 — Additional experiments
+ 
+# Part 2 — Experiment deepening
 
-Choose **at least one** exploration:
+**Suggestions** to deepen your study:
 
-| | Question | |
-|---|---|---|
-| **B1** | Does the SMB model matter? (ELA-based vs climate) | Session 2 (`tutorial.ipynb`, 5) |
-| **B3** | Response time: how fast does your glacier react? | Session 2 (`tutorial.ipynb`, 6) |
-| **B4** | Moraines: where does the debris go? | **today** (`tutorial-session3.ipynb`) |
+| | Question |
+|---|---|
+| **D1** | **LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past |
+| **D2** | **Response time**: how fast does your glacier react? |
+| **D3** | **Moraines**: where does the debris go? (particles; if relevant) |
 
-Today: copy the Session 3 notebook into your project, and follow it:
+Keep working in **your** `~/work/my-glacier` (from Session 2). Just update the course material and add the Session 3 notebook to it:
 
 ```bash
+cd ~/work/glamod && git pull
 cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
 ```
 
 ---
 
-# B3 — Response time (Session 2): your own IGM module
+# D1 — LIA extent: the data
+
+The LIA maximum (~1850) is the best-documented past state: **moraines**, first topographic maps
+
+- **Swiss Glacier Inventory 1850** (SGI 1850, [GLAMOS](https://www.glamos.ch/en/downloads); Maisch et al., 2000): outlines of all Swiss glaciers in 1850 ➡️ downloaded by the notebook
+- **Historical maps**, [map.geo.admin.ch](https://map.geo.admin.ch) *Journey through time*: Dufour (1845–1865), Siegfried (1870–1926)
+- **Moraines**: swissALTI3D relief, SWISSIMAGE: youngest, fresh, unvegetated ridges in front of the glacier
+- **Front retreat** since ~1880: GLAMOS length changes (factsheet of your glacier)
+
+---
+
+# D1 — LIA extent: calibrate the past
+
+![bg right:42% contain](fig/lia-extent-rhone.png)
+
+`compare_lia_extent`: model in 1850 vs SGI 1850 (red), today (black)
+
+Rhone, `melt_enhancer` 0.8: the front goes **too far**
+
+- Wrong **in 1850** ➡️ pre-1901 `delta_temp`
+- Wrong **today** ➡️ `melt_enhancer`
+- Front too thin ➡️ ice flow
+- Then redo the future runs
+
+---
+
+# D2 — Response time: your own IGM module
 
 `user/code/processes/smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
 
@@ -88,7 +119,7 @@ igm_run +experiment=params_response_time
 
 ---
 
-# B3 — Response time: example (Rhone Glacier)
+# D2 — Response time: example (Rhone Glacier)
 
 ![height:250px](fig/response-time-rhone.png)
 
@@ -98,7 +129,7 @@ igm_run +experiment=params_response_time
 
 ---
 
-# B4 — Moraines: tracking debris with particles
+# D3 — Moraines: tracking debris with particles
 
 ![width:700px](fig/particles-rhone.png)
 
@@ -108,7 +139,7 @@ Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) ➡️ **morain
 
 ---
 
-# B4 — Moraines: questions
+# D3 — Moraines: questions
 
 ```bash
 igm_run +experiment=params_past_moraines
@@ -129,7 +160,7 @@ Notebook: `plot_particles(run, year=...)`, and `rh_min=0.95` for the debris at t
 - **Precipitation**: ±20 % precipitation vs ±1 °C?
 - **Committed loss**: today's climate kept, when does the glacier stabilize (beyond 2100)?
 - **Tributaries and lakes**: disconnections, proglacial lakes in bed overdeepenings (`topg`)
-- **Validation**: GLAMOS series, Siegfried / Dufour maps, swisstopo thickness
+- **Validation**: GLAMOS mass balance series, swisstopo thickness
 - **Your own question**: hazards, water resources, landscape evolution...
 
 
@@ -210,9 +241,8 @@ Deadline: **to be announced**. Questions? Ask the assistant during the project h
 # Now: work on your project
 
 Checklist for today:
-- [ ] Past run that reaches a plausible LIA maximum and today's extent
-- [ ] ≥ 2 future scenarios
-- [ ] ≥ 1 exploration (B1–B4)
+- [ ] Basic workflow done on your glacier (Session 2)
+- [ ] ≥ 1 deepening (D1 LIA extent, D2 response time, D3 moraines): not all three
 - [ ] Figures drafted
 - [ ] Report outline written
 
