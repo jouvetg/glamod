@@ -1164,46 +1164,94 @@ def compare_lia_extent(run_dir, input_file, year=1850, data_dir='data'):
     ds.close(); ds_in.close()
 
 
-def plot_moraines(run_dir, input_file, year=2020, data_dir='data'):
+def plot_moraines(run_dir, input_file, year=2020, period=None, data_dir='data'):
     """Moraine experiment (params_past_moraines): debris DEPOSITED on ice-free terrain at `year`
-    (particles where the modelled ice has gone), on a hillshade of the topography, with the 1850
-    outline (Swiss Glacier Inventory 1850, red) and today's glacier (black). Compare the modelled
-    deposits with the LIA moraines visible on map.geo.admin.ch (SWISSIMAGE, swissALTI3D relief)."""
+    (particles left behind by the retreating ice), on a hillshade of the topography, with the
+    1850 outline (Swiss Glacier Inventory 1850, red), today's glacier (black) and the maximum
+    modelled extent (blue dashed).
+    Left: DENSITY of all the deposits (particles per grid cell).
+    Right: density of the debris deposited when the glacier was at its MAXIMUM (by default from
+    10 years before to 30 years after the year of maximum modelled ice area, or `period`=(t1, t2)):
+    the modelled moraines of the maximum (LIA).
+    Compare with the LIA moraines visible on map.geo.admin.ch (SWISSIMAGE, swissALTI3D relief)."""
     import os, glob
-    from matplotlib.colors import LightSource
+    from matplotlib.colors import LightSource, LogNorm
     files = sorted(glob.glob(os.path.join(run_dir, 'trajectories', 'traj-*.csv')))
     if not files:
         print("No particle files found (run params_past_moraines first)")
         return
     years = np.array([float(os.path.basename(f)[5:-4].replace('-', '.')) for f in files])
-    i = int(np.argmin(np.abs(years - year)))
-    P = np.loadtxt(files[i], delimiter=',', skiprows=1, ndmin=2)   # columns: Id, x, y, z, rh, t
+    keep = years <= year + 1e-6
+    files, years = [f for f, k in zip(files, keep) if k], years[keep]
     ds = xr.open_dataset(os.path.join(run_dir, 'output.nc'))
-    k = int(np.argmin(np.abs(ds['time'].values - years[i])))
-    x, y = ds['x'].values, ds['y'].values
+    x, y, times = ds['x'].values, ds['y'].values, ds['time'].values
     dx = float(x[1] - x[0])
-    thk = ds['thk'].isel(time=k).values
-    z = ds['usurf'].isel(time=k).values if 'usurf' in ds else ds['topg'].values
-    # particles on ice-free terrain = deposited debris
-    ix = np.clip(np.round((P[:, 1] - x[0]) / dx).astype(int), 0, len(x) - 1)
-    iy = np.clip(np.round((P[:, 2] - y[0]) / dx).astype(int), 0, len(y) - 1)
-    dep = P[thk[iy, ix] < 1]
+    THK = ds['thk'].values
+    def on_ice(P, t):
+        thk = THK[int(np.argmin(np.abs(times - t)))]
+        ix = np.clip(np.round((P[:, 1] - x[0]) / dx).astype(int), 0, len(x) - 1)
+        iy = np.clip(np.round((P[:, 2] - y[0]) / dx).astype(int), 0, len(y) - 1)
+        return thk[iy, ix] >= 1
+    # deposition year of each particle: last time it went from the ice onto ice-free terrain
+    dep_year, was_on_ice = {}, {}
+    for f, t in zip(files, years):
+        P = np.loadtxt(f, delimiter=',', skiprows=1, ndmin=2)   # columns: Id, x, y, z, rh, t
+        if len(P) == 0:
+            continue
+        ice = on_ice(P, t)
+        for pid, i_ in zip(P[:, 0].astype(int), ice):
+            if not i_ and was_on_ice.get(pid, True):
+                dep_year[pid] = t
+            was_on_ice[pid] = bool(i_)
+    dep = P[~ice]                                    # debris on ice-free terrain at `year`
+    dyear = np.array([dep_year.get(int(i), np.nan) for i in dep[:, 0]])
+    if period is None:                               # around the maximum modelled extent
+        t_max = times[int(np.argmax((THK > 1).sum(axis=(1, 2))))]
+        period = (t_max - 10, t_max + 30)
+    dep_max = dep[(dyear >= period[0]) & (dyear <= period[1])]
+    k = int(np.argmin(np.abs(times - years[-1])))
+    thk = THK[k]
+    z = ds['usurf'].values[k] if 'usurf' in ds else ds['topg'].values
+    thk_max = THK.max(axis=0)
     extent = [x.min() - dx / 2, x.max() + dx / 2, y.min() - dx / 2, y.max() + dx / 2]
-    fig, ax = plt.subplots(figsize=(8, 8))
-    ax.imshow(LightSource(azdeg=315, altdeg=45).hillshade(z, dx=dx, dy=dx), origin='lower',
-              extent=extent, cmap='gray')
-    ax.imshow(np.where(thk > 1, 1.0, np.nan), origin='lower', extent=extent, cmap='Blues', vmin=0, vmax=1.5, alpha=0.5)
-    ax.scatter(dep[:, 1], dep[:, 2], c='orange', s=4, edgecolors='none')   # deposited debris
+    # zoom on the maximum modelled extent
+    jj, ii = np.where(thk_max > 1)
+    m = 10 * dx
+    zoom = [max(x[ii].min() - m, extent[0]), min(x[ii].max() + m, extent[1]),
+            max(y[jj].min() - m, extent[2]), min(y[jj].max() + m, extent[3])]
+    def density(D):                                  # particles per grid cell
+        d, _, _ = np.histogram2d(D[:, 2], D[:, 1], bins=[len(y), len(x)],
+                                 range=[[extent[2], extent[3]], [extent[0], extent[1]]])
+        return np.where(d >= 1, d, np.nan)
+    hill = LightSource(azdeg=315, altdeg=45).hillshade(z, dx=dx, dy=dx)
     try:
         ds_in = xr.open_dataset(input_file)
         crs = ds_in.attrs.get('pyproj_srs', ds_in.attrs.get('epsg'))
-        ax.contour(x, y, ds_in['thk'].interp(x=ds['x'], y=ds['y']).values > 1, levels=[0.5], colors='k', linewidths=1)
-        load_sgi1850(data_dir).to_crs(crs).cx[x.min():x.max(), y.min():y.max()].boundary.plot(ax=ax, color='red', linewidth=1.2)
+        thk_today = ds_in['thk'].interp(x=ds['x'], y=ds['y']).values
+        sgi = load_sgi1850(data_dir).to_crs(crs).cx[x.min():x.max(), y.min():y.max()]
         ds_in.close()
     except Exception as e:
         print("(1850 outline not shown:", e, ")")
-    ax.set_xlim(extent[:2]); ax.set_ylim(extent[2:])
-    ax.set_title(f"Debris deposited on ice-free terrain in {years[i]:.0f} ({len(dep)} particles)\n"
-                 "orange: debris, red: 1850 outline (SGI 1850), black: today, blue: modelled ice")
+        thk_today, sgi = None, None
+    fig, axs = plt.subplots(1, 2, figsize=(15, 7))
+    for ax in axs:
+        ax.imshow(hill, origin='lower', extent=extent, cmap='gray')
+        ax.imshow(np.where(thk > 1, 1.0, np.nan), origin='lower', extent=extent, cmap='Blues', vmin=0, vmax=1.5, alpha=0.4)
+        ax.contour(x, y, thk_max > 1, levels=[0.5], colors='tab:blue', linewidths=1, linestyles='--')
+        if thk_today is not None:
+            ax.contour(x, y, thk_today > 1, levels=[0.5], colors='k', linewidths=1)
+        if sgi is not None:
+            sgi.boundary.plot(ax=ax, color='red', linewidth=1.2)
+        ax.set_xlim(zoom[:2]); ax.set_ylim(zoom[2:])
+        ax.set_xticks([]); ax.set_yticks([])
+    for ax, D, title in [(axs[0], dep, f"All debris deposited by {years[-1]:.0f}"),
+                         (axs[1], dep_max, f"Debris deposited {period[0]:.0f}-{period[1]:.0f} (maximum extent)")]:
+        d = density(D) if len(D) else np.full(thk.shape, np.nan)
+        im = ax.imshow(d, origin='lower', extent=extent, cmap='YlOrRd',
+                       norm=LogNorm(vmin=1, vmax=max(2, np.nanmax(d) if len(D) else 2)))
+        plt.colorbar(im, ax=ax, shrink=0.7, label='deposited particles per cell')
+        ax.set_title(f"{title} ({len(D)} particles)")
+    fig.suptitle("red: 1850 outline (SGI 1850), black: today, blue dashed: maximum modelled extent", y=0.02)
+    plt.tight_layout()
     plt.show()
     ds.close()

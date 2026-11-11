@@ -43,8 +43,8 @@ processes:
       melt_enhancer: 1.0    # use YOUR calibrated value (params_past.yaml)
   particles:
     seeding:                # CONTROLS of the debris supply (try them!)
-      method: accumulation  # where: accumulation = surface of the accumulation area; all = whole ice column, once
-      frequency: 10.0       # when: new particles every 10 years (lower = more debris, slower runs)
+      method: accumulation  # where: surface of the accumulation area (keep it; other strategies need a user module)
+      frequency: 2.0        # when: new particles every 2 years (lower = more debris, slower runs)
       density: 0.2          # how many: fraction of the grid cells seeded (higher = more debris)
   iceflow:                  # ICE FLOW
     vertical_velocity:
