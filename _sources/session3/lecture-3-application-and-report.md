@@ -246,12 +246,11 @@ git pull          # get the latest version of the course
 ```
 
 - `~/work/glamod`: the **course material**, updated by `git pull` (incl. `utils/helper.py`)
-- `~/work/my-glacier`: **your project**, a **local copy** made last week: `git pull` does **not** update it
-
-Mind that `tutorial.ipynb` has been updated: save your former work first
+- `~/work/my-glacier-s2` (or `~/work/rhone`): **your folder from last week**, not updated by `git pull`
+- `~/work/my-glacier-s3`: a **fresh copy** of the updated template, for the second part of the tutorial today:
 
 ```bash
-cd ~/work/my-glacier
-mv tutorial.ipynb tutorial-session2.ipynb        # keep your Session 2 notebook
-cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
+cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier-s3
 ```
+
+Once you have done today's tutorial, move the parts of the tutorial and the parameter files you need to your own folder (e.g. `~/work/my-glacier-s2` or `~/work/rhone`)
