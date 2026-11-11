@@ -248,21 +248,10 @@ git pull          # get the latest version of the course
 - `~/work/glamod`: the **course material**, updated by `git pull` (incl. `utils/helper.py`)
 - `~/work/my-glacier`: **your project**, a **local copy** made last week: `git pull` does **not** update it
 
----
-
-# Updating your project (my-glacier)
-
-⚠️ The new template files (`tutorial.ipynb`, `experiment/*.yaml`) are in `~/work/glamod/session2/my-glacier/`: copy only what you need, **without overwriting your own work** (calibrated values, RGI ID, notes)
+Mind that `tutorial.ipynb` has been updated: save your former work first
 
 ```bash
 cd ~/work/my-glacier
 mv tutorial.ipynb tutorial-session2.ipynb        # keep your Session 2 notebook
 cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
-```
-
-For a YAML file, compare first, then copy the new lines by hand:
-
-```bash
-diff experiment/params_past_moraines.yaml \
-     ~/work/glamod/session2/my-glacier/experiment/params_past_moraines.yaml
 ```
