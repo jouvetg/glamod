@@ -1,6 +1,6 @@
 # @package _global_
 
-# MORAINES (Session 3, D3): same as params_past.yaml (put YOUR calibrated values below),
+# MORAINES (Session 3, extension G): same as params_past.yaml (put YOUR calibrated values below),
 # plus Lagrangian PARTICLES (debris) carried by the 3D ice flow. Particles are seeded at the
 # surface of the accumulation area, buried, transported, and re-emerge in the ablation area.
 # When the glacier retreats after the LIA, the debris left on ice-free terrain shows where

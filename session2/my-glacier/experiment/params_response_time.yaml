@@ -4,7 +4,7 @@
 # (user module user/code/processes/smb_oscillating.py, parameters in
 # user/conf/processes/smb_oscillating.yaml). Compare the timing of the ELA signal
 # with the timing of the volume response: the lag is related to the response time.
-# Try other periods (e.g. 50, 100, 200, 800 years): how does the amplitude of the response change?
+# Try other periods (e.g. 50, 100, 400 years): how does the amplitude of the response change?
 
 defaults:
   - /user/conf/processes@processes: smb_oscillating   # parameters of the user module
@@ -24,11 +24,11 @@ inputs:
 
 processes:
   smb_oscillating:
-    period: 400.0
+    period: 200.0
     amplitude: 200.0
   time:
     start: 0.0
-    end: 800.0              # 2 periods (model years, not calendar years)
+    end: 400.0              # 2 periods (model years, not calendar years)
     save: 5.0
   iceflow:                  # ICE FLOW
     physics:                # ICE-FLOW PARAMETERS: put YOUR calibrated values (params_sensitivity)
