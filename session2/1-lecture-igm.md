@@ -465,4 +465,4 @@ igm_run +experiment=params_past_simple
 - **Try to reproduce the volume curve** of your calibrated past run (`compare_runs`) by playing with the ELAs
 - Which one is easier to calibrate? Which one would you trust for the future, and why?
 
-Then: migrate to **your glacier**, redo steps 1–5. Session 3: response time, LIA extent, moraines
+Then: migrate to **your glacier**, redo steps 1–5. Session 3: sections 6–8 of the same notebook (LIA extent, response time, moraines)
