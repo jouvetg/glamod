@@ -134,10 +134,11 @@ igm_run +experiment=params_response_time
 
 # A) Response time: what to do
 
-1. **Lag** between the ELA minimum and the volume peak ➡️ response time $\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)$ (`plot_response_time`)
-2. **Other periods** $P$ (50–800 yr): how do lag and amplitude change? Which $P$ give a reliable $\tau$? Compare with $\tau \approx H/(-b_{terminus})$
+1. **Lag** between the ELA minimum and the volume peak (`plot_response_time`)
+2. **Other periods** $P$ (50–800 yr): how do the lag and the amplitude change? Towards which value does the lag tend for long periods? ➡️ **response time** $\tau$. Compare with $\tau \approx H/(-b_{terminus})$
 3. **Size**: does $\tau$ grow with the volume? (compare with other students' glaciers)
-4. **Conclude**: what happens to short climate variations? to long-term trends? What does it mean for 2100?
+4. *Optional*: constant ELA (`amplitude: 0`): how long until the glacier has done ~2/3 of its adjustment?
+5. **Conclude**: what happens to short climate variations? to long-term trends? What does it mean for 2100?
 
 ---
 

@@ -905,13 +905,6 @@ def plot_response_time(run_dir):
         amp = vol[late].max() - vol[late].min()
         print(f"Lag between ELA minimum and volume maximum: ~{lag:.0f} yr")
         print(f"Volume oscillation: {amp:.3f} km3 peak to peak, i.e. {100 * amp / vol.mean():.0f} % of the mean volume ({vol.mean():.2f} km3)")
-        # first-order glacier (dV/dt = (V_eq - V)/tau, a low-pass filter): lag = P/(2 pi) * arctan(2 pi tau / P)
-        phase = 2 * np.pi * lag / p['period']
-        if phase < 0.8 * np.pi / 2:          # (unreliable when the lag is close to P/4)
-            print(f"Response time from the lag (first-order model): tau = P/(2 pi) tan(2 pi lag / P) ~ "
-                  f"{p['period'] / (2 * np.pi) * np.tan(phase):.0f} yr")
-        else:
-            print("Lag close to a quarter period: the period is too short to estimate tau, try a longer one")
     plt.show()
 
 
