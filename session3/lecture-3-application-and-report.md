@@ -34,8 +34,8 @@ Guillaume Jouvet
 2. **Past**: can the model reproduce the **LIA maximum (~1850)** and the retreat to today? (moraines, old maps, GLAMOS length changes)
 3. **Future**: 2020–2100 under climate scenarios (RCP 2.6, 4.5, 8.5).
 
-➡️ **Session 2, basic workflow**: a calibrated model of your glacier, used for the future
-➡️ **Session 3, experiment deepening**: LIA extent, then response time, moraines
+➡️ **Session 2, basic workflow**: a calibrated model of your glacier & future
+➡️ **Session 3, experiment deepening**: LIA extent, response time, moraines, climate controls, committed loss, lake appear., debris covering, societal impacts.
 
 ---
 
@@ -55,8 +55,8 @@ Guillaume Jouvet
  
 # Part 2 — Experiment deepening
 
-1. **First, everyone — fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
-2. **Then, if time allows — extensions**: **response time**, **moraines**, or one of the other questions (optional extensions, later)
+1. **First, fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
+2. **Then, work on optional extensions**: **A) response time**, **B) moraines**, or one of the other questions (C–G)
 
 Keep working in **your** `~/work/my-glacier` (from Session 2). Just update the course material and add the Session 3 notebook to it:
 
@@ -69,10 +69,10 @@ cp ~/work/glamod/session3/tutorial-session3.ipynb ~/work/my-glacier/
 
 # The Little Ice Age (LIA) in the Alps
 
-![width:1100px](fig/lia-temperature.png)
+![width:1000px](fig/lia-temperature.png)
 
-- ~1300–1860: cooler summers (~0.5–1 °C) ➡️ repeated glacier advances, last maximum **~1850**
-- Since then: retreat, accelerating since the 1980s; the LIA moraines mark the 1850 extent
+- ~1300–1860: cooler summers (~0.5–1 °C) ➡️ last maximum **~1850**
+- Since then: retreat, accelerating since the 1980s
 
 ---
 
@@ -96,19 +96,18 @@ The LIA maximum (~1850) is the best-documented past state: **moraines**, first t
 # LIA extent: calibrate the past
 
 ![bg right:42% contain](fig/lia-extent-rhone.png)
-
-`compare_lia_extent`: model in 1850 vs SGI 1850 (red), today (black)
-
-Rhone, `melt_enhancer` 0.8: the front goes **too far**
-
-- Wrong **in 1850** ➡️ pre-1901 `delta_temp`
-- Wrong **today** ➡️ `melt_enhancer`
-- Front too thin ➡️ ice flow
+  
+- Wrong **in 1850** 
+➡️ tune pre-1901 `delta_temp`
+- Wrong **today** 
+➡️ tune `melt_enhancer`
+- Front too thin 
+➡️ tune ice flow
 - Then redo the future runs
 
 ---
 
-# Response time
+# A) Response time
 
 The response time is tested with an IGM **user module** for the SMB (instead of the built-in SMB used so far), `smb_oscillating.py`: the ELA oscillates, the glacier follows... with a delay
 
@@ -126,25 +125,22 @@ igm_run +experiment=params_response_time
 
 ---
 
-# Response time: example (Rhone Glacier)
+# A) Response time: example (Rhone Glacier)
 
-![height:250px](fig/response-time-rhone.png)
-
-- The volume peaks **~45 years** after the ELA minimum (period 200 yr, amplitude 200 m): close to $P/4$, the period is too short
-- Longer periods: $\tau \approx$ 75 yr ($P$ = 400 yr), 55 yr ($P$ = 800 yr); theory $H/(-b_{terminus}) \approx$ 380 m / 6 m/yr $\approx$ 65 yr
+![height:450px](fig/response-time-rhone.png)
 
 ---
 
-# Response time: what to do
+# A) Response time: what to do
 
-1. **Find the response time** from the lag: $\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)$ (first-order glacier, printed by `plot_response_time`)
-2. **Test other periods** $P$ (50 … 800 yr, run 2 periods): lag and amplitude? Compare $\tau$ with the theory $\tau \approx H/(-b_{terminus})$ (Lecture 1a)
-3. **Relate $\tau$ to the size / volume** of your glacier: compare with other students' glaciers
-4. **Conclude**: a glacier is a **low-pass filter**: it damps climate variations shorter than $\tau$, integrates the long-term trends ➡️ committed loss
+1. **Lag** between the ELA minimum and the volume peak ➡️ response time $\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)$ (`plot_response_time`)
+2. **Other periods** $P$ (50–800 yr): how do lag and amplitude change? Which $P$ give a reliable $\tau$? Compare with $\tau \approx H/(-b_{terminus})$
+3. **Size**: does $\tau$ grow with the volume? (compare with other students' glaciers)
+4. **Conclude**: what happens to short climate variations? to long-term trends? What does it mean for 2100?
 
 ---
 
-# Moraines: tracking debris with particles
+# B) Moraines: tracking debris with particles
 
 ![width:1000px](fig/particles-rhone.png)
 
@@ -154,7 +150,7 @@ Particles carried by the ice flow (Rhone Glacier, 1510 → 2000)
 
 ---
 
-# Moraines: reproduce the LIA moraines
+# B) Moraines: reproduce the LIA moraines
 
 ![bg right:38% contain](fig/moraines-rhone.png)
 
@@ -167,13 +163,13 @@ Retreat after 1850: debris left on ice-free terrain ➡️ **modelled LIA morain
 
 ---
 
-# Optional extensions
+# Extensions C–G
 
-- **Climate controls**: what are the main controls of the future evolution? Can a warming of +1 °C be compensated by more precipitation? If so, by how much?
-- **Committed loss**: if today's climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?
-- **Disconnection and lakes**: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (`topg`)?
-- **Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it therefore survive longer than a clean glacier? Can this hypothesis be tested?
-- **Society**: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?
+- **C) Climate controls**: what are the main controls of the future evolution? Can a warming of +1 °C be compensated by more precipitation? If so, by how much?
+- **D) Committed loss**: if today's climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?
+- **E) Disconnection and lakes**: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (`topg`)?
+- **F) Society**: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat , and how do they differ between scenarios?
+- **G) Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it survive longer than a clean glacier? Can this hypothesis be tested?
 
 ---
 
@@ -226,7 +222,7 @@ Retreat after 1850: debris left on ice-free terrain ➡️ **modelled LIA morain
 Today:
 - Finish the basic workflow on your glacier (Session 2)
 - Fine-tune the calibration of the past with the 1850 extent, then re-run the future scenarios
-- If time allows: response time, moraines, or other extensions
+- Then: extensions (A–G) suitable for your glacier
 - Draft your figures
 - Start your report (outline, study site, methods)
 
