@@ -338,7 +338,7 @@ Ask the assistant!
 | Session | What |
 |---|---|
 | **2 (today): the basic workflow** | with the Rhone Glacier, then **your glacier**: data → ice-flow calibration → melt calibration (past) → future scenarios → ELA retrieval |
-| **3: experiment deepening** | LIA extent: closer calibration of the past (everyone); then, if time allows: response time (your own IGM module), moraines; figures |
+| **3: experiment deepening** | LIA extent: closer calibration of the past; then optional extensions: response time (your own IGM module), moraines, ... |
 
 Then: the report (Lecture 3). Deadline: *to be announced*
 

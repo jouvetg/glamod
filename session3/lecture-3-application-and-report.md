@@ -41,13 +41,14 @@ Guillaume Jouvet
 
 # Finish the calibration: tips
 
-| Problem | Try |
-|---|---|
-| Speeds too high / too low | refine the grid of `params_sensitivity` (`igm_run -m`) around your best values |
-| No LIA advance / too large | colder / warmer pre-1901 `delta_temp` (`clim_trend_array`) |
-| Glacier grows without limit / disappears | more / less melt: `melt_enhancer` |
+| Control ↓ &nbsp; Target → | Speeds | Volume today | 1850 extent |
+|---|:-:|:-:|:-:|
+| **Ice flow**: `arrhenius`, `tau_ref` | ●●● | ● | ●● |
+| **Melt**: `melt_enhancer` | | ●●● | ●● |
+| **Past climate**: pre-1901 `delta_temp` | | ● | ●●● |
 
-- **One parameter at a time**, keep your calibrated values; do not expect perfect fit, **discuss** the mismatch in the report anyway
+- No single parameter fits all targets: e.g. a `melt_enhancer` that fits today's volume may give a wrong 1850 extent ➡️ **iterate** between the three controls to find the **best compromise**
+- One parameter at a time; no perfect fit: **discuss** the mismatch in the report
 - Tests with `ratio: 2`, **final runs with `ratio: 1`**
 
 ---
@@ -58,10 +59,10 @@ Guillaume Jouvet
 1. **First, fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
 2. **Then, work on optional extensions**, by increasing difficulty: **A–E** (questions with the runs you know), then **F) response time** and **G) moraines**
 
-Follow **`tutorial.ipynb`, sections 6–8** (Session 3 part). Keep working in **your** `~/work/my-glacier`; update the course material and the notebook (your Session 2 notebook is kept as `tutorial-session2.ipynb`):
+Follow **`tutorial.ipynb`, sections 6–8** (Session 3 part). Keep working in **your** `~/work/my-glacier`; update the course material and the notebook (details: last slide):
 
 ```bash
-cd ~/work/glamod && git pull
+cd ~/work/glamod && git restore . && git pull
 cd ~/work/my-glacier && mv tutorial.ipynb tutorial-session2.ipynb
 cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
 ```
@@ -104,6 +105,7 @@ The LIA maximum (~1850) is the best-documented past state: **moraines**, first t
 ➡️ tune `melt_enhancer`
 - Front too thin 
 ➡️ tune ice flow
+- No single parameter fits all ➡️ iterate, best compromise
 - Then redo the future runs
 
 ---
@@ -231,4 +233,36 @@ Today:
 - Draft your figures
 - Start your report (outline, study site, methods)
 
-Work in `~/work/my-glacier/`. 
+Work in `~/work/my-glacier/`.
+
+---
+
+# Updating the course material (glamod)
+
+```bash
+cd ~/work/glamod
+git restore .     # discard any change made in glamod (it is not your project!)
+git pull          # get the latest version of the course
+```
+
+- `~/work/glamod`: the **course material**, updated by `git pull` (incl. `utils/helper.py`)
+- `~/work/my-glacier`: **your project**, a **local copy** made last week: `git pull` does **not** update it
+
+---
+
+# Updating your project (my-glacier)
+
+⚠️ The new template files (`tutorial.ipynb`, `experiment/*.yaml`) are in `~/work/glamod/session2/my-glacier/`: copy only what you need, **without overwriting your own work** (calibrated values, RGI ID, notes)
+
+```bash
+cd ~/work/my-glacier
+mv tutorial.ipynb tutorial-session2.ipynb        # keep your Session 2 notebook
+cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
+```
+
+For a YAML file, compare first, then copy the new lines by hand:
+
+```bash
+diff experiment/params_past_moraines.yaml \
+     ~/work/glamod/session2/my-glacier/experiment/params_past_moraines.yaml
+```
