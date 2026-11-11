@@ -511,14 +511,14 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past">1. The Little Ice Age extent: a closer calibration of the past</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-additional-topic-if-time-allows-your-own-igm-module">2. Response time (additional topic, if time allows): your own IGM module</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-a-response-time-if-time-allows-your-own-igm-module">2. Extension A — Response time (if time allows): your own IGM module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-find-the-response-time">i) Find the response time</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-test-other-periods-compare-with-the-theoretical-value">ii) Test other periods, compare with the theoretical value</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-relate-the-response-time-to-the-size-of-the-glacier">iii) Relate the response time to the size of the glacier</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-conclusion-a-glacier-damps-the-climate-variations">iv) Conclusion: a glacier damps the climate variations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-conclusion-what-does-the-glacier-do-with-climate-variations">iv) Conclusion: what does the glacier do with climate variations?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-reproduce-the-lia-moraines-additional-topic-if-time-allows">3. Moraines: reproduce the LIA moraines (additional topic, if time allows)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-b-moraines-reproduce-the-lia-moraines-if-time-allows">3. Extension B — Moraines: reproduce the LIA moraines (if time allows)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">4. Figures for the report</a></li>
 </ul>
             </nav>
@@ -536,8 +536,8 @@
 <p>In Session 2 you went through the <strong>basic workflow</strong> (data, calibration of the ice flow and of the melt, past, future, ELA retrieval) with the Rhone Glacier, then with your own glacier. Session 3 <strong>deepens</strong> some experiments on your glacier, by bringing new data and by customising IGM:</p>
 <ol class="arabic simple">
 <li><p><strong>The Little Ice Age extent</strong> (<strong>everyone</strong>): compare the modelled glacier in 1850 with the mapped 1850 extent, and refine your calibration of the past</p></li>
-<li><p><strong>The response time</strong>: write / read your own IGM module (oscillating ELA)</p></li>
-<li><p><strong>The moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
+<li><p><strong>Extension A — the response time</strong>: write / read your own IGM module (oscillating ELA)</p></li>
+<li><p><strong>Extension B — the moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
 <li><p><strong>Figures for the report</strong></p></li>
 </ol>
 <p>Part 1 (fine-tuning the calibration on the LIA extent) is <strong>necessary for everyone</strong>. Parts 2–3 are <strong>additional topics</strong>, to be taken afterwards <strong>if time allows</strong>.</p>
@@ -606,8 +606,8 @@ cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span cl
 <div><p>✅ <strong>Calibration of the past, refined</strong> (double-click to edit): pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> = …  <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> = …  (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = …  <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = …)</p>
 </div></blockquote>
 </section>
-<section id="response-time-additional-topic-if-time-allows-your-own-igm-module">
-<h2>2. Response time (additional topic, if time allows): your own IGM module<a class="headerlink" href="#response-time-additional-topic-if-time-allows-your-own-igm-module" title="Link to this heading">#</a></h2>
+<section id="extension-a-response-time-if-time-allows-your-own-igm-module">
+<h2>2. Extension A — Response time (if time allows): your own IGM module<a class="headerlink" href="#extension-a-response-time-if-time-allows-your-own-igm-module" title="Link to this heading">#</a></h2>
 <p><strong>Why?</strong> In Session 2 (ELA retrieval) you saw that the glacier does not react immediately to an ELA change. How long does it take? This <strong>response time</strong> <span class="math notranslate nohighlight">\(\tau\)</span> tells how much of the present-day warming your glacier has not “seen” yet, and how much it will keep retreating even if the climate stabilises.</p>
 <p><strong>The experiment</strong>: the ELA oscillates like a sine wave (period <span class="math notranslate nohighlight">\(P\)</span> = 200 yr, amplitude 200 m) and we look at how the glacier volume follows.</p>
 <p><strong>Look at the module first</strong>: this SMB is not part of IGM, it is a <strong>user module</strong> written in Python: <code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code> (its parameters: <code class="docutils literal notranslate"><span class="pre">user/conf/processes/smb_oscillating.yaml</span></code>). Open it: like any IGM module, it has 3 functions, <code class="docutils literal notranslate"><span class="pre">initialize</span></code> (called once), <code class="docutils literal notranslate"><span class="pre">update</span></code> (at each time step: computes the ELA at time t, then the SMB from the surface elevation) and <code class="docutils literal notranslate"><span class="pre">finalize</span></code>. This is how you can extend IGM with your own processes.</p>
@@ -633,7 +633,6 @@ cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span cl
 </pre></div>
 </div>
 <p>How do the <strong>lag</strong> and the <strong>amplitude</strong> of the volume oscillation change with the period? Which periods give a reliable <span class="math notranslate nohighlight">\(\tau\)</span>?</p>
-<p><em>Example, Rhone Glacier</em> (default ice-flow parameters): <span class="math notranslate nohighlight">\(P\)</span> = 200 yr: lag ~45 yr, close to <span class="math notranslate nohighlight">\(P/4\)</span> (too short); <span class="math notranslate nohighlight">\(P\)</span> = 400 yr: lag ~55 yr, <span class="math notranslate nohighlight">\(\tau\)</span> ~75 yr; <span class="math notranslate nohighlight">\(P\)</span> = 800 yr: lag ~50 yr, <span class="math notranslate nohighlight">\(\tau\)</span> ~55 yr. Theory: <span class="math notranslate nohighlight">\(H/(-b_{\text{terminus}})\)</span> ~ 380 m / 6 m/yr ~ 65 yr.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>                                  <span class="c1"># &lt;- the periods you ran</span>
@@ -660,18 +659,26 @@ cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span cl
 </section>
 <section id="iii-relate-the-response-time-to-the-size-of-the-glacier">
 <h3>iii) Relate the response time to the size of the glacier<a class="headerlink" href="#iii-relate-the-response-time-to-the-size-of-the-glacier" title="Link to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(\tau \approx H / (-b_{\text{terminus}})\)</span>: a <strong>thick</strong> glacier (i.e. a large one: thickness grows with size) reaching <strong>high</strong> elevations (weak melt at its front) reacts slowly. Compare your <span class="math notranslate nohighlight">\(\tau\)</span> and the volume of your glacier with the values of <strong>other students’ glaciers</strong> (small cirque glaciers vs large valley glaciers such as the Rhone or the Aletsch): does the response time grow with the volume?</p>
+<ul class="simple">
+<li><p>From <span class="math notranslate nohighlight">\(\tau \approx H / (-b_{\text{terminus}})\)</span>: how should the response time depend on the <strong>thickness</strong> of the glacier, and on the <strong>elevation of its front</strong>?</p></li>
+<li><p>Compare your <span class="math notranslate nohighlight">\(\tau\)</span> and the volume of your glacier with <strong>other students’ glaciers</strong> (small cirque glaciers vs large valley glaciers): does the response time grow with the volume? Why?</p></li>
+</ul>
 </section>
-<section id="iv-conclusion-a-glacier-damps-the-climate-variations">
-<h3>iv) Conclusion: a glacier damps the climate variations<a class="headerlink" href="#iv-conclusion-a-glacier-damps-the-climate-variations" title="Link to this heading">#</a></h3>
-<p>A glacier behaves like a <strong>low-pass filter</strong>: it <strong>damps</strong> climate variations much shorter than its response time (year-to-year, decadal fluctuations: small and delayed volume changes), and <strong>integrates</strong> the long-term trends. Hence (1) a single warm or cold year hardly changes the glacier, (2) a glacier is still adjusting to the warming of the past decades (<strong>committed loss</strong>), (3) large glaciers are slow, smoothed indicators of climate, small glaciers react fast.</p>
+<section id="iv-conclusion-what-does-the-glacier-do-with-climate-variations">
+<h3>iv) Conclusion: what does the glacier do with climate variations?<a class="headerlink" href="#iv-conclusion-what-does-the-glacier-do-with-climate-variations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>With a period much <strong>shorter</strong> than <span class="math notranslate nohighlight">\(\tau\)</span>, how large is the volume oscillation? And with a period much <strong>longer</strong>?</p></li>
+<li><p>What happens then to year-to-year or decadal climate fluctuations? And to long-term trends?</p></li>
+<li><p>Is your glacier today in balance with the present climate? What does this mean for its evolution until 2100, even without further warming?</p></li>
+<li><p>Would a small glacier and a large one tell the same story about the climate?</p></li>
+</ul>
 <blockquote>
 <div><p>✅ <strong>Conclusion — response time</strong> (double-click to edit): the response time of my glacier is about … years (from the lag with <span class="math notranslate nohighlight">\(P\)</span> = … yr), vs … years from <span class="math notranslate nohighlight">\(H/(-b_{\text{terminus}})\)</span>. Volume of my glacier: … km³. Climate variations shorter than … years are damped. Consequence for 2100: …</p>
 </div></blockquote>
 </section>
 </section>
-<section id="moraines-reproduce-the-lia-moraines-additional-topic-if-time-allows">
-<h2>3. Moraines: reproduce the LIA moraines (additional topic, if time allows)<a class="headerlink" href="#moraines-reproduce-the-lia-moraines-additional-topic-if-time-allows" title="Link to this heading">#</a></h2>
+<section id="extension-b-moraines-reproduce-the-lia-moraines-if-time-allows">
+<h2>3. Extension B — Moraines: reproduce the LIA moraines (if time allows)<a class="headerlink" href="#extension-b-moraines-reproduce-the-lia-moraines-if-time-allows" title="Link to this heading">#</a></h2>
 <p><strong>Why?</strong> Rocks fallen on the glacier are buried, carried by the ice flow and released at the margins and the front, where they build <strong>lateral and frontal moraines</strong>. The LIA moraines are the youngest, fresh ridges in front of today’s glaciers. Can the model reproduce <strong>where</strong> they are? IGM tracks the debris with <strong>particles</strong> moved by the 3D ice flow: when the glacier retreats after ~1850, the particles left on the ice-free terrain show where the modelled glacier dropped its debris.</p>
 <p>▶ <strong>In the terminal</strong>: put your calibrations (ice flow, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, pre-1901 climate from part 1) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_moraines.yaml</span></code>, then (a few minutes, more than the past run)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines
@@ -778,14 +785,14 @@ cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span cl
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past">1. The Little Ice Age extent: a closer calibration of the past</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-additional-topic-if-time-allows-your-own-igm-module">2. Response time (additional topic, if time allows): your own IGM module</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-a-response-time-if-time-allows-your-own-igm-module">2. Extension A — Response time (if time allows): your own IGM module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-find-the-response-time">i) Find the response time</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-test-other-periods-compare-with-the-theoretical-value">ii) Test other periods, compare with the theoretical value</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-relate-the-response-time-to-the-size-of-the-glacier">iii) Relate the response time to the size of the glacier</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-conclusion-a-glacier-damps-the-climate-variations">iv) Conclusion: a glacier damps the climate variations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iv-conclusion-what-does-the-glacier-do-with-climate-variations">iv) Conclusion: what does the glacier do with climate variations?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-reproduce-the-lia-moraines-additional-topic-if-time-allows">3. Moraines: reproduce the LIA moraines (additional topic, if time allows)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-b-moraines-reproduce-the-lia-moraines-if-time-allows">3. Extension B — Moraines: reproduce the LIA moraines (if time allows)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-for-the-report">4. Figures for the report</a></li>
 </ul>
   </nav></div>
