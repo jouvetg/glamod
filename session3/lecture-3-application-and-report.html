@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Session 3 — Lecture 3: Additional experiments and reporting &#8212; Glacier Modelling course</title>
+    <title>Session 3 — Lecture 3: Experiment deepening and reporting &#8212; Glacier Modelling course</title>
   
   
   
@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -66,8 +66,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="My glacier — tutorial (Session 3): moraines and figures for the report" href="tutorial-session3.html" />
-    <link rel="prev" title="Modelling a glacier with IGM — tutorial (Session 2)" href="../session2/my-glacier/tutorial.html" />
+    <link rel="next" title="Modelling a glacier with IGM — Session 3: experiment deepening" href="tutorial-session3.html" />
+    <link rel="prev" title="Modelling a glacier with IGM — Session 2: the basic workflow" href="../session2/my-glacier/tutorial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -326,11 +326,11 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/tutorial.html">Modelling a glacier with IGM — tutorial (Session 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session2/my-glacier/tutorial.html">Modelling a glacier with IGM — Session 2: the basic workflow</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 3 — Lecture 3: Additional experiments and reporting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session 3 — Lecture 3: Experiment deepening and reporting</a></li>
 
 
 
@@ -347,7 +347,10 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="tutorial-session3.html">My glacier — tutorial (Session 3): moraines and figures for the report</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tutorial-session3.html">Modelling a glacier with IGM — Session 3: experiment deepening</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -497,7 +500,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Session 3 — Lecture 3: Additional experiments and reporting</h1>
+    <h1>Session 3 — Lecture 3: Experiment deepening and reporting</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -507,22 +510,25 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 3 — Lecture 3: Additional experiments and reporting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 3 — Lecture 3: Experiment deepening and reporting</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-goals-of-your-mini-project">Part 1 — Goals of your mini-project</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-the-calibration-tips">Finish the calibration: tips</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-additional-experiments">Part 2 — Additional experiments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-session-2-your-own-igm-module">B3 — Response time (Session 2): your own IGM module</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-rhone-glacier">B3 — Response time: example (Rhone Glacier)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-tracking-debris-with-particles">B4 — Moraines: tracking debris with particles</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-questions">B4 — Moraines: questions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extensions-optional-discuss-them-with-us-first">C. Extensions (optional, discuss them with us first)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-good-experiment-design">A good experiment design</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-experiment-deepening">Part 2 — Experiment deepening</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-lia-in-the-alps">The Little Ice Age (LIA) in the Alps</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#after-the-lia-the-rhone-glacier-from-gletsch">After the LIA: the Rhone Glacier from Gletsch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-the-data">LIA extent: the data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-calibrate-the-past">LIA extent: calibrate the past</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time">Response time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-example-rhone-glacier">Response time: example (Rhone Glacier)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-what-to-do">Response time: what to do</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-tracking-debris-with-particles">Moraines: tracking debris with particles</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-reproduce-the-lia-moraines">Moraines: reproduce the LIA moraines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extensions">Optional extensions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-a-good-experiment-design">Tips for a good experiment design</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-the-report">Part 3 — The report</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-describe-the-model-not-the-code">Methods: describe the model, not the code</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-convey-your-results">Figures convey your results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-be-critical">Discussion: be critical</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#now-work-on-your-project">Now: work on your project</a></li>
 </ul>
 
@@ -536,8 +542,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="session-3-lecture-3-additional-experiments-and-reporting">
-<h1>Session 3 — Lecture 3: Additional experiments and reporting<a class="headerlink" href="#session-3-lecture-3-additional-experiments-and-reporting" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="session-3-lecture-3-experiment-deepening-and-reporting">
+<h1>Session 3 — Lecture 3: Experiment deepening and reporting<a class="headerlink" href="#session-3-lecture-3-experiment-deepening-and-reporting" title="Link to this heading">#</a></h1>
 <p>Guillaume Jouvet</p>
 </section>
 <hr class="docutils" />
@@ -560,13 +566,13 @@
 <td><p><em>Glacier selection</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Week 2</strong></p></td>
-<td><p>Intro to IGM, <em>calibration, past &amp; future runs</em></p></td>
+<td><p>Intro to IGM, <em>basic workflow</em> (Rhone, then your glacier)</p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
 <td><p><em>Project</em></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Week 3</strong></p></td>
-<td><p><strong>Moraines, report</strong></p></td>
+<td><p><strong>Experiment deepening, report</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
 <td><p><strong>Project</strong></p></td>
@@ -586,11 +592,12 @@
 <h1>Part 1 — Goals of your mini-project<a class="headerlink" href="#part-1-goals-of-your-mini-project" title="Link to this heading">#</a></h1>
 <p><strong>Main question</strong>: how did <em>your</em> glacier evolve since the Little Ice Age, and how will it evolve until 2100?</p>
 <ol class="arabic simple">
-<li><p><strong>Present</strong>: is the model state realistic today? (thickness, speed vs. observations)</p></li>
-<li><p><strong>Past</strong>: can the model reproduce the <strong>LIA maximum (~1850)</strong> and the retreat to today? → calibration / validation with moraines, Siegfried map, GLAMOS length changes</p></li>
-<li><p><strong>Future</strong>: glacier evolution 2020–2100 under ≥ 2 climate scenarios (e.g. SSP1-2.6 ≈ +1.5°C, SSP2-4.5 ≈ +2.5°C, SSP5-8.5 ≈ +4.5°C)</p></li>
+<li><p><strong>Present</strong>: is the model state realistic today? (speeds vs. observations)</p></li>
+<li><p><strong>Past</strong>: can the model reproduce the <strong>LIA maximum (~1850)</strong> and the retreat to today? (moraines, old maps, GLAMOS length changes)</p></li>
+<li><p><strong>Future</strong>: 2020–2100 under climate scenarios (RCP 2.6, 4.5, 8.5).</p></li>
 </ol>
-<p>➡️ <strong>A. Common base</strong> (everyone): one model of your glacier, calibrated on the past, used for the future</p>
+<p>➡️ <strong>Session 2, basic workflow</strong>: a calibrated model of your glacier, used for the future
+➡️ <strong>Session 3, experiment deepening</strong>: LIA extent, then response time, moraines</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="finish-the-calibration-tips">
@@ -602,65 +609,83 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Glacier grows without limit / disappears</p></td>
-<td><p>more / less melt: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
+<tr class="row-even"><td><p>Speeds too high / too low</p></td>
+<td><p>refine the grid of <code class="docutils literal notranslate"><span class="pre">params_sensitivity</span></code> (<code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">-m</span></code>) around your best values</p></td>
 </tr>
 <tr class="row-odd"><td><p>No LIA advance / too large</p></td>
 <td><p>colder / warmer pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code> (<code class="docutils literal notranslate"><span class="pre">clim_trend_array</span></code>)</p></td>
 </tr>
-<tr class="row-even"><td><p>Speeds too high / too low</p></td>
-<td><p>refine the grid of <code class="docutils literal notranslate"><span class="pre">params_sensitivity</span></code> (<code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">-m</span></code>) around your best values</p></td>
+<tr class="row-even"><td><p>Glacier grows without limit / disappears</p></td>
+<td><p>more / less melt: <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <ul class="simple">
-<li><p><strong>One parameter at a time</strong>, keep your calibrated values in the ✅ boxes of <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>; no perfect fit: <strong>discuss</strong> the mismatch</p></li>
+<li><p><strong>One parameter at a time</strong>, keep your calibrated values; do not expect perfect fit, <strong>discuss</strong> the mismatch in the report anyway</p></li>
 <li><p>Tests with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">2</span></code>, <strong>final runs with <code class="docutils literal notranslate"><span class="pre">ratio:</span> <span class="pre">1</span></code></strong></p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="part-2-additional-experiments">
-<h1>Part 2 — Additional experiments<a class="headerlink" href="#part-2-additional-experiments" title="Link to this heading">#</a></h1>
-<p>Choose <strong>at least one</strong> exploration:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>Question</p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>B1</strong></p></td>
-<td><p>Does the SMB model matter? (ELA-based vs climate)</p></td>
-<td><p>Session 2 (<code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, 5)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>B3</strong></p></td>
-<td><p>Response time: how fast does your glacier react?</p></td>
-<td><p>Session 2 (<code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, 6)</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>B4</strong></p></td>
-<td><p>Moraines: where does the debris go?</p></td>
-<td><p><strong>today</strong> (<code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Today: copy the Session 3 notebook into your project, and follow it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span class="w"> </span>~/work/my-glacier/
+<section class="tex2jax_ignore mathjax_ignore" id="part-2-experiment-deepening">
+<h1>Part 2 — Experiment deepening<a class="headerlink" href="#part-2-experiment-deepening" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong>First, everyone — fine-tune the model with the LIA extent</strong>: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future</p></li>
+<li><p><strong>Then, if time allows — extensions</strong>: <strong>response time</strong>, <strong>moraines</strong>, or one of the other questions (optional extensions, later)</p></li>
+</ol>
+<p>Keep working in <strong>your</strong> <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> (from Session 2). Just update the course material and add the Session 3 notebook to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
+cp<span class="w"> </span>~/work/glamod/session3/tutorial-session3.ipynb<span class="w"> </span>~/work/my-glacier/
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-session-2-your-own-igm-module">
-<h1>B3 — Response time (Session 2): your own IGM module<a class="headerlink" href="#b3-response-time-session-2-your-own-igm-module" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code>: the ELA oscillates, the glacier follows… with a delay</p>
+<section class="tex2jax_ignore mathjax_ignore" id="the-little-ice-age-lia-in-the-alps">
+<h1>The Little Ice Age (LIA) in the Alps<a class="headerlink" href="#the-little-ice-age-lia-in-the-alps" title="Link to this heading">#</a></h1>
+<p><img alt="width:1100px" src="../_images/lia-temperature.png" /></p>
+<ul class="simple">
+<li><p>~1300–1860: cooler summers (~0.5–1 °C) ➡️ repeated glacier advances, last maximum <strong>~1850</strong></p></li>
+<li><p>Since then: retreat, accelerating since the 1980s; the LIA moraines mark the 1850 extent</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="after-the-lia-the-rhone-glacier-from-gletsch">
+<h1>After the LIA: the Rhone Glacier from Gletsch<a class="headerlink" href="#after-the-lia-the-rhone-glacier-from-gletsch" title="Link to this heading">#</a></h1>
+<p><img alt="height:520px" src="../_images/rhone-gletsch-1856-2008.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="lia-extent-the-data">
+<h1>LIA extent: the data<a class="headerlink" href="#lia-extent-the-data" title="Link to this heading">#</a></h1>
+<p>The LIA maximum (~1850) is the best-documented past state: <strong>moraines</strong>, first topographic maps</p>
+<ul class="simple">
+<li><p><strong>Swiss Glacier Inventory 1850</strong> (SGI 1850, <a class="reference external" href="https://www.glamos.ch/en/downloads">GLAMOS</a>; Maisch et al., 2000): outlines of all Swiss glaciers in 1850 ➡️ downloaded by the notebook</p></li>
+<li><p><strong>Historical maps</strong>, <a class="reference external" href="https://map.geo.admin.ch">map.geo.admin.ch</a> <em>Journey through time</em>: Dufour (1845–1865), Siegfried (1870–1926)</p></li>
+<li><p><strong>Moraines</strong>: swissALTI3D relief, SWISSIMAGE: youngest, fresh, unvegetated ridges in front of the glacier</p></li>
+<li><p><strong>Front retreat</strong> since ~1880: GLAMOS length changes (factsheet of your glacier)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="lia-extent-calibrate-the-past">
+<h1>LIA extent: calibrate the past<a class="headerlink" href="#lia-extent-calibrate-the-past" title="Link to this heading">#</a></h1>
+<p><img alt="bg right:42% contain" src="../_images/lia-extent-rhone.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">compare_lia_extent</span></code>: model in 1850 vs SGI 1850 (red), today (black)</p>
+<p>Rhone, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> 0.8: the front goes <strong>too far</strong></p>
+<ul class="simple">
+<li><p>Wrong <strong>in 1850</strong> ➡️ pre-1901 <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code></p></li>
+<li><p>Wrong <strong>today</strong> ➡️ <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code></p></li>
+<li><p>Front too thin ➡️ ice flow</p></li>
+<li><p>Then redo the future runs</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="response-time">
+<h1>Response time<a class="headerlink" href="#response-time" title="Link to this heading">#</a></h1>
+<p>The response time is tested with an IGM <strong>user module</strong> for the SMB (instead of the built-in SMB used so far), <code class="docutils literal notranslate"><span class="pre">smb_oscillating.py</span></code>: the ELA oscillates, the glacier follows… with a delay</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>                        <span class="c1"># called at each time step</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">processes</span><span class="o">.</span><span class="n">smb_oscillating</span>
     <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span> <span class="o">-</span> <span class="n">cfg</span><span class="o">.</span><span class="n">processes</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">start</span>
     <span class="n">state</span><span class="o">.</span><span class="n">ela</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">ela_mean</span> <span class="o">-</span> <span class="n">p</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
-    <span class="n">smb</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">usurf</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">ela</span>              <span class="c1"># SMB linear in elevation</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">smb</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">smb</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">usurf</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">ela</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time
@@ -668,51 +693,57 @@
 </div>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b3-response-time-example-rhone-glacier">
-<h1>B3 — Response time: example (Rhone Glacier)<a class="headerlink" href="#b3-response-time-example-rhone-glacier" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="response-time-example-rhone-glacier">
+<h1>Response time: example (Rhone Glacier)<a class="headerlink" href="#response-time-example-rhone-glacier" title="Link to this heading">#</a></h1>
 <p><img alt="height:250px" src="../_images/response-time-rhone.png" /></p>
 <ul class="simple">
-<li><p>The volume peaks <strong>~45 years</strong> after the ELA minimum (period 200 yr, amplitude 200 m)</p></li>
-<li><p>Other periods (50, 100, 400 yr): copy the file (<code class="docutils literal notranslate"><span class="pre">params_response_100.yaml</span></code>), set <code class="docutils literal notranslate"><span class="pre">period:</span> <span class="pre">100</span></code> in it: how do lag and amplitude change? Compare with <span class="math notranslate nohighlight">\(\tau \approx H/(-b_{terminus})\)</span> (Lecture 1a) and the tutorial</p></li>
-<li><p>Read the module: how to extend IGM with <code class="docutils literal notranslate"><span class="pre">initialize</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">finalize</span></code></p></li>
+<li><p>The volume peaks <strong>~45 years</strong> after the ELA minimum (period 200 yr, amplitude 200 m): close to <span class="math notranslate nohighlight">\(P/4\)</span>, the period is too short</p></li>
+<li><p>Longer periods: <span class="math notranslate nohighlight">\(\tau \approx\)</span> 75 yr (<span class="math notranslate nohighlight">\(P\)</span> = 400 yr), 55 yr (<span class="math notranslate nohighlight">\(P\)</span> = 800 yr); theory <span class="math notranslate nohighlight">\(H/(-b_{terminus}) \approx\)</span> 380 m / 6 m/yr <span class="math notranslate nohighlight">\(\approx\)</span> 65 yr</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b4-moraines-tracking-debris-with-particles">
-<h1>B4 — Moraines: tracking debris with particles<a class="headerlink" href="#b4-moraines-tracking-debris-with-particles" title="Link to this heading">#</a></h1>
-<p><img alt="width:700px" src="../_images/particles-rhone.png" /></p>
-<p>Particles carried by the ice flow (Rhone Glacier, 1510 → 2000) ➡️ <strong>moraines</strong>, <strong>debris cover</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">params_past_moraines.yaml</span></code> = your <strong>calibrated</strong> past run + <code class="docutils literal notranslate"><span class="pre">particles</span></code> (seeded every 10 yr in the accumulation area)</p>
+<section class="tex2jax_ignore mathjax_ignore" id="response-time-what-to-do">
+<h1>Response time: what to do<a class="headerlink" href="#response-time-what-to-do" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong>Find the response time</strong> from the lag: <span class="math notranslate nohighlight">\(\tau = \frac{P}{2\pi}\tan\left(\frac{2\pi\,\text{lag}}{P}\right)\)</span> (first-order glacier, printed by <code class="docutils literal notranslate"><span class="pre">plot_response_time</span></code>)</p></li>
+<li><p><strong>Test other periods</strong> <span class="math notranslate nohighlight">\(P\)</span> (50 … 800 yr, run 2 periods): lag and amplitude? Compare <span class="math notranslate nohighlight">\(\tau\)</span> with the theory <span class="math notranslate nohighlight">\(\tau \approx H/(-b_{terminus})\)</span> (Lecture 1a)</p></li>
+<li><p><strong>Relate <span class="math notranslate nohighlight">\(\tau\)</span> to the size / volume</strong> of your glacier: compare with other students’ glaciers</p></li>
+<li><p><strong>Conclude</strong>: a glacier is a <strong>low-pass filter</strong>: it damps climate variations shorter than <span class="math notranslate nohighlight">\(\tau\)</span>, integrates the long-term trends ➡️ committed loss</p></li>
+</ol>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="b4-moraines-questions">
-<h1>B4 — Moraines: questions<a class="headerlink" href="#b4-moraines-questions" title="Link to this heading">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_moraines
-</pre></div>
-</div>
-<p>Notebook: <code class="docutils literal notranslate"><span class="pre">plot_particles(run,</span> <span class="pre">year=...)</span></code>, and <code class="docutils literal notranslate"><span class="pre">rh_min=0.95</span></code> for the debris at the surface only</p>
+<section class="tex2jax_ignore mathjax_ignore" id="moraines-tracking-debris-with-particles">
+<h1>Moraines: tracking debris with particles<a class="headerlink" href="#moraines-tracking-debris-with-particles" title="Link to this heading">#</a></h1>
+<p><img alt="width:1000px" src="../_images/particles-rhone.png" /></p>
+<p>Particles carried by the ice flow (Rhone Glacier, 1510 → 2000)</p>
+<p>➡️ Passive “particles” can be added on top of the simulation to model the supply and transport of supraglacial debris (IGM module <code class="docutils literal notranslate"><span class="pre">particles</span></code>).</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="moraines-reproduce-the-lia-moraines">
+<h1>Moraines: reproduce the LIA moraines<a class="headerlink" href="#moraines-reproduce-the-lia-moraines" title="Link to this heading">#</a></h1>
+<p><img alt="bg right:38% contain" src="../_images/moraines-rhone.png" /></p>
+<p>Retreat after 1850: debris left on ice-free terrain ➡️ <strong>modelled LIA moraines</strong></p>
 <ul class="simple">
-<li><p>Where do the particles re-emerge at the surface? Do they form medial / lateral moraines?</p></li>
-<li><p>Compare with the moraines on aerial photos (<a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>) and with the LIA moraines</p></li>
-<li><p>Particles left on ice-free terrain: debris deposited where the glacier retreated</p></li>
-<li><p>How old is the debris when it reaches the front?</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">params_past_moraines</span></code>, then <code class="docutils literal notranslate"><span class="pre">plot_moraines</span></code></p></li>
+<li><p>Compare with <strong>aerial photos / relief</strong> (<a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>)</p></li>
+<li><p><strong>Controls</strong>: <code class="docutils literal notranslate"><span class="pre">seeding</span></code>, calibration of the past</p></li>
+<li><p>Limits: debris comes from rock walls; moraine building not modelled</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="c-extensions-optional-discuss-them-with-us-first">
-<h1>C. Extensions (optional, discuss them with us first)<a class="headerlink" href="#c-extensions-optional-discuss-them-with-us-first" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="optional-extensions">
+<h1>Optional extensions<a class="headerlink" href="#optional-extensions" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p><strong>Uncertainty</strong>: small ensembles (melt factor, initial thickness, <code class="docutils literal notranslate"><span class="pre">prec_scal</span></code>, CH2018 ranges)</p></li>
-<li><p><strong>Precipitation</strong>: ±20 % precipitation vs ±1 °C?</p></li>
-<li><p><strong>Committed loss</strong>: today’s climate kept, when does the glacier stabilize (beyond 2100)?</p></li>
-<li><p><strong>Tributaries and lakes</strong>: disconnections, proglacial lakes in bed overdeepenings (<code class="docutils literal notranslate"><span class="pre">topg</span></code>)</p></li>
-<li><p><strong>Validation</strong>: GLAMOS series, Siegfried / Dufour maps, swisstopo thickness</p></li>
-<li><p><strong>Your own question</strong>: hazards, water resources, landscape evolution…</p></li>
+<li><p><strong>Climate controls</strong>: what are the main controls of the future evolution? Can a warming of +1 °C be compensated by more precipitation? If so, by how much?</p></li>
+<li><p><strong>Committed loss</strong>: if today’s climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?</p></li>
+<li><p><strong>Disconnection and lakes</strong>: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (<code class="docutils literal notranslate"><span class="pre">topg</span></code>)?</p></li>
+<li><p><strong>Debris cover</strong>: if your glacier is debris-covered, melt is probably reduced: can it therefore survive longer than a clean glacier? Can this hypothesis be tested?</p></li>
+<li><p><strong>Society</strong>: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="a-good-experiment-design">
-<h1>A good experiment design<a class="headerlink" href="#a-good-experiment-design" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="tips-for-a-good-experiment-design">
+<h1>Tips for a good experiment design<a class="headerlink" href="#tips-for-a-good-experiment-design" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p><strong>One question → one (or a few) experiments → one figure</strong></p></li>
 <li><p>Change <strong>one thing at a time</strong> (ELA, <code class="docutils literal notranslate"><span class="pre">delta_temp</span></code>, <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>, …)</p></li>
@@ -726,34 +757,28 @@
 <h1>Part 3 — The report<a class="headerlink" href="#part-3-the-report" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p><strong>≤ 1500 words</strong> (excluding captions and references), PDF</p></li>
-<li><p>Written like a short scientific paper:</p></li>
+<li><p>Written like a short scientific paper, for instance with this structure (a suggestion, not a strict rule):</p></li>
 </ul>
 <ol class="arabic simple">
 <li><p><strong>Introduction</strong>: why model glaciers? state of knowledge, your research question(s)</p></li>
 <li><p><strong>Study site</strong>: location, characteristics, history, available observations</p></li>
-<li><p><strong>Methods</strong>: the model (what it does, <em>not</em> how you ran it: no code, no YAML), data, experiments</p></li>
-<li><p><strong>Results</strong>: figures!</p></li>
+<li><p><strong>Methods</strong>: the model (what it does, <em>not</em> how you ran it: no code, no YAML), data, experiments, <strong>this is not a technical documentation</strong></p></li>
+<li><p><strong>Results</strong>: figures, what you found</p></li>
 <li><p><strong>Discussion</strong>: answer your questions, limitations, uncertainties</p></li>
 <li><p><strong>Conclusion</strong> + references</p></li>
 </ol>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="methods-describe-the-model-not-the-code">
-<h1>Methods: describe the model, not the code<a class="headerlink" href="#methods-describe-the-model-not-the-code" title="Link to this heading">#</a></h1>
-<p>❌ “We ran <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_past</span></code> with <code class="docutils literal notranslate"><span class="pre">smb:</span> <span class="pre">method:</span> <span class="pre">oggm</span></code> and <code class="docutils literal notranslate"><span class="pre">melt_enhancer:</span> <span class="pre">1.4</span></code>.”</p>
-<p>✅ “Ice flow is modelled with the Instructed Glacier Model (IGM; Jouvet &amp; Cordonnier, 2023), which solves a higher-order approximation of the Stokes equations with a physics-informed neural network. The surface mass balance is computed with a monthly temperature-index model (Maussion et al., 2019), forced by the GSWP3-W5E5 climate; melt was scaled by a factor of 1.4 to reproduce the observed front position in 2020.”</p>
-<p>A reader who does not know IGM must understand what you did, and be able to reproduce it.</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="figures-convey-your-results">
 <h1>Figures convey your results<a class="headerlink" href="#figures-convey-your-results" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Typical figures: map of the glacier (thickness/speed) at key dates, <strong>time series</strong> of ice volume, <strong>flowline profiles</strong>, model vs. observations</p></li>
-<li><p>Every figure: axes with units, legend, readable font, a caption that says what to see</p></li>
+<li><p>Every figure: axes with units, legend, readable font, a caption</p></li>
 <li><p>Compare model with <strong>observations</strong> whenever possible (LIA extent, GLAMOS length changes, observed speeds)</p></li>
-<li><p>Fewer, better figures (4–6 is a good number)</p></li>
+<li><p>Fewer, better figures (4–6 is a good number): make a selection, do not show results you do not discuss. Quality over quantity</p></li>
+<li><p>Customise your figures by adapting the provided plotting functions (<code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code>)</p></li>
+<li><p>Get inspired by the figures of published papers, e.g. <a class="reference external" href="https://doi.org/10.3189/2013AoG63A434">https://doi.org/10.3189/2013AoG63A434</a></p></li>
 </ul>
-<p>Inspiration: Jouvet et al. (2011) <a class="reference external" href="https://doi.org/10.3189/002214311798843359">https://doi.org/10.3189/002214311798843359</a> — <a class="reference external" href="https://doi.org/10.3189/2013AoG63A434">https://doi.org/10.3189/2013AoG63A434</a></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="discussion-be-critical">
@@ -766,49 +791,17 @@
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="evaluation">
-<h1>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Criterion</p></th>
-<th class="head"><p>Weight</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>A. Research question, context, literature</p></td>
-<td><p>25%</p></td>
-</tr>
-<tr class="row-odd"><td><p>B. Modelling tools and numerical experiments</p></td>
-<td><p>25%</p></td>
-</tr>
-<tr class="row-even"><td><p>C. Results and discussion</p></td>
-<td><p>25%</p></td>
-</tr>
-<tr class="row-odd"><td><p>D. Form and quality (structure, figures, writing)</p></td>
-<td><p>10%</p></td>
-</tr>
-<tr class="row-even"><td><p>Handed in on time</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Deadline: <strong>to be announced</strong>. Questions? Ask the assistant during the project hours.</p>
-<!-- TEACHER NOTE: weights taken from 2025 AGRADING.md (sum = 85%); confirm the remaining 15% (on-time / oral?) and the deadline. -->
-</section>
-<hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="now-work-on-your-project">
 <h1>Now: work on your project<a class="headerlink" href="#now-work-on-your-project" title="Link to this heading">#</a></h1>
-<p>Checklist for today:</p>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Past run that reaches a plausible LIA maximum and today’s extent</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ≥ 2 future scenarios</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> ≥ 1 exploration (B1–B4)</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figures drafted</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Report outline written</p></li>
+<p>Today:</p>
+<ul class="simple">
+<li><p>Finish the basic workflow on your glacier (Session 2)</p></li>
+<li><p>Fine-tune the calibration of the past with the 1850 extent, then re-run the future scenarios</p></li>
+<li><p>If time allows: response time, moraines, or other extensions</p></li>
+<li><p>Draft your figures</p></li>
+<li><p>Start your report (outline, study site, methods)</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (your copy: YAML + terminal + <code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>)</p>
-<p><strong>Back up</strong> at the end of each afternoon (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work</span> <span class="pre">&amp;&amp;</span> <span class="pre">tar</span> <span class="pre">czf</span> <span class="pre">my-glacier.tar.gz</span> <span class="pre">--exclude=outputs</span> <span class="pre">--exclude=data</span> <span class="pre">my-glacier</span></code> → <em>Download</em> → OneDrive): RenkuLab sessions are not permanent storage. Data problem? Delete <code class="docutils literal notranslate"><span class="pre">data/input_&lt;RGI_ID&gt;.nc</span></code> and run again.</p>
+<p>Work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code>.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -847,7 +840,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Modelling a glacier with IGM — tutorial (Session 2)</p>
+        <p class="prev-next-title">Modelling a glacier with IGM — Session 2: the basic workflow</p>
       </div>
     </a>
     <a class="right-next"
@@ -855,7 +848,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">My glacier — tutorial (Session 3): moraines and figures for the report</p>
+        <p class="prev-next-title">Modelling a glacier with IGM — Session 3: experiment deepening</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -877,22 +870,25 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 3 — Lecture 3: Additional experiments and reporting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Session 3 — Lecture 3: Experiment deepening and reporting</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#course-format-3-afternoons-4-hours-1-extra">Course format: 3 afternoons × 4 hours + 1 extra</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-goals-of-your-mini-project">Part 1 — Goals of your mini-project</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-the-calibration-tips">Finish the calibration: tips</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-additional-experiments">Part 2 — Additional experiments</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-session-2-your-own-igm-module">B3 — Response time (Session 2): your own IGM module</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-response-time-example-rhone-glacier">B3 — Response time: example (Rhone Glacier)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-tracking-debris-with-particles">B4 — Moraines: tracking debris with particles</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-moraines-questions">B4 — Moraines: questions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#c-extensions-optional-discuss-them-with-us-first">C. Extensions (optional, discuss them with us first)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-good-experiment-design">A good experiment design</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-experiment-deepening">Part 2 — Experiment deepening</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-little-ice-age-lia-in-the-alps">The Little Ice Age (LIA) in the Alps</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#after-the-lia-the-rhone-glacier-from-gletsch">After the LIA: the Rhone Glacier from Gletsch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-the-data">LIA extent: the data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-calibrate-the-past">LIA extent: calibrate the past</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time">Response time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-example-rhone-glacier">Response time: example (Rhone Glacier)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-what-to-do">Response time: what to do</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-tracking-debris-with-particles">Moraines: tracking debris with particles</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#moraines-reproduce-the-lia-moraines">Moraines: reproduce the LIA moraines</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extensions">Optional extensions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-a-good-experiment-design">Tips for a good experiment design</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-the-report">Part 3 — The report</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-describe-the-model-not-the-code">Methods: describe the model, not the code</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-convey-your-results">Figures convey your results</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-be-critical">Discussion: be critical</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#now-work-on-your-project">Now: work on your project</a></li>
 </ul>
 

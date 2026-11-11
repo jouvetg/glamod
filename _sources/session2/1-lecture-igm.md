@@ -335,11 +335,10 @@ Ask the assistant!
 
 > **How did my glacier evolve since the Little Ice Age (LIA, ~1850), and how will it evolve until 2100 under different climate scenarios?**
 
-| Part | What | When |
-|---|---|---|
-| **A. Common base** (everyone) | Present → ice-flow calibration → Past (SMB calibration) → Future | **today** |
-| **B. Explorations** | simple SMB model, response time | **today** |
-| | moraines (particles), figures for the report | Session 3 |
+| Session | What |
+|---|---|
+| **2 (today): the basic workflow** | with the Rhone Glacier, then **your glacier**: data → ice-flow calibration → melt calibration (past) → future scenarios → ELA retrieval |
+| **3: experiment deepening** | LIA extent: closer calibration of the past (everyone); then, if time allows: response time (your own IGM module), moraines; figures |
 
 Then: the report (Lecture 3). Deadline: *to be announced*
 
@@ -347,18 +346,17 @@ Then: the report (Lecture 3). Deadline: *to be announced*
 
 # Hands-on: follow `tutorial.ipynb` ⚠️
 
-**Your guide for the afternoon is the notebook `tutorial.ipynb`**: follow it from top to bottom, it tells you which file to edit and which command to run.
+**Your guide: the notebook `tutorial.ipynb`**, from top to bottom (which file to edit, which command to run)
 
 | Step | (= section of `tutorial.ipynb`) |
 |---|---|
-| 0 | **Your own copy** of the template folder, your glacier |
 | 1 | **Present**: download the data, check the initial state |
 | 2 | **Calibration 1**: ice-flow parameters (`arrhenius`, `tau_ref`) on the observed speeds |
 | 3 | **Past**: LIA → today, **Calibration 2**: SMB (`melt_enhancer`) |
 | 4 | **Future**: climate scenarios 2020–2100 |
-| 5–6 | A simple SMB model (ELA), response time |
+| 5 | **ELA retrieval**: a simple (ELA-based) SMB model fitted to the complex one |
 
-All runs in the **terminal**; the notebook **only plots**.
+First with the **Rhone Glacier**, then **migrate to your glacier** and redo steps 1–5. All runs in the **terminal**; the notebook **only plots**.
 
 ---
 
@@ -457,7 +455,7 @@ igm_run -m +experiment=params_future processes.climate.oggm.clim_trend_array.2.1
 
 ---
 
-# Step 5 — A simple SMB model: ELA-based
+# Step 5 — Retrieving the ELA history
 
 ```bash
 igm_run +experiment=params_past_simple
@@ -467,4 +465,4 @@ igm_run +experiment=params_past_simple
 - **Try to reproduce the volume curve** of your calibrated past run (`compare_runs`) by playing with the ELAs
 - Which one is easier to calibrate? Which one would you trust for the future, and why?
 
-Step 6 — Response time: see the end of `tutorial.ipynb` (and Lecture 3)
+Then: migrate to **your glacier**, redo steps 1–5. Session 3: response time, LIA extent, moraines

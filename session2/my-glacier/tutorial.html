@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Modelling a glacier with IGM — tutorial (Session 2) &#8212; Glacier Modelling course</title>
+    <title>Modelling a glacier with IGM — Session 2: the basic workflow &#8212; Glacier Modelling course</title>
   
   
   
@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=6a604523" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -55,18 +55,16 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'session2/my-glacier/tutorial';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Session 3 — Lecture 3: Additional experiments and reporting" href="../../session3/lecture-3-application-and-report.html" />
+    <link rel="next" title="Session 3 — Lecture 3: Experiment deepening and reporting" href="../../session3/lecture-3-application-and-report.html" />
     <link rel="prev" title="Session 2 — Lecture 2: Introduction to IGM" href="../1-lecture-igm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -326,11 +324,11 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling a glacier with IGM — tutorial (Session 2)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelling a glacier with IGM — Session 2: the basic workflow</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 3: Application and report</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../session3/lecture-3-application-and-report.html">Session 3 — Lecture 3: Additional experiments and reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session3/lecture-3-application-and-report.html">Session 3 — Lecture 3: Experiment deepening and reporting</a></li>
 
 
 
@@ -347,7 +345,10 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../../session3/tutorial-session3.html">My glacier — tutorial (Session 3): moraines and figures for the report</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../session3/tutorial-session3.html">Modelling a glacier with IGM — Session 3: experiment deepening</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Session 4: Mont Miné (course Dates &amp; Rates)</span></p>
 <ul class="nav bd-sidenav">
@@ -497,7 +498,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Modelling a glacier with IGM — tutorial (Session 2)</h1>
+    <h1>Modelling a glacier with IGM — Session 2: the basic workflow</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -511,8 +512,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ice-flow-parameters">2. Calibration of the ice-flow parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today-calibration-of-the-smb">3. Past: from the Little Ice Age to today — calibration of the SMB</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-climate-scenarios-20202100">4. Future: climate scenarios 2020–2100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-smb-model-ela-based">5. A simple SMB model: ELA-based</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-your-own-igm-module-oscillating-ela">6. Response time (your own IGM module, oscillating ELA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one">5. Retrieving the ELA history: a simple SMB model fitted to the complex one</a></li>
 </ul>
             </nav>
         </div>
@@ -524,10 +524,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="modelling-a-glacier-with-igm-tutorial-session-2">
-<h1>Modelling a glacier with IGM — tutorial (Session 2)<a class="headerlink" href="#modelling-a-glacier-with-igm-tutorial-session-2" title="Link to this heading">#</a></h1>
-<p>This tutorial carries out a series of <strong>numerical experiments with IGM</strong> on the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Rhone_Glacier">Rhone Glacier</a></strong> (Valais, ~15 km², the source of the Rhone river; RGI ID <code class="docutils literal notranslate"><span class="pre">RGI2000-v7.0-G-11-01706</span></code>, set by default in all parameter files). Step by step, you calibrate the model on observations, reconstruct the glacier since the Little Ice Age, project it until 2100, and explore two key concepts (the SMB model, the response time).</p>
-<p>It is the <strong>basis of your mini-project</strong>: once you have gone through it with the Rhone Glacier, do the same with <strong>your own glacier</strong> (put its RGI ID in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>, and keep the same steps).</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="modelling-a-glacier-with-igm-session-2-the-basic-workflow">
+<h1>Modelling a glacier with IGM — Session 2: the basic workflow<a class="headerlink" href="#modelling-a-glacier-with-igm-session-2-the-basic-workflow" title="Link to this heading">#</a></h1>
+<p>This tutorial carries out a series of <strong>numerical experiments with IGM</strong> on the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Rhone_Glacier">Rhone Glacier</a></strong> (Valais, ~15 km², the source of the Rhone river; RGI ID <code class="docutils literal notranslate"><span class="pre">RGI2000-v7.0-G-11-01706</span></code>, set by default in all parameter files). Step by step, you go through the <strong>basic workflow</strong> of a glacier modelling study: check the data, calibrate the ice flow on the observed speeds, calibrate the melt on the past evolution, project the glacier until 2100, and retrieve the ELA history that explains its evolution.</p>
+<p>It is the <strong>basis of your mini-project</strong>: once you have gone through it with the Rhone Glacier, <strong>migrate to your own glacier</strong> (put its RGI ID in each file of <code class="docutils literal notranslate"><span class="pre">experiment/</span></code>) and redo the same steps, still in Session 2. Session 3 then deepens some aspects of your glacier (LIA extent, response time, moraines): <code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>.</p>
 <p><strong>Follow this notebook from top to bottom.</strong> It lives in <strong>your own copy</strong> of the template, <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code> (copied once from <code class="docutils literal notranslate"><span class="pre">~/work/glamod/session2/my-glacier/</span></code>). It only <strong>reads and plots</strong> the results of your IGM runs: re-run it as often as you like.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -554,10 +554,8 @@
 <li><p><strong>Calibration of the ice-flow parameters</strong> (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>) on the observed speeds</p></li>
 <li><p><strong>Past</strong>: Little Ice Age → today, <strong>calibration of the SMB</strong> (<code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code>)</p></li>
 <li><p><strong>Future</strong>: climate scenarios 2020–2100</p></li>
-<li><p><strong>A simple SMB model</strong> (ELA-based)</p></li>
-<li><p><strong>Response time</strong></p></li>
+<li><p><strong>Retrieving the ELA history</strong>: a simple (ELA-based) SMB model fitted to the complex one</p></li>
 </ol>
-<p>Session 3 (moraines, figures for the report): <code class="docutils literal notranslate"><span class="pre">tutorial-session3.ipynb</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">yaml</span>
@@ -695,11 +693,11 @@
 </div>
 </div>
 </section>
-<section id="a-simple-smb-model-ela-based">
-<h2>5. A simple SMB model: ELA-based<a class="headerlink" href="#a-simple-smb-model-ela-based" title="Link to this heading">#</a></h2>
+<section id="retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one">
+<h2>5. Retrieving the ELA history: a simple SMB model fitted to the complex one<a class="headerlink" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one" title="Link to this heading">#</a></h2>
 <p><strong>Why?</strong> The climate-driven SMB hides many processes (temperature, precipitation, melt factors). Here we take a simpler approach: we prescribe the <strong>ELA directly</strong>. This forces us to think about <strong>which ELAs must have prevailed</strong> to drive the glacier evolution we observe (LIA advance, then retreat).</p>
 <p><strong>Goal</strong>: try to reproduce the volume curve of your calibrated past run (section 3) by playing with the ELAs (and gradients) in <code class="docutils literal notranslate"><span class="pre">experiment/params_past_simple.yaml</span></code> (today’s ELA: end-of-summer snowline on <a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>, GLAMOS; LIA ELAs ≈ 100–200 m lower).</p>
-<p><strong>Difficulty</strong>: a glacier does not react immediately. It has a <strong>response time</strong>: after an ELA change, it takes years to decades to adjust its geometry. So the ELA must change <em>before</em> the volume does. This is studied in section 6.</p>
+<p><strong>Difficulty</strong>: a glacier does not react immediately. It has a <strong>response time</strong>: after an ELA change, it takes years to decades to adjust its geometry. So the ELA must change <em>before</em> the volume does. This is studied in Session 3.</p>
 <p>▶ <strong>In the terminal</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_past_simple
 </pre></div>
@@ -712,33 +710,6 @@
 </div>
 </div>
 </div>
-</section>
-<section id="response-time-your-own-igm-module-oscillating-ela">
-<h2>6. Response time (your own IGM module, oscillating ELA)<a class="headerlink" href="#response-time-your-own-igm-module-oscillating-ela" title="Link to this heading">#</a></h2>
-<p>Here the ELA oscillates like a sine wave (period 200 yr, amplitude 200 m) and we look at how the glacier volume follows.</p>
-<p><strong>Look at the module first</strong>: this SMB is not part of IGM, it is a <strong>user module</strong> written in Python: <code class="docutils literal notranslate"><span class="pre">user/code/processes/smb_oscillating.py</span></code> (its parameters: <code class="docutils literal notranslate"><span class="pre">user/conf/processes/smb_oscillating.yaml</span></code>). Open it: like any IGM module, it has 3 functions, <code class="docutils literal notranslate"><span class="pre">initialize</span></code> (called once), <code class="docutils literal notranslate"><span class="pre">update</span></code> (at each time step: computes the ELA at time t, then the SMB from the surface elevation) and <code class="docutils literal notranslate"><span class="pre">finalize</span></code>. This is how you can extend IGM with your own processes.</p>
-<p>▶ <strong>In the terminal</strong> (400 model years, a few minutes). For another period, copy <code class="docutils literal notranslate"><span class="pre">experiment/params_response_time.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">experiment/params_response_100.yaml</span></code>, set <code class="docutils literal notranslate"><span class="pre">period:</span> <span class="pre">100</span></code> and the run folder <code class="docutils literal notranslate"><span class="pre">outputs/params_response_100</span></code> in it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_time
-igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_response_100
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_response_time</span><span class="p">(</span><span class="s2">&quot;outputs/params_response_time&quot;</span><span class="p">)</span>
-<span class="c1"># plot_response_time(&quot;outputs/params_response_100&quot;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>What you should see</strong>:</p>
-<ul class="simple">
-<li><p>The volume <strong>lags behind</strong> the ELA: the volume is maximal some decades <strong>after</strong> the ELA is lowest (e.g. ~45 years for the Rhone Glacier, period 200 yr).</p></li>
-<li><p>With a <strong>shorter</strong> period (50–100 yr), the glacier has no time to adjust: the volume oscillation is <strong>small</strong> and strongly delayed. With a <strong>longer</strong> period (400 yr), the glacier nearly follows the ELA: <strong>large</strong> oscillation.</p></li>
-<li><p>The lag gives an estimate of the <strong>response time</strong> of your glacier. Compare with <span class="math notranslate nohighlight">\(\tau \approx H / (-b_{\text{terminus}})\)</span> (Lecture 1a; <span class="math notranslate nohighlight">\(H\)</span>: typical thickness, <span class="math notranslate nohighlight">\(b_{\text{terminus}}\)</span>: SMB at the front) and with the 1D tutorial of Session 1.</p></li>
-</ul>
-<blockquote>
-<div><p>✅ <strong>Conclusion — response time</strong> (double-click to edit): the response time of my glacier is about … years. Consequence for the future: by 2100, the glacier is still / no longer responding to the warming of today because …</p>
-</div></blockquote>
 </section>
 </section>
 
@@ -786,7 +757,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_respons
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Session 3 — Lecture 3: Additional experiments and reporting</p>
+        <p class="prev-next-title">Session 3 — Lecture 3: Experiment deepening and reporting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -812,8 +783,7 @@ igm_run<span class="w"> </span>+experiment<span class="o">=</span>params_respons
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ice-flow-parameters">2. Calibration of the ice-flow parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#past-from-the-little-ice-age-to-today-calibration-of-the-smb">3. Past: from the Little Ice Age to today — calibration of the SMB</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-climate-scenarios-20202100">4. Future: climate scenarios 2020–2100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-smb-model-ela-based">5. A simple SMB model: ELA-based</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time-your-own-igm-module-oscillating-ela">6. Response time (your own IGM module, oscillating ELA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-the-ela-history-a-simple-smb-model-fitted-to-the-complex-one">5. Retrieving the ELA history: a simple SMB model fitted to the complex one</a></li>
 </ul>
   </nav></div>
 
