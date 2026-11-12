@@ -743,13 +743,12 @@
 <li><p><strong>Extension G (optional) — the moraines</strong>: track debris with particles (if relevant for your glacier)</p></li>
 </ol>
 <p>Start with section 6 (fine-tuning the calibration on the LIA extent). Then choose <strong>optional extensions</strong>, by increasing difficulty: <strong>A–E</strong> (questions to answer with the runs you already know, see Lecture 3), then <strong>F) response time</strong> (section 7) and <strong>G) moraines</strong> (section 8).</p>
-<p>Keep working in <strong>your</strong> project <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code> (from Session 2): do <strong>not</strong> copy the template again, your runs in <code class="docutils literal notranslate"><span class="pre">outputs/</span></code> and your YAML files stay as they are. If your copy of this notebook stops at section 5, get the updated course material and the updated notebook, in a terminal (the <code class="docutils literal notranslate"><span class="pre">mv</span></code> keeps your Session 2 notebook, with your notes, under another name):</p>
+<p>Work in a <strong>fresh copy</strong> of the updated template (tutorial, data incl. the 1850 outlines, parameter files), in a terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull<span class="w">   </span><span class="c1"># discard changes made in glamod, then update it</span>
-<span class="nb">cd</span><span class="w"> </span>~/work/my-glacier
-mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb
-cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
+cp<span class="w"> </span>-r<span class="w"> </span>~/work/glamod/session2/my-glacier<span class="w"> </span>~/work/my-glacier-s3
 </pre></div>
 </div>
+<p>Then work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s3</span></code> (rename it as you like) and transfer your calibration from Session 2 by <strong>editing</strong> its parameter files (do not copy the old files over them): RGI ID and ice-flow parameters (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>). Climate and <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> are recalibrated in section 6. Your Session 2 folder stays as it is.</p>
 <p>Then re-run the first code cell (setup) of this notebook before the cells below.</p>
 <section id="the-little-ice-age-extent-a-closer-calibration-of-the-past">
 <h2>6. The Little Ice Age extent: a closer calibration of the past<a class="headerlink" href="#the-little-ice-age-extent-a-closer-calibration-of-the-past" title="Link to this heading">#</a></h2>

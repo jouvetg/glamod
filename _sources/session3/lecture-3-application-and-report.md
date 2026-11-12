@@ -57,15 +57,9 @@ Guillaume Jouvet
 # Part 2 — Experiment deepening
 
 1. **First, fine-tune the model with the LIA extent**: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future
-2. **Then, work on optional extensions**, by increasing difficulty: **A–E** (questions with the runs you know), then **F) response time** and **G) moraines**
+2. **Then, work on optional extensions** (1 or 2, in depth), by increasing difficulty: **A–E, Z** (questions with the runs you know), then **F) response time** and **G) moraines** (for the most curious!)
 
-Follow **`tutorial.ipynb`, sections 6–8** (Session 3 part). Keep working in **your** `~/work/my-glacier`; update the course material and the notebook (details: last slide):
-
-```bash
-cd ~/work/glamod && git restore . && git pull
-cd ~/work/my-glacier && mv tutorial.ipynb tutorial-session2.ipynb
-cp ~/work/glamod/session2/my-glacier/tutorial.ipynb .
-```
+Follow **`tutorial.ipynb`, sections 6–8** (Session 3 part), in a **fresh copy** of the updated template: see the last slide
 
 ---
 
@@ -110,16 +104,15 @@ The LIA maximum (~1850) is the best-documented past state: **moraines**, first t
 
 ---
 
-# Extensions A–E 
+# Extensions work 
 
 - **A) Committed loss**: if today's climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?
 - **B) Climate controls**: what are the main controls of the future evolution? Can a +1 °C warming be compensated by more precipitation? If so, by how much?
-- **C) Society**: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?
-- **D) Disconnection and lakes**: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (`topg`)?
+- **C) Society**: what could be the societal impacts of the future changes in the catchment hydrology caused by the glacier retreat for the different scenarios?
+- **D) Lakes**: Are proglacial lakes expected to form in bed overdeepenings?
 - **E) Debris cover**: if your glacier is debris-covered, melt is probably reduced: can it survive longer than a clean glacier? Can this hypothesis be tested?
-
-➡️ More demanding: **F) response time** (your own IGM module), **G) moraines** (particles)
-
+- **Z) ELA history**: Can you fit the glacier reconstruction with a simple ELA-based SMB model? If yes, what does it tell us about changes in ELA since the LIA?
+ 
 ---
 
 # F) Response time
@@ -229,28 +222,23 @@ Retreat after 1850: debris left on ice-free terrain ➡️ **modelled LIA morain
 Today:
 - Finish the basic workflow on your glacier (Session 2)
 - Fine-tune the calibration of the past with the 1850 extent, then re-run the future scenarios
-- Then: extensions (A–G) suitable for your glacier
+- Then: extensions (A–G, Z) suitable for your glacier
 - Draft your figures
 - Start your report (outline, study site, methods)
 
-Work in `~/work/my-glacier/`.
+Work in your fresh copy `~/work/my-glacier-s3/` (see next slide).
 
 ---
 
 # Updating the course material (glamod)
 
 ```bash
-cd ~/work/glamod
-git restore .     # discard any change made in glamod (it is not your project!)
-git pull          # get the latest version of the course
-```
-
-- `~/work/glamod`: the **course material**, updated by `git pull` (incl. `utils/helper.py`)
-- `~/work/my-glacier-s2` (or `~/work/rhone`): **your folder from last week**, not updated by `git pull`
-- `~/work/my-glacier-s3`: a **fresh copy** of the updated template, for the second part of the tutorial today:
-
-```bash
+cd ~/work/glamod && git restore . && git pull # erases any change made inside glamod
 cp -r ~/work/glamod/session2/my-glacier ~/work/my-glacier-s3
 ```
 
-Once you have done today's tutorial, move the parts of the tutorial and the parameter files you need to your own folder (e.g. `~/work/my-glacier-s2` or `~/work/rhone`)
+- `~/work/glamod`: the **course material**, updated by `git pull` (incl. `utils/helper.py`); do not work in it
+- `~/work/my-glacier-s2` (or `~/work/rhone`): **your folder from last week**
+- `~/work/my-glacier-s3`: a **fresh copy** of the updated template (tutorial, data incl. 1850 outlines, parameter files)
+➡️ **work here from now on** (rename it as you like)
+- You may transfer last week's calibration by **editing** the new parameter files (do not copy the old files over them): RGI ID, ice-flow parameters (`arrhenius`, `tau_ref`). Climate and `melt_enhancer` are recalibrated in Session 3

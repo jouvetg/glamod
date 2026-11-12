@@ -520,7 +520,7 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#after-the-lia-the-rhone-glacier-from-gletsch">After the LIA: the Rhone Glacier from Gletsch</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-the-data">LIA extent: the data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-calibrate-the-past">LIA extent: calibrate the past</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-ae">Extensions A–E</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-work">Extensions work</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-response-time">F) Response time</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-response-time-example-rhone-glacier">F) Response time: example (Rhone Glacier)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-glacier-response-times">F) Glacier response times</a></li>
@@ -642,14 +642,9 @@
 <h1>Part 2 — Experiment deepening<a class="headerlink" href="#part-2-experiment-deepening" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p><strong>First, fine-tune the model with the LIA extent</strong>: does the model reach the mapped 1850 extent? ➡️ closer calibration of the past, then re-run the future</p></li>
-<li><p><strong>Then, work on optional extensions</strong>, by increasing difficulty: <strong>A–E</strong> (questions with the runs you know), then <strong>F) response time</strong> and <strong>G) moraines</strong></p></li>
+<li><p><strong>Then, work on optional extensions</strong> (1 or 2, in depth), by increasing difficulty: <strong>A–E, Z</strong> (questions with the runs you know), then <strong>F) response time</strong> and <strong>G) moraines</strong> (for the most curious!)</p></li>
 </ol>
-<p>Follow <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, sections 6–8</strong> (Session 3 part). Keep working in <strong>your</strong> <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier</span></code>; update the course material and the notebook (details: last slide):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull
-<span class="nb">cd</span><span class="w"> </span>~/work/my-glacier<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span>tutorial.ipynb<span class="w"> </span>tutorial-session2.ipynb
-cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span class="w"> </span>.
-</pre></div>
-</div>
+<p>Follow <strong><code class="docutils literal notranslate"><span class="pre">tutorial.ipynb</span></code>, sections 6–8</strong> (Session 3 part), in a <strong>fresh copy</strong> of the updated template: see the last slide</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="the-little-ice-age-lia-in-the-alps">
@@ -692,16 +687,16 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 </ul>
 </section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="extensions-ae">
-<h1>Extensions A–E<a class="headerlink" href="#extensions-ae" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="extensions-work">
+<h1>Extensions work<a class="headerlink" href="#extensions-work" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p><strong>A) Committed loss</strong>: if today’s climate were kept unchanged, when would the glacier stabilise (beyond 2100), and at what volume compared with today?</p></li>
 <li><p><strong>B) Climate controls</strong>: what are the main controls of the future evolution? Can a +1 °C warming be compensated by more precipitation? If so, by how much?</p></li>
-<li><p><strong>C) Society</strong>: what could be the direct societal impacts of the changes in the catchment hydrology caused by the future glacier retreat, and how do they differ between scenarios?</p></li>
-<li><p><strong>D) Disconnection and lakes</strong>: is your glacier expected to split into several branches as it retreats? Are proglacial lakes expected to form in bed overdeepenings (<code class="docutils literal notranslate"><span class="pre">topg</span></code>)?</p></li>
+<li><p><strong>C) Society</strong>: what could be the societal impacts of the future changes in the catchment hydrology caused by the glacier retreat for the different scenarios?</p></li>
+<li><p><strong>D) Lakes</strong>: Are proglacial lakes expected to form in bed overdeepenings?</p></li>
 <li><p><strong>E) Debris cover</strong>: if your glacier is debris-covered, melt is probably reduced: can it survive longer than a clean glacier? Can this hypothesis be tested?</p></li>
+<li><p><strong>Z) ELA history</strong>: Can you fit the glacier reconstruction with a simple ELA-based SMB model? If yes, what does it tell us about changes in ELA since the LIA?</p></li>
 </ul>
-<p>➡️ More demanding: <strong>F) response time</strong> (your own IGM module), <strong>G) moraines</strong> (particles)</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="f-response-time">
@@ -809,29 +804,26 @@ cp<span class="w"> </span>~/work/glamod/session2/my-glacier/tutorial.ipynb<span 
 <ul class="simple">
 <li><p>Finish the basic workflow on your glacier (Session 2)</p></li>
 <li><p>Fine-tune the calibration of the past with the 1850 extent, then re-run the future scenarios</p></li>
-<li><p>Then: extensions (A–G) suitable for your glacier</p></li>
+<li><p>Then: extensions (A–G, Z) suitable for your glacier</p></li>
 <li><p>Draft your figures</p></li>
 <li><p>Start your report (outline, study site, methods)</p></li>
 </ul>
-<p>Work in <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier/</span></code>.</p>
+<p>Work in your fresh copy <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s3/</span></code> (see next slide).</p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="updating-the-course-material-glamod">
 <h1>Updating the course material (glamod)<a class="headerlink" href="#updating-the-course-material-glamod" title="Link to this heading">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod
-git<span class="w"> </span>restore<span class="w"> </span>.<span class="w">     </span><span class="c1"># discard any change made in glamod (it is not your project!)</span>
-git<span class="w"> </span>pull<span class="w">          </span><span class="c1"># get the latest version of the course</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/work/glamod<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>restore<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span><span class="c1"># erases any change made inside glamod</span>
+cp<span class="w"> </span>-r<span class="w"> </span>~/work/glamod/session2/my-glacier<span class="w"> </span>~/work/my-glacier-s3
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>: the <strong>course material</strong>, updated by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (incl. <code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s2</span></code> (or <code class="docutils literal notranslate"><span class="pre">~/work/rhone</span></code>): <strong>your folder from last week</strong>, not updated by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s3</span></code>: a <strong>fresh copy</strong> of the updated template, for the second part of the tutorial today:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/work/glamod</span></code>: the <strong>course material</strong>, updated by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (incl. <code class="docutils literal notranslate"><span class="pre">utils/helper.py</span></code>); do not work in it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s2</span></code> (or <code class="docutils literal notranslate"><span class="pre">~/work/rhone</span></code>): <strong>your folder from last week</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s3</span></code>: a <strong>fresh copy</strong> of the updated template (tutorial, data incl. 1850 outlines, parameter files)
+➡️ <strong>work here from now on</strong> (rename it as you like)</p></li>
+<li><p>You may transfer last week’s calibration by <strong>editing</strong> the new parameter files (do not copy the old files over them): RGI ID, ice-flow parameters (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>). Climate and <code class="docutils literal notranslate"><span class="pre">melt_enhancer</span></code> are recalibrated in Session 3</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>-r<span class="w"> </span>~/work/glamod/session2/my-glacier<span class="w"> </span>~/work/my-glacier-s3
-</pre></div>
-</div>
-<p>Once you have done today’s tutorial, move the parts of the tutorial and the parameter files you need to your own folder (e.g. <code class="docutils literal notranslate"><span class="pre">~/work/my-glacier-s2</span></code> or <code class="docutils literal notranslate"><span class="pre">~/work/rhone</span></code>)</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -909,7 +901,7 @@ git<span class="w"> </span>pull<span class="w">          </span><span class="c1"
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#after-the-lia-the-rhone-glacier-from-gletsch">After the LIA: the Rhone Glacier from Gletsch</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-the-data">LIA extent: the data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lia-extent-calibrate-the-past">LIA extent: calibrate the past</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-ae">Extensions A–E</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-work">Extensions work</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-response-time">F) Response time</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-response-time-example-rhone-glacier">F) Response time: example (Rhone Glacier)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#f-glacier-response-times">F) Glacier response times</a></li>
