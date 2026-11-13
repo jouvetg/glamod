@@ -147,6 +147,8 @@ igm_run +experiment=params_response_time
 - **Size**: do you expect $\tau$ to grow with the volume? 
 - **Conclude**: what happens to short climate variations? to long-term trends?
 
+**New**: you may also plot the glacier length (position of the tongue) with `plot_response_time("outputs/params_response_time", length=True)`
+
 ---
 
 # G) Moraines: tracking debris with particles
@@ -166,6 +168,7 @@ Particles carried by the ice flow (Rhone Glacier, 1510 → 2000)
 Retreat after 1850: debris left on ice-free terrain ➡️ **modelled LIA moraines**
 
 - Run `params_past_moraines`, then `plot_moraines`
+- **Tip**: to see the moraines of the maximum rather than all debris dropped during the retreat, stop the run soon after the retreat starts (`time: end: 1900`), or plot that year: `plot_moraines(run, INPUT, year=1900)`
 - Compare with **aerial photos / relief** (map.geo.admin.ch)
 - **Controls**: `seeding`, calibration of the past
 - Limits: debris comes from rock walls; moraine building not modelled

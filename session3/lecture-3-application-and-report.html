@@ -728,6 +728,7 @@
 <li><p><strong>Size</strong>: do you expect <span class="math notranslate nohighlight">\(\tau\)</span> to grow with the volume?</p></li>
 <li><p><strong>Conclude</strong>: what happens to short climate variations? to long-term trends?</p></li>
 </ul>
+<p><strong>New</strong>: you may also plot the glacier length (position of the tongue) with <code class="docutils literal notranslate"><span class="pre">plot_response_time(&quot;outputs/params_response_time&quot;,</span> <span class="pre">length=True)</span></code></p>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="g-moraines-tracking-debris-with-particles">
@@ -743,6 +744,7 @@
 <p>Retreat after 1850: debris left on ice-free terrain ➡️ <strong>modelled LIA moraines</strong></p>
 <ul class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">params_past_moraines</span></code>, then <code class="docutils literal notranslate"><span class="pre">plot_moraines</span></code></p></li>
+<li><p><strong>Tip</strong>: to see the moraines of the maximum rather than all debris dropped during the retreat, stop the run soon after the retreat starts (<code class="docutils literal notranslate"><span class="pre">time:</span> <span class="pre">end:</span> <span class="pre">1900</span></code>), or plot that year: <code class="docutils literal notranslate"><span class="pre">plot_moraines(run,</span> <span class="pre">INPUT,</span> <span class="pre">year=1900)</span></code></p></li>
 <li><p>Compare with <strong>aerial photos / relief</strong> (<a class="reference external" href="http://map.geo.admin.ch">map.geo.admin.ch</a>)</p></li>
 <li><p><strong>Controls</strong>: <code class="docutils literal notranslate"><span class="pre">seeding</span></code>, calibration of the past</p></li>
 <li><p>Limits: debris comes from rock walls; moraine building not modelled</p></li>
