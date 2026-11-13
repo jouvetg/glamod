@@ -871,11 +871,28 @@ def compare_runs(run_dirs, labels=None, observations=None):
     plt.show()
 
 
-def plot_response_time(run_dir):
-    """Response-time experiment (params_response_time): ELA forcing and volume response through time.
+def glacier_length(run_dir, thk_min=1.0):
+    """Length of the glacier through time (km), from run_dir/output.nc: distance between the
+    glacier head (highest ice-covered point at the start) and the farthest ice-covered cell
+    (ice thickness > thk_min m), i.e. the position of the tongue. Returns (time, length)."""
+    import os
+    ds = xr.open_dataset(os.path.join(run_dir, 'output.nc'))
+    t, thk, usurf = ds['time'].values, ds['thk'].values, ds['usurf'].values
+    X, Y = np.meshgrid(ds['x'].values, ds['y'].values)
+    ds.close()
+    ice = thk > thk_min
+    k = int(np.argmax(np.where(ice[0], usurf[0], -np.inf)))
+    dist = np.hypot(X - X.flat[k], Y - Y.flat[k])
+    length = np.array([dist[ice[n]].max() if ice[n].any() else 0.0 for n in range(len(t))]) / 1e3
+    return t, length
+
+
+def plot_response_time(run_dir, length=False):
+    """Response-time experiment (params_response_time): ELA forcing and glacier response through time.
 
     Reads the oscillation parameters in run_dir/.hydra/config.yaml, plots the ELA and the ice
     volume, and estimates the lag between the ELA minimum and the volume maximum.
+    length=True: also the glacier length (position of the tongue, see glacier_length) and its lag.
     """
     import os, yaml
     with open(os.path.join(run_dir, '.hydra', 'config.yaml')) as f:
@@ -883,28 +900,33 @@ def plot_response_time(run_dir):
     p = cfg['processes']['smb_oscillating']
     t0 = cfg['processes']['time']['start']
     ds = xr.open_dataset(os.path.join(run_dir, 'output_ts.nc'))
-    t, vol = ds['time'].values, ds['vol'].values
+    series = [(ds['time'].values, ds['vol'].values, 'Ice volume (km$^3$)', 'volume', 'tab:blue')]
     ds.close()
-    ela_anom = -p['amplitude'] * np.sin(2 * np.pi * (t - t0) / p['period'])
-    fig, ax1 = plt.subplots(figsize=(10, 4))
-    ax1.plot(t, ela_anom, color='tab:red', lw=2)
-    ax1.set_ylabel('ELA anomaly (m)', color='tab:red')
-    ax1.invert_yaxis()   # low ELA (glacier-friendly) up
-    ax2 = ax1.twinx()
-    ax2.plot(t, vol, color='tab:blue', lw=2)
-    ax2.set_ylabel('Ice volume (km$^3$)', color='tab:blue')
-    ax1.set_xlabel('Model time (yr)')
-    ax1.grid(alpha=0.3)
-    # lag between an ELA minimum (at t0 + period/4 + n*period) and the volume maximum of the last period
-    late = t >= t[-1] - p['period']
-    if t[-1] - t0 >= 2 * p['period']:
-        t_vol_max = t[late][np.argmax(vol[late])]
-        lag = (t_vol_max - t0 - p['period'] / 4) % p['period']
-        ax1.set_title(f"Period {p['period']:.0f} yr, amplitude {p['amplitude']:.0f} m: "
-                      f"volume peaks ~{lag:.0f} yr after the ELA minimum")
-        amp = vol[late].max() - vol[late].min()
-        print(f"Lag between ELA minimum and volume maximum: ~{lag:.0f} yr")
-        print(f"Volume oscillation: {amp:.3f} km3 peak to peak, i.e. {100 * amp / vol.mean():.0f} % of the mean volume ({vol.mean():.2f} km3)")
+    if length:
+        tl, L = glacier_length(run_dir)
+        series.append((tl, L, 'Glacier length (km)', 'length', 'tab:green'))
+    fig, axes = plt.subplots(len(series), 1, figsize=(10, 4 * len(series)), sharex=True, squeeze=False)
+    for ax1, (t, y, ylabel, name, col) in zip(axes[:, 0], series):
+        ela_anom = -p['amplitude'] * np.sin(2 * np.pi * (t - t0) / p['period'])
+        ax1.plot(t, ela_anom, color='tab:red', lw=2)
+        ax1.set_ylabel('ELA anomaly (m)', color='tab:red')
+        ax1.invert_yaxis()   # low ELA (glacier-friendly) up
+        ax1.grid(alpha=0.3)
+        ax2 = ax1.twinx()
+        ax2.plot(t, y, color=col, lw=2)
+        ax2.set_ylabel(ylabel, color=col)
+        # lag between an ELA minimum (at t0 + period/4 + n*period) and the maximum of the last period
+        late = t >= t[-1] - p['period']
+        if t[-1] - t0 >= 2 * p['period']:
+            t_max = t[late][np.argmax(y[late])]
+            lag = (t_max - t0 - p['period'] / 4) % p['period']
+            ax1.set_title(f"Period {p['period']:.0f} yr, amplitude {p['amplitude']:.0f} m: "
+                          f"{name} peaks ~{lag:.0f} yr after the ELA minimum")
+            amp = y[late].max() - y[late].min()
+            print(f"Lag between ELA minimum and {name} maximum: ~{lag:.0f} yr")
+            print(f"{name.capitalize()} oscillation: {amp:.3f} peak to peak, i.e. {100 * amp / y.mean():.0f} % of the mean ({y.mean():.2f})")
+    axes[-1, 0].set_xlabel('Model time (yr)')
+    plt.tight_layout()
     plt.show()
 
 
