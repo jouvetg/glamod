@@ -1,0 +1,60 @@
+# @package _global_
+
+# ICE-FLOW CALIBRATION (Step 1): 1-year runs from today's Mont Miné glacier, for all combinations of
+# ice softness (arrhenius) x basal sliding (tau_ref) given in the command line (-m = multirun):
+#   igm_run -m +experiment=params_sensitivity processes.iceflow.physics.viscosity.arrhenius=25,50,100 processes.iceflow.physics.sliding.tau_ref=0.1,0.2,0.4,0.8
+# (3 x 4 = 12 runs, a few minutes; the first run downloads the data). Compare the modelled speeds
+# with the observed ones in analysis.ipynb. One run per combination: outputs/params_sensitivity/0, 1, ..., 11.
+
+defaults:
+  - override /inputs: [oggm_shop, local]
+  - override /processes: [smb, iceflow, time, thk]
+  - override /outputs: [local, live_dashboard]
+
+inputs:
+  oggm_shop:
+    RGI_ID: "RGI2000-v7.0-G-11-00907"                  # Glacier du Mont Miné
+    thk_source: millan_ice_thickness                # initial ice thickness (Millan et al., 2022)
+    filename: input_${inputs.oggm_shop.RGI_ID}.nc
+  local:
+    filename: ${inputs.oggm_shop.filename}
+    coarsening:
+      ratio: 2              # GRID: 2 = twice coarser grid -> fast test runs; set 1 for your final runs
+
+processes:
+  time:
+    start: 2024.0
+    end: 2025.0
+    save: 1.0
+  smb:                      # present-day SMB (it barely matters for a 1-year run: only the speeds are used)
+    method: simple
+    simple:
+      array:
+        - ["time", "gradabl", "gradacc", "ela", "accmax"]
+        - [ 2024,      0.009,     0.005,  3100,      2.0]
+        - [ 2025,      0.009,     0.005,  3100,      2.0]
+  iceflow:                  # ICE FLOW
+    physics:                # ICE-FLOW PARAMETERS: replaced by the values of the command line (see top of file)
+      sliding:
+        tau_ref: 0.4        # basal shear stress (MPa) to slide at 100 m/yr: lower = more sliding (explore 0.1-0.8)
+      viscosity:
+        arrhenius: 100.0    # ice softness A (MPa^-3 yr^-1): higher = softer ice (explore 20-150)
+    # --- pre-trained ice-flow emulator dahunet_edu: set for you, DO NOT MODIFY ---
+    numerics:
+      Nz: 2
+      basis_horizontal: q1
+      basis_vertical: molho
+    unified:
+      nbit_init: 0
+      retrain_freq: 0
+      network:
+        pretrained: true
+        pretrained_path: dahunet_edu.keras
+
+outputs:
+  live_dashboard:
+    headless: true          # no screen in the cloud: saves dashboard_*.png images in the run folder
+
+hydra:
+  sweep:
+    dir: outputs/params_sensitivity       # RUN FOLDERS of `igm_run -m` (one per combination): outputs/params_sensitivity/0, 1, 2, ...
