@@ -19,7 +19,7 @@ Guillaume Jouvet
 
 | | |
 |---|---|
-| Hour 1 | Modelling the Mont Miné since the Little Ice Age (this guide) |
+| Hour 1 | Modelling the Mont Miné since the Little Ice Age (this guide), ice-flow calibration |
 | Hour 2 | G. King's course |
 | Hours 3–4 | Calibrate the model against the sample ages |
 
@@ -39,19 +39,25 @@ Retreat of the Mont Miné since the LIA: slides 28–30 of [this presentation](h
 
 ---
 
-# The folder: `session4/mont-mine/`
+# The folder: `mont-mine/`
+
+Copy it **outside** the course repository (`git pull` would otherwise conflict with your changes), then work there:
+
+```bash
+cp -r ~/work/glamod/session4/mont-mine ~/work/mont-mine
+cd ~/work/mont-mine              # run igm_run from HERE
+```
 
 ```
-mont-mine/                       ← run igm_run from HERE
-├── analysis.ipynb               notebook: plots only (maps, sample sites, deglaciation years)
-├── Samples_2024.csv             sample sites (ID, CH1903 x/y, UTM32 x/y)
-├── Samples_XXXX.csv             a second set of sample sites (19FER...)
+mont-mine/
+├── analysis.ipynb               notebook: plots only (speeds, maps, sample sites, deglaciation years)
+├── Samples_2024.csv             sample sites (ID, CH1903 x/y, UTM32 x/y): indicative, replace by YOURS
+├── Samples_XXXX.csv             a second (indicative) set of sample sites (19FER...)
 ├── experiment/
+│   ├── params_sensitivity.yaml  1-year runs from today: ice-flow calibration (Step 1)
 │   └── params.yaml              1700-2024, ELA-based SMB (+ ice flow, emulator, run folder)
 └── outputs/, data/              created by IGM (outputs/params/ = run of params.yaml)
 ```
-
-Same tools as before: **YAML** (parameters) + **terminal** (runs) + **notebook** (plots)
 
 ---
 
@@ -68,52 +74,64 @@ $$SMB(z) = \beta\,(z - z_{ELA}), \quad \beta = \texttt{gradabl} \text{ below},\ 
 
 ---
 
-# Step 1 — Set up and run
+# Step 1 — Ice-flow calibration (as in Session 2)
 
-1. Open `session4/mont-mine/analysis.ipynb`, run the first cell
-2. *File → New → Terminal*, next to the notebook:
+1. Open `~/work/mont-mine/analysis.ipynb`, run the first cell
+2. *File → New → Terminal*: grid search of `arrhenius` × `tau_ref`, 1-year runs from **today's** glacier (12 runs; the first one downloads the data):
 
 ```bash
-cd ~/work/glamod/session4/mont-mine
-igm_run +experiment=params
+cd ~/work/mont-mine
+igm_run -m +experiment=params_sensitivity \
+   processes.iceflow.physics.viscosity.arrhenius=25,50,100 \
+   processes.iceflow.physics.sliding.tau_ref=0.1,0.2,0.4,0.8
 ```
 
-- The first run downloads the data (≈ 1 min), then runs 1700–2024 (a few minutes) ➡️ `outputs/params/`
-- Notebook, section 1: the SMB profile, the dashboard, volume and area through time
+3. Notebook, section 1: modelled − observed speeds for each couple ➡️ pick the couple with the **smallest misfit** (bias ≈ 0, small RMSE), refine around it if needed
+4. `experiment/params.yaml` uses the best couple of this grid (`arrhenius` = 100, `tau_ref` = 0.4): if you find a better one by refining, put it in its `iceflow → physics` block
 
 ---
 
-# Step 2 — Ice cover at the sample sites
+# Step 2 — The reference run
 
-Notebook, section 2:
+```bash
+igm_run +experiment=params
+```
+
+- 1700–2024 (a few minutes) ➡️ `outputs/params/`
+- Notebook, section 2: the SMB profile, the dashboard, volume and area through time
+
+---
+
+# Step 3 — Ice cover at YOUR sample sites
+
+The samples provided (`Samples_2024.csv`) are **only indicative**, to get things running: **replace them by your own samples** (same format: ID, CH1903 x/y, UTM32 x/y), and set `SAMPLES` in the first cell of the notebook
+
+Notebook, section 3:
 
 - `plot_samples_map`: today's glacier and the sample sites, and the modelled LIA glacier (1850)
 - `animate_glacier_evolution`: the retreat since 1700
 - `plot_thk_at_samples`: ice thickness through time at each site, and the **modelled deglaciation year** (last time the site is covered by ice)
 
-Enter the **measured ages** in `ages` (calendar years, or years before 2024) to compare them with the model
+Enter **your measured ages** in `ages` (calendar years, or years before 2024)
 
 ---
 
-# Step 3 — Calibration: your turn!
+# Step 4 — Calibration of the ELA history: your turn!
 
-Copy `experiment/params.yaml` (e.g. `params_v2.yaml`), change **one thing at a time**, run it (➡️ `outputs/params_v2/`):
+Copy `experiment/params.yaml` to `experiment/my.params.yaml`, change **only the ELA history** (`ela` column of the `smb` array; keep the ice flow of Step 1 and the SMB gradients), run it (➡️ `outputs/my.params/`):
 
 ```bash
-igm_run +experiment=params_v2
+igm_run +experiment=my.params
 ```
 
-1. **ELA history**: when and how low is the LIA maximum? How fast does the ELA rise afterwards?
-2. **SMB gradients** and maximum accumulation (`gradabl`, `gradacc`, `accmax`)
-3. **Basal sliding** `tau_ref`: e.g. 0.4 (less sliding) and 0.1 (more sliding)
-
-Then compare the deglaciation years with the measured ages (notebook, section 3)
+- When and how low is the LIA maximum? How fast does the ELA rise afterwards?
+- Change one thing at a time, until the modelled deglaciation years match **your** sample ages (notebook, section 4)
 
 ---
 
 # Questions
 
-- Which parameters control the **timing** of deglaciation at the sites, and which control the **extent** of the LIA glacier?
+- Which part of the ELA history controls the **timing** of deglaciation at the sites, and which controls the **extent** of the LIA glacier?
 - Can you match all samples with a single ELA history? If not, why (model, data, sample interpretation)?
 - How sensitive are the modelled dates to the grid resolution (`ratio: 2` vs `ratio: 1`)?
 
@@ -122,4 +140,5 @@ Then compare the deglaciation years with the measured ages (notebook, section 3)
 # To go further
 
 - **Climate-driven SMB** instead of a prescribed ELA: `climate` + `smb` with `method: oggm`, as in the mini-project (`session2/my-glacier/experiment/params_past.yaml`). Observed climate from 1901; before 1901, the cooling is set with `delta_temp` in `clim_trend_array`
-- **Second set of sample sites**: `Samples_XXXX.csv` (IDs `19FER...`), same format: `plot_thk_at_samples(..., "Samples_XXXX.csv")`
+- **Second set of sample sites**: `Samples_XXXX.csv` (IDs `19FER...`, indicative), same format: `plot_thk_at_samples(..., "Samples_XXXX.csv")`
+- **Other parameters**: SMB gradients and maximum accumulation (`gradabl`, `gradacc`, `accmax`): how sensitive are the deglaciation dates?

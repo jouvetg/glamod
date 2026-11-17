@@ -362,6 +362,7 @@
 
 
 
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glacier du Mont Miné — visualize the results</a></li>
 </ul>
 
@@ -508,13 +509,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run">1. The run</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">2. Ice cover at the sample sites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">3. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-your-calibration-runs">Compare your calibration runs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-calibration-as-in-session-2">1. Ice-flow calibration (as in Session 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reference-run">2. The reference run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">3. Ice cover at the sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">4. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ela-history">Calibration of the ELA history</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites">4. Second set of sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites-indicative">5. Second set of sample sites (indicative)</a></li>
 </ul>
             </nav>
         </div>
@@ -529,7 +531,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="glacier-du-mont-mine-visualize-the-results">
 <h1>Glacier du Mont Miné — visualize the results<a class="headerlink" href="#glacier-du-mont-mine-visualize-the-results" title="Link to this heading">#</a></h1>
 <p><em>Session 4. The step-by-step guide is in the slides <code class="docutils literal notranslate"><span class="pre">session4/lecture-4-mont-mine.md</span></code>.</em></p>
-<p>This notebook <strong>only reads</strong> the run folders <code class="docutils literal notranslate"><span class="pre">outputs/&lt;run&gt;/</span></code>: run IGM in the <strong>terminal</strong>, from this folder (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/glamod/session4/mont-mine</span></code>), then run the cells below. Re-run them as often as you like.</p>
+<p>This notebook <strong>only reads</strong> the run folders <code class="docutils literal notranslate"><span class="pre">outputs/&lt;run&gt;/</span></code>: run IGM in the <strong>terminal</strong>, from this folder (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/work/mont-mine</span></code>: your copy, <strong>outside</strong> the course repository, made with <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">~/work/glamod/session4/mont-mine</span> <span class="pre">~/work/mont-mine</span></code>), then run the cells below. Re-run them as often as you like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
@@ -538,14 +540,36 @@
 <span class="kn">from</span> <span class="nn">helper</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">RGI_ID</span> <span class="o">=</span> <span class="s2">&quot;RGI2000-v7.0-G-11-00907&quot;</span>   <span class="c1"># Glacier du Mont Miné</span>
-<span class="n">SAMPLES</span> <span class="o">=</span> <span class="s2">&quot;Samples_2024.csv&quot;</span>          <span class="c1"># sample sites (ID, CH1903 x/y, UTM32 x/y)</span>
+<span class="n">INPUT</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;data/input_</span><span class="si">{</span><span class="n">RGI_ID</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="s2">&quot;Samples_2024.csv&quot;</span>          <span class="c1"># sample sites (ID, CH1903 x/y, UTM32 x/y): indicative, replace by YOUR file</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="the-run">
-<h2>1. The run<a class="headerlink" href="#the-run" title="Link to this heading">#</a></h2>
-<p>Terminal: <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params/</span></code> (the run folder has the name of the parameter file)</p>
+<section id="ice-flow-calibration-as-in-session-2">
+<h2>1. Ice-flow calibration (as in Session 2)<a class="headerlink" href="#ice-flow-calibration-as-in-session-2" title="Link to this heading">#</a></h2>
+<p>Grid search of ice softness (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code>) × basal sliding (<code class="docutils literal notranslate"><span class="pre">tau_ref</span></code>): 1-year runs from <strong>today’s</strong> glacier, one per couple (3 × 4 = 12 runs; the first one downloads the data).</p>
+<p>▶ <strong>In the terminal</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>igm_run<span class="w"> </span>-m<span class="w"> </span>+experiment<span class="o">=</span>params_sensitivity<span class="w"> </span>processes.iceflow.physics.viscosity.arrhenius<span class="o">=</span><span class="m">25</span>,50,100<span class="w"> </span>processes.iceflow.physics.sliding.tau_ref<span class="o">=</span><span class="m">0</span>.1,0.2,0.4,0.8
+</pre></div>
+</div>
+<p>Each map shows the speed difference (modelled − observed, Millan et al., 2022) of one run: pick the couple with a <strong>bias close to 0</strong> and the smallest RMSE (refine around it if needed: re-run with other values, the folder is overwritten). <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> uses the best couple of this grid (<code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = 100, <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = 0.4): if you find a better one by refining, put it in its <code class="docutils literal notranslate"><span class="pre">iceflow</span> <span class="pre">→</span> <span class="pre">physics</span></code> block.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_input_data</span><span class="p">(</span><span class="n">INPUT</span><span class="p">)</span>
+<span class="n">runs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">sweep_runs</span><span class="p">(</span><span class="s2">&quot;outputs/params_sensitivity&quot;</span><span class="p">)</span>   <span class="c1"># the 12 runs</span>
+<span class="n">compare_velocity_misfit</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>✅ <strong>Ice flow</strong> (double-click to edit): <code class="docutils literal notranslate"><span class="pre">arrhenius</span></code> = 100  <code class="docutils literal notranslate"><span class="pre">tau_ref</span></code> = 0.4 (best of the 3 × 4 grid; refined: …)</p>
+</div></blockquote>
+</section>
+<section id="the-reference-run">
+<h2>2. The reference run<a class="headerlink" href="#the-reference-run" title="Link to this heading">#</a></h2>
+<p>Terminal (with the ice flow of section 1 in <code class="docutils literal notranslate"><span class="pre">params.yaml</span></code>): <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params</span></code> ➡️ results in <code class="docutils literal notranslate"><span class="pre">outputs/params/</span></code> (the run folder has the name of the parameter file)</p>
 <p>The SMB profile (ELA 2900 m), then the run:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -565,10 +589,11 @@
 </div>
 </section>
 <section id="ice-cover-at-the-sample-sites">
-<h2>2. Ice cover at the sample sites<a class="headerlink" href="#ice-cover-at-the-sample-sites" title="Link to this heading">#</a></h2>
+<h2>3. Ice cover at the sample sites<a class="headerlink" href="#ice-cover-at-the-sample-sites" title="Link to this heading">#</a></h2>
+<p>The samples provided (<code class="docutils literal notranslate"><span class="pre">Samples_2024.csv</span></code>) are <strong>only indicative</strong>, to get things running: put <strong>your own samples</strong> in a file of the same format (ID, CH1903 x/y, UTM32 x/y) in this folder, and set <code class="docutils literal notranslate"><span class="pre">SAMPLES</span></code> in the first cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_samples_map</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;data/input_</span><span class="si">{</span><span class="n">RGI_ID</span><span class="si">}</span><span class="s2">.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">)</span>                   <span class="c1"># today&#39;s glacier and the sample sites</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_samples_map</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">)</span>                   <span class="c1"># today&#39;s glacier and the sample sites</span>
 <span class="n">plot_samples_map</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output.nc&quot;</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>   <span class="c1"># modelled LIA glacier</span>
 </pre></div>
 </div>
@@ -583,8 +608,8 @@
 </div>
 </section>
 <section id="modelled-deglaciation-years-vs-measured-ages">
-<h2>3. Modelled deglaciation years vs measured ages<a class="headerlink" href="#modelled-deglaciation-years-vs-measured-ages" title="Link to this heading">#</a></h2>
-<p>Ice thickness through time at each site, and the modelled deglaciation year (last time the site is covered by ice). Enter the measured ages in <code class="docutils literal notranslate"><span class="pre">ages</span></code> (calendar years, or years before 2024).</p>
+<h2>4. Modelled deglaciation years vs measured ages<a class="headerlink" href="#modelled-deglaciation-years-vs-measured-ages" title="Link to this heading">#</a></h2>
+<p>Ice thickness through time at each site, and the modelled deglaciation year (last time the site is covered by ice). Enter <strong>your</strong> measured ages in <code class="docutils literal notranslate"><span class="pre">ages</span></code> (calendar years, or years before 2024).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># e.g. {&quot;24FER1&quot;: 1890, &quot;24FER2&quot;: 1925, ...}  &lt;- measured ages</span>
@@ -594,21 +619,21 @@
 </div>
 </div>
 </div>
-<section id="compare-your-calibration-runs">
-<h3>Compare your calibration runs<a class="headerlink" href="#compare-your-calibration-runs" title="Link to this heading">#</a></h3>
-<p>Terminal: copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">params_v2.yaml</span></code>, change it, then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=params_v2</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/params_v2/</span></code></p>
+<section id="calibration-of-the-ela-history">
+<h3>Calibration of the ELA history<a class="headerlink" href="#calibration-of-the-ela-history" title="Link to this heading">#</a></h3>
+<p>Terminal: copy <code class="docutils literal notranslate"><span class="pre">experiment/params.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">experiment/my.params.yaml</span></code>, change <strong>only the ELA history</strong> (<code class="docutils literal notranslate"><span class="pre">ela</span></code> column of the <code class="docutils literal notranslate"><span class="pre">smb</span></code> array), then <code class="docutils literal notranslate"><span class="pre">igm_run</span> <span class="pre">+experiment=my.params</span></code> ➡️ <code class="docutils literal notranslate"><span class="pre">outputs/my.params/</span></code>. Change one thing at a time until the modelled deglaciation years match your sample ages.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/params_v2&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">])</span>
-<span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="s2">&quot;outputs/params_v2/output.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare_runs</span><span class="p">([</span><span class="s2">&quot;outputs/params&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs/my.params&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="s2">&quot;my ELA history&quot;</span><span class="p">])</span>
+<span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="s2">&quot;outputs/my.params/output.nc&quot;</span><span class="p">,</span> <span class="n">SAMPLES</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="second-set-of-sample-sites">
-<h2>4. Second set of sample sites<a class="headerlink" href="#second-set-of-sample-sites" title="Link to this heading">#</a></h2>
+<section id="second-set-of-sample-sites-indicative">
+<h2>5. Second set of sample sites (indicative)<a class="headerlink" href="#second-set-of-sample-sites-indicative" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_thk_at_samples</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="s2">&quot;output.nc&quot;</span><span class="p">),</span> <span class="s2">&quot;Samples_XXXX.csv&quot;</span><span class="p">,</span> <span class="n">ages</span><span class="o">=</span><span class="n">ages</span><span class="p">)</span>
@@ -676,13 +701,14 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run">1. The run</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">2. Ice cover at the sample sites</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">3. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-your-calibration-runs">Compare your calibration runs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-flow-calibration-as-in-session-2">1. Ice-flow calibration (as in Session 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reference-run">2. The reference run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cover-at-the-sample-sites">3. Ice cover at the sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelled-deglaciation-years-vs-measured-ages">4. Modelled deglaciation years vs measured ages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-of-the-ela-history">Calibration of the ELA history</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites">4. Second set of sample sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-set-of-sample-sites-indicative">5. Second set of sample sites (indicative)</a></li>
 </ul>
   </nav></div>
 
